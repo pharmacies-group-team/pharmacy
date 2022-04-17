@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
-            $table->foreignId('user_payment_id');
-            $table->foreign('user_payment_id')->references('id')->on('user_payments')->onDelete('cascade');
+            $table->foreignId('payment_user_id');
+            $table->foreign('payment_user_id')->references('id')->on('payment_users')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
