@@ -14,7 +14,7 @@ class City extends Model
     protected $guarded = [];
 
     /**
-     * Get Directorates
+     * Get City Directorates
      */
     public function directorates(): HasMany
     {

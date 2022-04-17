@@ -15,7 +15,7 @@ class Directorate extends Model
     protected $guarded = [];
 
     /**
-     * Get Neighborhoods
+     * Get Directorate Neighborhoods
      */
     public function neighborhoods(): HasMany
     {
