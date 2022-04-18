@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "bmewburn.vscode-intelephense-client",
+    "codingyu.laravel-goto-view",
+    "onecentlin.laravel-blade",
+    "onecentlin.laravel5-snippets",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "shufo.vscode-blade-formatter"
+  ]
+}
