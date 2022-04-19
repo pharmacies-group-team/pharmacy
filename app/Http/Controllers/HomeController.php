@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pharmacy;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,7 +49,7 @@ class HomeController extends Controller
 
 
         #Update the new Password
-        User::whereId(auth()->user()->id)->update([
+        Pharmacy::whereId(auth()->user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
 
