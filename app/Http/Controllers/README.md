@@ -9,6 +9,11 @@ php artisan make:controller pharmacy/NameController --resource
 ```bash
 php artisan make:controller admin/NameController --resource
 ```
+## advertisement
+
+```bash
+php artisan make:controller advertisement/NameController --resource
+```
 
 ## client
 
