@@ -1,17 +1,31 @@
 ### create new Table
 
-`php artisan make:migration create_ads_table`
+```bash
+php artisan make:migration create_ads_table
+```
+
+### add new column
+
+```bash
+php artisan make:migration add_columnName_columns_to_tableName_table
+```
 
 ### create new Table with Model
 
-`php artisan make:model ModelName -m`
+```bash
+php artisan make:model ModelName -m
+```
 
 ---
 
 ### migrate Database Table
 
-`php artisan migrate:fresh --seed`
+```bash
+php artisan migrate:fresh --seed
+```
 
 ### Update Database
 
-`php artisan migrate`
+```bash
+php artisan migrate
+```
