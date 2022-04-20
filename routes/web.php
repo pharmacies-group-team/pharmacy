@@ -31,6 +31,7 @@ Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'cha
 
 Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
 
+
 // pharmacies
 Route::get('/pharmacies', [PharmacyController::class, 'index']);
 Route::get('/pharmacies/{id}', [PharmacyController::class, 'show']);
