@@ -16,19 +16,9 @@ class PharmacyController extends Controller
    */
   public function index()
   {
-    $pharmacies = Pharmacy::all();
+    $pharmacies = Pharmacy::with(['user', 'social', 'neighborhood'])->get();
 
     return response($pharmacies);
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
   }
 
   /**
@@ -53,7 +43,6 @@ class PharmacyController extends Controller
       'neighborhood_id' => $request->input('neighborhood_id'),
     ]);
 
-
     return response(['added successfully', $validator->errors()]);
   }
 
@@ -65,20 +54,9 @@ class PharmacyController extends Controller
    */
   public function show($id)
   {
-    $pharmacy = Pharmacy::select()->where('id', $id)->get();
+    $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood'])->where('id', $id)->get();
 
     return response($pharmacy);
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    //
   }
 
   /**
