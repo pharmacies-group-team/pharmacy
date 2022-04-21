@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('ad_position');
             $table->date('start_at');
             $table->date('end_at');
-
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
