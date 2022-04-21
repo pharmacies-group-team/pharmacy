@@ -28,20 +28,13 @@ Route::get('/', function () {
 });
 
 
-// pharmacies
-Route::get('/pharmacies', [PharmacyController::class, 'index']);
-Route::get('/pharmacies/{id}', [PharmacyController::class, 'show']);
-Route::post('/pharmacies', [PharmacyController::class, 'store']);
-Route::put('/pharmacies/{id}', [PharmacyController::class, 'update']);
-Route::delete('/pharmacies/{id}', [PharmacyController::class, 'destroy']);
-Route::get('/pharmacies', [PharmacyController::class, 'index']);
-
-
-
 Route::prefix('admin')->group(function () {
 
   // TODO
   // Route::middleware(['auth'])->group(function () {
+  // pharmacies
+  Route::resource('/pharmacies', PharmacyController::class);
+
   /* ads */
   Route::resource('/ads', AdController::class);
 
