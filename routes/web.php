@@ -27,13 +27,13 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+// pharmacies
+Route::resource('/pharmacies', PharmacyController::class);
 
 Route::prefix('admin')->group(function () {
 
   // TODO
   // Route::middleware(['auth'])->group(function () {
-  // pharmacies
-  Route::resource('/pharmacies', PharmacyController::class);
 
   /* ads */
   Route::resource('/ads', AdController::class);
