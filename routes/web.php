@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\admin\AdController;
-use App\Http\Controllers\advertisement\advertisementController;
-use App\Http\Controllers\advertisement\AdvertisementController as AdvertisementAdvertisementController;
+use App\Http\Controllers\admin;
 use App\Http\Controllers\pharmacy\PharmacyController;
 use App\Http\Controllers\web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
-use Illuminate\Routing\RouteGroup;
 
 // TODO
 // disable Debug
@@ -36,7 +33,7 @@ Route::prefix('admin')->group(function () {
   // Route::middleware(['auth'])->group(function () {
 
   /* ads */
-  Route::resource('/ads', AdController::class);
+  Route::resource('/ads', admin\AdController::class);
 
   // });
 });
