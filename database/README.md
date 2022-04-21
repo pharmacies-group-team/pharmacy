@@ -1,7 +1,7 @@
 ### create new Table
 
 ```bash
-php artisan make:migration create_ads_table
+php artisan make:migration create_tableName_table
 ```
 
 ### add new column
