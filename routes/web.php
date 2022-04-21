@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdController;
 use App\Http\Controllers\advertisement\advertisementController;
 use App\Http\Controllers\advertisement\AdvertisementController as AdvertisementAdvertisementController;
 use App\Http\Controllers\pharmacy\PharmacyController;
+use App\Http\Controllers\web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -23,9 +24,8 @@ Debugbar::disable();
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+// home page
+Route::get('/', [HomeController::class, 'index']);
 
 // pharmacies
 Route::resource('/pharmacies', PharmacyController::class);

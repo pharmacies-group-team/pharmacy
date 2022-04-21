@@ -13,7 +13,7 @@ php artisan make:migration add_columnName_columns_to_tableName_table
 ### create new Table with Model
 
 ```bash
-php artisan make:model ModelName -m
+php artisan make:model SocialMedia -m
 ```
 
 ---
