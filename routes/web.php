@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\admin;
-use App\Http\Controllers\pharmacy\PharmacyController;
-use App\Http\Controllers\web\HomeController;
+use App\Http\Controllers\pharmacy;
+use App\Http\Controllers\web;
 use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -22,10 +22,10 @@ Debugbar::disable();
 */
 
 // home page
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [web\HomeController::class, 'index']);
 
 // pharmacies
-Route::resource('/pharmacies', PharmacyController::class);
+Route::resource('/pharmacies', pharmacy\PharmacyController::class);
 
 Route::prefix('admin')->group(function () {
 
@@ -47,8 +47,14 @@ Route::prefix('admin')->group(function () {
 
     Route::put('/social', [admin\SiteController::class, 'updateSocial']);
   });
+
+  // clients
+  Route::get('/clients', [admin\ClientController::class, 'index']);
+
+  // orders
+  Route::get('/orders', [admin\OrderController::class, 'index']);
+
+  // pharmacies
+  Route::get('/pharmacies', [admin\PharmacyController::class, 'index']);
   // });
 });
-
-
-//
