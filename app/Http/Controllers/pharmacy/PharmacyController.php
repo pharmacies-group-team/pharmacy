@@ -16,7 +16,7 @@ class PharmacyController extends Controller
    */
   public function index()
   {
-    $pharmacies = Pharmacy::with(['user', 'social', 'neighborhood'])->get();
+    $pharmacies = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->get();
 
     return response($pharmacies);
   }
@@ -54,7 +54,7 @@ class PharmacyController extends Controller
    */
   public function show($id)
   {
-    $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood'])->where('id', $id)->get();
+    $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->where('id', $id)->get();
 
     return response($pharmacy);
   }
