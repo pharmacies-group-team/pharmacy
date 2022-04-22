@@ -35,5 +35,20 @@ Route::prefix('admin')->group(function () {
   /* ads */
   Route::resource('/ads', admin\AdController::class);
 
+  /* website content */
+  Route::prefix('site')->group(function () {
+    Route::get('/', [admin\SiteController::class, 'index']);
+    Route::put('/about-us', [admin\SiteController::class, 'updateAboutUs']);
+
+    Route::post('/services', [admin\SiteController::class, 'addService']);
+    Route::put('/services/{service}', [admin\SiteController::class, 'updateService']);
+
+    Route::put('/contact-us', [admin\SiteController::class, 'updateContactUs']);
+
+    Route::put('/social', [admin\SiteController::class, 'updateSocial']);
+  });
   // });
 });
+
+
+//
