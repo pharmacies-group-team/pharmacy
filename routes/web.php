@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\admin;
-use App\Http\Controllers\admin\AdminProfileController;
-use App\Http\Controllers\client\ClientProfileController;
-use App\Http\Controllers\pharmacy;
-use App\Http\Controllers\UserProfileController;
+use App\Enum\RoleEnum;
+
 use App\Http\Controllers\web;
+use App\Http\Controllers\admin;
+use App\Http\Controllers\client;
+use App\Http\Controllers\pharmacy;
+use App\Http\Controllers\Auth\RegisterPharmacyController;
+use App\Http\Controllers\UserProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -24,73 +27,94 @@ Debugbar::disable();
 |
 */
 
-// home page
-Route::get('/', [web\HomeController::class, 'index'])->name('web.home');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(web\HomeController::class)->group(function () {
+  Route::get('/', 'index')->name('home');
+  Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
+  Route::get('/pharmacies/{id}', 'showPharmacy')->name('pharmacy');
+});
 
-// pharmacies
-Route::resource('/pharmacies', pharmacy\PharmacyController::class);
+/*
+|--------------------------------------------------------------------------
+| Register Pharmacy Routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(RegisterPharmacyController::class)->group(function () {
+  Route::get('/register/pharmacy', 'index')->name('register.pharmacy');
+  Route::post('/register/pharmacy', 'store')->name('register.pharmacy.store');
+});
 
-Route::prefix('admin')->group(function () {
-
-  // TODO
-  // Route::middleware(['auth'])->group(function () {
-
-  // admin profile
-  Route::get(
-    'profile',
-    [AdminProfileController::class, 'index']
-  )->name('admin.profile');
-
-  // admin profile
-  Route::post(
-    'profile',
-    [AdminProfileController::class, 'updateProfile']
-  )->name('admin.update-profile');
-
-  /* ads */
-  Route::resource('/ads', admin\AdController::class);
-
-  /* website content */
-  Route::prefix('site')->group(function () {
-    Route::get('/', [admin\SiteController::class, 'index']);
-    Route::put('/about-us', [admin\SiteController::class, 'updateAboutUs']);
-
-    Route::post('/services', [admin\SiteController::class, 'addService']);
-    Route::put('/services/{service}', [admin\SiteController::class, 'updateService']);
-
-    Route::put('/contact-us', [admin\SiteController::class, 'updateContactUs']);
-
-    Route::put('/social', [admin\SiteController::class, 'updateSocial']);
+/*
+|--------------------------------------------------------------------------
+| Pharmacies Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY])
+  ->name('pharmacies.')->group(function () {
+    Route::resource('/', pharmacy\PharmacyController::class);
   });
 
-  // clients
-  Route::get(
-    '/clients',
-    [admin\ClientController::class, 'index']
-  )->name('admin.clients');
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  ->name('admin.')->group(function () {
 
-  // orders
-  Route::get(
-    '/orders',
-    [admin\OrderController::class, 'index']
-  )->name('admin.orders');
+    // admin profile
+    Route::get('profile', [admin\AdminProfileController::class, 'index'])
+      ->name('profile');
 
-  // pharmacies
-  Route::get(
-    '/pharmacies',
-    [admin\PharmacyController::class, 'index']
-  )->name('admin.pharmacies');
-  // });
+    Route::post('profile', [admin\AdminProfileController::class, 'updateProfile'])
+      ->name('update-profile');
+
+    /*------------------------------ ads ------------------------------*/
+    Route::resource('/ads', admin\AdController::class);
+
+    /*------------------------------ website content ------------------------------*/
+    Route::prefix('site')->controller(admin\SiteController::class)
+      ->group(function () {
+        Route::get('/', 'index')->name('site');
+        Route::put('/about-us', 'updateAboutUs')
+          ->name('updateAboutUs');
+
+        Route::post('/services', 'addService')->name('addService');
+        Route::put('/services/{service}', 'updateService')->name('updateService');
+
+        Route::put('/contact-us', 'updateContactUs')->name('updateContactUs');
+
+        Route::put('/social', 'updateSocial')->name('updateSocial');
+      });
+
+    /*------------------------------ clients ------------------------------*/
+    Route::get('/clients', [admin\ClientController::class, 'index'])
+      ->name('clients');
+
+    /*------------------------------ orders ------------------------------*/
+    Route::get('/orders', [admin\OrderController::class, 'index'])
+      ->name('admin.orders');
+
+    // pharmacies
+    Route::get('pharmacies', [admin\PharmacyController::class, 'index'])
+      ->name('pharmacies');
+  });
+
+/*
+|--------------------------------------------------------------------------
+| Client Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('/dashboard/clients')->name('clients.')->group(function () {
+  Route::get('/', [client\ClientProfileController::class, 'index'])
+    ->name('profile');
+
+  Route::post('/', [client\ClientProfileController::class, 'updateProfile'])
+    ->name('update-profile');
 });
 
-// client
-Route::prefix('clients')->group(function () {
-  Route::get(
-    '/profile',
-    [ClientProfileController::class, 'index']
-  )->name('clients.profile');
-  Route::post(
-    '/profile',
-    [ClientProfileController::class, 'updateProfile']
-  )->name('clients.update-profile');
-});
+Auth::routes();

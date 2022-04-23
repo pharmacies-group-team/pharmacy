@@ -5,22 +5,34 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
 use App\Models\ContactUs;
+use App\Models\Pharmacy;
 use App\Models\Service;
 use App\Models\SocialMedia;
-use Illuminate\Http\Request;
-use Symfony\Component\Console\Helper\Helper;
 
 class HomeController extends Controller
 {
-  public function index()
-  {
-    $homeData = [];
+    public function index()
+    {
+        $aboutUs    = AboutUs::first();
+        $services   = Service::all();
+        $contactUs  = ContactUs::first();
+        $social     = SocialMedia::first();
+        $pharmacies = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->get();
 
-    $homeData['about-us'] = AboutUs::first();
-    $homeData['services'] = Service::all();
-    $homeData['contact-us'] = ContactUs::first();
-    $homeData['social'] = SocialMedia::first();
+        return view('index', compact('aboutUs', 'services', 'contactUs', 'social', 'pharmacies'));
+    }
 
-    return response($homeData);
-  }
+    public function showPharmacies()
+    {
+        $pharmacies = Pharmacy::select()->with('neighborhood.directorate.city')->get();
+
+        return view('web.pharmacies', compact('pharmacies'));
+    }
+
+    public function showPharmacy($id)
+    {
+      $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->where('id', $id)->get();
+
+      return response($pharmacy);
+    }
 }

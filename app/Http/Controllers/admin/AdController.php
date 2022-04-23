@@ -30,23 +30,25 @@ class AdController extends Controller
    */
   public function store(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'title' => 'required',
-      'image' => 'required',
-      'link' => 'required',
-      'ad_position' => 'required',
-      'start_at' => 'required',
-      'end_at' => 'required',
-    ]);
+    // TODO
+    $validator = Validator::make($request->all(),
+      [
+        'title'       => 'required',
+        'image'       => 'required',
+        'link'        => 'required',
+        'ad_position' => 'required',
+        'start_at'    => 'required',
+        'end_at'      => 'required',
+      ]);
 
     Ad::create([
-      'title' => $request->input('title'),
-      'image' => $request->input('image'),
-      'link' => $request->input('link'),
+      'title'       => $request->input('title'),
+      'image'       => $request->input('image'),
+      'link'        => $request->input('link'),
       'ad_position' => $request->input('ad_position'),
-      'user_id' => $request->input('user_id'),
-      'start_at' => $request->input('start_at'),
-      'end_at' => $request->input('end_at')
+      'user_id'     => $request->input('user_id'),
+      'start_at'    => $request->input('start_at'),
+      'end_at'      => $request->input('end_at')
     ]);
 
 
