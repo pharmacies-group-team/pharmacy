@@ -1,0 +1,57 @@
+@media (min-width: 1536px) {
+  .landing{
+    height: 860px;
+  }
+}
+@media screen and (max-width: 1440px)  {
+  .landing{
+    background-size: cover;
+    height: 580px;
+  }
+}
+
+@media screen and (max-width: 992px) and (min-width: 768px) {
+  .landing h1{
+    font-size: 2.5rem !important;
+  }
+  .landing__box{
+    height: 350px !important;
+    padding-top: 35px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landing{
+    height: 550px;
+    background-image: url('../images/bg-mobile.svg');
+    background-position: center bottom;
+    background-size: cover;
+  }
+  .landing__box{
+    height: 350px !important;
+    padding-top: 35px;
+  }
+  .landing__box article{
+    text-align: center;
+    padding: 0 50px;
+  }
+  .landing h1{
+    font-size: 2.5rem !important;
+  }
+  .service{
+    height: auto;
+    min-height: auto !important;
+  }
+  .service article{
+    position: initial !important;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .landing__box article{
+    padding: 0;
+  }
+  .landing h1{
+    font-size: 2rem !important;
+  }
+}
