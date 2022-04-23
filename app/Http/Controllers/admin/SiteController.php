@@ -18,14 +18,14 @@ class SiteController extends Controller
    */
   public function index()
   {
-    $homeData = [];
+      $homeData = [];
 
-    $homeData['about-us'] = AboutUs::first();
-    $homeData['services'] = Service::all();
-    $homeData['contact-us'] = ContactUs::first();
-    $homeData['social'] = SocialMedia::first();
+      $homeData['about-us'] = AboutUs::first();
+      $homeData['services'] = Service::all();
+      $homeData['contact-us'] = ContactUs::first();
+      $homeData['social'] = SocialMedia::first();
 
-    return response($homeData);
+      return response($homeData);
   }
 
   // about us
