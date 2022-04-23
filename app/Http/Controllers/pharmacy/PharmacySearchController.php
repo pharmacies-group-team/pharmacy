@@ -16,8 +16,10 @@ class PharmacySearchController extends Controller
         // }
         public function show($name)
         {
-          $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->where('name', $name)->get();
-
+          // $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->where('name', $name)->get();
+          // return response($pharmacy);
+          // $name = $_GET['name'];
+          $pharmacy = Pharmacy::where('name','LIKE','%'.$name.'%')->get();
           return response($pharmacy);
         }
         public function showByNieg($nig)
