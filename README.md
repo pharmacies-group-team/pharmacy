@@ -94,6 +94,8 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 # title
 'required|min:5|max:100|string'
 
+#phone
+
 # link
 'required|min:5|max:100|string'
 
@@ -103,6 +105,6 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 'required|image|mimes:png,jpg'
 
 # date
-'required|date|before:end_at'
+'required|date'
 
 ```
