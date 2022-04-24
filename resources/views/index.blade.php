@@ -49,17 +49,25 @@
         <i class="bi bi-arrow-left mt-1"></i>
       </a>
       <div class="owl-carousel owl-2">
-        <article class="card shadow bg-secondary-light rounded-3 card--hover">
-          <div class="d-flex p-4 flex-column justify-content-center align-items-center">
-            <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="">
-            <h1 class="fs-5 fw-bold text-primary-dark mt-4">اسم الصيدلية</h1>
-            <p class="text-dark-100">
-              <span class="text-dark-50">اسم المدينه /</span>
-              <span>اسم المديرية</span>
-            </p>
-          </div>
-          <a class="btn bg-secondary-dark rounded-botton-3 p-3 fw-bold text-dark-50" href="">أطلب دوائك</a>
-        </article>
+        @if(isset($pharmacies))
+          @foreach($pharmacies as $pharmacy)
+              <article class="card shadow bg-secondary-light rounded-3 card--hover" style="min-height: 272px;height: 272px;">
+                <div class="d-flex p-4 flex-column justify-content-center align-items-center" style="min-height: 220px;height: 220px;">
+                  <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="">
+                  <a href="{{ route('pharmacy', $pharmacy->id) }}" class="fs-5 fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</a>
+                  <p class="text-dark-100">
+                    <span class="text-dark-50">
+                      @if(isset($pharmacy->neighborhood->name))
+                        {{ $pharmacy->neighborhood->name }} /
+                      </span>
+                    <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
+                    @endif
+                  </p>
+                </div>
+                <a class="btn bg-secondary-dark rounded-botton-3 p-3 fw-bold text-dark-50" href="">أطلب دوائك</a>
+              </article>
+          @endforeach
+        @endif
       </div>
     </div>
   </section>

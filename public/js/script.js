@@ -69,6 +69,6 @@ $(document).ready(function(){
 
 });
 
-$('#search-select')
+$('.search-select')
   .dropdown()
 ;
