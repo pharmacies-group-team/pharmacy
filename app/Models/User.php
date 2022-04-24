@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -78,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ad::class);
     }
+
+  protected static function newFactory()
+  {
+    return UserFactory::new();
+  }
 }
