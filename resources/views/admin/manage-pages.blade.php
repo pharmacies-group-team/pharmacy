@@ -88,7 +88,7 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label @error('phone') is-invalid @enderror"
                                             for="
-                                                                                                                                                                                                                            mainTitle">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        mainTitle">
                                             رقم
                                             التلفون</label>
                                         <input class="form-control" name="phone" value="{{ $contactUs->phone }}"
@@ -105,7 +105,7 @@
                                         <input type="email" name="email"
                                             class="form-control @error('email') is-invalid @enderror"
                                             for="
-                                                                                                                                                                                                        mainTitle"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    mainTitle"
                                             value=" {{ $contactUs->email }}" id="inputLastName"
                                             placeholder="ادخل الايميل" />
 
@@ -187,7 +187,7 @@
 
 
                                     <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="inputLastName">حساب الانسقرام</label>
+                                        <label class="form-label" for="inputLastName">حساب الانستقرام</label>
                                         <input type="url" name="instagram"
                                             class="form-control @error('instagram') is-invalid @enderror"
                                             value="{{ $social->instagram }}" id="inputLastName"
@@ -230,25 +230,25 @@
                                                 <tr>
                                                     <th class="sorting sorting_desc" tabindex="0"
                                                         aria-controls="datatables-multi" rowspan="1" colspan="1"
-                                                        style="width: 15%"
+                                                        style="width: 10%"
                                                         aria-label="Name: activate to sort column ascending"
                                                         aria-sort="descending">
                                                         الايقونة
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="datatables-multi"
-                                                        rowspan="1" colspan="1" style="width: 25%"
+                                                        rowspan="1" colspan="1" style="width: 10%"
                                                         aria-label="Position: activate to sort column ascending">
                                                         الاسم
                                                     </th>
 
                                                     <th class="sorting" tabindex="0" aria-controls="datatables-multi"
-                                                        rowspan="1" colspan="1" style="width: 40%"
+                                                        rowspan="1" colspan="1" style="width: 50%"
                                                         aria-label="Age: activate to sort column ascending">
                                                         الوصف
                                                     </th>
 
                                                     <th class="sorting" tabindex="0" aria-controls="datatables-multi"
-                                                        rowspan="1" colspan="1" style="width: 20%"
+                                                        rowspan="1" colspan="1" style="width: 30%"
                                                         aria-label="Age: activate to sort column ascending">
                                                         التعديل والحذف
                                                     </th>
@@ -259,10 +259,15 @@
                                                     @foreach ($services as $service)
                                                         <tr class="odd">
                                                             <input type="hidden" name="id" value="{{ $service->id }}" />
+
                                                             <td>
-                                                                <img alt="{{ $service->icon }}"
-                                                                    src="{{ $service->icon }}" name="image"
-                                                                    class="img-responsive img-fluid mt-2 @error("{{ $service->icon }}") is-invalid @enderror" />
+                                                                <img :src="'{{ url('img/services') }}/{{ $service->icon }}'"
+                                                                    name=" image"
+                                                                    class="img-responsive img-fluid mt-2 @error('icon') is-invalid @enderror" />
+                                                                @error('icon')
+                                                                    <span id="exampleInputEmail1-error"
+                                                                        class="error invalid-feedback">{{ $message }}</span>
+                                                                @enderror
                                                             </td>
 
                                                             <td class="dtr-control sorting_1" tabindex="0">
@@ -273,16 +278,20 @@
                                                             <td>
                                                                 <button type="button"
                                                                     @click="id = {{ $service->id }}; service = {{ $service }}"
-                                                                    class="btn btn-success float-end mt-n1"
+                                                                    class="btn btn-success float-end  m-1"
                                                                     data-bs-toggle="modal" data-bs-target="#modify">
-                                                                    <i class="fas fa-plus"></i> تعديل
+                                                                    تعديل
                                                                 </button>
+                                                                {{-- <a href="{{ route('admin.site.destroy', $service->id) }}"
+                                                                    class="btn btn-danger btn-sm">
+                                                                    حذف
+                                                                </a> --}}
 
-                                                                <button
-                                                                    @click='id = {{ $service->id }};service = {{ $service }}'
-                                                                    type="button" class="btn btn-danger float-end mt-n1"
+                                                                <button type="button"
+                                                                    @click="id = {{ $service->id }};service = {{ $service }}"
+                                                                    class="btn btn-danger float-end  m-1"
                                                                     data-bs-toggle="modal" data-bs-target="#delete">
-                                                                    <i class="fas fa-plus"></i> حذف
+                                                                    حذف
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -292,6 +301,9 @@
                                         </table>
                                     </div>
                                 </div>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -312,27 +324,48 @@
                                 @method('PUT')
 
                                 @csrf
-                                <input type="text" name="id" :value="id" />
+                                <input type="hidden" name="id" :value="id" />
 
                                 <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="mainTitle">اسم الخدمة</label>
-                                        <input type="text" class="form-control" id="mainTitle" name="name"
-                                            placeholder="ادخل اسم الخدمة" :value="service.name" />
+                                    <div class="col-9">
+                                        <div class="mb-3 ">
+                                            <label class="form-label" for="mainTitle">اسم الخدمة</label>
+                                            <input type="text" class="form-control" id="mainTitle" name="name"
+                                                placeholder="ادخل اسم الخدمة" :value="service.name" />
+                                        </div>
+                                        <div class="mb-3 ">
+                                            <label class="form-label" for="inputUsername">الوصف</label>
+                                            <textarea rows="2" class="form-control" name='desc' placeholder="ادخل الوصف" spellcheck="false"
+                                                :value="service.desc"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="inputLastName">
-                                            الوصف</label>
-                                        <input type="text" class="form-control" class="form-control"
-                                            id="inputLastName" name='icon' placeholder="" :value="service.icon" />
+
+                                    <div class="col-3 d-flex align-items-center justify-center">
+                                        <div>
+                                            <img :src="'{{ url('img/services') }}/'+service.icon" name=" image"
+                                                class="img-responsive img-fluid mt-2 @error('icon') is-invalid @enderror" />
+                                            {{-- <div class="custom-file">
+                                                <input type="image" class="custom-file-input" id="customFile" value="">
+                                                <label class="custom-file-label" for="customFile">تحميل</label>
+                                            </div> --}}
+                                            <div class="mt-2">
+
+                                                <span class="btn btn-primary"><i data-feather="upload"></i> تحميل</span>
+                                            </div>
+                                            @error('icon')
+                                                <span id="exampleInputEmail1-error"
+                                                    class="error invalid-feedback">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+
+
                                     </div>
+
+
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="inputUsername">الوصف</label>
-                                    <textarea rows="2" class="form-control" name='desc' placeholder="ادخل الوصف" spellcheck="false"
-                                        :value="service.desc"></textarea>
-                                </div>
+
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">حفظ
                                     </button>
@@ -361,27 +394,21 @@
                         </div>
                         <div class="modal-body m-3">
                             <form method="post" class="needs-validation" novalidate> @csrf
-                                <input type="hidden" name="id" :value="id" />
+                                <input type="text" name="id" :value="id" />
 
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
+                                {{-- <input type="hidden" name="id" :value="id" /> --}}
 
-                                    </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">حفظ
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
 
                                 </div>
 
-
-                                <button type="submit" class="btn btn-primary">
-                                    حذف
-                                </button>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">حفظ
-                            </button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
 
-                        </div>
                     </div>
                 </div>
             </div>
