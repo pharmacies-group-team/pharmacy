@@ -22,9 +22,9 @@ class SiteController extends Controller
     $contactUs = ContactUs::first();
     $social = SocialMedia::first();
     $aboutUs = AboutUs::first();
-  
 
-    return view('admin.manage-pages', compact('services', 'contactUs','social','aboutUs'));
+
+    return view('admin.manage-pages', compact('services', 'contactUs', 'social', 'aboutUs'));
   }
 
   // about us
