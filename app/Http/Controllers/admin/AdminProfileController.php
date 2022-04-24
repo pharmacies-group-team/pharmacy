@@ -31,7 +31,7 @@ class AdminProfileController extends Controller
         'name' => $request->input('name'),
       ]);
     return response([
-      'updated' => (bool) $result,
+      'updated'   => (bool) $result,
       'user_data' => User::find($id) ?? []
     ]);
   }
