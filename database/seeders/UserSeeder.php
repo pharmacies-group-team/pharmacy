@@ -43,6 +43,7 @@ class UserSeeder extends Seeder
 
             ])->assignRole(RoleEnum::CLIENT);
 
+        User::factory()->count(50)->create();
 
 
     }
