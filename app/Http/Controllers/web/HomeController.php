@@ -23,6 +23,9 @@ class HomeController extends Controller
       'neighborhood.directorate.city'
     ])->get();
 
+    // return response($pharmacies);
+
+
     return view(
       'index',
       compact(

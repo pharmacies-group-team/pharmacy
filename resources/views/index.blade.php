@@ -46,24 +46,41 @@
     <header class="d-flex flex-column justify-content-center align-items-center mt-5 mb-2 pt-5">
       <h1 class="text-primary-darker fw-bold fs-1">الصيدليات</h1>
     </header>
+
     <div class="container-lg owl-2-style mt-2">
-      <a href="" class="d-block text-start d-flex justify-content-lg-end text-primary-base align-items-center mb-4 gap-2">
+      <a href="{{ route('pharmacies') }}"
+        class="d-block text-start d-flex justify-content-lg-end text-primary-base align-items-center mb-4 gap-2">
         <span>عرض جميع الصيدليات</span>
         <i class="bi bi-arrow-left mt-1"></i>
       </a>
-      <div class="owl-carousel owl-2">
-        <article class="card bg-secondary-light rounded-3 card--hover shadow">
-          <div class="d-flex flex-column justify-content-center align-items-center p-4">
-            <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="">
-            <h1 class="fs-5 fw-bold text-primary-dark mt-4">اسم الصيدلية</h1>
-            <p class="text-dark-100">
-              <span class="text-dark-50">اسم المدينه /</span>
-              <span>اسم المديرية</span>
-            </p>
-          </div>
-          <a class="btn bg-secondary-dark rounded-botton-3 fw-bold text-dark-50 p-3" href="">أطلب دوائك</a>
-        </article>
-      </div>
+
+      @if (isset($pharmacies))
+        <div class="owl-carousel owl-2" dir="rtl">
+          @foreach ($pharmacies as $pharmacy)
+            <article class="card bg-secondary-light rounded-3 card--hover shadow">
+              <div class="d-flex flex-column justify-content-center align-items-center p-4">
+                <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="pharmacy image">
+
+                <h3 class="fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</h3>
+
+                <p class="text-dark-100">
+                  <span class="text-dark-50">
+                    {{ $pharmacy->neighborhood->directorate->city->name }}
+                  </span>
+                  /
+                  <span>{{ $pharmacy->neighborhood->name }}</span>
+                </p>
+              </div>
+
+              <a class="btn bg-secondary-dark rounded-button-3 fw-bold text-dark-50 p-3"
+                href="{{ route('pharmacies') }}">
+                أطلب دوائك
+              </a>
+            </article>
+          @endforeach
+        </div>
+      @endif
+
     </div>
   </section>
   <!-- End Pharmacies Section -->
