@@ -25,18 +25,18 @@ class ClientProfileController extends Controller
     $id = $request->input('id');
 
     $request->validate([
-      'full_name' => 'required|string|min:3|max:50',
-      'phone' => 'required|min:9|max:16'
+      'full_name'   => 'required|string|min:3|max:50',
+      'phone'       => 'required|min:9|max:16|numeric'
     ]);
 
     $result = Client::where('id', $id)
       ->update([
         'full_name' => $request->input('full_name'),
-        'phone' => $request->input('phone'),
+        'phone'     => $request->input('phone'),
       ]);
 
     return response([
-      'updated' => (bool) $result,
+      'updated'   => (bool) $result,
       'user_data' => Client::find($id) ?? []
     ]);
   }

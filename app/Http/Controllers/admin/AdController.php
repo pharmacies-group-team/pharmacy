@@ -40,12 +40,12 @@ class AdController extends Controller
     $validator = Validator::make(
       $request->all(),
       [
-        'title'       => 'required',
-        'image'       => 'required',
-        'link'        => 'required',
-        'ad_position' => 'required',
-        'start_at'    => 'required',
-        'end_at'      => 'required',
+        'title'       => 'required|min:5|max:100|string',
+        'image'       => 'required|image|mimes:png,jpg',
+        'link'        => 'required|min:5|max:255|string',
+        'ad_position' => 'required|min:5|max:100|string',
+        'start_at'    => 'required|date|before:end_at',
+        'end_at'      => 'required|date|after:start_at',
       ]
     );
 
@@ -88,22 +88,22 @@ class AdController extends Controller
   public function update(Request $request, $id)
   {
     $validator = Validator::make($request->all(), [
-      'title' => 'required',
-      'image' => 'required',
-      'link' => 'required',
-      'ad_position' => 'required',
-      'start_at' => 'required',
-      'end_at' => 'required'
+      'title'       => 'required|min:5|max:100|string',
+      'image'       => 'required|image|mimes:png,jpg',
+      'link'        => 'required|min:5|max:255|string',
+      'ad_position' => 'required|min:5|max:100|string',
+      'start_at'    => 'required|date|before:end_at',
+      'end_at'      => 'required|date|after:start_at',
     ]);
 
     Ad::where('id', $id)
       ->update([
-        'title' => $request->input('title'),
-        'image' => $request->input('image'),
-        'link' => $request->input('link'),
+        'title'       => $request->input('title'),
+        'image'       => $request->input('image'),
+        'link'        => $request->input('link'),
         'ad_position' => $request->input('ad_position'),
-        'start_at' => $request->input('start_at'),
-        'end_at' => $request->input('end_at')
+        'start_at'    => $request->input('start_at'),
+        'end_at'      => $request->input('end_at')
       ]);
 
     return response(['edit successfully', $validator->errors()]);
