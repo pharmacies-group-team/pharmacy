@@ -1,6 +1,6 @@
 @extends('layouts.web.master')
 @section('title') Home @stop
-@php( $count = 0 )
+@php($count = 0)
 @section('content')
 
   <!-- Start Services Section -->
@@ -8,24 +8,27 @@
     <div class="container-xl">
       <div class="row">
         <div class="col-lg-10 col-md-12 m-auto">
-          <article class="card bg-primary-darker rounded-3 p-3 service" style="min-height: 230px;">
+          <article class="card bg-primary-darker rounded-3 service p-3" style="min-height: 230px;">
             <div class="d-flex flex-md-row flex-column">
-              @foreach($services->slice(0, 3)  as $service)
+              @foreach ($services->slice(0, 3) as $service)
                 @php($count++)
-                @if($count === 2)
+                @if ($count === 2)
                   <div class="col-md-4 col-12 position-relative">
-                    <article class="rounded-3 d-flex bg-secondary-light position-absolute flex-column justify-content-center align-items-center text-primary-dark p-3" style="bottom: 13px; min-height: 230px;">
+                    <article
+                      class="rounded-3 d-flex bg-secondary-light position-absolute flex-column justify-content-center align-items-center text-primary-dark p-3"
+                      style="bottom: 13px; min-height: 230px;">
                       <i class="bi bi-arrow-repeat fs-1"></i>
                       <h5>{{ $service->name }}</h5>
-                      <p class="text-center mt-2 fw-light">{{ $service->desc }}</p>
+                      <p class="fw-light mt-2 text-center">{{ $service->desc }}</p>
                     </article>
                   </div>
                 @else
                   <div class="col-md-4 col-12">
-                    <article class="d-flex flex-column justify-content-center align-items-center text-secondary-lighter p-3">
+                    <article
+                      class="d-flex flex-column justify-content-center align-items-center text-secondary-lighter p-3">
                       <i class="bi bi-bicycle fs-1"></i>
                       <h5>{{ $service->name }}</h5>
-                      <p class="text-center mt-2 fw-light">{{ $service->desc }}</p>
+                      <p class="fw-light mt-2 text-center">{{ $service->desc }}</p>
                     </article>
                   </div>
                 @endif
@@ -43,14 +46,14 @@
     <header class="d-flex flex-column justify-content-center align-items-center mt-5 mb-2 pt-5">
       <h1 class="text-primary-darker fw-bold fs-1">الصيدليات</h1>
     </header>
-    <div class="container-lg mt-2 owl-2-style">
-      <a href="" class="d-block text-start mb-4 d-flex justify-content-lg-end text-primary-base align-items-center gap-2">
+    <div class="container-lg owl-2-style mt-2">
+      <a href="" class="d-block text-start d-flex justify-content-lg-end text-primary-base align-items-center mb-4 gap-2">
         <span>عرض جميع الصيدليات</span>
         <i class="bi bi-arrow-left mt-1"></i>
       </a>
       <div class="owl-carousel owl-2">
-        <article class="card shadow bg-secondary-light rounded-3 card--hover">
-          <div class="d-flex p-4 flex-column justify-content-center align-items-center">
+        <article class="card bg-secondary-light rounded-3 card--hover shadow">
+          <div class="d-flex flex-column justify-content-center align-items-center p-4">
             <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="">
             <h1 class="fs-5 fw-bold text-primary-dark mt-4">اسم الصيدلية</h1>
             <p class="text-dark-100">
@@ -58,7 +61,7 @@
               <span>اسم المديرية</span>
             </p>
           </div>
-          <a class="btn bg-secondary-dark rounded-botton-3 p-3 fw-bold text-dark-50" href="">أطلب دوائك</a>
+          <a class="btn bg-secondary-dark rounded-botton-3 fw-bold text-dark-50 p-3" href="">أطلب دوائك</a>
         </article>
       </div>
     </div>
@@ -70,9 +73,10 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-lg-7 col-md-8 col-12 m-lg-0 m-md-auto">
-          <div class="card p-md-5 p-3 card-blur">
+          <div class="card p-md-5 card-blur p-3">
             <h1 class="text-primary-base fw-bold">هل أنت صاحب صيدلية؟</h1>
-            <p class="fs-lg-5 text-primary-darker mt-2">انضم لشفاء الآن واجعل صيدليتك أونلاين! واحصل على مبيعات أكثر من خلال الانضمام لتطبيق شفاء عبر تسجيلك لهذا النموذج.</p>
+            <p class="fs-lg-5 text-primary-darker mt-2">انضم لشفاء الآن واجعل صيدليتك أونلاين! واحصل على مبيعات أكثر من
+              خلال الانضمام لتطبيق شفاء عبر تسجيلك لهذا النموذج.</p>
             <a href="{{ route('register.pharmacy') }}" class="btn btn-primary w-75 mt-3">أنضم إلينا كصيدلية</a>
           </div>
         </div>

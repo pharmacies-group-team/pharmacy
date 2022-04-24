@@ -7,7 +7,6 @@ use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
-use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
