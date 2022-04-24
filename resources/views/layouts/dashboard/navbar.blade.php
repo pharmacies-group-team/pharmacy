@@ -231,7 +231,7 @@
               <div class="row g-0 align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-5.jpg"
+                    src="{{asset('img/avatars/avatar-5.jpg')}}"
                     class="avatar img-fluid rounded-circle"
                     alt="Vanessa Tucker"
                   />
@@ -249,7 +249,8 @@
               <div class="row g-0 align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-2.jpg"
+                  src="{{asset('img/avatars/avatar-2.jpg')}}"
+
                     class="avatar img-fluid rounded-circle"
                     alt="William Harris"
                   />
@@ -267,7 +268,7 @@
               <div class="row g-0 align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-4.jpg"
+                  src="{{asset('img/avatars/avatar-4.jpg')}}"
                     class="avatar img-fluid rounded-circle"
                     alt="Christina Mason"
                   />
@@ -285,7 +286,7 @@
               <div class="row g-0 align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-3.jpg"
+                  src="{{asset('img/avatars/avatar-3.jpg')}}"
                     class="avatar img-fluid rounded-circle"
                     alt="Sharon Lessman"
                   />
@@ -313,7 +314,9 @@
           id="languageDropdown"
           data-bs-toggle="dropdown"
         >
-          <img src="img/flags/ar.svg" alt="English" />
+          <img 
+          src="{{asset('img/flags/ar.svg')}}"
+          alt="English" />
         </a>
         <div
           class="dropdown-menu dropdown-menu-end"
@@ -331,7 +334,7 @@
 
           <a class="dropdown-item" href="#">
             <img
-              src="img/flags/us.png"
+            src="{{asset('img/flags/us.png')}}"
               alt="English"
               width="20"
               class="align-middle me-1"
@@ -369,9 +372,9 @@
           data-bs-toggle="dropdown"
         >
           <img
-            src="img/avatars/avatar.jpg"
-            class="avatar img-fluid rounded"
-            alt="Charles Hall"
+          src="{{asset('img/avatars/avatar.jpg')}}"
+          class="avatar img-fluid rounded"
+          alt="Charles Hall"
           />
         </a>
         <div class="dropdown-menu dropdown-menu-end">

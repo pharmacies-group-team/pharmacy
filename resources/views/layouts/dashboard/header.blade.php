@@ -26,7 +26,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
 
-    <title>Multi Selection | AdminKit Demo</title>
+    <title>Pharamcy</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
@@ -44,8 +44,8 @@
 
   
     <!-- BEGIN SETTINGS -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet" />
-    <script src="{{asset('js/settings.js')}}"></script>
+    <link href="{{asset('css/dashboard/app.css')}}" rel="stylesheet" />
+    {{-- <script src="{{asset('js/settings.js')}}"></script> --}}
 
 
     <script

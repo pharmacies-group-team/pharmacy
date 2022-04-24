@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Enum\RoleEnum;
 
 class AdController extends Controller
 {
@@ -17,8 +19,12 @@ class AdController extends Controller
   public function index()
   {
     $ads = Ad::all();
+    // $ads = User::role(RoleEnum::CLIENT)->orderBy('id', 'DESC')->get();
 
-    return response($ads);
+
+    // dd($ads);
+    // return response($ads);
+    return view('admin.ads', compact('ads'));
   }
 
 
@@ -31,7 +37,8 @@ class AdController extends Controller
   public function store(Request $request)
   {
     // TODO
-    $validator = Validator::make($request->all(),
+    $validator = Validator::make(
+      $request->all(),
       [
         'title'       => 'required',
         'image'       => 'required',
@@ -39,7 +46,8 @@ class AdController extends Controller
         'ad_position' => 'required',
         'start_at'    => 'required',
         'end_at'      => 'required',
-      ]);
+      ]
+    );
 
     Ad::create([
       'title'       => $request->input('title'),
@@ -109,6 +117,7 @@ class AdController extends Controller
    */
   public function destroy($id)
   {
+    dd($id);
     //
     return Ad::where('id', $id)->delete() ? "deleted" : 'not deleted';
   }

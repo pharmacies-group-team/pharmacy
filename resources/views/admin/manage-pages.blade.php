@@ -1,569 +1,397 @@
 @extends('layouts/dashboard/dashboard-mastre')
 @section('content')
-    
+
     <main class="content">
-
-          {{-- about us --}}
-          <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">من نحن</h1>
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div
-                      id="datatables-fixed-header_wrapper"
-                      class="dataTables_wrapper dt-bootstrap5 no-footer"
-                    >
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <table
-                           
-                            class="table "
-                            style="width: 100%"
-                          >
-                            <thead>
-                              <tr>
-                                <th
-                                  class="sorting sorting_desc"
-                                  tabindex="0"
-                                  aria-controls="datatables-multi"
-                                  rowspan="1"
-                                  colspan="1"
-                                  style="width: 30%"
-                                  aria-label="Name: activate to sort column ascending"
-                                  aria-sort="descending"
-                                >
-                                  العنوان
-                                </th>
-                                <th
-                                  class="sorting"
-                                  tabindex="0"
-                                  aria-controls="datatables-multi"
-                                  rowspan="1"
-                                  colspan="1"
-                                  style="width: 50%"
-                                  aria-label="Position: activate to sort column ascending"
-                                >
-                                  المحتوى
-                                </th>
-                                
-                                <th
-                                  class="sorting"
-                                  tabindex="0"
-                                  aria-controls="datatables-multi"
-                                  rowspan="1"
-                                  colspan="1"
-                                  style="width: 20%"
-                                  aria-label="Age: activate to sort column ascending"
-                                >
-                                  التعديل والاضافة
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr class="odd">
-                                <td class="dtr-control sorting_1" tabindex="0">
-                                    العنوان
-                                </td>
-                                <td>pharmacy</td>
-                               
-                                <td>
-                                    <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                    data-bs-target="#phone">
-                                    <i class="fas fa-plus"></i> اضافه وتعديل
-                                </button>
-                                </td>
-                              </tr>
-                              <tr class="even">
-                                <td class="dtr-control sorting_1" tabindex="0">
-                                    العنوان الفرعي
-                                </td>
-                                <td>sub title</td>
-                                
-                                <td>
-                                    <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                    data-bs-target="#email">
-                                    <i class="fas fa-plus"></i> اضافه وتعديل
-                                </button>
-                                </td>
-                              </tr>
-
-                              <tr class="odd">
-                                <td class="dtr-control sorting_1" tabindex="0">
-                                    العنوان
-                                </td>
-                                <td>pharmacy</td>
-                               
-                                <td>
-                                    <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                    data-bs-target="#phone">
-                                    <i class="fas fa-plus"></i> اضافه وتعديل
-                                </button>
-                                </td>
-                              </tr>
-                              
-                             
-    
-                             
-                            </tbody>
-                          </table>
-    
-                         
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {{-- {{ dd($homeData['services']) }} --}}
+        {{-- about us --}}
+        <div class="container-fluid p-0">
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">من نحن</h1>
             </div>
-          </div>
-        
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">من نحن</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="{{ route('admin.updateAboutUs') }}" class="needs-validation"
+                                novalidate>
+                                @csrf
+                                @method('put')
+                                <input type="hidden" name="id" value="{{ $aboutUs->id }}" />
 
-      
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="mainTitle">العنوان الرئيسية</label>
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                            id="mainTitle" name="title" placeholder="ادخل العنوان الرئيسي"
+                                            value="{{ $aboutUs->title }}" />
+                                        @error('title')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="inputLastName">العنوان الفرعي</label>
+                                        <input type="text" class="form-control @error('sub_title') is-invalid @enderror"
+                                            id="inputLastName" name='sub_title' placeholder="ادخل العنوان الفرعي"
+                                            value="{{ $aboutUs->sub_title }}" />
+                                        @error('sub_title')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="inputUsername">من نحن</label>
+                                    <textarea rows="2" class="form-control @error('about') is-invalid @enderror" id="inputBio" name='about'
+                                        placeholder="اخبرنا من انتم" spellcheck="false"
+                                        value="{{ $aboutUs->about }}"></textarea>
+                                    @error('about')
+                                        <span id="exampleInputEmail1-error"
+                                            class="error invalid-feedback">{{ $message }}</span>
+                                    @enderror
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    احفظ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {{-- contact us --}}
         <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">تواصل معنا</h1>
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div
-                      id="datatables-fixed-header_wrapper"
-                      class="dataTables_wrapper dt-bootstrap5 no-footer"
-                    >
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <table
-                           
-                            class="table "
-                            style="width: 100%"
-                          >
-                            <thead>
-                              <tr>
-                                <th
-                                  class="sorting sorting_desc"
-                                  tabindex="0"
-                                  aria-controls="datatables-multi"
-                                  rowspan="1"
-                                  colspan="1"
-                                  style="width: 30%"
-                                  aria-label="Name: activate to sort column ascending"
-                                  aria-sort="descending"
-                                >
-                                  العنوان
-                                </th>
-                                <th
-                                  class="sorting"
-                                  tabindex="0"
-                                  aria-controls="datatables-multi"
-                                  rowspan="1"
-                                  colspan="1"
-                                  style="width: 50%"
-                                  aria-label="Position: activate to sort column ascending"
-                                >
-                                  المحتوى
-                                </th>
-                                
-                                <th
-                                  class="sorting"
-                                  tabindex="0"
-                                  aria-controls="datatables-multi"
-                                  rowspan="1"
-                                  colspan="1"
-                                  style="width: 20%"
-                                  aria-label="Age: activate to sort column ascending"
-                                >
-                                  التعديل والاضافة
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr class="odd">
-                                <td class="dtr-control sorting_1" tabindex="0">
-                                    رقم التلفون
-                                </td>
-                                <td>777777777</td>
-                               
-                                <td>
-                                    <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                    data-bs-target="#phone">
-                                    <i class="fas fa-plus"></i> اضافه وتعديل
-                                </button>
-                                </td>
-                              </tr>
-                              <tr class="even">
-                                <td class="dtr-control sorting_1" tabindex="0">
-                                    الايميل
-                                </td>
-                                <td>myemail.gmail.com</td>
-                                
-                                <td>
-                                    <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                    data-bs-target="#email">
-                                    <i class="fas fa-plus"></i> اضافه وتعديل
-                                </button>
-                                </td>
-                              </tr>
-                              
-                             
-    
-                             
-                            </tbody>
-                          </table>
-    
-                         
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">تواصل معنا</h1>
             </div>
-          </div>
-        
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">تواصل معنا</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="{{ route('admin.updateContactUs') }}" class="needs-validation"
+                                novalidate>
+                                @csrf
+                                @method('put')
+                                <input type="hidden" name="id" value="{{ $contactUs->id }}" />
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label @error('phone') is-invalid @enderror"
+                                            for="
+                                                                                                                                                                                                                            mainTitle">
+                                            رقم
+                                            التلفون</label>
+                                        <input class="form-control" name="phone" value="{{ $contactUs->phone }}"
+                                            type="tel" id="mainTitle" placeholder="ادخل رقم التلفون " />
+                                        @error('phone')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+
+
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="inputLastName">الايميل</label>
+                                        <input type="email" name="email"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            for="
+                                                                                                                                                                                                        mainTitle"
+                                            value=" {{ $contactUs->email }}" id="inputLastName"
+                                            placeholder="ادخل الايميل" />
+
+                                        @error('email')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    احفظ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         {{-- social media managment --}}
-      <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">وسائل التواصل الأجتماعي </h1>
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-body">
-                <div
-                  id="datatables-fixed-header_wrapper"
-                  class="dataTables_wrapper dt-bootstrap5 no-footer"
-                >
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <table
-                       
-                        class="table "
-                        style="width: 100%"
-                      >
-                        <thead>
-                          <tr>
-                            <th
-                              class="sorting sorting_desc"
-                              tabindex="0"
-                              aria-controls="datatables-multi"
-                              rowspan="1"
-                              colspan="1"
-                              style="width: 30%"
-                              aria-label="Name: activate to sort column ascending"
-                              aria-sort="descending"
-                            >
-                              اسم الموقع
-                            </th>
-                            <th
-                              class="sorting"
-                              tabindex="0"
-                              aria-controls="datatables-multi"
-                              rowspan="1"
-                              colspan="1"
-                              style="width: 50%"
-                              aria-label="Position: activate to sort column ascending"
-                            >
-                              الرابط
-                            </th>
-                            
-                            <th
-                              class="sorting"
-                              tabindex="0"
-                              aria-controls="datatables-multi"
-                              rowspan="1"
-                              colspan="1"
-                              style="width: 20%"
-                              aria-label="Age: activate to sort column ascending"
-                            >
-                              التعديل والاضافة
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr class="odd">
-                            <td class="dtr-control sorting_1" tabindex="0">
-                                Facebook
-                            </td>
-                            <td>facebook.com</td>
-                           
-                            <td>
-                                <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                data-bs-target="#facebook">
-                                <i class="fas fa-plus"></i> اضافه وتعديل
-                            </button>
-                            </td>
-                          </tr>
-                          <tr class="even">
-                            <td class="dtr-control sorting_1" tabindex="0">
-                                whatsapp
-                            </td>
-                            <td>whatsapp.com</td>
-                            
-                            <td>
-                                <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                data-bs-target="#whatsapp">
-                                <i class="fas fa-plus"></i> اضافه وتعديل
-                            </button>
-                            </td>
-                          </tr>
-                          <tr class="odd">
-                            <td class="dtr-control sorting_1" tabindex="0">
-                                twitter
-                            </td>
-                            <td>twitter.com</td>
-                            
-                            <td>
-                                <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                data-bs-target="#twitter">
-                                <i class="fas fa-plus"></i> اضافه وتعديل
-                            </button>
-                            </td>
-                          </tr>
-                          <tr class="even ">
-                            <td class="dtr-control sorting_1" tabindex="0">
-                                instagram
-                            </td>
-                            <td>instagram.com</td>
-                           
-                            <td>
-                                <button type="button" class="btn btn-primary float-end mt-n1" data-bs-toggle="modal"
-                                data-bs-target="#instagram">
-                                <i class="fas fa-plus"></i> اضافه وتعديل
-                            </button>
-                            </td>
-                          </tr>
-                         
+        <div class="container-fluid p-0">
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle"> وسائل التواصل الأجتماعي</h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">وسائل التواصل الأجتماعي</h5>
+                        </div>
 
-                         
-                        </tbody>
-                      </table>
+                        <div class="card-body">
+                            <form method="post" action="{{ route('admin.updateSocial') }}" class="needs-validation"
+                                novalidate>
+                                @csrf
+                                @method('put')
+                                <input type="hidden" name="id" value="{{ $social->id }}" />
 
-                     
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="mainTitle">حساب الفيسبوك</label>
+                                        <input class="form-control @error('facebook') is-invalid @enderror" name="facebook"
+                                            placeholder="رقم التلفون" value="{{ $social->facebook }}" type="url"
+                                            id="mainTitle" placeholder="ادخل حساب الفيسبوك " />
+                                        @error('facebook')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="inputLastName">حساب التويتر</label>
+                                        <input type="url" name="twitter"
+                                            class="form-control @error('twitter') is-invalid @enderror"
+                                            value="{{ $social->twitter }}" id="inputLastName"
+                                            placeholder="ادخل حساب التويتر" />
+                                        @error('twitter')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="mainTitle">حساب الواتس اب</label>
+                                        <input class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp"
+                                            value="{{ $social->whatsapp }}" type="url" id="mainTitle"
+                                            placeholder="ادخل حساب الواتس اب " />
+                                        @error('whatsapp')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="inputLastName">حساب الانسقرام</label>
+                                        <input type="url" name="instagram"
+                                            class="form-control @error('instagram') is-invalid @enderror"
+                                            value="{{ $social->instagram }}" id="inputLastName"
+                                            placeholder="ادخل حساب الانستقرام" />
+                                        @error('instagram')
+                                            <span id="exampleInputEmail1-error"
+                                                class="error invalid-feedback">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    احفظ
+                                </button>
+                            </form>
+                        </div>
+                        {{-- @endif --}}
+
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
 
 
-      {{-- models --}}
+        {{-- services --}}
 
-       {{-- start facebook modal --}}
-        
-       <div class="modal fade" id="facebook" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">الفيسبوك</h5>
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+        <div class="container-fluid p-0" x-data="{ id: null, service: {} }">
+            <h1 class="h3 mb-3">خدماتنا </h1>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="datatables-fixed-header_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table " style="width: 100%">
+                                            <thead>
+
+                                                <tr>
+                                                    <th class="sorting sorting_desc" tabindex="0"
+                                                        aria-controls="datatables-multi" rowspan="1" colspan="1"
+                                                        style="width: 15%"
+                                                        aria-label="Name: activate to sort column ascending"
+                                                        aria-sort="descending">
+                                                        الايقونة
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-multi"
+                                                        rowspan="1" colspan="1" style="width: 25%"
+                                                        aria-label="Position: activate to sort column ascending">
+                                                        الاسم
+                                                    </th>
+
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-multi"
+                                                        rowspan="1" colspan="1" style="width: 40%"
+                                                        aria-label="Age: activate to sort column ascending">
+                                                        الوصف
+                                                    </th>
+
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-multi"
+                                                        rowspan="1" colspan="1" style="width: 20%"
+                                                        aria-label="Age: activate to sort column ascending">
+                                                        التعديل والحذف
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($services)
+                                                    @foreach ($services as $service)
+                                                        <tr class="odd">
+                                                            <input type="hidden" name="id" value="{{ $service->id }}" />
+                                                            <td>
+                                                                <img alt="{{ $service->icon }}"
+                                                                    src="{{ $service->icon }}" name="image"
+                                                                    class="img-responsive img-fluid mt-2 @error("{{ $service->icon }}") is-invalid @enderror" />
+                                                            </td>
+
+                                                            <td class="dtr-control sorting_1" tabindex="0">
+                                                                {{ $service->name }}
+                                                            </td>
+                                                            <td>{{ $service->desc }}</td>
+
+                                                            <td>
+                                                                <button type="button"
+                                                                    @click="id = {{ $service->id }}; service = {{ $service }}"
+                                                                    class="btn btn-success float-end mt-n1"
+                                                                    data-bs-toggle="modal" data-bs-target="#modify">
+                                                                    <i class="fas fa-plus"></i> تعديل
+                                                                </button>
+
+                                                                <button
+                                                                    @click='id = {{ $service->id }};service = {{ $service }}'
+                                                                    type="button" class="btn btn-danger float-end mt-n1"
+                                                                    data-bs-toggle="modal" data-bs-target="#delete">
+                                                                    <i class="fas fa-plus"></i> حذف
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body m-3">
-                    <form method="post" class="needs-validation" novalidate>
-                        @csrf
+            </div>
+            {{-- update service modal --}}
+            <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> تعديل الخدمات </h5>
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+                            <form method="post" class="needs-validation" novalidate
+                                :action="'{{ url('admin/site/services') }}/'+id">
+                                @method('PUT')
 
-                        <div class="mb-3">
-                            <label class="form-label" for="ad-name-label">رابط الفيسبوك</label>
-                            <input id="ad-name-label" name="facebook" value="{{ old('facebook') }}" type="url"
-                                class="form-control @error('facebook') is-invalid @enderror"
-                                placeholder="ادخل رابط الفيسبوك" />
-                            @error('title') <span id="exampleInputEmail1-error"
-                                class="error invalid-feedback">{{ $message }}</span> @enderror
+                                @csrf
+                                <input type="text" name="id" :value="id" />
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="mainTitle">اسم الخدمة</label>
+                                        <input type="text" class="form-control" id="mainTitle" name="name"
+                                            placeholder="ادخل اسم الخدمة" :value="service.name" />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="inputLastName">
+                                            الوصف</label>
+                                        <input type="text" class="form-control" class="form-control"
+                                            id="inputLastName" name='icon' placeholder="" :value="service.icon" />
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="inputUsername">الوصف</label>
+                                    <textarea rows="2" class="form-control" name='desc' placeholder="ادخل الوصف" spellcheck="false"
+                                        :value="service.desc"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">حفظ
+                                    </button>
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {{-- update service model --}}
+
+
+
+            {{-- delete service modal --}}
+            <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> حذف الخدمة </h5>
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+                            <form method="post" class="needs-validation" novalidate> @csrf
+                                <input type="hidden" name="id" :value="id" />
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+
+                                    </div>
+
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">
+                                    حذف
+                                </button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">حفظ
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
 
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">حفظ </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
+                    </div>
                 </div>
             </div>
+            {{-- delete service model --}}
+
+
+
         </div>
-    </div>
-    {{-- end facebook modal --}}
-
-     {{-- start instagram modal --}}
-
-     <div class="modal fade" id="instagram" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">الانستقرام</h5>
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body m-3">
-                    <form method="post" class="needs-validation" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label" for="ad-name-label">رابط الانستقرام</label>
-                            <input id="ad-name-label" name="instagram" value="{{ old('instagram') }}" type="url"
-                                class="form-control @error('instagram') is-invalid @enderror"
-                                placeholder="ادخل رابط الانستقرام" />
-                            @error('instagram') <span id="exampleInputEmail1-error"
-                                class="error invalid-feedback">{{ $message }}</span> @enderror
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">حفظ </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end instagram modal --}}
-
-     {{-- start twitteer modal --}}
-
-     <div class="modal fade" id="twitter" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">التويتر</h5>
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body m-3">
-                    <form method="post" class="needs-validation" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label" for="ad-name-label">رابط التويتر</label>
-                            <input id="ad-name-label" name="twitter" value="{{ old('twitter') }}" type="url"
-                                class="form-control @error('twitter') is-invalid @enderror"
-                                placeholder="ادخل رابط التويتر" />
-                            @error('twitter') <span id="exampleInputEmail1-error"
-                                class="error invalid-feedback">{{ $message }}</span> @enderror
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">حفظ </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end twitter modal --}}
-
-     {{-- start whatsapp modal --}}
-
-     <div class="modal fade" id="whatsapp" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">الواتس اب</h5>
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body m-3">
-                    <form method="post" class="needs-validation" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label" for="ad-name-label">رابط الواتس اب</label>
-                            <input id="ad-name-label" name="whatsapp" value="{{ old('whatsapp') }}" type="url"
-                                class="form-control @error('whatsapp') is-invalid @enderror"
-                                placeholder="ادخل رابط الواتس اب" />
-                            @error('whatsapp') <span id="exampleInputEmail1-error"
-                                class="error invalid-feedback">{{ $message }}</span> @enderror
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">حفظ </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end whatsapp modal --}}
 
 
-    {{-- start email modal --}}
-
-    <div class="modal fade" id="email" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">الايميل</h5>
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body m-3">
-                    <form method="post" class="needs-validation" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label" for="ad-name-label">رابط الايميل</label>
-                            <input id="ad-name-label" name="email" value="{{ old('email') }}" type="url"
-                                class="form-control @error('email') is-invalid @enderror"
-                                placeholder="ادخل رابط الايميل" />
-                            @error('email') <span id="exampleInputEmail1-error"
-                                class="error invalid-feedback">{{ $message }}</span> @enderror
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">حفظ </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end email modal --}}
-
-
-
-    {{-- start phone modal --}}
-
-    <div class="modal fade" id="phone" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">رقم الهاتف</h5>
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body m-3">
-                    <form method="post" class="needs-validation" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label" for="ad-name-label">رقم الهاتف</label>
-                            <input id="ad-name-label" name="phone" value="{{ old('phone') }}" type="url"
-                                class="form-control @error('phone') is-invalid @enderror"
-                                placeholder="ادخل الهاتف " />
-                            @error('phone') <span id="exampleInputEmail1-error"
-                                class="error invalid-feedback">{{ $message }}</span> @enderror
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">حفظ </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end phone modal --}}
     </main>
 
 @stop

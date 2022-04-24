@@ -32,6 +32,22 @@ Debugbar::disable();
 | Web Routes
 |--------------------------------------------------------------------------
 */
+// Route::get('/clients', function () {
+//   return view('admin.clients');
+// });
+
+// Route::get('/ads', function () {
+//   return view('admin.ads');
+// });
+
+// Route::get('/pharmacies-users', function () {
+//   return view('admin.pharmacies-users');
+// });
+
+// Route::get('/manage-pages', function () {
+//   return view('admin.manage-pages');
+// });
+
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
@@ -64,7 +80,7 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+Route::prefix('/admin')->middleware(['auth'])
   ->name('admin.')->group(function () {
 
     // admin profile

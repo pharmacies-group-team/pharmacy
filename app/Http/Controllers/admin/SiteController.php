@@ -18,14 +18,13 @@ class SiteController extends Controller
    */
   public function index()
   {
-      $homeData = [];
+    $services = Service::all();
+    $contactUs = ContactUs::first();
+    $social = SocialMedia::first();
+    $aboutUs = AboutUs::first();
+  
 
-      $homeData['about-us'] = AboutUs::first();
-      $homeData['services'] = Service::all();
-      $homeData['contact-us'] = ContactUs::first();
-      $homeData['social'] = SocialMedia::first();
-
-      return response($homeData);
+    return view('admin.manage-pages', compact('services', 'contactUs','social','aboutUs'));
   }
 
   // about us
@@ -42,8 +41,7 @@ class SiteController extends Controller
       "sub_title" => $request->input('sub_title'),
       "about" => $request->input('about') ?? AboutUs::first()->about,
     ]);
-
-    return ['updated' => $result, 'data' => AboutUs::first()];
+    return redirect()->back();
   }
 
   // add service
@@ -61,13 +59,14 @@ class SiteController extends Controller
       "icon" => $request->input('icon'),
       'user_id' => $request->input('user_id')
     ]);
-
-    return ['added' => $result, 'data' => Service::all()];
+    return redirect()->back();
+    // return ['added' => $result, 'data' => Service::all()];
   }
 
   // update services
   public function updateService(Request $request, $id)
   {
+    // dd($request);
     $request->validate([
       "name" => 'required|min:10|string',
       "desc" => 'required|min:10|string',
@@ -78,8 +77,9 @@ class SiteController extends Controller
       "desc" => $request->input('desc'),
       "icon" => $request->input('icon'),
     ]);
+    return redirect()->back();
 
-    return ['updated' => $result, 'data' => Service::find($id)];
+    // return ['updated' => $result, 'data' => Service::find($id)];
   }
 
   // update contact us
@@ -94,8 +94,9 @@ class SiteController extends Controller
       "phone" => $request->input('phone'),
       "email" => $request->input('email'),
     ]);
+    return redirect()->back();
 
-    return ['updated' => $result, 'data' => ContactUs::first()];
+    // return ['updated' => $result, 'data' => ContactUs::first()];
   }
 
   // update social
@@ -114,7 +115,8 @@ class SiteController extends Controller
       "twitter" => $request->input('twitter'),
       "instagram" => $request->input('instagram'),
     ]);
+    return redirect()->back();
 
-    return ['updated' => $result, 'data' => SocialMedia::first()];
+    // return ['updated' => $result, 'data' => SocialMedia::first()];
   }
 }
