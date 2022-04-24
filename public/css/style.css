@@ -68,7 +68,7 @@ a{
   background-color: var(--primary-dark-color) !important;
   transition: 0.5s;
 }
-.card--hover:hover h1{
+.card--hover:hover a{
   color: var(--secondary-lighter-color) !important;
   transition: 0.5s;
 }
@@ -76,7 +76,7 @@ a{
   color: var(--secondary-light-color) !important;
   transition: 0.5s;
 }
-.card--hover:hover a{
+.card--hover:hover a.btn{
   background-color: var(--primary-darker-color) !important;
   color: var(--secondary-light-color) !important;
   transition: 0.5s;

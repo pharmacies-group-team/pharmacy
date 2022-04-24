@@ -17,15 +17,14 @@ class HomeController extends Controller
         $services   = Service::all();
         $contactUs  = ContactUs::first();
         $social     = SocialMedia::first();
-        $pharmacies = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->get();
+        $pharmacies = Pharmacy::all();
 
         return view('index', compact('aboutUs', 'services', 'contactUs', 'social', 'pharmacies'));
     }
 
     public function showPharmacies()
     {
-        $pharmacies = Pharmacy::select()->with('neighborhood.directorate.city')->get();
-
+        $pharmacies = Pharmacy::all();
         return view('web.pharmacies', compact('pharmacies'));
     }
 
