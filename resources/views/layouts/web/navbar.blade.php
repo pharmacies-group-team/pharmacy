@@ -87,13 +87,12 @@
         <div class="d-none d-lg-flex align-items-center gap-3">
           @auth
             {{-- <a href="{{ url('/home') }}" class="btn btn-primary__linear">{{ Auth::user()->name }} TODO</a> --}}
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-              logout (TODO)
-            </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
+            {{-- TODO logout style --}}
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class=""> @csrf <button
+                type="submit" class="dropdown-item">
+                logout
+              </button>
             </form>
           @else
             <a href="{{ route('login') }}" class="btn btn-primary__linear">تسجيل الدخول</a>
