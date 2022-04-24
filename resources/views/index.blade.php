@@ -44,7 +44,7 @@
       <h1 class="text-primary-darker fw-bold fs-1">الصيدليات</h1>
     </header>
     <div class="container-lg mt-2 owl-2-style">
-      <a href="" class="d-block text-start mb-4 d-flex justify-content-lg-end text-primary-base align-items-center gap-2">
+      <a href="{{ route('pharmacies') }}" class="d-block text-start mb-4 d-flex justify-content-lg-end text-primary-base align-items-center gap-2">
         <span>عرض جميع الصيدليات</span>
         <i class="bi bi-arrow-left mt-1"></i>
       </a>
@@ -53,7 +53,7 @@
           @foreach($pharmacies as $pharmacy)
               <article class="card shadow bg-secondary-light rounded-3 card--hover" style="min-height: 272px;height: 272px;">
                 <div class="d-flex p-4 flex-column justify-content-center align-items-center" style="min-height: 220px;height: 220px;">
-                  <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="">
+                  <img src="{{ asset('uploads/pharmacy/'.$pharmacy->logo) }}" width="50%" class="rounded-circle img-fluid" alt="">
                   <a href="{{ route('pharmacy', $pharmacy->id) }}" class="fs-5 fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</a>
                   <p class="text-dark-100">
                     <span class="text-dark-50">

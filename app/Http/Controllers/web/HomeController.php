@@ -3,11 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
-use App\Models\AboutUs;
-use App\Models\ContactUs;
-use App\Models\Pharmacy;
-use App\Models\Service;
-use App\Models\SocialMedia;
+use App\Models\{AboutUs, City, ContactUs, Directorate, Neighborhood, Pharmacy, Service, SocialMedia};
 
 class HomeController extends Controller
 {
@@ -24,14 +20,18 @@ class HomeController extends Controller
 
     public function showPharmacies()
     {
-        $pharmacies = Pharmacy::all();
-        return view('web.pharmacies', compact('pharmacies'));
+        $pharmacies    = Pharmacy::all();
+        $cities        = City::all();
+        $directorates  = Directorate::all();
+        $neighborhoods = Neighborhood::all();
+
+        return view('web.pharmacies', compact('pharmacies','cities', 'directorates', 'neighborhoods'));
     }
 
     public function showPharmacy($id)
     {
-      $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->where('id', $id)->get();
+      $pharmacy = Pharmacy::find($id);
 
-      return response($pharmacy);
+      return view('pharmacy.profile', compact('pharmacy'));
     }
 }

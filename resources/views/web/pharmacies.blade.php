@@ -13,17 +13,23 @@
               <div class="col-8 d-flex flex-row justify-content-start ">
                 <div class="input-group flex-nowrap position-relative" style="z-index: 999">
                   <select class="ui search selection dropdown search-select" id="search-select">
-                    <option> المدينة</option>
+                    @foreach($cities as $city)
+                      <option>{{ $city->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="input-group flex-nowrap position-relative" style="z-index: 999">
                   <select class="ui search selection dropdown search-select" id="search-select">
-                    <option> المديرية</option>
+                    @foreach($directorates as $directorate)
+                      <option>{{ $directorate->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="input-group flex-nowrap position-relative" style="z-index: 999">
                   <select class="ui search selection dropdown search-select" id="search-select">
-                    <option> الحي</option>
+                    @foreach($neighborhoods as $neighborhood)
+                      <option>{{ $neighborhood->name }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
@@ -42,7 +48,7 @@
             <div class="col-lg-3 col-md-6 col-12 mb-4">
               <article class="card shadow bg-secondary-light rounded-3 card--hover" style="min-height: 272px;height: 272px;">
                 <div class="d-flex p-4 flex-column justify-content-center align-items-center" style="min-height: 220px;height: 220px;">
-                  <img src="images/1.png" width="50%" class="rounded-circle img-fluid" alt="">
+                  <img src="{{ asset('uploads/pharmacy/'.$pharmacy->logo) }}" width="50%" class="rounded-circle img-fluid" alt="">
                   <a href="{{ route('pharmacy', $pharmacy->id) }}" class="fs-5 fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</a>
                   <p class="text-dark-100">
                     <span class="text-dark-50">
