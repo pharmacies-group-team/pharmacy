@@ -25,8 +25,8 @@
                 <input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror rounded-2 pr" placeholder="البريد الإلكتروني" aria-label="email" aria-describedby="addon-wrapping">
               </div>
               @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
+              <span class="text-danger" role="alert">
+                 {{ $message }}
               </span>
               @enderror
               <div class="col-12 input-group flex-nowrap position-relative">
@@ -36,8 +36,8 @@
                 <input name="password" type="password" class="form-control @error('password') is-invalid @enderror rounded-2 pr" placeholder="كلمة السر" aria-label="email" aria-describedby="addon-wrapping">
               </div>
               @error('password')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
+              <span class="text-danger" role="alert">
+                  {{ $message }}
               </span>
               @enderror
               <div class="d-flex justify-content-between align-items-center mb-3 mb-3">

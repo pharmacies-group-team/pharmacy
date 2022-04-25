@@ -117,4 +117,5 @@ Route::prefix('/dashboard/clients')->name('clients.')->group(function () {
     ->name('update-profile');
 });
 
+Auth::routes(['verify' => true]);
 Auth::routes();
