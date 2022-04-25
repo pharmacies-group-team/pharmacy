@@ -4,7 +4,7 @@
 <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" />
 <meta name="author" content="AdminKit" />
 <meta name="keywords"
-    content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
+  content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
 
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
@@ -19,18 +19,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
 
 <style>
-    * {
-        direction: rtl;
-    }
+  * {
+    direction: rtl;
+  }
 
-    .navbar input {
-        direction: rtl !important;
-    }
+  .navbar input {
+    direction: rtl !important;
+  }
 
-    .modal-header .btn-close {
-        margin: 0 !important;
-        padding: 0.5rem;
-    }
+  .modal-header .btn-close {
+    margin: 0 !important;
+    padding: 0.5rem;
+  }
 
 </style>
 
@@ -42,14 +42,14 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
+  window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
 
-    gtag("config", "UA-120946860-10", {
-        anonymize_ip: true
-    });
+  gtag("config", "UA-120946860-10", {
+    anonymize_ip: true
+  });
 </script>

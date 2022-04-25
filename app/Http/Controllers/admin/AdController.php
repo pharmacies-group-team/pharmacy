@@ -36,31 +36,28 @@ class AdController extends Controller
    */
   public function store(Request $request)
   {
-    // TODO
-    $validator = Validator::make(
-      $request->all(),
-      [
-        'title'       => 'required|min:5|max:100|string',
-        'image'       => 'required|image|mimes:png,jpg',
-        'link'        => 'required|min:5|max:255|string',
-        'ad_position' => 'required|min:5|max:100|string',
-        'start_at'    => 'required|date|before:end_at',
-        'end_at'      => 'required|date|after:start_at',
-      ]
-    );
+    $request->validate([
+      'title'       => 'required|min:5|max:100|string',
+      // 'image'       => 'required|image|mimes:png,jpg', TODO
+      'link'        => 'required|min:5|max:255|string',
+      'ad_position' => 'required|min:5|max:100|string',
+      'start_at'    => 'required|date|before:end_at',
+      'end_at'      => 'required|date|after:start_at',
+    ]);
 
     Ad::create([
       'title'       => $request->input('title'),
-      'image'       => $request->input('image'),
+      'image'       => $request->input('image') ?? '',
       'link'        => $request->input('link'),
       'ad_position' => $request->input('ad_position'),
       'user_id'     => $request->input('user_id'),
       'start_at'    => $request->input('start_at'),
-      'end_at'      => $request->input('end_at')
+      'end_at'      => $request->input('end_at'),
+      'user_id'     => 1
     ]);
 
 
-    return response(['added successfully', $validator->errors()]);
+    return redirect()->back()->with('status', 'added successfully');
   }
 
   /**
@@ -87,9 +84,9 @@ class AdController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $validator = Validator::make($request->all(), [
+    $request->validate([
       'title'       => 'required|min:5|max:100|string',
-      'image'       => 'required|image|mimes:png,jpg',
+      // 'image'       => 'required|image|mimes:png,jpg', TODO
       'link'        => 'required|min:5|max:255|string',
       'ad_position' => 'required|min:5|max:100|string',
       'start_at'    => 'required|date|before:end_at',
@@ -99,14 +96,14 @@ class AdController extends Controller
     Ad::where('id', $id)
       ->update([
         'title'       => $request->input('title'),
-        'image'       => $request->input('image'),
+        'image'       => $request->input('image') ?? '', // TODO
         'link'        => $request->input('link'),
         'ad_position' => $request->input('ad_position'),
         'start_at'    => $request->input('start_at'),
         'end_at'      => $request->input('end_at')
       ]);
 
-    return response(['edit successfully', $validator->errors()]);
+    return redirect()->back()->with('status', 'edit successfully');
   }
 
   /**
@@ -117,8 +114,6 @@ class AdController extends Controller
    */
   public function destroy($id)
   {
-    dd($id);
-    //
-    return Ad::where('id', $id)->delete() ? "deleted" : 'not deleted';
+    return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
   }
 }

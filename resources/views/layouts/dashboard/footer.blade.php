@@ -54,26 +54,27 @@
 </div>
 </div>
 
-
+<script src="{{ asset('js/alpine.min.js') }}"></script>
 <script src="{{ asset('js/dashboard/app.js') }}"></script>
 <script src="{{ asset('js/datatables.js') }}"></script>
 
-<script src="{{ asset('js/alpine.min.js') }}"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Datatables with Multiselect
-        flatpickr(".flatpickr-datetime", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-        });
-        var datatablesMulti = $("#datatables-multi").DataTable({
-            responsive: true,
-            select: {
-                style: "multi",
-            },
-        });
-    });
+  // document.addEventListener("", function() {
+  // Datatables with Multivalent
+  flatpickr(".flatpickr-datetime", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+  });
+
+  document.querySelector("#datatables-multi").DataTable({
+    responsive: true,
+    select: {
+      style: "multi",
+    },
+  });
+  // });
 </script>
+
 </body>
 
 </html>

@@ -88,7 +88,6 @@ Route::prefix('/admin')->middleware(['auth'])
 
     Route::post('profile', [admin\AdminProfileController::class, 'updateProfile'])
       ->name('update-profile');
-
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
 

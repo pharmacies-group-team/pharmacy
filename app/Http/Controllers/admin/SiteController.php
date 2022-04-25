@@ -32,7 +32,7 @@ class SiteController extends Controller
   {
     $request->validate([
       "title"     => 'required|min:10|string|max:100',
-      "sub_title" => 'required|min:20|string|max:100',
+      "sub_title" => 'required|min:20|string|max:500',
       "about"     => 'nullable|min:20|string|max:255'
     ]);
 
@@ -70,13 +70,13 @@ class SiteController extends Controller
     $request->validate([
       "name" => 'required|min:10|string',
       "desc" => 'required|min:10|string',
-      "icon" => 'required|image|mimes:png,jpg'
+      "icon" => 'nullable|image|mimes:png,jpg'
     ]);
 
     $result = Service::where('id', $id)->update([
       "name" => $request->input('name'),
       "desc" => $request->input('desc'),
-      "icon" => $request->input('icon'),
+      // "icon" => $request->input('icon'), TODO
     ]);
     return redirect()->back();
 

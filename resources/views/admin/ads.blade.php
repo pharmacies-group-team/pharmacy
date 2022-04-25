@@ -1,7 +1,11 @@
 @extends('layouts/dashboard/dashboard-mastre')
 @section('content')
 
-  <main class="content">
+  <div class="container px-5">
+    @include('includes.alerts')
+  </div>
+
+  <main class="content" x-data=" { id: null, ad: {{ json_encode(old()) }} ?? {} }">
     <div class="container-fluid p-0">
       <div class="d-flex justify-content-between my-2">
         <h1 class="h3">نشر الأعلان</h1>
@@ -16,7 +20,7 @@
         <div class="card-body">
           <div id="datatables-fixed-header_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
             <div class="row">
-              <div class="col-sm-12" x-data=" { id: null, ad: {} }">
+              <div class="col-sm-12">
                 <table id="datatables-multi" class="table-striped dataTable no-footer dtr-inline table"
                   style="width: 100%" aria-describedby="datatables-multi_info">
                   <thead>
@@ -46,10 +50,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{-- {{ dd($ads) }} --}}
                     @foreach ($ads as $ad)
                       <tr class="odd">
-                        {{-- {{ dd($ad) }} --}}
                         <td>
                           <img :src="'{{ url('img/ads') }}/{{ $ad->icon }}'" {{-- alt="{{ $ad->image }}" src="{{ $ad->image }}" --}} name="image"
                             class="img-responsive img-fluid" />
@@ -63,7 +65,7 @@
                         <td>{{ $ad->link }}</td>
 
                         <td>
-                          <button type="button" @click="id = {{ $ad->id }}; ad = {{ $ad }}"
+                          <button type="button" @click=" id = {{ $ad->id }}; ad = {{ $ad }}"
                             class="btn btn-success float-end m-1" data-bs-toggle="modal" data-bs-target="#update">
                             تعديل
                           </button>
@@ -78,6 +80,97 @@
 
                   </tbody>
                 </table>
+
+                {{-- add ads modal --}}
+                <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title"> اضافة اعلان </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+
+                      <div class="modal-body m-3">
+                        <form action="{{ route('admin.ads.store') }}" method="post" class="needs-validation"
+                          novalidate>
+                          @csrf
+
+                          <div class="mb-3">
+                            <label class="form-label" for="ad-name-label">أسم
+                              الأعلان</label>
+                            <input id="ad-name-label" name="title" :value="ad.title" type="text"
+                              class="form-control @error('title') is-invalid @enderror" placeholder="أسم الاعلان" />
+                            @error('title')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">تاريخ
+                              بدا الاعلان</label>
+                            <input type="text"
+                              class="form-control flatpickr-datetime flatpickr-input active @error('start_at') is-invalid @enderror"
+                              placeholder="حدد تاريخ البدأ" readonly="readonly" name="start_at" :value="ad.start_at">
+                            @error('start_at')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="form-label">تاريخ
+                              نهاية الاعلان</label>
+                            <input type="text"
+                              class="form-control flatpickr-datetime flatpickr-input active @error('end_at') is-invalid @enderror"
+                              placeholder="حدد تاريخ الانتهاء" readonly="readonly" name="end_at" :value="ad.end_at">
+                            @error('end_at')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="form-label">را'بط
+                              الموقع</label>
+                            <input type="text" name="link" :value="ad.link"
+                              class="form-control @error('link') is-invalid @enderror" placeholder="ادخل رابط الموقع" />
+                            @error('link')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          {{-- ad position --}}
+                          <div class="mb-3">
+                            <label class="form-label">Ad position</label>
+
+                            <input type="text" name="ad_position" :value="ad.ad_position"
+                              class="form-control @error('ad_position') is-invalid @enderror" placeholder="" />
+
+                            @error('ad_position')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          {{-- ad image --}}
+                          <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <input name="image" class="form-control form-control-sm @error('image') is-invalid @enderror"
+                              type="file">
+
+                            @error('image')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">حفظ
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {{-- update ads modal --}}
                 <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-md" role="document">
@@ -87,175 +180,88 @@
                         <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
                           aria-label="Close"></button>
                       </div>
+
                       <div class="modal-body m-3">
-                        <div class="row">
-                          <div class="col-md-12">
+                        <form :action="'{{ url('/admin/ads') }}/'+ ad.id" method="post" class="needs-validation"
+                          novalidate>
+                          @method('PUT')
+                          @csrf
 
-                            <div class="row">
-                              <div class="col-xs-12">
-                                <form method="post" class="needs-validation" novalidate>
-                                  @csrf
-                                  @method('PUT')
+                          <div class="mb-3">
+                            <label class="form-label" for="ad-name-label">أسم
+                              الأعلان</label>
+                            <input id="ad-name-label" name="title" :value="ad.title" type="text"
+                              class="form-control @error('title') is-invalid @enderror" placeholder="أسم الاعلان" />
+                            @error('title')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
 
-                                  <input type="hidden" name="id" :value="id" />
-
-
-                                  <div class="mb-3">
-                                    <label class="form-label" for="ad-name-label">أسم
-                                      الأعلان</label>
-                                    <input id="ad-name-label" name="title" :value="ad.title" type="text"
-                                      class="form-control @error('title') is-invalid @enderror"
-                                      placeholder="أسم الاعلان" />
-                                    @error('title')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">تاريخ
-                                      بدا الاعلان</label>
-                                    <input type="text"
-                                      class="form-control flatpickr-datetime flatpickr-input active @error('start_at') is-invalid @enderror"
-                                      placeholder="حدد تاريخ البدأ" readonly="readonly" name="start_at"
-                                      :value="ad.start_at">
-                                    @error('start_at')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">
-                                      تاريخ نهاية الاعلان
-                                    </label>
-
-                                    <input type="text"
-                                      class="form-control flatpickr-datetime flatpickr-input active @error('end_at') is-invalid @enderror"
-                                      placeholder="حدد تاريخ الانتهاء" readonly="readonly" name="end_at"
-                                      :value="ads.end_at">
-                                    @error('end_at')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                  </div>
-
-
-                                  <div class="mb-3">
-                                    <label class="form-label">را'بط
-                                      الموقع</label>
-                                    <input type="text" name="link" :value="ad.link"
-                                      class="form-control @error('link') is-invalid @enderror"
-                                      placeholder="ادخل رابط الموقع" />
-                                    @error('link')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">حفظ
-                                    </button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
                           </div>
-                        </div>
+                          <div class="mb-3">
+                            <label class="form-label">تاريخ
+                              بدا الاعلان</label>
+                            <input type="text"
+                              class="form-control flatpickr-datetime flatpickr-input active @error('start_at') is-invalid @enderror"
+                              placeholder="حدد تاريخ البدأ" readonly="readonly" name="start_at" :value="ad.start_at">
+                            @error('start_at')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="form-label">تاريخ
+                              نهاية الاعلان</label>
+                            <input type="text"
+                              class="form-control flatpickr-datetime flatpickr-input active @error('end_at') is-invalid @enderror"
+                              placeholder="حدد تاريخ الانتهاء" readonly="readonly" name="end_at" :value="ad.end_at">
+                            @error('end_at')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="form-label">را'بط
+                              الموقع</label>
+                            <input type="text" name="link" :value="ad.link"
+                              class="form-control @error('link') is-invalid @enderror" placeholder="ادخل رابط الموقع" />
+                            @error('link')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          {{-- ad position --}}
+                          <div class="mb-3">
+                            <label class="form-label">Ad position</label>
+
+                            <input type="text" name="ad_position" :value="ad.ad_position"
+                              class="form-control @error('ad_position') is-invalid @enderror" placeholder="" />
+
+                            @error('ad_position')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          {{-- ad image --}}
+                          <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <input name="image" class="form-control form-control-sm @error('image') is-invalid @enderror"
+                              type="file">
+
+                            @error('image')
+                              <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">حفظ
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
-                {{-- update  ads model --}}
-
-                {{-- add ads modal --}}
-                <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-md" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title"> اضافة اعلان </h5>
-                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                          aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body m-3">
-                        <div class="row">
-                          <div class="col-md-12">
-
-                            <div class="row">
-                              <div class="col-xs-12">
-                                <form method="post" class="needs-validation" novalidate>
-                                  @csrf
-                                  <input type="hidden" name="id" :value="id" />
-
-                                  <div class="mb-3">
-                                    <label class="form-label" for="ad-name-label">أسم
-                                      الأعلان</label>
-                                    <input id="ad-name-label" name="title" :value="ad.title" type="text"
-                                      class="form-control @error('title') is-invalid @enderror"
-                                      placeholder="أسم الاعلان" />
-                                    @error('title')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-
-                                  </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">تاريخ
-                                      بدا الاعلان</label>
-                                    <input type="text"
-                                      class="form-control flatpickr-datetime flatpickr-input active @error('start_at') is-invalid @enderror"
-                                      placeholder="حدد تاريخ البدأ" readonly="readonly" name="start_at"
-                                      :value="ad.start_at">
-                                    @error('start_at')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">تاريخ
-                                      نهاية الاعلان</label>
-                                    <input type="text"
-                                      class="form-control flatpickr-datetime flatpickr-input active @error('end_at') is-invalid @enderror"
-                                      placeholder="حدد تاريخ الانتهاء" readonly="readonly" name="end_at"
-                                      :value="ads.end_at">
-                                    @error('end_at')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">را'بط
-                                      الموقع</label>
-                                    <input type="text" name="link" :value="ad.link"
-                                      class="form-control @error('link') is-invalid @enderror"
-                                      placeholder="ادخل رابط الموقع" />
-                                    @error('link')
-                                      <span id="exampleInputEmail1-error"
-                                        class="error invalid-feedback">{{ $message }}</span>
-                                    @enderror
-
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">حفظ
-                                    </button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {{-- add  ads model --}}
 
                 {{-- delete ad modal --}}
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
@@ -266,13 +272,15 @@
                         <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
                           aria-label="Close"></button>
                       </div>
+
                       <div class="modal-body m-3">
-                        <form method="post" class="needs-validation" novalidate> @csrf
-                          <input type="text" name="id" :value="id" />
+                        <form method="post" :action="'/admin/ads/' + id" class="needs-validation" novalidate> @csrf
+                          @method('DELETE')
+
 
                           {{-- <input type="hidden" name="id" :value="id" /> --}}
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">حفظ
+                            <button type="submit" class="btn btn-danger">حذف
                             </button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
                           </div>
@@ -281,7 +289,6 @@
                     </div>
                   </div>
                 </div>
-                {{-- delete ad model --}}
               </div>
             </div>
           </div>
