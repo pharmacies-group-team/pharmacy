@@ -4,20 +4,41 @@
 
 @section('content')
 
-  <section class="profile__bg" style="background-image: url({{ asset('uploads/pharmacy/'.$pharmacy->logo) }});">
+  <section class="profile__bg" style="background-image: url(
+                @if(isset($pharmacy->logo))
+                {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH.$pharmacy->logo) }})
+                @else
+                {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }})
+                @endif">
     <div class="container-fluid d-flex justify-content-start align-items-end position-relative" style="height: inherit;">
       <div class="profile__avatar d-flex justify-content-end align-items-start gap-4">
         <figure class="position-relative">
-          <img class="rounded-3" src="{{ asset('uploads/pharmacy/'.$pharmacy->logo) }}" alt="">
-          <a href="" class="btn bg-primary-lighter position-absolute bottom-0 start-0" style="padding: 5px 10px;"><i class="bi bi-pencil-square"></i></a>
+          <img class="rounded-3"
+               src="@if(isset($pharmacy->logo))
+                        {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH.$pharmacy->logo) }}
+                    @else
+                        {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
+                    @endif"
+          alt="">
+
+          @if(Auth::id() === $pharmacy->user->id)
+            <a data-bs-toggle="modal" data-bs-target="#editImg"  class="btn bg-primary-lighter position-absolute bottom-0 start-0" style="padding: 5px 10px;"><i class="bi bi-pencil-square"></i></a>
+          @endif
+
         </figure>
         <div class="pt-4">
           <h4 class="text-dark-100 ">{{ $pharmacy->name }}</h4>
           <p>
             <i class="bi bi-geo-alt-fill text-primary-base"></i>
-            <span>{{ $pharmacy->neighborhood->directorate->city->name }} - </span>
-            <span>{{ $pharmacy->neighborhood->directorate->name }} - </span>
-            <span>{{ $pharmacy->neighborhood->name }} </span>
+            @if(isset($pharmacy->neighborhood->directorate->city))
+              <span>{{ $pharmacy->neighborhood->directorate->city->name }} - </span>
+            @endif
+            @if(isset($pharmacy->neighborhood->directorate))
+              <span>{{ $pharmacy->neighborhood->directorate->name }} - </span>
+            @endif
+            @if(isset($pharmacy->neighborhood))
+              <span>{{ $pharmacy->neighborhood->name }} </span>
+            @endif
           </p>
         </div>
       </div>
@@ -31,17 +52,19 @@
         <div class="col-lg-7 col-md-6 col-12 ">
           <div class="p-5">
             <h1 class="text-primary-dark fw-bold fs-2">عن صيدلية  <span class="text-primary-base">{{ $pharmacy->name }}</span></h1>
-            <p class="fs-6 text-primary-darker mt-3">{{ $pharmacy->about }}</p>
+            <p class="fs-6 text-primary-darker mt-3">@if(isset($pharmacy->about)) {{ $pharmacy->about }} @endif</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-12 card card-blur p-4 position-relative">
-          <img src="images/contact.png" class="position-absolute" width="15%" style="top: 20px; left: 20px; filter: opacity(0.1);" alt="">
+          <img src="{{ asset('images/contact.png') }}" class="position-absolute" width="15%" style="top: 20px; left: 20px; filter: opacity(0.1);" alt="">
           <h1 class="fs-5 text-primary-dark mb-4 fw-bold">تواصل معنا</h1>
           <div class="d-flex flex-column">
-            <a href="" class="text-primary-darker mb-2">
-              <i class="bi bi-envelope m-2"></i>
-              <span>{{ $pharmacy->email }}</span>
-            </a>
+            @if(isset($pharmacy->email))
+              <a href="" class="text-primary-darker mb-2">
+                <i class="bi bi-envelope m-2"></i>
+                  <span>{{ $pharmacy->email }}</span>
+              </a>
+            @endif
             @if(isset($pharmacy->contacts))
               @foreach($pharmacy->contacts as $contact)
                 <a href="" class="text-primary-darker mb-2">
@@ -84,4 +107,6 @@
     </div>
   </section>
 
+  <!-- Modal Edit Logo Profile -->
+  @include('pharmacy.modal.update-logo')
 @stop
