@@ -53,8 +53,7 @@
                     @foreach ($ads as $ad)
                       <tr class="odd">
                         <td>
-                          <img :src="'{{ url('img/ads') }}/{{ $ad->icon }}'" {{-- alt="{{ $ad->image }}" src="{{ $ad->image }}" --}} name="image"
-                            class="img-responsive img-fluid" />
+                          <img :src="'{{ url('images/ads') }}/{{ $ad->image }}'" class="img-responsive img-fluid" />
                           <input type="hidden" name="image" value="{{ $ad->id }}" />
                         </td>
 
@@ -92,7 +91,7 @@
 
                       <div class="modal-body m-3">
                         <form action="{{ route('admin.ads.store') }}" method="post" class="needs-validation"
-                          novalidate>
+                          enctype="multipart/form-data" novalidate>
                           @csrf
 
                           <div class="mb-3">
@@ -183,7 +182,7 @@
 
                       <div class="modal-body m-3">
                         <form :action="'{{ url('/admin/ads') }}/'+ ad.id" method="post" class="needs-validation"
-                          novalidate>
+                          enctype="multipart/form-data" novalidate>
                           @method('PUT')
                           @csrf
 

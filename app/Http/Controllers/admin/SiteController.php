@@ -83,6 +83,15 @@ class SiteController extends Controller
     // return ['updated' => $result, 'data' => Service::find($id)];
   }
 
+  public function deleteService(Request $request, $id)
+  {
+    $result = Service::where('id', $id)->delete();
+
+    return redirect()->back()->with('statues', 'delete done');
+
+    // return ['updated' => $result, 'data' => Service::find($id)];
+  }
+
   // update contact us
   public function updateContactUs(Request $request)
   {

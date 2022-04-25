@@ -343,13 +343,13 @@
             </div>
 
             <div class="modal-body m-3">
-              <form method="post" class="needs-validation" novalidate> @csrf
+              <form method="post" :action="'/admin/site/services/' + id " class="needs-validation" novalidate> @csrf
                 {{-- <input type="text" name="id" :value="id" /> --}}
-
+                @method("DELETE")
                 {{-- <input type="hidden" name="id" :value="id" /> --}}
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">حفظ
+                  <button type="submit" class="btn btn-danger">delete
                   </button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
 

@@ -74,10 +74,9 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 
     Route::resource('/', pharmacy\PharmacyController::class);
 
-    Route::controller(pharmacy\SettingController::class)->group(function (){
+    Route::controller(pharmacy\SettingController::class)->group(function () {
 
       Route::post('/update/logo', 'updateLogo')->name('update.logo');
-
     });
   });
 
@@ -107,6 +106,7 @@ Route::prefix('/admin')->middleware(['auth'])
 
         Route::post('/services', 'addService')->name('addService');
         Route::put('/services/{service}', 'updateService')->name('updateService');
+        Route::delete('/services/{service}', 'deleteService')->name('deleteService');
 
         Route::put('/contact-us', 'updateContactUs')->name('updateContactUs');
 
