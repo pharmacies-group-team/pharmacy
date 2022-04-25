@@ -26,7 +26,7 @@
                 </div>
                 <input name="name" value="{{ old('name') }}" type="text" class="form-control @error('name') is-invalid @enderror rounded-2 pr" placeholder="اسم المستخدم" aria-describedby="addon-wrapping">
               </div>
-              @error('name') <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span> @enderror
+              @error('name') <span id="exampleInputEmail1-error" class="error text-danger">{{ $message }}</span> @enderror
 
               <div class="col-12 input-group flex-nowrap position-relative">
                 <div class="position-absolute top-50 end-0 translate-middle-y me-4" style="z-index: 999;">
@@ -34,7 +34,7 @@
                 </div>
                 <input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror rounded-2 pr" placeholder="البريد الإلكتروني" aria-label="email" aria-describedby="addon-wrapping">
               </div>
-              @error('email') <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span> @enderror
+              @error('email') <span id="exampleInputEmail1-error" class="error text-danger">{{ $message }}</span> @enderror
 
               <div class="col-12 input-group flex-nowrap position-relative">
                 <div class="position-absolute top-50 end-0 translate-middle-y me-4" style="z-index: 999;">
@@ -42,7 +42,7 @@
                 </div>
                 <input  name="password" type="password" class="form-control @error('password') is-invalid @enderror rounded-2 pr" placeholder="كلمة السر" aria-describedby="addon-wrapping">
               </div>
-              @error('password') <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span> @enderror
+              @error('password') <span id="exampleInputEmail1-error" class="error text-danger">{{ $message }}</span> @enderror
 
               <div class="col-12 input-group flex-nowrap position-relative">
                 <div class="position-absolute top-50 end-0 translate-middle-y me-4" style="z-index: 999;">
