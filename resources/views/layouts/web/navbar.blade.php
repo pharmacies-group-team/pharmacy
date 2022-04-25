@@ -85,6 +85,7 @@
         </li> --}}
       </ul>
       @if (Route::has('login'))
+<<<<<<< HEAD
         <div class="d-none d-lg-flex align-items-center gap-3">
           @auth
             {{-- <a href="{{ url('/home') }}" class="btn btn-primary__linear">{{ Auth::user()->name }} TODO</a> --}}
@@ -101,10 +102,52 @@
             @if (Route::has('register'))
               <a href="{{ route('register') }}" class="btn btn-primary__linear">إنشاء حساب</a>
             @endif
+=======
+        <div class=""> @auth <div class="dropdown d-lg-inline-flex d-none">
+              <a class="dropdown-toggle text-light mt-1 text-center" href="#" role="button" id="dropdownMenuLink"
+                data-bs-toggle="dropdown" aria-expanded="true">
+                <span class="text-primary-darker">{{ Auth::user()->name }}</span>
+                {{-- <img src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH.Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif" width="20%" class="img-fluid rounded-circle border border-2 border-secondary shadow-sm" alt=""> --}}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item"
+                    href="@if (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN)) #
+                       @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
+                       #
+                       @elseif(Auth::user()->hasRole(RoleEnum::PHARMACY))
+                       {{ route('pharmacy.profile', Auth::user()->pharmacy->id) }} @endif">
+                    <i class="bi bi-person-fill m-2"></i> Profile
+                  </a>
+                </li>
+                <li><a class="dropdown-item" {{-- href="@if (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN)) --}} {{-- {{route('dashboard.index')}} --}} {{-- @elseif(Auth::user()->hasRole(RoleEnum::SEEKER)) --}}
+                    {{-- {{ route('seeker.account') }} --}} {{-- @elseif(Auth::user()->hasRole(RoleEnum::COMPANY)) --}} {{-- {{ route('company.account') }} --}} {{-- @endif" --}}>
+                    <i class="bi bi-speedometer m-2"></i>Dashboard
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                      class="bi bi-box-arrow-down-right m-2"></i> Sign out</a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </ul>
+            </div>
+          @else
+            <div class="d-lg-flex d-none justify-content-end gap-4">
+              <a href="{{ route('login') }}" class="btn btn-primary__linear">تسجيل الدخول</a>
+              @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="btn btn-primary__linear">إنشاء حساب</a>
+              @endif
+            </div>
+>>>>>>> e283490d4aaf31208358165e11f6f0a5c4266fbe
           @endauth
         </div>
       @endif
     </div>
+  </div>
   </div>
   </div>
 </nav>
