@@ -7,7 +7,6 @@ use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
-use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,11 +31,28 @@ Debugbar::disable();
 | Web Routes
 |--------------------------------------------------------------------------
 */
+// Route::get('/clients', function () {
+//   return view('admin.clients');
+// });
+
+// Route::get('/ads', function () {
+//   return view('admin.ads');
+// });
+
+// Route::get('/pharmacies-users', function () {
+//   return view('admin.pharmacies-users');
+// });
+
+// Route::get('/manage-pages', function () {
+//   return view('admin.manage-pages');
+// });
+
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +86,7 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+Route::prefix('/admin')->middleware(['auth'])
   ->name('admin.')->group(function () {
 
     // admin profile
@@ -79,7 +95,6 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
 
     Route::post('profile', [admin\AdminProfileController::class, 'updateProfile'])
       ->name('update-profile');
-
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
 

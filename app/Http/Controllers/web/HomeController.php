@@ -3,35 +3,51 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\{AboutUs, City, ContactUs, Directorate, Neighborhood, Pharmacy, Service, SocialMedia};
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $aboutUs    = AboutUs::first();
-        $services   = Service::all();
-        $contactUs  = ContactUs::first();
-        $social     = SocialMedia::first();
-        $pharmacies = Pharmacy::all();
+  public function index()
+  {
+    $aboutUs    = AboutUs::first();
+    $services   = Service::all();
+    $contactUs  = ContactUs::first();
+    $social     = SocialMedia::first();
+    $pharmacies = Pharmacy::with([
+      'user', 'social',
+      'neighborhood.directorate.city'
+    ])->get();
 
-        return view('index', compact('aboutUs', 'services', 'contactUs', 'social', 'pharmacies'));
-    }
+    // return response($pharmacies);
 
-    public function showPharmacies()
-    {
-        $pharmacies    = Pharmacy::all();
-        $cities        = City::all();
-        $directorates  = Directorate::all();
-        $neighborhoods = Neighborhood::all();
 
-        return view('web.pharmacies', compact('pharmacies','cities', 'directorates', 'neighborhoods'));
-    }
+    return view(
+      'index',
+      compact(
+        'aboutUs',
+        'services',
+        'contactUs',
+        'social',
+        'pharmacies'
+      )
+    );
+  }
 
-    public function showPharmacy($id)
-    {
-      $pharmacy = Pharmacy::find($id);
+  public function showPharmacies()
+  {
+    $pharmacies    = Pharmacy::all();
+    $cities        = City::all();
+    $directorates  = Directorate::all();
+    $neighborhoods = Neighborhood::all();
 
-      return view('pharmacy.profile', compact('pharmacy'));
-    }
+    return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates', 'neighborhoods'));
+  }
+
+  public function showPharmacy($id)
+  {
+    $pharmacy = Pharmacy::find($id);
+
+    return view('pharmacy.profile', compact('pharmacy'));
+  }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Enum\RoleEnum;
 
 class AdController extends Controller
 {
@@ -17,8 +19,12 @@ class AdController extends Controller
   public function index()
   {
     $ads = Ad::all();
+    // $ads = User::role(RoleEnum::CLIENT)->orderBy('id', 'DESC')->get();
 
-    return response($ads);
+
+    // dd($ads);
+    // return response($ads);
+    return view('admin.ads', compact('ads'));
   }
 
 
@@ -30,29 +36,28 @@ class AdController extends Controller
    */
   public function store(Request $request)
   {
-    // TODO
-    $validator = Validator::make($request->all(),
-      [
-        'title'       => 'required',
-        'image'       => 'required',
-        'link'        => 'required',
-        'ad_position' => 'required',
-        'start_at'    => 'required',
-        'end_at'      => 'required',
-      ]);
+    $request->validate([
+      'title'       => 'required|min:5|max:100|string',
+      // 'image'       => 'required|image|mimes:png,jpg', TODO
+      'link'        => 'required|min:5|max:255|string',
+      'ad_position' => 'required|min:5|max:100|string',
+      'start_at'    => 'required|date|before:end_at',
+      'end_at'      => 'required|date|after:start_at',
+    ]);
 
     Ad::create([
       'title'       => $request->input('title'),
-      'image'       => $request->input('image'),
+      'image'       => $request->input('image') ?? '',
       'link'        => $request->input('link'),
       'ad_position' => $request->input('ad_position'),
       'user_id'     => $request->input('user_id'),
       'start_at'    => $request->input('start_at'),
-      'end_at'      => $request->input('end_at')
+      'end_at'      => $request->input('end_at'),
+      'user_id'     => 1
     ]);
 
 
-    return response(['added successfully', $validator->errors()]);
+    return redirect()->back()->with('status', 'added successfully');
   }
 
   /**
@@ -79,26 +84,26 @@ class AdController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $validator = Validator::make($request->all(), [
-      'title' => 'required',
-      'image' => 'required',
-      'link' => 'required',
-      'ad_position' => 'required',
-      'start_at' => 'required',
-      'end_at' => 'required'
+    $request->validate([
+      'title'       => 'required|min:5|max:100|string',
+      // 'image'       => 'required|image|mimes:png,jpg', TODO
+      'link'        => 'required|min:5|max:255|string',
+      'ad_position' => 'required|min:5|max:100|string',
+      'start_at'    => 'required|date|before:end_at',
+      'end_at'      => 'required|date|after:start_at',
     ]);
 
     Ad::where('id', $id)
       ->update([
-        'title' => $request->input('title'),
-        'image' => $request->input('image'),
-        'link' => $request->input('link'),
+        'title'       => $request->input('title'),
+        'image'       => $request->input('image') ?? '', // TODO
+        'link'        => $request->input('link'),
         'ad_position' => $request->input('ad_position'),
-        'start_at' => $request->input('start_at'),
-        'end_at' => $request->input('end_at')
+        'start_at'    => $request->input('start_at'),
+        'end_at'      => $request->input('end_at')
       ]);
 
-    return response(['edit successfully', $validator->errors()]);
+    return redirect()->back()->with('status', 'edit successfully');
   }
 
   /**
@@ -109,7 +114,6 @@ class AdController extends Controller
    */
   public function destroy($id)
   {
-    //
-    return Ad::where('id', $id)->delete() ? "deleted" : 'not deleted';
+    return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
   }
 }

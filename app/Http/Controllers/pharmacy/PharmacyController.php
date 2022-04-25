@@ -30,16 +30,16 @@ class PharmacyController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required',
-      'logo' => 'required',
-      'user_id' => 'required',
-      'neighborhood_id' => 'required'
+      'name'            => 'required|min:5|max:100|string',
+      'logo'            => 'required|image|mimes:png,jpg',
+      'user_id'         => 'required|numeric|max:12',
+      'neighborhood_id' => 'required|numeric|max:12'
     ]);
 
     Pharmacy::create([
-      'name' => $request->input('name'),
-      'logo' => $request->input('logo'),
-      'user_id' => $request->input('user_id'),
+      'name'            => $request->input('name'),
+      'logo'            => $request->input('logo'),
+      'user_id'         => $request->input('user_id'),
       'neighborhood_id' => $request->input('neighborhood_id'),
     ]);
 
@@ -69,19 +69,19 @@ class PharmacyController extends Controller
   public function update(Request $request, $id)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required',
-      'logo' => 'required',
-      'user_id' => 'required',
-      'neighborhood_id' => 'required'
+      'name'            => 'required|min:5|max:100|string',
+      'logo'            => 'required|image|mimes:png,jpg',
+      'user_id'         => 'required|numeric|max:12',
+      'neighborhood_id' => 'required|numeric|max:12'
     ]);
 
     Pharmacy::where('id', $id)
       ->update([
-        'name' => $request->input('name'),
-        'logo' => $request->input('logo'),
-        'user_id' => $request->input('user_id'),
+        'name'            => $request->input('name'),
+        'logo'            => $request->input('logo'),
+        'user_id'         => $request->input('user_id'),
         'neighborhood_id' => $request->input('neighborhood_id'),
-        'about' => $request->input('about')
+        'about'           => $request->input('about')
       ]);
 
     return response(['edit successfully', $validator->errors()]);

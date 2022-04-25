@@ -20,7 +20,7 @@ a{
 .rounded-2{
   border-radius: 8px !important;
 }
-.rounded-botton-3{
+.rounded-button-3{
   border-radius: 0 0 20px 20px !important;
 }
 .shadow{
@@ -68,7 +68,7 @@ a{
   background-color: var(--primary-dark-color) !important;
   transition: 0.5s;
 }
-.card--hover:hover a{
+.card--hover:hover h3{
   color: var(--secondary-lighter-color) !important;
   transition: 0.5s;
 }
