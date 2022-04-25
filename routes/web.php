@@ -50,7 +50,7 @@ Debugbar::disable();
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/{id}', 'showPharmacy')->name('pharmacy');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
 });
 
 
@@ -71,7 +71,14 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 */
 Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY])
   ->name('pharmacies.')->group(function () {
+
     Route::resource('/', pharmacy\PharmacyController::class);
+
+    Route::controller(pharmacy\SettingController::class)->group(function (){
+
+      Route::post('/update/logo', 'updateLogo')->name('update.logo');
+
+    });
   });
 
 /*

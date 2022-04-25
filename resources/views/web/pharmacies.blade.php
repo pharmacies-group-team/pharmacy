@@ -52,7 +52,7 @@
                   style="min-height: 220px;height: 220px;">
                   <img src="{{ asset('uploads/pharmacy/' . $pharmacy->logo) }}" width="50%"
                     class="rounded-circle img-fluid" alt="">
-                  <a href="{{ route('pharmacy', $pharmacy->id) }}"
+                  <a href="{{ route('pharmacy.profile', $pharmacy->id) }}"
                     class="fs-5 fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</a>
                   <p class="text-dark-100">
                     <span class="text-dark-50">
