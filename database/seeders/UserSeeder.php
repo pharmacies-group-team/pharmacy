@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enum\RoleEnum;
+use App\Models\Pharmacy;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,14 +26,20 @@ class UserSeeder extends Seeder
 
         ])->assignRole(RoleEnum::SUPER_ADMIN);
 
-        User::create(
-            [
-                'name' =>"pharmacy",
-                'email' => 'pharmacy@gmail.com',
-                'email_verified_at' => now(),
-                'password' => bcrypt('123456789')
+        $pharmacy = User::create(
+          [
+              'name' =>"pharmacy",
+              'email' => 'pharmacy@gmail.com',
+              'email_verified_at' => now(),
+              'password' => bcrypt('123456789')
 
-            ])->assignRole(RoleEnum::PHARMACY);
+          ])->assignRole(RoleEnum::PHARMACY);
+
+        Pharmacy::create(
+        [
+          'name'            => 'Dreams',
+          'user_id'         => $pharmacy->id,
+        ]);
 
         User::create(
             [
@@ -43,6 +50,7 @@ class UserSeeder extends Seeder
 
             ])->assignRole(RoleEnum::CLIENT);
 
+        User::factory()->count(50)->create();
 
 
     }

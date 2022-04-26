@@ -66,6 +66,20 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 ---
 
+## upload folders
+
+```
+/upload/user
+/upload/pharmacy
+/upload/ads
+/upload/service
+/upload/order
+```
+
+---
+
+---
+
 ## Leader roles
 
 ### Github/git roles
@@ -87,3 +101,24 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 `build` – changes that affect the build system or external dependencies
 
 ---
+
+### Validation roles
+
+```php
+# title
+'required|min:5|max:100|string'
+
+#phone
+
+# link
+'required|min:5|max:100|string'
+
+# email
+
+# image
+'required|image|mimes:png,jpg'
+
+# date
+'required|date'
+
+```

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\PharmacyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -58,5 +59,10 @@ class Pharmacy extends Model
     public function neighborhood(): BelongsTo
     {
         return $this->belongsTo(Neighborhood::class);
+    }
+
+    protected static function newFactory()
+    {
+        return PharmacyFactory::new();
     }
 }
