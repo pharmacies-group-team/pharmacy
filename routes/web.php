@@ -34,23 +34,8 @@ Debugbar::disable();
 |--------------------------------------------------------------------------
 */
 
-Route::get('/profile', function () {
-  return view('client.profile');
-});
-// Route::get('/clients', function () {
-//   return view('admin.clients');
-// });
-
-// Route::get('/ads', function () {
-//   return view('admin.ads');
-// });
-
-// Route::get('/pharmacies-users', function () {
-//   return view('admin.pharmacies-users');
-// });
-
-// Route::get('/manage-pages', function () {
-//   return view('admin.manage-pages');
+// Route::get('/profile', function () {
+//   return view('client.profile');
 // });
 
 Route::controller(web\HomeController::class)->group(function () {
