@@ -15,9 +15,13 @@ class ClientController extends Controller
   {
     $users = User::role(RoleEnum::CLIENT)->orderBy('id', 'DESC')->get();
 
-    // $users = Client::select()->with(['user'])->get();
-    // dd($users);
-
     return view('admin.clients', compact('users'));
+  }
+
+  public function clientToggle(Request $request, $id)
+  {
+    $result = User::where('id', $id)->update(['is_active' => !User::find($id)->is_active]);
+
+    return redirect()->back()->with('status', $result ? ' change client statue successfully' : 'failed');
   }
 }

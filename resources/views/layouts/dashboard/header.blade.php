@@ -32,6 +32,10 @@
     padding: 0.5rem;
   }
 
+  .overflow-x-scroll {
+    overflow-x: scroll
+  }
+
 </style>
 
 
