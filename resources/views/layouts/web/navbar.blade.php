@@ -62,7 +62,7 @@
                           @if(Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN))
                             {{ route('admin.profile') }}
                           @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
-                            {{ route('pharmacy.profile', Auth::id()) }}
+                            {{ route('pharmacy.profile', Auth::user()->pharmacy->id) }}
                           @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                             #
                           @endif

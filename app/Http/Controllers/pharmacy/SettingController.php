@@ -15,6 +15,7 @@ class SettingController extends Controller
 
     public function updateLogo(Request $request)
     {
+        $request->validate(['logo' => 'required|image|mimes:png,jpg,svg']);
         $logo = $this->updateImage($request->logo,
           PharmacyEnum::PHARMACY_LOGO_PATH,
            PharmacyEnum::PHARMACY_LOGO_PATH.Auth::user()->pharmacy->logo);
@@ -23,6 +24,6 @@ class SettingController extends Controller
         $pharmacy->update(['logo'=>$logo]);
 
         return redirect()->back()
-          ->with('success','updated Logo successfully');
+          ->with('success','تم التعديل بنجاح');
     }
 }
