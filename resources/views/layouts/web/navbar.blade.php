@@ -3,24 +3,27 @@
 <nav class="navbar navbar-light navbar-expand-lg top-header">
   <div class="container-md">
     <div class="row w-100">
+
       {{-- Logo --}}
       <div class="col-3">
         <a class="navbar-brand h4 text-decoration-none m-0" href="{{ route('home') }}">
           <img src="{{ asset('images/logo.svg') }}">
         </a>
       </div>
+
       {{-- Button collapse --}}
       <div class="d-lg-none">
         <button class="navbar-toggler btn btn-sm navbar-burger text-primary-dark" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                aria-label="Toggle navigation">
+          data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+          aria-label="Toggle navigation">
           <svg class="d-block text-primary-dark" width="16" height="16" viewBox="0 0 20 20"
-               xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg">
             <title>Mobile menu</title>
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
           </svg>
         </button>
       </div>
+
       {{-- Nav collapse --}}
       <div class="col-6">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -52,50 +55,50 @@
         @if (Route::has('login'))
           @auth
             <div class="dropdown d-lg-inline-flex d-none">
-              <a class="nav-link dropdown-toggle text-primary-darker" href="#" id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH.Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif" width="15%" class="img-fluid rounded-circle border border-1 border-secondary shadow-sm" alt="">
+              {{-- user info --}}
+              <div class="nav-link dropdown-toggle text-primary-darker cursor-pointer" id="dropdown08"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img
+                  src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
+                  width="30" height="20" class="img-fluid rounded-circle border-1 border-secondary border shadow-sm"
+                  alt="user avatar">
+
                 <span class="me-2">{{ Auth::user()->name }}</span>
-              </a>
+              </div>
+
               <ul class="dropdown-menu" aria-labelledby="dropdown08" style="z-index: 9999999999">
-                @if(!Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
-                  <li><a class="dropdown-item text-primary-dark d-flex align-items-center"
-                         href="
-                          @if(Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN))
-                         {{ route('admin.profile') }}
-                         @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
-                         {{ route('pharmacy.profile', Auth::user()->pharmacy->id) }}
-                          @endif
-                           ">
-                      <i class="bi bi-person-fill m-2 text-primary-light"></i> الملف الشخصي
+                @if (!Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
+                  <li>
+                    <a class="dropdown-item text-primary-dark d-flex align-items-center"
+                      href="@if (Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) {{ route('admin.profile') }}
+                      @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
+                        {{ route('pharmacy.profile', Auth::user()->pharmacy->id) }} @endif">
+                      <i class="bi bi-person-fill text-primary-light m-2"></i> الملف الشخصي
                     </a>
                   </li>
                 @endif
                 <li><a class="dropdown-item text-primary-dark d-flex align-items-center"
-                       href="
-                          @if(Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN))
-                            {{ route('admin.ads.index') }}
+                    href="@if (Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) {{ route('admin.ads.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
                             {{ route('pharmacies.dashboard') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
-                            {{ route('clients.dashboard') }}
-                         @endif
-                          ">
-                    <i class="bi bi-speedometer m-2 text-primary-light"></i>  لوحة التحكم
+                            {{ route('clients.dashboard') }} @endif">
+                    <i class="bi bi-speedometer text-primary-light m-2"></i> لوحة التحكم
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-primary-dark d-flex align-items-center"
-                       href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="bi bi-box-arrow-down-right m-2 text-primary-light"></i>  تسجيل الخروج
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  <form action="{{ route('logout') }}" method="POST">
                     @csrf
+
+                    <button class="dropdown-item text-primary-dark d-flex align-items-center" type="submit">
+                      <i class="bi bi-box-arrow-down-right text-primary-light m-2"></i> تسجيل الخروج
+                    </button>
                   </form>
                 </li>
               </ul>
             </div>
           @else
-            <div class="d-none d-lg-flex gap-3 align-items-center">
+            <div class="d-none d-lg-flex align-items-center gap-3">
               <a class="btn btn-primary__linear" href="{{ route('login') }}">تسجيل الدخول</a>
               @if (Route::has('register'))
                 <a class="btn btn-primary__linear" href="{{ route('register') }}">إنشاء حساب</a>

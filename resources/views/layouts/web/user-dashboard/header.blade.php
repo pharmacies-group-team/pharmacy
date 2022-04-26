@@ -80,7 +80,7 @@
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
 
-            <button class="dropdown-item text-primary-dark d-flex align-items-center">
+            <button type="submit" class="dropdown-item text-primary-dark d-flex align-items-center">
               <i class="bi bi-box-arrow-down-right text-primary-light m-2"></i> تسجيل الخروج
             </button>
           </form>
