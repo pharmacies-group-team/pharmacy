@@ -33,6 +33,10 @@ Debugbar::disable();
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+Route::get('/profile', function () {
+  return view('client.profile');
+});
 // Route::get('/clients', function () {
 //   return view('admin.clients');
 // });
@@ -94,6 +98,10 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 //    Route::resource('/', pharmacy\PharmacyController::class);
 
     Route::view('/','pharmacy.dashboard.setting')->name('dashboard');
+    Route::controller(pharmacy\SettingController::class)->group(function () {
+
+      Route::post('/update/logo', 'updateLogo')->name('update.logo');
+    });
   });
 
 /*
@@ -103,6 +111,8 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 */
 Route::prefix('/admin')->middleware(['auth', 'role:'. RoleEnum::SUPER_ADMIN])
   ->name('admin.')->group(function () {
+
+    Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
     // admin profile
     Route::get('profile', [admin\AdminProfileController::class, 'index'])
@@ -122,6 +132,7 @@ Route::prefix('/admin')->middleware(['auth', 'role:'. RoleEnum::SUPER_ADMIN])
 
         Route::post('/services', 'addService')->name('addService');
         Route::put('/services/{service}', 'updateService')->name('updateService');
+        Route::delete('/services/{service}', 'deleteService')->name('deleteService');
 
         Route::put('/contact-us', 'updateContactUs')->name('updateContactUs');
 
@@ -129,16 +140,26 @@ Route::prefix('/admin')->middleware(['auth', 'role:'. RoleEnum::SUPER_ADMIN])
       });
 
     /*------------------------------ clients ------------------------------*/
-    Route::get('/clients', [admin\ClientController::class, 'index'])
-      ->name('clients');
+    Route::controller(admin\ClientController::class)->group(function () {
+      Route::get('/clients', 'index')
+        ->name('clients');
+
+      Route::post('/clients/toggle/{id}',  'clientToggle')
+        ->name('clients.toggle');
+    });
 
     /*------------------------------ orders ------------------------------*/
-    Route::get('/orders', [admin\OrderController::class, 'index'])
-      ->name('admin.orders');
+    // Route::get('/orders', [admin\OrderController::class, 'index'])
+    //   ->name('admin.orders'); // TODO
 
     // pharmacies
-    Route::get('pharmacies', [admin\PharmacyController::class, 'index'])
-      ->name('pharmacies');
+    Route::controller(admin\PharmacyController::class)->group(function () {
+      Route::get('/pharmacies',  'index')
+        ->name('pharmacies');
+
+      Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
+        ->name('pharmacies.toggle');
+    });
   });
 
 /*
@@ -157,4 +178,3 @@ Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role
 });
 
 Auth::routes(['verify' => true]);
-Auth::routes();

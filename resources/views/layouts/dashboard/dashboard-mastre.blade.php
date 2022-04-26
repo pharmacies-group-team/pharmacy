@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
-  <head>
+<head>
     {{-- header --}}
 
     @include('layouts/dashboard/header')
+    <link href="{{ asset('css/dashboard/admin.css') }}" rel="stylesheet" />
+
 </head>
 
-<body
-  data-theme="default"
-  data-layout="fluid"
-  data-sidebar-position="right"
-  data-sidebar-layout="default"
->
+<body data-theme="default" data-layout="fluid" data-sidebar-position="right" data-sidebar-layout="default">
 
-  <div class="wrapper">
-    {{-- sidebar --}}
-  @include('layouts/dashboard/sidebar')
+    <div class="wrapper">
+        {{-- sidebar --}}
+        @include('layouts/dashboard/sidebar')
 
-  {{-- main --}}
-  <div class="main">
-    {{-- navbar --}}
-    @include('layouts/dashboard/navbar')
-    @yield('content')
+        {{-- main --}}
+        <div class="main">
+            {{-- navbar --}}
+            @include('layouts/dashboard/navbar')
+            @yield('content')
 
 
 
-  </div>
+        </div>
 
-  {{-- footer --}}
+        {{-- footer --}}
 
-   @include('layouts/dashboard/footer')
+        @include('layouts/dashboard/footer')

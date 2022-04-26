@@ -6,43 +6,43 @@
 
 @section('content')
 
-  <!-- Start Services Section -->
-  <section>
-    <div class="container-xl">
-      <div class="row">
-        <div class="col-lg-10 col-md-12 m-auto">
-          <article class="card bg-primary-darker rounded-3 service p-3" style="min-height: 230px;">
-            <div class="d-flex flex-md-row flex-column">
-              @foreach ($services->slice(0, 3) as $service)
-                @php($count++)
-                @if ($count === 2)
-                  <div class="col-md-4 col-12 position-relative">
-                    <article
-                      class="rounded-3 d-flex bg-secondary-light position-absolute flex-column justify-content-center align-items-center text-primary-dark p-3"
-                      style="bottom: 13px; min-height: 230px;">
-                      <i class="bi bi-arrow-repeat fs-1"></i>
-                      <h5>{{ $service->name }}</h5>
-                      <p class="fw-light mt-2 text-center">{{ $service->desc }}</p>
+    <!-- Start Services Section -->
+    <section>
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 m-auto">
+                    <article class="card bg-primary-darker rounded-3 service p-3" style="min-height: 230px;">
+                        <div class="d-flex flex-md-row flex-column">
+                            @foreach ($services->slice(0, 3) as $service)
+                                @php($count++)
+                                @if ($count === 2)
+                                    <div class="col-md-4 col-12 position-relative">
+                                        <article
+                                            class="rounded-3 d-flex bg-secondary-light position-absolute flex-column justify-content-center align-items-center text-primary-dark p-3"
+                                            style="bottom: 13px; min-height: 230px;">
+                                            <i class="bi bi-arrow-repeat fs-1"></i>
+                                            <h5>{{ $service->name }}</h5>
+                                            <p class="fw-light mt-2 text-center">{{ $service->desc }}</p>
+                                        </article>
+                                    </div>
+                                @else
+                                    <div class="col-md-4 col-12">
+                                        <article
+                                            class="d-flex flex-column justify-content-center align-items-center text-secondary-lighter p-3">
+                                            <i class="bi bi-bicycle fs-1"></i>
+                                            <h5>{{ $service->name }}</h5>
+                                            <p class="fw-light mt-2 text-center">{{ $service->desc }}</p>
+                                        </article>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
                     </article>
-                  </div>
-                @else
-                  <div class="col-md-4 col-12">
-                    <article
-                      class="d-flex flex-column justify-content-center align-items-center text-secondary-lighter p-3">
-                      <i class="bi bi-bicycle fs-1"></i>
-                      <h5>{{ $service->name }}</h5>
-                      <p class="fw-light mt-2 text-center">{{ $service->desc }}</p>
-                    </article>
-                  </div>
-                @endif
-              @endforeach
+                </div>
             </div>
-          </article>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Services Section -->
+    </section>
+    <!-- End Services Section -->
 
   <!-- Start Pharmacies Section -->
   <section>
@@ -85,21 +85,23 @@
   </section>
   <!-- End Pharmacies Section -->
 
-  <!-- Start Register Pharmacy -->
-  <section class="mt-5 py-5" style="background-image: url({{ asset('images/map.svg') }})">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-6 col-lg-7 col-md-8 col-12 m-lg-0 m-md-auto">
-          <div class="card p-md-5 card-blur p-3">
-            <h1 class="text-primary-base fw-bold">هل أنت صاحب صيدلية؟</h1>
-            <p class="fs-lg-5 text-primary-darker mt-2">انضم لشفاء الآن واجعل صيدليتك أونلاين! واحصل على مبيعات أكثر من
-              خلال الانضمام لتطبيق شفاء عبر تسجيلك لهذا النموذج.</p>
-            <a href="{{ route('register.pharmacy') }}" class="btn btn-primary w-75 mt-3">أنضم إلينا كصيدلية</a>
-          </div>
+    <!-- Start Register Pharmacy -->
+    <section class="mt-5 py-5" style="background-image: url({{ asset('images/map.svg') }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-7 col-md-8 col-12 m-lg-0 m-md-auto">
+                    <div class="card p-md-5 card-blur p-3">
+                        <h1 class="text-primary-base fw-bold">هل أنت صاحب صيدلية؟</h1>
+                        <p class="fs-lg-5 text-primary-darker mt-2">انضم لشفاء الآن واجعل صيدليتك أونلاين! واحصل على مبيعات
+                            أكثر من
+                            خلال الانضمام لتطبيق شفاء عبر تسجيلك لهذا النموذج.</p>
+                        <a href="{{ route('register.pharmacy') }}" class="btn btn-primary w-75 mt-3">أنضم إلينا
+                            كصيدلية</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Register Pharmacy -->
+    </section>
+    <!-- End Register Pharmacy -->
 
 @stop

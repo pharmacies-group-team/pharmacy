@@ -32,12 +32,16 @@
     padding: 0.5rem;
   }
 
+  .overflow-x-scroll {
+    overflow-x: scroll
+  }
+
 </style>
 
 
 <!-- BEGIN SETTINGS -->
 <link href="{{ asset('css/dashboard/app.css') }}" rel="stylesheet" />
-{{-- <script src="{{asset('js/settings.js')}}"></script> --}}
+<script src="{{ asset('js/dashboard/settings.js') }}"></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>

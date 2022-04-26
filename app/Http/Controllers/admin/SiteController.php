@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enum\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
 use App\Models\ContactUs;
 use App\Models\Service;
 use App\Models\SocialMedia;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -53,14 +55,22 @@ class SiteController extends Controller
       "icon" => 'required|image|mimes:png,jpg'
     ]);
 
-    $result = Service::create([
-      "name"    => $request->input('name'),
-      "desc"    => $request->input('desc'),
-      "icon"    => $request->input('icon'),
-      'user_id' => $request->input('user_id')
-    ]);
-    return redirect()->back();
-    // return ['added' => $result, 'data' => Service::all()];
+
+    $imageName = $this->storeImage($request->file('icon'), 'images/services');
+
+    if ($imageName) {
+
+      $result = Service::create([
+        "name"    => $request->input('name'),
+        "desc"    => $request->input('desc'),
+        "icon"    => $imageName,
+        'user_id' => User::role(RoleEnum::SUPER_ADMIN)->first()->id
+      ]);
+    } else {
+      $result = false;
+    }
+
+    return redirect()->back()->with('status', 'added' . $result ? 'successfully' : 'failed');
   }
 
   // update services
@@ -73,12 +83,25 @@ class SiteController extends Controller
       "icon" => 'nullable|image|mimes:png,jpg'
     ]);
 
-    $result = Service::where('id', $id)->update([
-      "name" => $request->input('name'),
-      "desc" => $request->input('desc'),
-      // "icon" => $request->input('icon'), TODO
-    ]);
-    return redirect()->back();
+    $imageName = $this->storeImage($request->file('icon'), 'images/services');
+
+    if ($imageName) {
+
+      $result = Service::where('id', $id)->update([
+        "name" => $request->input('name'),
+        "desc" => $request->input('desc'),
+        "icon" => $imageName
+      ]);
+    }
+
+    return redirect()->back()->with('status', 'updated' . $result ? 'successfully' : 'failed');
+  }
+
+  public function deleteService(Request $request, $id)
+  {
+    $result = Service::where('id', $id)->delete();
+
+    return redirect()->back()->with('statues', 'delete done');
 
     // return ['updated' => $result, 'data' => Service::find($id)];
   }
