@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin;
 use App\Http\Controllers\pharmacy;
+use App\Http\Controllers\city;
 use App\Http\Controllers\web;
 use Illuminate\Support\Facades\Route;
 
@@ -27,10 +28,13 @@ Route::get('/', [web\HomeController::class, 'index']);
 // pharmacies
 Route::resource('/pharmacies', pharmacy\PharmacyController::class);
 Route::get('/search',[pharmacy\PharmacySearchController::class,'index']);
-Route::get('/searchName/{name}',[pharmacy\PharmacySearchController::class,'show']);
+Route::get('/searchName',[pharmacy\PharmacySearchController::class,'show']);
 Route::get('/showByNieg/{nieg}',[pharmacy\PharmacySearchController::class,'showByNieg']);
 Route::get('/searchDir/{dir}',[pharmacy\PharmacySearchController::class,'showByDir']);
 Route::get('/searchCity/{city}',[pharmacy\PharmacySearchController::class,'showByCity']);
+
+// cities
+Route::resource('/cities', city\CityController::class);
 
 Route::prefix('admin')->group(function () {
 
