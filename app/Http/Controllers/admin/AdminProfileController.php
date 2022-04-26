@@ -2,37 +2,34 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enum\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 class AdminProfileController extends Controller
 {
   public function index(Request $request)
   {
-    // TODO
-    $id = $request->query('id');
+    $user = User::role(RoleEnum::SUPER_ADMIN)->first();
 
-    $adminData = User::select('name', 'email')->where('id', $id)->first();
-    return response($adminData);
+    return view('admin.profile')->with('user', $user);
   }
 
   public function updateProfile(Request $request)
   {
-    // TODO
-    $id = $request->input('id');
-
     $request->validate([
-      'name' => 'required|string|min:3|max:50'
+      'name' => 'required|string|min:3|max:50',
+      'email' => 'required|email|min:3|max:50'
     ]);
 
-    $result = User::where('id', $id)
+    $result = User::role(RoleEnum::SUPER_ADMIN)
       ->update([
         'name' => $request->input('name'),
+        'email' => $request->input('email'),
       ]);
-    return response([
-      'updated'   => (bool) $result,
-      'user_data' => User::find($id) ?? []
-    ]);
+
+    return redirect()->back()->with('status',  $result ? 'updated successfully' : 'updated failed');
   }
 }

@@ -1,28 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.web.master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+  <div class="modal-body col-8 mx-auto p-5">
+    <h1 class="fw-bold text-primary mb-0">ارسلنا لك ايميل </h1>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+    <div class="row align-items-center">
+      <h3>
+        لطفا راجع بريدك الالكتروني لتاكيد حسابك
+      </h3>
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
-        </div>
+      <img class="img-fluid" src="{{ asset('images/verification_email.png') }}" alt="email verification">
     </div>
-</div>
+
+    <div dir="auto" class="mt-4">
+      <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+        @csrf
+
+        <button type="submit" class="btn btn-big btn-primary w-100 mt-5" data-bs-dismiss="modal">اعاده ارسال رسالة التاكيد
+        </button>
+      </form>
+    </div>
+  </div>
 @endsection

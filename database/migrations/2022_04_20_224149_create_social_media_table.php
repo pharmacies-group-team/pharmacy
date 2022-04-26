@@ -6,35 +6,35 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('social_media', function (Blueprint $table) {
-            $table->id();
-            $table->string('facebook')->nullable();
-            $table->string('whatsapp')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('instagram')->nullable();
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('social_media', function (Blueprint $table) {
+      $table->id();
+      $table->string('facebook')->nullable();
+      $table->string('whatsapp')->nullable();
+      $table->string('twitter')->nullable();
+      $table->string('instagram')->nullable();
 
-            $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      $table->foreignId('user_id');
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->softDeletes();
-            $table->timestamps();
-        });
-    }
+      $table->softDeletes();
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('social_media');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('social_media');
+  }
 };

@@ -9,17 +9,17 @@ use App\Models\Neighborhood;
 use App\Models\Pharmacy;
 use App\Models\PharmacyContact;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterPharmacyController extends Controller
 {
+  use RegistersUsers;
+
   public function index()
   {
-    //      $neighborhoods = Neighborhood::all();
-    //      $directorates  = Directorate::all();
-    //      $cities        = City::all();
-
     return view('auth.register_pharmacy');
   }
 
@@ -30,19 +30,17 @@ class RegisterPharmacyController extends Controller
         'name'            => ['required', 'string', 'max:255'],
         'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password'        => ['required', 'string', 'min:8', 'confirmed'],
-        // 'neighborhood_id' => 'required',
-        'namePharma'      => ['required', 'string', 'max:255'],
+        'namePharma'      => ['required', 'string', 'min:8', 'max:255'],
         'phone'           => ['required', 'numeric']
       ]
     );
-
-    $user = User::create(
+    event(new Registered($user = User::create(
       [
         'name'     => $request['name'],
         'email'    => $request['email'],
         'password' => Hash::make($request['password']),
       ]
-    )->assignRole($request['roles']);
+    )->assignRole($request['roles'])));
 
     $pharmacy = Pharmacy::create(
       [
@@ -57,6 +55,8 @@ class RegisterPharmacyController extends Controller
         'pharmacy_id' => $pharmacy->id
       ]
     );
+
+    $this->guard()->login($user);
 
     return redirect()->route('home');
   }

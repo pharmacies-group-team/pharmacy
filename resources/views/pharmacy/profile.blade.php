@@ -2,6 +2,8 @@
 
 @section('title') profile @stop
 
+@php use App\Enum\PharmacyEnum;  @endphp
+
 @section('content')
 
   <section class="profile__bg" style="background-image: url(
@@ -15,9 +17,9 @@
         <figure class="position-relative">
           <img class="rounded-3"
                src="@if(isset($pharmacy->logo))
-                        {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH.$pharmacy->logo) }}
+                        {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH.$pharmacy->logo) }}
                     @else
-                        {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
+                        {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
                     @endif"
           alt="">
 
