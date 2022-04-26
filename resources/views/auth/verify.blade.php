@@ -5,11 +5,13 @@
     <h1 class="fw-bold text-primary mb-0">ارسلنا لك ايميل </h1>
 
     <div class="row align-items-center">
-      <h3>
+      <h3 class="col-md-4">
         لطفا راجع بريدك الالكتروني لتاكيد حسابك
       </h3>
 
-      <img class="img-fluid" src="{{ asset('images/verification_email.png') }}" alt="email verification">
+      <div class="col">
+        <img class="img-fluid" src="{{ asset('images/verification_email.png') }}" alt="email verification">
+      </div>
     </div>
 
     <div dir="auto" class="mt-4">
