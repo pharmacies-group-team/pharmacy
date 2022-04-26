@@ -329,8 +329,8 @@
             </div>
 
             <div class="modal-body m-3">
-              <form method="post" class="needs-validation" novalidate :action="'{{ url('admin/site/services') }}/'+id"
-                enctype="multipart/form-data">
+              <form method="post" class="needs-validation" novalidate
+                :action="'{{ url('admin/site/services') }}/' + id" enctype="multipart/form-data">
                 @method('PUT')
 
                 @csrf
@@ -382,7 +382,7 @@
             </div>
 
             <div class="modal-body m-3">
-              <form method="post" :action="'/admin/site/services/' + id " class="needs-validation" novalidate>
+              <form method="post" :action="'/admin/site/services/' + id" class="needs-validation" novalidate>
                 @csrf
                 @method("DELETE")
 
