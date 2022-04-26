@@ -44,15 +44,15 @@
 
                 <div class="mb-3">
                   <label class="form-label" for="inputUsername">من نحن</label>
-                  <textarea rows="2" class="form-control @error('about') is-invalid @enderror" id="inputBio" name='about'
-                    placeholder="About us" spellcheck="false" value="{{ $aboutUs->about }}"></textarea>
+                  <textarea rows="4" dir="auto" class="form-control @error('about') is-invalid @enderror" id="inputBio" name='about'
+                    placeholder="About us" spellcheck="false">{{ $aboutUs->about }}</textarea>
                   @error('about')
                     <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                   @enderror
 
                 </div>
                 <button type="submit" class="btn btn-primary">
-                  احفظ
+                  تعديل
                 </button>
               </form>
             </div>

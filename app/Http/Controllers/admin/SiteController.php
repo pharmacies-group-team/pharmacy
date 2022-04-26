@@ -43,7 +43,7 @@ class SiteController extends Controller
       "sub_title" => $request->input('sub_title'),
       "about"     => $request->input('about') ?? AboutUs::first()->about,
     ]);
-    return redirect()->back();
+    return redirect()->back()->with('status', 'updated about us');
   }
 
   // add service
