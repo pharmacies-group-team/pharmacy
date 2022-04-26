@@ -1,0 +1,19 @@
+/* Start Components Style */
+.btn-primary{
+  background: var(--primary-darker-color);
+  color: #ffffff;
+  border-radius: 12px;
+}
+.btn-primary__linear{
+  background: var(--primary-linear-color);
+  color: #ffffff;
+  border-radius: 30px;
+  padding: 2px 16px;
+  font-weight: 500;
+  transition: background 3s ease-out;
+}
+.btn-primary__linear:hover{
+  background: var(--primary-r-linear-color);
+  color: #ffffff;
+}
+/* End Components Style */

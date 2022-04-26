@@ -8,8 +8,6 @@ example
 
 ```
 `v-1.1/login`
-
-`v-1.2/sign-up`
 ```
 
 ## Github/git roles
@@ -45,15 +43,15 @@ The commit type can include the following:
 
 ## controller and routers
 
-| Verb   | URI                    | why                  | Function name |
-| ------ | ---------------------- | -------------------- | ------------- |
-| GET    | `/photos`              | show all items page  | index         |
-| GET    | `/photos/{photo}`      | show one item page   | show          |
-| GET    | `/photos/create`       | create new item page | create        |
-| GET    | `/photos/{photo}/edit` | edit one item page   | edit          |
-| POST   | `/photos`              | store new item       | store         |
-| PUT    | `/photos/{photo}`      | update item          | update        |
-| DELETE | `/photos/{photo}`      | delete item          | destroy       |
+| Verb   | URI                 | why                  | Function name |
+| ------ | ------------------- | -------------------- | ------------- |
+| GET    | `/photos`           | show all items page  | index         |
+| GET    | `/photos/{id}`      | show one item page   | show          |
+| GET    | `/photos/create`    | create new item page | create        |
+| GET    | `/photos/{id}/edit` | edit one item page   | edit          |
+| POST   | `/photos`           | store new item       | store         |
+| PUT    | `/photos/{id}`      | update item          | update        |
+| DELETE | `/photos/{id}`      | delete item          | destroy       |
 
 example
 
@@ -89,3 +87,24 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 `build` – changes that affect the build system or external dependencies
 
 ---
+
+### Validation roles
+
+```php
+# title
+'required|min:5|max:100|string'
+
+#phone
+
+# link
+'required|min:5|max:100|string'
+
+# email
+
+# image
+'required|image|mimes:png,jpg'
+
+# date
+'required|date'
+
+```

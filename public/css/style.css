@@ -1,0 +1,160 @@
+@import "color.css";
+@import "components.css";
+
+body{
+  font-family: 'Tajawal', sans-serif;
+  direction: rtl;
+  background-color: #f7f9fe;
+  background-image:
+    radial-gradient(at 47% 33%, hsl(240.00, 0%, 100%) 0, transparent 59%),
+    radial-gradient(at 82% 65%, hsl(218.82, 100%, 93%) 0, transparent 55%);
+}
+a{
+  text-decoration: none;
+}
+
+/* custom */
+.rounded-3{
+  border-radius: 20px !important;
+}
+.rounded-2{
+  border-radius: 8px !important;
+}
+.rounded-button-3{
+  border-radius: 0 0 20px 20px !important;
+}
+.shadow{
+  box-shadow: -3px 3px 10px #00000017 !important;
+}
+
+.bg-blur{
+  background-color: #52536a08;;
+  backdrop-filter: blur(6px);
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+}
+.card-blur{
+  backdrop-filter: blur(7px) saturate(200%);
+  -webkit-backdrop-filter: blur(7px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.39);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+}
+.pr{
+  padding-right: 2.5rem;
+}
+
+/* Start Landing Section */
+.landing{
+  height: 600px;
+  background-image: url('../images/bg.svg');
+  background-position: center top;
+  background-size: cover;
+}
+.landing h1{
+  font-size: 3.5rem!important;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+/* End Landing Section */
+
+/* Start Pharmacies Section */
+.card--hover:hover{
+  background-color: var(--primary-dark-color) !important;
+  transition: 0.5s;
+}
+.card--hover:hover h3{
+  color: var(--secondary-lighter-color) !important;
+  transition: 0.5s;
+}
+.card--hover:hover p span{
+  color: var(--secondary-light-color) !important;
+  transition: 0.5s;
+}
+.card--hover:hover a.btn{
+  background-color: var(--primary-darker-color) !important;
+  color: var(--secondary-light-color) !important;
+  transition: 0.5s;
+}
+/* End Pharmacies Section */
+
+
+/* Start owl.carousel Section */
+.owl-2-style .owl-nav {
+  display: none;
+}
+.owl-2-style .owl-dots {
+  text-align: center;
+  position: relative;
+  bottom: -30px;
+}
+.owl-2-style .owl-dots .owl-dot {
+  display: inline-block;
+}
+.owl-2-style .owl-dots .owl-dot span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #cccccc;
+  -webkit-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+  -o-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+  transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+  margin: 3px;
+  border-radius: 50%;
+}
+.owl-2-style .owl-dots .owl-dot.active span {
+  background: var(--primary-base-color);
+}
+.owl-2-style .owl-dots .owl-dot:active, .owl-2-style .owl-dots .owl-dot:focus {
+  outline: none;
+}
+.owl-carousel .owl-item article.card img{
+  width: 50% !important;
+}
+/* End owl.carousel Section */
+
+
+/* Start Profile Pharmacy */
+.profile__bg{
+  height: 300px;
+  background-position: center center;
+  background-size: cover;
+}
+.profile__bg > .container-fluid{
+  backdrop-filter: blur(3px) saturate(200%);
+  -webkit-backdrop-filter: blur(3px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.21);
+  /* background-c: rgba(255, 255, 255, 0.49); */
+  background: #dde9ffb3;
+}
+/* .profile__bg::before{
+    width: 100%;
+    height: 40vh;
+    background: rgba(5, 10, 40, 0.99) none repeat scroll 0 0;
+} */
+.profile__avatar > figure {
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 40px;
+  margin-bottom: -30px;
+}
+.profile__avatar > figure img {
+  border: 2px solid var(--secondary-light-color);
+  display: inline-block;
+  padding: 6px;
+  max-width: 140px;
+}
+.modal-blur{
+  backdrop-filter: blur(4px) saturate(200%);
+  -webkit-backdrop-filter: blur(4px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.83);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+/* End Profile Pharmacy */
