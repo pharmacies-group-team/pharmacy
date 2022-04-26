@@ -5,15 +5,17 @@
     {{-- header --}}
 
     @include('layouts/dashboard/header')
-    <link href="{{ asset('css/dashboard/admin.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/dashboard/client.css') }}" rel="stylesheet" />
 
 </head>
 
-<body data-theme="default" data-layout="fluid" data-sidebar-position="right" data-sidebar-layout="default">
+<body data-theme="default" data-layout="fluid" data-sidebar-position="right" data-sidebar-layout="compact">
 
     <div class="wrapper">
         {{-- sidebar --}}
-        @include('layouts/dashboard/sidebar')
+
+        @include('layouts/dashboard/client-sidebar')
+
 
         {{-- main --}}
         <div class="main">

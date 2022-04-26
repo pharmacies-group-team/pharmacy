@@ -1,17 +1,11 @@
 @extends('layouts/dashboard/dashboard-mastre')
 @section('content')
 
-    <main class="content">
+    <main class="content" x-data="{ id: null, pharmacy: {} }">
         <div class="container-fluid p-0">
-            <div class="d-flex justify-content-between my-2 ">
-                <h1 class="h3 ">لوحة تحكم <strong>الصيدليات</strong></h1>
-
-                <button type="button" class="btn btn-primary  mt-n1 block " data-bs-toggle="modal" data-bs-target="#modify">
-                    <i class="fas fa-plus"></i>اضافه صيدلية
-                </button>
+            <h1 class="h3 ">لوحة تحكم <strong>الصيدليات</strong></h1>
 
 
-            </div>
 
             <div class="row">
 
@@ -21,7 +15,7 @@
                         <div class="card-body">
                             <div id="datatables-fixed-header_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                 <div class="row">
-                                    <div class="col-sm-12" x-data="{ id: null, pharmacy: {} }">
+                                    <div class="col-sm-12">
                                         <table id="datatables-multi"
                                             class="table table-striped dataTable no-footer dtr-inline" style="width: 100%"
                                             aria-describedby="datatables-multi_info">
