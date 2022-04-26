@@ -14,7 +14,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
 
-<title>Pharamcy</title>
+<title>صيدلية اون لاين</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
 
@@ -48,12 +48,11 @@
 <script>
   window.dataLayer = window.dataLayer || [];
 
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
+  const getDataLayer = (...params) => dataLayer.push(params);
 
-  gtag("config", "UA-120946860-10", {
+  getDataLayer("js", new Date());
+
+  getDataLayer("config", "UA-120946860-10", {
     anonymize_ip: true
   });
 </script>
