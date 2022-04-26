@@ -10,8 +10,13 @@
           @csrf
           <div class="col-12">
             <div class="input-group mb-3">
-              <input name="logo" type="file" class="form-control" id="inputGroupFile02">
+              <input name="logo" type="file" class="form-control @error('logo') is-invalid @enderror" id="inputGroupFile02">
             </div>
+            @error('logo')
+              <span class="text-danger" role="alert">
+                  {{ $message }}
+              </span>
+            @enderror
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary px-5">حفظ</button>

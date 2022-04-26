@@ -14,7 +14,7 @@
 
 </head>
 <body>
-
+  @include('includes.alert-web')
   {{-- Navbar --}}
   @include('layouts.web.navbar')
 
