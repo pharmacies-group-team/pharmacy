@@ -98,10 +98,6 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 //    Route::resource('/', pharmacy\PharmacyController::class);
 
     Route::view('/','pharmacy.dashboard.setting')->name('dashboard');
-    Route::controller(pharmacy\SettingController::class)->group(function () {
-
-      Route::post('/update/logo', 'updateLogo')->name('update.logo');
-    });
   });
 
 /*
