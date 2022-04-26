@@ -50,7 +50,7 @@ Debugbar::disable();
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
 });
 
 
@@ -69,7 +69,7 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY])
+Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacies.')->group(function () {
 
     Route::resource('/', pharmacy\PharmacyController::class);
@@ -86,7 +86,7 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth'])
+Route::prefix('/admin')->middleware(['auth', 'role:'. RoleEnum::SUPER_ADMIN])
   ->name('admin.')->group(function () {
 
     // admin profile
@@ -131,7 +131,7 @@ Route::prefix('/admin')->middleware(['auth'])
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/clients')->name('clients.')->group(function () {
+Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role:'. RoleEnum::CLIENT, 'verified'])->group(function () {
   Route::get('/', [client\ClientProfileController::class, 'index'])
     ->name('profile');
 
