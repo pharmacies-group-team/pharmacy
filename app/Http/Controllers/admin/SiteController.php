@@ -23,8 +23,8 @@ class SiteController extends Controller
     $services = Service::all();
     $contactUs = ContactUs::first();
     $social = SocialMedia::first();
-    $aboutUs = AboutUs::first();
 
+    $aboutUs = AboutUs::first();
 
     return view('admin.manage-pages', compact('services', 'contactUs', 'social', 'aboutUs'));
   }
@@ -50,7 +50,7 @@ class SiteController extends Controller
   public function addService(Request $request)
   {
     $request->validate([
-      "name" => 'required|min:10|string|max:100',
+      "name" => 'required|min:10|string|max:100|alpha',
       "desc" => 'required|min:10|string|max:255',
       "icon" => 'required|image|mimes:png,jpg'
     ]);
@@ -76,9 +76,8 @@ class SiteController extends Controller
   // update services
   public function updateService(Request $request, $id)
   {
-    // dd($request);
     $request->validate([
-      "name" => 'required|min:10|string',
+      "name" => 'required|min:10|alpha',
       "desc" => 'required|min:10|string',
       "icon" => 'nullable|image|mimes:png,jpg'
     ]);
@@ -86,7 +85,6 @@ class SiteController extends Controller
     $imageName = $this->storeImage($request->file('icon'), 'images/services');
 
     if ($imageName) {
-
       $result = Service::where('id', $id)->update([
         "name" => $request->input('name'),
         "desc" => $request->input('desc'),
@@ -102,8 +100,6 @@ class SiteController extends Controller
     $result = Service::where('id', $id)->delete();
 
     return redirect()->back()->with('statues', 'delete done');
-
-    // return ['updated' => $result, 'data' => Service::find($id)];
   }
 
   // update contact us
@@ -127,10 +123,10 @@ class SiteController extends Controller
   public function updateSocial(Request $request)
   {
     $request->validate([
-      "facebook"  => 'required|min:5|max:255',
-      "whatsapp"  => 'required|min:5|max:255',
-      "twitter"   => 'required|min:5|max:255',
-      "instagram" => 'required|min:5|max:255',
+      "facebook"  => 'nullable|min:5|max:255',
+      "whatsapp"  => 'nullable|min:5|max:255',
+      "twitter"   => 'nullable|min:5|max:255',
+      "instagram" => 'nullable|min:5|max:255',
     ]);
 
     $result = SocialMedia::first()->update([
