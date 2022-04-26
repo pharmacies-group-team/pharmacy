@@ -1,0 +1,24 @@
+    * {
+        direction: rtl;
+    }
+
+    .navbar input {
+        direction: rtl !important;
+    }
+
+    .modal-header .btn-close {
+        margin: 0 !important;
+        padding: 0.5rem;
+    }
+
+    .dropdown-menu {
+
+        text-align: right !important;
+
+    }
+
+    .sidebar-dropdown .sidebar-link:before {
+        content: "←" !important;
+        right: -14px;
+
+    }

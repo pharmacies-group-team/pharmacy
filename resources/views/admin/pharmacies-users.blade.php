@@ -104,40 +104,6 @@
         </div>
       </div>
     </div>
-
-    {{-- modals --}}
-    <!--
-                                                      <div>
-
-                                                      {{-- delete pharmacy modal --}}
-                                                      <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
-                                                      <div class="modal-dialog modal-md" role="document">
-                                                        <div class="modal-content">
-                                                          <div class="modal-header">
-
-                                                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                          </div>
-                                                          <div class="modal-body m-3">
-                                                            <h2 class="modal-title mb-2"> هل أنت متأكد من حذف الصيدلية
-                                                            </h2>
-
-                                                            <form method="post" :action="'/admin/pharmacies/' + id">
-                                                              @csrf
-                                                              @method('DELETE')
-
-                                                              <div class="modal-footer flex">
-                                                                <button type="submit" class="btn btn-danger">حذف
-                                                                </button>
-
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                                                              </div>
-                                                            </form>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      </div>
-                                                      </div>
-                                                      -->
   </main>
 
 @stop

@@ -31,6 +31,10 @@ Debugbar::disable();
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+Route::get('/profile', function () {
+  return view('client.profile');
+});
 // Route::get('/clients', function () {
 //   return view('admin.clients');
 // });

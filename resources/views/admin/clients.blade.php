@@ -88,7 +88,6 @@
                   @endforeach
                 @endif
 
-
               </tbody>
             </table>
 
