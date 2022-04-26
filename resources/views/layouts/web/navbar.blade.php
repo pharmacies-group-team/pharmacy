@@ -56,7 +56,7 @@
                 <img src="{{ asset(UserEnum::USER_AVATAR_DEFAULT) }}" width="15%" class="img-fluid rounded-circle border border-1 border-secondary shadow-sm" alt="">
                 <span class="me-2">{{ Auth::user()->name }}</span>
               </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown08">
+              <ul class="dropdown-menu" aria-labelledby="dropdown08" style="z-index: 9999999999">
                 <li><a class="dropdown-item text-primary-dark d-flex align-items-center"
                        href="
                           @if(Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN))

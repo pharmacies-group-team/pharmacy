@@ -6,7 +6,7 @@
 
 @section('content')
 
-  <section class="position-sticky" style="z-index: 999999999; top: 10%">
+  <section>
     <div class="container-lg">
       <div class="row">
         <div class="col-12">
