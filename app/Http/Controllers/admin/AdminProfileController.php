@@ -20,7 +20,7 @@ class AdminProfileController extends Controller
   public function updateProfile(Request $request)
   {
     $request->validate([
-      'name' => 'required|string|min:3|max:50',
+      'name' => 'required|alpha|min:3|max:90',
       'email' => 'required|email|min:3|max:50'
     ]);
 
