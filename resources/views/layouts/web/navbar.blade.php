@@ -7,7 +7,8 @@
       {{-- Logo --}}
       <div class="col-3">
         <a class="navbar-brand h4 text-decoration-none m-0" href="{{ route('home') }}">
-          <img src="{{ asset('images/logo.svg') }}">
+{{--          <img src="{{ asset('images/logo.svg') }}">--}}
+          <h1 class="text-primary-darker fs-3 fw-bold">PHARMACY <span class="fs-6 fw-normal text-primary-base">online</span></h1>
         </a>
       </div>
 
@@ -25,7 +26,7 @@
       </div>
 
       {{-- Nav collapse --}}
-      <div class="col-6">
+      <div class="col-5">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item">
@@ -40,7 +41,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-primary-darker" href="#">
-                عن شفاء
+                عنَا
               </a>
             </li>
             <li class="nav-item">
@@ -51,7 +52,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-3">
+      <div class="col-4">
         @if (Route::has('login'))
           @auth
             <div class="dropdown d-lg-inline-flex d-none">

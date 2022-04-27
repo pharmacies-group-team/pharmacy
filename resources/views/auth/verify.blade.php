@@ -2,11 +2,11 @@
 
 @section('content')
   <div class="modal-body col-8 mx-auto p-5">
-    <h1 class="fw-bold text-primary mb-0">ارسلنا لك ايميل </h1>
+    <h1 class="fw-bold text-primary mb-0">أرسلنا لك إيميل </h1>
 
     <div class="row align-items-center">
       <h3 class="col-md-4">
-        لطفا راجع بريدك الالكتروني لتاكيد حسابك
+        لطفاً راجع بريدك الإلكتروني لتأكيد حسابك
       </h3>
 
       <div class="col">
@@ -18,7 +18,7 @@
       <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
         @csrf
 
-        <button type="submit" class="btn btn-big btn-primary w-100 mt-5" data-bs-dismiss="modal">اعاده ارسال رسالة التاكيد
+        <button type="submit" class="btn btn-big btn-primary w-100 mt-5" data-bs-dismiss="modal">إعاده إرسال رسالة التاكيد
         </button>
       </form>
     </div>

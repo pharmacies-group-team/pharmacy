@@ -6,7 +6,7 @@
 
 @section('content')
 
-  <div class="row p-lg-4 bg-body vh-100  ">
+  <div class="row p-lg-4 bg-body vh-100">
     <div class="col-10 mb-3 mx-auto">
       <div class="card card-blur p-3">
         <div class="card-header bg-transparent">
@@ -69,6 +69,7 @@
                     <input name="new_password_confirmation"  type="password" class="form-control rounded-2" placeholder="تأكيد كلمة السر" aria-label="الاسم" aria-describedby="addon-wrapping" required>
                   </div>
                 </div>
+                <a class="nav-link-style fs-ms" href="{{ route('password.request') }}">هل نسيت كلمة السر ؟</a>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">حفظ</button>
                 </div>

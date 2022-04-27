@@ -28,7 +28,7 @@ $(function () {
       margin: 20,
       rtl: true,
       smartSpeed: 2000,
-      autoplay: true,
+      autoplay: false,
       nav: true,
       dots: true,
       pauseOnHover: false,
