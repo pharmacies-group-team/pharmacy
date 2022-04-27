@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Order;
+namespace App\Http\Controllers\Bill;
 
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-//use App\Models\Order;
-use App\Models\OrderDetails;
+//use App\Models\Bill;
+use App\Models\BillDetails;
 
-class PharmOrderController extends Controller
+class PharmBillController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class PharmOrderController extends Controller
      */
     public function index()
     {
-        $pharm_order = OrderDetails::with(['Order'])->get();
+        $pharm_Bill = BillDetails::with(['Bill'])->get();
 
-        return response($pharm_order);
+        return response($pharm_Bill);
     }
 
     /**
@@ -41,23 +41,27 @@ class PharmOrderController extends Controller
      */
     public function store(Request $request)
     {
+        // id	drug_name	type	quantity	price	total	bill_id	
         //TODO validation
         $validator = Validator::make($request->all(), [
             'drug_name' => 'required',
             'drug_image' => 'required',
             'type' => 'required',
             'quantity' => 'required',
-            'details' => 'required',
-            'order_id' => 'required'
+            'price' => 'required',
+            'total' => 'required',
+            'Bill_id' => 'required'
         ]);
 
-        OrderDetails::create([
+        BillDetails::create([
             'drug_name' => $request->input('drug_name'),
             'drug_image' => $request->input('drug_image'),
             'type' => $request->input('type'),
             'quantity' => $request->input('quantity'),
-            'details' => $request->input('details'),
-            'order_id' => $request->input('order_id')
+           	
+            ' price' => $request->input(' price'),
+            'total' => $request->input('total'),
+            'Bill_id' => $request->input('Bill_id')
 
         ]);
 
@@ -72,8 +76,8 @@ class PharmOrderController extends Controller
      */
     public function show($id)
     {
-        $pharm_OrderDetails = OrderDetails::with(['Order'])->where('id', $id)->get();
-        return response($pharm_OrderDetails);
+        $pharm_BillDetails = BillDetails::with(['Bill'])->where('id', $id)->get();
+        return response($pharm_BillDetails);
     }
 
     /**
@@ -102,18 +106,20 @@ class PharmOrderController extends Controller
             'drug_image' => 'required',
             'type' => 'required',
             'quantity' => 'required',
-            'details' => 'required',
-            'order_id' => 'required'
+            'price' => 'required',
+            'total' => 'required',
+            'Bill_id' => 'required'
         ]);
 
-        OrderDetails::where('id', $id)
+        BillDetails::where('id', $id)
             ->update([
                 'drug_name' => $request->input('drug_name'),
                 'drug_image' => $request->input('drug_image'),
                 'type' => $request->input('type'),
                 'quantity' => $request->input('quantity'),
-                'details' => $request->input('details'),
-                'order_id' => $request->input('order_id')
+            'price' => $request->input('price'),
+            'total' => $request->input('total'),
+                'Bill_id' => $request->input('Bill_id')
 
             ]);
 
