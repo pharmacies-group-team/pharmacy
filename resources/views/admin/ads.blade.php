@@ -1,4 +1,4 @@
-@extends('layouts/dashboard/dashboard-mastre')
+@extends('layouts/dashboard/dashboard-master')
 @section('content')
 
   <div class="container px-5">
@@ -181,7 +181,7 @@
                       </div>
 
                       <div class="modal-body m-3">
-                        <form :action="'{{ url('/admin/ads') }}/'+ ad.id" method="post" class="needs-validation"
+                        <form :action="'{{ url('/admin/ads') }}/' + ad.id" method="post" class="needs-validation"
                           enctype="multipart/form-data" novalidate>
                           @method('PUT')
                           @csrf
