@@ -18,9 +18,9 @@ class Order extends Model
     /**
      * Get Order Details
      */
-    public function orderDetails(): HasMany
+    public function orderDetails(): HasOne
     {
-        return $this->hasMany(OrderDetails::class);
+        return $this->hasOne(OrderDetails::class);
     }
 
     /**
