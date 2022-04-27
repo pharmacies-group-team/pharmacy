@@ -129,7 +129,7 @@
                           <div class="mb-3">
                             <label class="form-label">را'بط
                               الموقع</label>
-                            <input type="text" name="link" :value="ad.link"
+                            <input type="url" name="link" :value="ad.link"
                               class="form-control @error('link') is-invalid @enderror" placeholder="ادخل رابط الموقع" />
                             @error('link')
                               <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
@@ -138,10 +138,14 @@
 
                           {{-- ad position --}}
                           <div class="mb-3">
-                            <label class="form-label">Ad position</label>
+                            <label class="form-label">مكان الاعلان</label>
 
-                            <input type="text" name="ad_position" :value="ad.ad_position"
-                              class="form-control @error('ad_position') is-invalid @enderror" placeholder="" />
+                            <select name="ad_position" :value="ad.ad_position"
+                              class="form-select @error('ad_position') is-invalid @enderror">
+                              <option value="header-ad">at top</option>
+                              <option value="sidebar-ad">on sidebar</option>
+                              <option value="inline-ad">inline ad</option>
+                            </select>
 
                             @error('ad_position')
                               <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
@@ -150,7 +154,7 @@
 
                           {{-- ad image --}}
                           <div class="mb-3">
-                            <label class="form-label">Image</label>
+                            <label class="form-label">صوره الاعلان</label>
                             <input name="image" class="form-control form-control-sm @error('image') is-invalid @enderror"
                               type="file">
 
