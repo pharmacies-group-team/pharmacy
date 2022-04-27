@@ -42,15 +42,15 @@ class PharmBillController extends Controller
     public function store(Request $request)
     {
         // id	drug_name	type	quantity	price	total	bill_id	
-        //TODO validation
+        //TODO check validation
         $validator = Validator::make($request->all(), [
-            'drug_name' => 'required',
-            'drug_image' => 'required',
-            'type' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'total' => 'required',
-            'Bill_id' => 'required'
+            'drug_name' => 'required|min:5|max:100|string',
+            'drug_image' => 'required|image|mimes:png,jpg',
+            'type' => 'required|min:5|max:10|string',
+            'quantity' => 'required|numeric|max:12',
+            'price' => 'required|numeric|max:12',
+            'total' => 'required|numeric|max:12',
+            'Bill_id' => 'required|numeric|max:12',
         ]);
 
         BillDetails::create([
@@ -100,15 +100,15 @@ class PharmBillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //TODO validation
+        //TODO check validation
         $validator = Validator::make($request->all(), [
-            'drug_name' => 'required',
-            'drug_image' => 'required',
-            'type' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'total' => 'required',
-            'Bill_id' => 'required'
+            'drug_name' => 'required|min:5|max:100|string',
+            'drug_image' => 'required|image|mimes:png,jpg',
+            'type' => 'required|min:5|max:10|string',
+            'quantity' => 'required|numeric|max:12',
+            'price' => 'required|numeric|max:12',
+            'total' => 'required|numeric|max:12',
+            'Bill_id' => 'required|numeric|max:12',
         ]);
 
         BillDetails::where('id', $id)
