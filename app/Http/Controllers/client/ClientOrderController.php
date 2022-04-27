@@ -42,13 +42,13 @@ class ClientOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO validation
+        //TODO check validation
         $validator = Validator::make($request->all(), [
         
-            'drug_image' => 'required',
+            'drug_image' => 'required|image|mimes:png,jpg',
          
-            'details' => 'required',
-            'order_id' => 'required'
+            'details' => 'required|min:5|max:2000|string',
+            'order_id' => 'required|numeric|max:12'
         ]);
 
         OrderDetails::create([
@@ -95,13 +95,12 @@ class ClientOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //TODO validation
+        //TODO check validation
         $validator = Validator::make($request->all(), [
-          
-            'drug_image' => 'required',
-       
-            'details' => 'required',
-            'order_id' => 'required'
+            'drug_image' => 'required|image|mimes:png,jpg',
+
+            'details' => 'required|min:5|max:2000|string',
+            'order_id' => 'required|numeric|max:12'
         ]);
 
         OrderDetails::where('id', $id)
