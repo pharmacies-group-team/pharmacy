@@ -64,7 +64,7 @@
                   width="30" height="20" class="img-fluid rounded-circle border-1 border-secondary border shadow-sm"
                   alt="user avatar">
 
-                <span class="me-2">{{ Auth::user()->name }}</span>
+                <span class="me-2" style="cursor: pointer">{{ Auth::user()->name }}</span>
               </div>
 
               <ul class="dropdown-menu" aria-labelledby="dropdown08" style="z-index: 9999999999">
