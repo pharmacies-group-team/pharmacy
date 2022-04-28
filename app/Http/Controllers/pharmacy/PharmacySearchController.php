@@ -42,15 +42,24 @@ class PharmacySearchController extends Controller
         //   $Dirc = Directorate::with('neighborhoods.pharmacies')->find($dir);
         //   return response($Dirc);
         // }
-
-        public function showBycity($city)
+  //       public function showPharmacies()
+  // {
+  //           $pharmacies    = Pharmacy::all();
+  //           $cities        = City::all();
+  //           $directorates  = Directorate::all();
+  //           $neighborhoods = Neighborhood::all();
+  //           return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates', 'neighborhoods'));
+  //        }
+        public function showBycity($id)
         {
-          $Cit = City::with('directorates')->find($city);
-          if($city){
+          $Cit = City::with('directorates')->find($id);
+          if($id){
           $dir = $Cit-> directorates;
           foreach($dir as $direct){
           echo   $direct -> name .'<br>';
+          return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates'));
         }
+
          }
           // return response($dir);
         }
@@ -58,9 +67,10 @@ class PharmacySearchController extends Controller
         {
           $cities  = City::with('directorates')->find($city);
          $dir =  $cities -> directorates;
-         foreach($dir as $Directorate){
+         foreach($dir as $directorates){
      //     echo   $Directorate -> name .'<br>';
-          return view('web.pharmacies',compact('pharmacies', 'cities', 'directorates', 'neighborhoods'));
+//                                                   compact
+          return view('web.pharmacies',compact('directorates'));
         }  }
       //-------------------------
       public function showPharmacies()
