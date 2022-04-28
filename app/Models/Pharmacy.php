@@ -20,10 +20,10 @@ class Pharmacy extends Model
     /**
      * Get pharmacy Orders
      */
-    public function scopeFilter(Builder $builder, $request)
-    {
-        return (new PharmacyFilter($request))->filter($builder);
-    }
+    // public function scopeFilter(Builder $builder, $request)
+    // {
+    //     return (new PharmacyFilter($request))->filter($builder);
+    // }
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
