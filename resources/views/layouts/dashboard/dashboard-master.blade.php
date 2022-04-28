@@ -8,10 +8,14 @@
   <title>صيدلية اون لاين</title>
 
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
+
 </head>
 
 <body>
-  <div class="dashboard" x-data="{ isSidebarOpen: true }">
+  {{-- load alpinejs before any html element #fix modal light show/hide issues --}}
+  <script src="{{ asset('js/alpine.min.js') }}"></script>
+
+  <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
     @include('layouts.dashboard.sidebar')
 
@@ -23,7 +27,6 @@
     </div>
   </div>
 
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
 </body>
 
 </html>

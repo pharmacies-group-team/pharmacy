@@ -1,4 +1,6 @@
-<nav class="sidebar" x-show="isSidebarOpen">
+<nav class="sidebar" x-show="isSidebarOpen"
+  @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
+
   {{-- link to home page --}}
   <a class="sidebar-brand" href="{{ route('admin.index') }}">
     <span>صيدلية اون لاين</span>
@@ -6,9 +8,11 @@
 
   {{-- sidebar links --}}
   <ul class="list">
-    {{-- profiel --}}
+    {{-- profile --}}
     <li>
-      <a class="list-item-link active" href="{{ route('admin.profile') }}">
+
+
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.profile') active @endif" href="{{ route('admin.profile') }}">
         <div class="list-item-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -24,7 +28,7 @@
 
     {{-- ads --}}
     <li>
-      <a class="list-item-link" href="{{ route('admin.ads.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.ads.index') active @endif" href="{{ route('admin.ads.index') }}">
         <div class="list-item-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -40,7 +44,7 @@
 
     {{-- pharmacies --}}
     <li>
-      <a class="list-item-link" href="{{ route('admin.pharmacies') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
         <div class="list-item-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -56,7 +60,7 @@
 
     {{-- clients --}}
     <li>
-      <a class="list-item-link" href="{{ route('admin.clients') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
         <div class="list-item-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -80,11 +84,11 @@
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
       </div>
-      <a class="list-item-link" href="{{ route('admin.orders') }}">الزبائن</a>
+      <a class="list-item-link  @if (Route::currentRouteName() === 'admin.orders') active @endif" href="{{ route('admin.orders') }}">الزبائن</a>
     </li> --}}
 
     <li>
-      <a class="list-item-link" href="{{ route('admin.site') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.site') active @endif" href="{{ route('admin.site') }}">
         <div class="list-item-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
