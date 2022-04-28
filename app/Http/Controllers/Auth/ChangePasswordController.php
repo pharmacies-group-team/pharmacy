@@ -21,7 +21,8 @@ class ChangePasswordController extends Controller
 
     #Match The Old Password
     if (!Hash::check($request->old_password, Auth::user()->password)) {
-      return back()->with("error", "كلمة السر القديمة غير صحيحة!");
+      return back()->with("error", "كلمة السر القديمة غير صحيحة!")
+        ->with("status", "كلمة السر القديمة غير صحيحة!");
     }
 
 
@@ -31,6 +32,7 @@ class ChangePasswordController extends Controller
     ]);
 
     return back()
-      ->with('success', 'تم تغير كلمة السر بنجاح');
+      ->with('success', 'تم تغير كلمة السر بنجاح')
+      ->with('status', 'تم تغير كلمة السر بنجاح');
   }
 }
