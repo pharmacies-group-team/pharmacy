@@ -57,7 +57,7 @@ class PharmacySearchController extends Controller
           $dir = $Cit-> directorates;
           foreach($dir as $direct){
           echo   $direct -> name .'<br>';
-          return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates'));
+         // return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates'));
         }
 
          }
