@@ -604,8 +604,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 15rem;
 }
 
+.max-w-\[12rem\]{
+  max-width: 12rem;
+}
+
 .flex-auto{
   flex: 1 1 auto;
+}
+
+.flex-1{
+  flex: 1 1 0%;
 }
 
 .flex-shrink{
@@ -1742,6 +1750,7 @@ textarea.form-control{
 
 @media (min-width: 1024px){
   .user-profile .upload-image{
+    order: 2;
     margin-left: 1rem;
     margin-right: 1rem;
   }
@@ -1770,6 +1779,7 @@ textarea.form-control{
 }
 
 .user-profile .profile-form{
+  order: 1;
   flex: 1 1 0%;
 }
 
