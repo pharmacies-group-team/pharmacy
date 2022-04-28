@@ -89,7 +89,9 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+// TODO only for debugging
+// ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+Route::prefix('/admin')
   ->name('admin.')->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
