@@ -46,9 +46,11 @@ class PharmacySearchController extends Controller
         public function showBycity($city)
         {
           $Cit = City::with('directorates')->find($city);
-         $dir = $Cit-> directorates;
-         foreach($dir as $direct){
+          if($city){
+          $dir = $Cit-> directorates;
+          foreach($dir as $direct){
           echo   $direct -> name .'<br>';
+        }
          }
           // return response($dir);
         }

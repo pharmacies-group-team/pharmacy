@@ -61,8 +61,8 @@ class Pharmacy extends Model
         return $this->belongsTo(Neighborhood::class);
     }
 
-    protected static function newFactory()
-    {
-        return PharmacyFactory::new();
-    }
+    // protected static function newFactory()
+    // {
+    //     return PharmacyFactory::new();
+    // }
 }
