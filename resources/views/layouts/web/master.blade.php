@@ -11,7 +11,7 @@
   @include('layouts.web.style')
 
   <title>@yield('title')</title>
-
+  @livewireStyles
 </head>
 <body>
   @include('includes.alert-web')
