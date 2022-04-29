@@ -25,7 +25,7 @@ class ClientProfileController extends Controller
     $id = $request->input('id');
 
     $request->validate([
-      'full_name'   => 'required|alpha|min:3|max:50',
+      'full_name'   => 'required|string|min:3|max:50',
       'phone'       => 'required|min:9|max:16|numeric'
     ]);
 

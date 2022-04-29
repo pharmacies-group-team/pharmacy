@@ -21,10 +21,10 @@ class AdController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'title'       => 'required|min:5|max:100|alpha',
+      'title'       => 'required|min:5|max:100|string',
       'image'       => 'required|image|mimes:png,jpg',
       'link'        => 'required|min:5|max:255|url',
-      'ad_position' => 'required|min:5|max:100|alpha',
+      'ad_position' => 'required|min:5|max:100|string',
       'start_at'    => 'required|date|before:end_at',
       'end_at'      => 'required|date|after:start_at',
     ]);
@@ -51,10 +51,10 @@ class AdController extends Controller
   public function update(Request $request, $id)
   {
     $request->validate([
-      'title'       => 'required|min:5|max:100|alpha',
+      'title'       => 'required|min:5|max:100|string',
       'image'       => 'required|image|mimes:png,jpg',
       'link'        => 'required|min:5|max:255|url',
-      'ad_position' => 'required|min:5|max:100|alpha',
+      'ad_position' => 'required|min:5|max:100|string',
       'start_at'    => 'required|date|before:end_at',
       'end_at'      => 'required|date|after:start_at',
     ]);

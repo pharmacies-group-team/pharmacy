@@ -33,9 +33,9 @@ class SiteController extends Controller
   public function updateAboutUs(Request $request)
   {
     $request->validate([
-      "title"     => 'required|min:5|max:100|alpha',
-      "sub_title" => 'required|min:20|max:500|alpha',
-      "about"     => 'nullable|min:20|max:255|alpha'
+      "title"     => 'required|min:5|max:100|string',
+      "sub_title" => 'required|min:20|max:500|string',
+      "about"     => 'nullable|min:20|max:255|string'
     ]);
 
     $result = AboutUs::where([])->first()->update([
@@ -50,8 +50,8 @@ class SiteController extends Controller
   public function addService(Request $request)
   {
     $request->validate([
-      "name" => 'required|min:10|max:100|alpha',
-      "desc" => 'required|min:10|max:255|alpha',
+      "name" => 'required|min:10|max:100|string',
+      "desc" => 'required|min:10|max:255|string',
       "icon" => 'required|image|mimes:png,jpg'
     ]);
 
@@ -77,7 +77,7 @@ class SiteController extends Controller
   public function updateService(Request $request, $id)
   {
     $request->validate([
-      "name" => 'required|min:10|alpha',
+      "name" => 'required|min:10|string',
       "desc" => 'required|min:10|string',
       "icon" => 'nullable|image|mimes:png,jpg'
     ]);
