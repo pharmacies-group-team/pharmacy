@@ -147,7 +147,7 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
+Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
   Route::get('/', [client\ClientProfileController::class, 'index'])
     ->name('profile');
 
@@ -155,6 +155,10 @@ Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role
     ->name('update-profile');
 
   Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+  Route::controller(client\OrderController::class)->group(function (){
+    Route::post('/order', 'order')->name('order');
+  });
 });
 
 Auth::routes(['verify' => true]);
