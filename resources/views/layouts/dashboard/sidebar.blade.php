@@ -38,7 +38,7 @@
           </svg>
         </div>
 
-        <span>الاعلانات</span>
+        <span>الإعلانات</span>
       </a>
     </li>
 
