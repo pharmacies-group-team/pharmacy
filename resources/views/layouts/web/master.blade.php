@@ -32,6 +32,8 @@
   @include('layouts.web.footer')
 
 @include('layouts.web.script')
+
+{{-- <livewire:search/> --}}
 @livewireScripts
 </body>
 </html>
