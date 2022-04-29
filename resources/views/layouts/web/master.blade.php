@@ -32,5 +32,6 @@
   @include('layouts.web.footer')
 
 @include('layouts.web.script')
+@livewireScripts
 </body>
 </html>
