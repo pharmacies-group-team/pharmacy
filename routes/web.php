@@ -8,6 +8,7 @@ use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
+
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -141,6 +142,9 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
         ->name('pharmacies.toggle');
     });
   });
+
+
+
 
 /*
 |--------------------------------------------------------------------------
