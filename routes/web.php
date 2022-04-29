@@ -3,6 +3,7 @@
 use App\Enum\RoleEnum;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
@@ -58,7 +59,11 @@ Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
     Route::get('/setting', 'index')->name('index');
     Route::post('/setting', 'updateAccount')->name('update.account');
     Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
+
   });
+
+  Route::get('/notification', [NotificationController::class, 'getAll'])->name('notification');
+
 });
 
 /*
@@ -159,6 +164,7 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
   Route::controller(client\OrderController::class)->group(function (){
     Route::post('/order', 'order')->name('order');
   });
+
 });
 
 Auth::routes(['verify' => true]);
