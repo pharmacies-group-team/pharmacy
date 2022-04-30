@@ -794,6 +794,11 @@ textarea.form-control{
   max-width: 80px;
 }
 
+.table tbody .btn{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .dashboard{
   display: flex;
   justify-content: space-between;
@@ -1153,9 +1158,4 @@ svg {
 
 .pharmacy-profile .social .btn{
   margin-top: 1.5rem;
-}
-
-.users .btn{
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
