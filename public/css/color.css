@@ -1,0 +1,96 @@
+:root{
+  --primary-lighter-color: #96BBFF;
+  --primary-light-color: #73A4FF;
+  --primary-base-color: #588FF4;
+  --primary-dark-color: #4E7DCB;
+  --primary-darker-color: #3869BA;
+  --primary-linear-color: linear-gradient(180deg, #5D93FF, #877EFF);
+  --primary-r-linear-color: linear-gradient(0deg, #5D93FF, #877EFF);
+
+  --secondary-lighter-color: #F7F9FE;
+  --secondary-light-color: #DDE9FF;
+  --secondary-base-color: #C5D9FE;
+  --secondary-dark-color: #B9D1FE;
+  --secondary-darker-color: #B1C9F2;
+
+  --dark-50: #456687;
+  --dark-100: #244362;
+
+  --linear: linear-gradient(180deg, #3869BA, #96BBFF);
+}
+
+.text-primary-base{
+  color: var(--primary-base-color) !important;
+}
+.text-primary-light{
+  color: var(--primary-light-color) !important;
+}
+.text-primary-lighter{
+  color: var(--primary-lighter-color) !important;
+}
+.text-primary-dark{
+  color: var(--primary-dark-color) !important;
+}
+.text-primary-darker{
+  color: var(--primary-darker-color) !important;
+}
+
+.bg-primary-base{
+  background-color: var(--primary-base-color) !important;
+}
+.bg-primary-light{
+  background-color: var(--primary-light-color) !important;
+}
+.bg-primary-lighter{
+  background-color: var(--primary-lighter-color) !important;
+}
+.bg-primary-dark{
+  background-color: var(--primary-dark-color) !important;
+}
+.bg-primary-darker{
+  background-color: var(--primary-darker-color) !important;
+}
+
+
+.text-secondary-base{
+  color: var(--secondary-base-color) !important;
+}
+.text-secondary-light{
+  color: var(--secondary-light-color) !important;
+}
+.text-secondary-lighter{
+  color: var(--secondary-lighter-color) !important;
+}
+.text-secondary-dark{
+  color: var(--secondary-dark-color) !important;
+}
+.text-secondary-darker{
+  color: var(--secondary-darker-color) !important;
+}
+
+.bg-secondary-base{
+  background-color: var(--secondary-base-color) !important;
+}
+.bg-secondary-light{
+  background-color: var(--secondary-light-color) !important;
+}
+.bg-secondary-lighter{
+  background-color: var(--secondary-lighter-color) !important;
+}
+.bg-secondary-dark{
+  background-color: var(--secondary-dark-color) !important;
+}
+.bg-secondary-darker{
+  background-color: var(--secondary-darker-color) !important;
+}
+
+.text-dark-50{
+  color: var(--dark-50);
+}
+.text-dark-100{
+  color: var(--dark-100);
+}
+.bg-linear{
+  background: rgb(56,105,186);
+  background: linear-gradient(294deg, rgba(56,105,186,1) 5%, rgba(50,91,161,1) 100%);
+}
