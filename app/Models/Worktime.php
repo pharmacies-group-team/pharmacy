@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OrderDetails extends Model
+class Worktime extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     /**
-     * Get Order
+     * Get pharmacy
      */
-    public function order(): BelongsTo
+    public function pharmacy(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+      return $this->belongsTo(Pharmacy::class);
     }
 }

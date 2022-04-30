@@ -17,19 +17,19 @@ class Pharmacy extends Model
     protected $guarded = [];
 
     /**
-     * Get pharmacy Orders
-     */
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    /**
      * Get User Data
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get pharmacy worktimes
+     */
+    public function worktimes(): HasMany
+    {
+      return $this->hasMany(Worktime::class);
     }
 
     /**
