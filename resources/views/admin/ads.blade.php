@@ -10,7 +10,8 @@
       <section class="section-header">
         <h2 class="text-large">نشر الأعلان</h2>
 
-        <button class="btn" @click="addModal = true">اضافه اعلان</button>
+        {{ json_encode(old()) }}
+        <button class="btn" @click="addModal = true; ad = {{ json_encode(old()) }} ?? {}">اضافه اعلان</button>
       </section>
 
       <div class="table-wrapper">
