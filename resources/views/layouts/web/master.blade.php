@@ -11,7 +11,7 @@
   @include('layouts.web.style')
 
   <title>@yield('title')</title>
-
+  @livewireStyles
 </head>
 <body>
   @include('includes.alert-web')
@@ -32,5 +32,8 @@
   @include('layouts.web.footer')
 
 @include('layouts.web.script')
+
+{{-- <livewire:search/> --}}
+@livewireScripts
 </body>
 </html>

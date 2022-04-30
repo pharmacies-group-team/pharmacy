@@ -8,8 +8,6 @@ use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
-use App\Http\Controllers\pharmacy\PharmacyController;
-use App\Http\Controllers\pharmacy\PharmacySearchController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +45,7 @@ Route::controller(web\HomeController::class)->group(function () {
 //                            PharmacySearchControlle
 // Route::get('/pharmacies',[pharmacy\PharmacySearchController::class,'index'])->name('pharmacies');
 //Route::get('/pharmacies/{city}',[pharmacy\PharmacySearchController::class,'showBycity'])->name('pharmacies');;
-Route::get('/cities/{city}',[pharmacy\PharmacySearchController::class,'showBycity']);
+Route::get('/cities/{city}', [pharmacy\PharmacySearchController::class, 'showBycity']);
 /*                                                                            showBycity
 |--------------------------------------------------------------------------
 | General Routes
@@ -145,6 +143,7 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
         ->name('pharmacies.toggle');
     });
   });
+
 
 
 /*
