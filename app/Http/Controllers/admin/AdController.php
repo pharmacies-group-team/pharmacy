@@ -32,7 +32,6 @@ class AdController extends Controller
     $imageName = $this->storeImage($request->file('image'), 'images/ads');
 
     if ($imageName) {
-
       Ad::create([
         'title'       => $request->input('title'),
         'image'       => $imageName,
@@ -60,6 +59,7 @@ class AdController extends Controller
     ]);
 
     $imageOldName = Ad::find($id)->image;
+
     if ($request->file('image')) {
       $imageName = $this->updateImage($request->file('image'), 'images/ads', $imageOldName);
     } else {
