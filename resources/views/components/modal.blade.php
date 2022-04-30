@@ -29,6 +29,13 @@
       <div class="modal-content">
         {{ $slot }}
       </div>
+
+      {{-- footer --}}
+      @if (isset($footer))
+        <div class="modal-footer">
+          {{ $footer }}
+        </div>
+      @endif
     </div>
   </div>
 @else
