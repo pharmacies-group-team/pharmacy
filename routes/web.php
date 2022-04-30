@@ -11,7 +11,6 @@ use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use Barryvdh\Debugbar\Facades\Debugbar;
 
 // TODO
@@ -43,8 +42,11 @@ Route::controller(web\HomeController::class)->group(function () {
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
 });
-
-/*
+//                            PharmacySearchControlle
+// Route::get('/pharmacies',[pharmacy\PharmacySearchController::class,'index'])->name('pharmacies');
+//Route::get('/pharmacies/{city}',[pharmacy\PharmacySearchController::class,'showBycity'])->name('pharmacies');;
+Route::get('/cities/{city}', [pharmacy\PharmacySearchController::class, 'showBycity']);
+/*                                                                            showBycity
 |--------------------------------------------------------------------------
 | General Routes
 |--------------------------------------------------------------------------
@@ -141,6 +143,8 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
         ->name('pharmacies.toggle');
     });
   });
+
+
 
 /*
 |--------------------------------------------------------------------------

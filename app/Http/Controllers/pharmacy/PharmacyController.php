@@ -55,7 +55,6 @@ class PharmacyController extends Controller
   public function show($id)
   {
     $pharmacy = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->where('id', $id)->get();
-
     return response($pharmacy);
   }
 

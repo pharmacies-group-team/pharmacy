@@ -41,7 +41,7 @@
       </div>
     </div>
   </section>
-
+  <livewire:search />
   <section>
     <div class="container-lg mt-4">
       <div class="row">

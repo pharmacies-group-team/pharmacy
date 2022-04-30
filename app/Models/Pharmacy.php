@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Filters\PharmacyFilter;
+use Illuminate\Database\Eloquent\Builder;
 class Pharmacy extends Model
 {
     use HasFactory, SoftDeletes;
@@ -19,6 +20,10 @@ class Pharmacy extends Model
     /**
      * Get pharmacy Orders
      */
+    // public function scopeFilter(Builder $builder, $request)
+    // {
+    //     return (new PharmacyFilter($request))->filter($builder);
+    // }
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
@@ -56,8 +61,8 @@ class Pharmacy extends Model
         return $this->belongsTo(Neighborhood::class);
     }
 
-    protected static function newFactory()
-    {
-        return PharmacyFactory::new();
-    }
+    // protected static function newFactory()
+    // {
+    //     return PharmacyFactory::new();
+    // }
 }
