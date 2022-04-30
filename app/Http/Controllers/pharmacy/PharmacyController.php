@@ -4,6 +4,8 @@ namespace App\Http\Controllers\pharmacy;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pharmacy;
+use App\Models\Order;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -97,4 +99,29 @@ class PharmacyController extends Controller
   {
     return Pharmacy::where('id', $id)->delete() ? "deleted" : 'not deleted';
   }
+
+
+  // show orders
+
+  public function orders()
+ {
+    $pharmacies = Pharmacy::with(['user', 'social', 'neighborhood.directorate.city'])->get();
+    return response($pharmacies);
+
+    // return view('pharmacy.dashboard.index');
+  // {dd('fff');
+  //   // $pharmacy = Pharmacy::with(['orders'])->get();
+  //   return view('pharmacy.dashboard.orders');
+
+    // return response($pharmacy);
+  }
+  // public function orders($id)
+  // {
+  //   $orders = Order::all();
+  //   dd($orders);
+
+  //   return view('pharmacy.dashboard.orders', compact('orders'));
+
+  // }
+
 }

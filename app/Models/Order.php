@@ -40,10 +40,10 @@ class Order extends Model
     }
 
     /**
-     * Get Client
+     * Get User
      */
-    public function client(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -81,7 +81,9 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 
     //    Route::resource('/', pharmacy\PharmacyController::class);
 
-    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+    Route::view('/o', 'pharmacy.dashboard.setting')->name('dashboard');
+    Route::view('/orders', [pharmacy\PharmacyController::class, 'orders'])->name('orders');
+
   });
 
 /*
@@ -129,8 +131,8 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
     });
 
     /*------------------------------ orders ------------------------------*/
-    // Route::get('/orders', [admin\OrderController::class, 'index'])
-    //   ->name('admin.orders'); // TODO
+    Route::get('/orders', [admin\OrderController::class, 'index'])
+      ->name('admin.orders'); // TODO
 
     // pharmacies
     Route::controller(admin\PharmacyController::class)->group(function () {

@@ -81,6 +81,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Ad::class);
     }
 
+    /**
+     * get orders
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
   protected static function newFactory()
   {
     return UserFactory::new();
