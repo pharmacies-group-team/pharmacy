@@ -27,7 +27,7 @@ class RegisterPharmacyController extends Controller
   {
     $request->validate(
       [
-        'name'            => ['required', 'alpha', 'max:255'],
+        'name'            => ['required', 'string', 'max:255'],
         'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password'        => ['required', 'string', 'min:8', 'confirmed'],
         'namePharma'      => ['required', 'string', 'min:8', 'max:255'],

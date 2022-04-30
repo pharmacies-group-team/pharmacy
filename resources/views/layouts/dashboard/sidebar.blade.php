@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar js-sidebar">
   <div class="sidebar-content js-simplebar">
     {{-- link to home page --}}
-    <a class="sidebar-brand" href="{{ route('admin.index') }}">
+    <a class="sidebar-brand" href="{{ route('home') }}">
       <span class="align-middle">صيدلية اون لاين</span>
     </a>
     {{-- sidebar links --}}

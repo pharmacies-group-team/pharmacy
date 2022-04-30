@@ -82,7 +82,7 @@ $count = 0;
                   @endif
                 </p>
               </div>
-              <a class="btn bg-secondary-dark rounded-botton-3 fw-bold text-dark-50 p-3" href="">أطلب دوائك</a>
+              <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;" href="">أطلب دوائك</a>
             </article>
           @endforeach
         @endif
@@ -98,9 +98,9 @@ $count = 0;
         <div class="col-xl-6 col-lg-7 col-md-8 col-12 m-lg-0 m-md-auto">
           <div class="card p-md-5 card-blur p-3">
             <h1 class="text-primary-base fw-bold">هل أنت صاحب صيدلية؟</h1>
-            <p class="fs-lg-5 text-primary-darker mt-2">انضم لشفاء الآن واجعل صيدليتك أونلاين! واحصل على مبيعات
+            <p class="fs-lg-5 text-primary-darker mt-2">انضم لصيدلية أونلاين الآن واجعل صيدليتك أونلاين! واحصل على مبيعات
               أكثر من
-              خلال الانضمام لتطبيق شفاء عبر تسجيلك لهذا النموذج.</p>
+              خلال الانضمام لصيدلية أونلاين عبر تسجيلك لهذا النموذج.</p>
             <a href="{{ route('register.pharmacy') }}" class="btn btn-primary w-75 mt-3">أنضم إلينا
               كصيدلية</a>
           </div>

@@ -6,5 +6,8 @@
     "onclick",
     "Spatie",
     "susccfluyly"
-  ]
+  ],
+  "html-css-class-completion.enableEmmetSupport": true,
+  "cssvar.enableGotoDef": true,
+  "cssvar.files": ["color.css", "resources/sass/index.scss"]
 }
