@@ -2,6 +2,8 @@
 
 use App\Enum\RoleEnum;
 
+use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
@@ -32,31 +34,32 @@ Debugbar::disable();
 |--------------------------------------------------------------------------
 */
 
-Route::get('/profile', function () {
-  return view('client.profile');
-});
-// Route::get('/clients', function () {
-//   return view('admin.clients');
-// });
-
-// Route::get('/ads', function () {
-//   return view('admin.ads');
-// });
-
-// Route::get('/pharmacies-users', function () {
-//   return view('admin.pharmacies-users');
-// });
-
-// Route::get('/manage-pages', function () {
-//   return view('admin.manage-pages');
+// Route::get('/profile', function () {
+//   return view('client.profile');
 // });
 
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
 });
 
+/*
+|--------------------------------------------------------------------------
+| General Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
+  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+
+  Route::controller(SettingController::class)->group(function () {
+
+    Route::post('/update/logo', 'updateLogo')->name('update.logo')->middleware('role:' . RoleEnum::PHARMACY);
+    Route::get('/setting', 'index')->name('index');
+    Route::post('/setting', 'updateAccount')->name('update.account');
+    Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
+  });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -73,15 +76,12 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY])
+Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacies.')->group(function () {
 
-    Route::resource('/', pharmacy\PharmacyController::class);
+    //    Route::resource('/', pharmacy\PharmacyController::class);
 
-    Route::controller(pharmacy\SettingController::class)->group(function () {
-
-      Route::post('/update/logo', 'updateLogo')->name('update.logo');
-    });
+    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
   });
 
 /*
@@ -89,9 +89,8 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth'])
+Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->name('admin.')->group(function () {
-
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
@@ -99,7 +98,7 @@ Route::prefix('/admin')->middleware(['auth'])
     Route::get('profile', [admin\AdminProfileController::class, 'index'])
       ->name('profile');
 
-    Route::post('profile', [admin\AdminProfileController::class, 'updateProfile'])
+    Route::put('profile', [admin\AdminProfileController::class, 'updateProfile'])
       ->name('update-profile');
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
@@ -121,16 +120,26 @@ Route::prefix('/admin')->middleware(['auth'])
       });
 
     /*------------------------------ clients ------------------------------*/
-    Route::get('/clients', [admin\ClientController::class, 'index'])
-      ->name('clients');
+    Route::controller(admin\ClientController::class)->group(function () {
+      Route::get('/clients', 'index')
+        ->name('clients');
+
+      Route::post('/clients/toggle/{id}',  'clientToggle')
+        ->name('clients.toggle');
+    });
 
     /*------------------------------ orders ------------------------------*/
-    Route::get('/orders', [admin\OrderController::class, 'index'])
-      ->name('admin.orders');
+    // Route::get('/orders', [admin\OrderController::class, 'index'])
+    //   ->name('admin.orders'); // TODO
 
     // pharmacies
-    Route::get('pharmacies', [admin\PharmacyController::class, 'index'])
-      ->name('pharmacies');
+    Route::controller(admin\PharmacyController::class)->group(function () {
+      Route::get('/pharmacies',  'index')
+        ->name('pharmacies');
+
+      Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
+        ->name('pharmacies.toggle');
+    });
   });
 
 /*
@@ -138,13 +147,14 @@ Route::prefix('/admin')->middleware(['auth'])
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/clients')->name('clients.')->group(function () {
+Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
   Route::get('/', [client\ClientProfileController::class, 'index'])
     ->name('profile');
 
   Route::post('/', [client\ClientProfileController::class, 'updateProfile'])
     ->name('update-profile');
+
+  Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 });
 
 Auth::routes(['verify' => true]);
-Auth::routes();

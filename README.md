@@ -66,6 +66,20 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 ---
 
+## upload folders
+
+```
+/upload/user
+/upload/pharmacy
+/upload/ads
+/upload/service
+/upload/order
+```
+
+---
+
+---
+
 ## Leader roles
 
 ### Github/git roles
@@ -92,12 +106,12 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 ```php
 # title
-'required|min:5|max:100|string'
+'required|min:5|max:100|alpha'
 
 #phone
 
 # link
-'required|min:5|max:100|string'
+ 'required|min:5|max:255|url'
 
 # email
 

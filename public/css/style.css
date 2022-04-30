@@ -37,6 +37,12 @@ a{
   right: 0;
   z-index: 99999;
 }
+.bg-body{
+  background-color: #f7f9fe !important;
+  background-image:
+    radial-gradient(at 47% 33%, hsl(240.00, 0%, 100%) 0, transparent 59%),
+    radial-gradient(at 82% 65%, hsl(218.82, 100%, 93%) 0, transparent 55%) !important;
+}
 .card-blur{
   backdrop-filter: blur(7px) saturate(200%);
   -webkit-backdrop-filter: blur(7px) saturate(200%);
@@ -48,7 +54,18 @@ a{
 .pr{
   padding-right: 2.5rem;
 }
-
+.alert-blur{
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  width: 25%;
+  backdrop-filter: blur(9px) saturate(200%);
+  -webkit-backdrop-filter: blur(9px) saturate(200%);
+  background-color: rgba(209, 231, 221, 0.87);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
 /* Start Landing Section */
 .landing{
   height: 600px;
@@ -68,7 +85,7 @@ a{
   background-color: var(--primary-dark-color) !important;
   transition: 0.5s;
 }
-.card--hover:hover h3{
+.card--hover:hover a{
   color: var(--secondary-lighter-color) !important;
   transition: 0.5s;
 }

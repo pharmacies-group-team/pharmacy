@@ -16,8 +16,9 @@
   --dark-50: #456687;
   --dark-100: #244362;
 
-  --linear: linear-gradient(180deg, #3869BA, #96BBFF);
-}
+  --linear: linear-gradient(180deg, #3869BA, #96BBFF)
+ }
+
 
 .text-primary-base{
   color: var(--primary-base-color) !important;

@@ -1,8 +1,10 @@
-@extends('layouts/dashboard/dashboard-mastre')
+@extends('layouts/dashboard/dashboard-master')
 @section('content')
 
   <main class="content">
-    {{-- {{ dd($homeData['services']) }} --}}
+
+    @include('includes.alerts')
+
     {{-- about us --}}
     <div class="container-fluid p-0">
       <div class="mb-3">
@@ -42,15 +44,15 @@
 
                 <div class="mb-3">
                   <label class="form-label" for="inputUsername">من نحن</label>
-                  <textarea rows="2" class="form-control @error('about') is-invalid @enderror" id="inputBio" name='about'
-                    placeholder="اخبرنا من انتم" spellcheck="false" value="{{ $aboutUs->about }}"></textarea>
+                  <textarea rows="4" dir="auto" class="form-control @error('about') is-invalid @enderror" id="inputBio" name='about'
+                    placeholder="About us" spellcheck="false">{{ $aboutUs->about }}</textarea>
                   @error('about')
                     <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                   @enderror
 
                 </div>
                 <button type="submit" class="btn btn-primary">
-                  احفظ
+                  تعديل
                 </button>
               </form>
             </div>
@@ -112,8 +114,7 @@
       </div>
     </div>
 
-
-    {{-- social media managment --}}
+    {{-- social media management --}}
     <div class="container-fluid p-0">
       <div class="mb-3">
         <h1 class="h3 d-inline align-middle"> وسائل التواصل الأجتماعي</h1>
@@ -184,12 +185,16 @@
       </div>
     </div>
 
-
     {{-- services --}}
-
     <div class="container-fluid p-0" x-data="{ id: null, service: {} }">
-      <h1 class="h3 mb-3">خدماتنا </h1>
-      <div class="row">
+      <div class="justify-content-between d-flex align-items-center">
+        <h3>خدماتنا </h3>
+
+        <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#addService">
+          اضافة
+        </button>
+      </div>
+      <div class="row mt-2">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -198,7 +203,6 @@
                   <div class="col-sm-12">
                     <table class="table" style="width: 100%">
                       <thead>
-
                         <tr>
                           <th class="sorting sorting_desc" tabindex="0" aria-controls="datatables-multi" rowspan="1"
                             colspan="1" style="width: 10%" aria-label="Name: activate to sort column ascending"
@@ -228,7 +232,7 @@
                               <input type="hidden" name="id" value="{{ $service->id }}" />
 
                               <td>
-                                <img :src="'{{ url('img/services') }}/{{ $service->icon }}'" name=" image"
+                                <img :src="'{{ asset('images/services') }}/{{ $service->icon }}'" name=" image"
                                   class="img-responsive img-fluid @error('icon') is-invalid @enderror mt-2" />
                                 @error('icon')
                                   <span id="exampleInputEmail1-error"
@@ -246,10 +250,6 @@
                                   class="btn btn-success float-end m-1" data-bs-toggle="modal" data-bs-target="#modify">
                                   تعديل
                                 </button>
-                                {{-- <a href="{{ route('admin.site.destroy', $service->id) }}"
-                                                                    class="btn btn-danger btn-sm">
-                                                                    حذف
-                                                                </a> --}}
 
                                 <button type="button" @click="id = {{ $service->id }};service = {{ $service }}"
                                   class="btn btn-danger float-end m-1" data-bs-toggle="modal" data-bs-target="#delete">
@@ -269,56 +269,43 @@
         </div>
       </div>
 
-      {{-- update service modal --}}
-      <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-hidden="true">
+      {{-- add service modal --}}
+      <div class="modal fade" id="addService" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title"> تعديل الخدمات </h5>
+              <h5 class="modal-title"> اضافه خدمة </h5>
+
               <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body m-3">
-              <form method="post" class="needs-validation" novalidate
-                :action="'{{ url('admin/site/services') }}/'+id">
-                @method('PUT')
-
+              <form method="post" class="needs-validation" novalidate action="{{ route('admin.addService') }}"
+                enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id" :value="id" />
 
-                <div class="row">
-                  <div class="col-9">
-                    <div class="mb-3">
-                      <label class="form-label" for="mainTitle">اسم الخدمة</label>
-                      <input type="text" class="form-control" id="mainTitle" name="name" placeholder="ادخل اسم الخدمة"
-                        :value="service.name" />
-                    </div>
+                <div class="mb-3">
+                  <label class="form-label" for="mainTitle">اسم الخدمة</label>
+                  <input type="text" class="form-control" id="mainTitle" name="name" placeholder="ادخل اسم الخدمة"
+                    value="" />
+                </div>
 
-                    <div class="mb-3">
-                      <label class="form-label" for="inputUsername">الوصف</label>
-                      <textarea rows="2" class="form-control" name='desc' placeholder="ادخل الوصف" spellcheck="false"
-                        :value="service.desc"></textarea>
-                    </div>
-                  </div>
+                <div class="mb-3">
+                  <label class="form-label" for="inputUsername">الوصف</label>
+                  <textarea rows="2" class="form-control" name='desc' placeholder="ادخل الوصف" spellcheck="false" value=""></textarea>
+                </div>
 
-                  <div class="col-3 d-flex align-items-center justify-center">
-                    <div>
-                      <img :src="'{{ url('img/services') }}/'+service.icon" name=" image"
-                        class="img-responsive img-fluid @error('icon') is-invalid @enderror mt-2" />
-                      {{-- <div class="custom-file">
-                          <input type="image" class="custom-file-input" id="customFile" value="">
-                          <label class="custom-file-label" for="customFile">تحميل</label>
-                      </div> --}}
-                      <div class="mt-2">
 
-                        <span class="btn btn-primary"><i data-feather="upload"></i> تحميل</span>
-                      </div>
-                      @error('icon')
-                        <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
-                      @enderror
+                <div class="mb-3">
+                  <label class="form-label" for="inputUsername">الايقونة</label>
 
-                    </div>
-                  </div>
+                  <input name="icon" class="form-control form-control-sm @error('image') is-invalid @enderror"
+                    type="file">
+
+                  {{-- <span class="btn btn-primary"><i data-feather="upload"></i> تحميل</span> --}}
+                  @error('icon')
+                    <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
                 </div>
 
                 <div class="modal-footer">
@@ -331,7 +318,59 @@
           </div>
         </div>
       </div>
-      {{-- update service model --}}
+
+      {{-- update service modal --}}
+      <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"> تعديل الخدمات </h5>
+              <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body m-3">
+              <form method="post" class="needs-validation" novalidate
+                :action="'{{ url('admin/site/services') }}/' + id" enctype="multipart/form-data">
+                @method('PUT')
+
+                @csrf
+                <input type="hidden" name="id" :value="id" />
+
+                <div class="mb-3">
+                  <label class="form-label" for="mainTitle">اسم الخدمة</label>
+                  <input type="text" class="form-control" id="mainTitle" name="name" placeholder="ادخل اسم الخدمة"
+                    :value="service.name" />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="inputUsername">الوصف</label>
+                  <textarea rows="2" class="form-control" name='desc' placeholder="ادخل الوصف" spellcheck="false"
+                    :value="service.desc"></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="inputUsername">الايقونة</label>
+
+                  <input name="icon" :value="service.icon"
+                    class="form-control form-control-sm @error('image') is-invalid @enderror" type="file">
+
+                  {{-- <span class="btn btn-primary"><i data-feather="upload"></i> تحميل</span> --}}
+                  @error('icon')
+                    <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">حفظ
+                  </button>
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       {{-- delete service modal --}}
       <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
@@ -343,10 +382,9 @@
             </div>
 
             <div class="modal-body m-3">
-              <form method="post" :action="'/admin/site/services/' + id " class="needs-validation" novalidate> @csrf
-                {{-- <input type="text" name="id" :value="id" /> --}}
+              <form method="post" :action="'/admin/site/services/' + id" class="needs-validation" novalidate>
+                @csrf
                 @method("DELETE")
-                {{-- <input type="hidden" name="id" :value="id" /> --}}
 
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-danger">delete
@@ -359,7 +397,7 @@
           </div>
         </div>
       </div>
-      {{-- delete service model --}}
+
     </div>
   </main>
 @stop

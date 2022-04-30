@@ -14,24 +14,9 @@ class HomeController extends Controller
     $services   = Service::all();
     $contactUs  = ContactUs::first();
     $social     = SocialMedia::first();
-    $pharmacies = Pharmacy::with([
-      'user', 'social',
-      'neighborhood.directorate.city'
-    ])->get();
+    $pharmacies = Pharmacy::all();
 
-    // return response($pharmacies);
-
-
-    return view(
-      'index',
-      compact(
-        'aboutUs',
-        'services',
-        'contactUs',
-        'social',
-        'pharmacies'
-      )
-    );
+    return view('index', compact('aboutUs', 'services', 'contactUs', 'social', 'pharmacies'));
   }
 
   public function showPharmacies()

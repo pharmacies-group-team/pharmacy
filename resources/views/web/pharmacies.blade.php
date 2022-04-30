@@ -2,9 +2,11 @@
 
 @section('title') Pharmacies @stop
 
+@php use App\Enum\PharmacyEnum;  @endphp
+
 @section('content')
 
-  <section class="position-sticky" style="z-index: 999999999; top: 10%">
+  <section>
     <div class="container-lg">
       <div class="row">
         <div class="col-12">
@@ -50,7 +52,11 @@
                 style="min-height: 272px;height: 272px;">
                 <div class="d-flex flex-column justify-content-center align-items-center p-4"
                   style="min-height: 220px;height: 220px;">
-                  <img src="{{ asset('uploads/pharmacy/' . $pharmacy->logo) }}" width="50%"
+                  <img src="@if(isset($pharmacy->logo))
+                              {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH.$pharmacy->logo) }}
+                             @else
+                              {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
+                             @endif" width="50%"
                     class="rounded-circle img-fluid" alt="">
                   <a href="{{ route('pharmacy.profile', $pharmacy->id) }}"
                     class="fs-5 fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</a>

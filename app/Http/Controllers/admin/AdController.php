@@ -21,10 +21,10 @@ class AdController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'title'       => 'required|min:5|max:100|string',
+      'title'       => 'required|min:5|max:100|alpha',
       'image'       => 'required|image|mimes:png,jpg',
-      'link'        => 'required|min:5|max:255|string',
-      'ad_position' => 'required|min:5|max:100|string',
+      'link'        => 'required|min:5|max:255|url',
+      'ad_position' => 'required|min:5|max:100|alpha',
       'start_at'    => 'required|date|before:end_at',
       'end_at'      => 'required|date|after:start_at',
     ]);
@@ -38,7 +38,6 @@ class AdController extends Controller
         'image'       => $imageName,
         'link'        => $request->input('link'),
         'ad_position' => $request->input('ad_position'),
-        'user_id'     => $request->input('user_id'),
         'start_at'    => $request->input('start_at'),
         'end_at'      => $request->input('end_at'),
         'user_id'     => 1
@@ -52,10 +51,10 @@ class AdController extends Controller
   public function update(Request $request, $id)
   {
     $request->validate([
-      'title'       => 'required|min:5|max:100|string',
-      'image'       => 'nullable|image|mimes:png,jpg',
-      'link'        => 'required|min:5|max:255|string',
-      'ad_position' => 'required|min:5|max:100|string',
+      'title'       => 'required|min:5|max:100|alpha',
+      'image'       => 'required|image|mimes:png,jpg',
+      'link'        => 'required|min:5|max:255|url',
+      'ad_position' => 'required|min:5|max:100|alpha',
       'start_at'    => 'required|date|before:end_at',
       'end_at'      => 'required|date|after:start_at',
     ]);
