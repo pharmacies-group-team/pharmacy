@@ -112,7 +112,13 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-end">
-          <a class="dropdown-item" href="#">Log out</a>
+          <form action="{{ route('logout') }}" method="POST">
+            @csrf
+
+            <button class="dropdown-item text-primary-dark d-flex align-items-center" type="submit">
+              <i class="bi bi-box-arrow-down-right text-primary-light m-2"></i> تسجيل الخروج
+            </button>
+          </form>
         </div>
       </li>
     </ul>

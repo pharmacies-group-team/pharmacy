@@ -12,33 +12,27 @@
         <div class="col-12">
           <div class="card card-blur p-3">
             <div class="row">
-              <div class="col-6 d-flex justify-content-start flex-row">
-                <div class="input-group position-relative flex-nowrap" style="z-index: 999">
-                  <select class="ui search selection dropdown search-select" id="search-select" >
+              <div class="col-8 d-flex justify-content-start flex-row">
+                <div class="input-group position-relative flex-nowrap me-3 " style="z-index: 999">
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     @foreach ($cities as $city)
-                      <option >{{$city->name}}</option>
+                      <option>{{ $city->name }}</option>
                     @endforeach
                   </select>
                 </div>
-                <div class="input-group position-relative flex-nowrap" style="z-index: 999">
-                  <select class="ui search selection dropdown search-select" id="search-select">
+                <div class="input-group position-relative flex-nowrap me-3 " style="z-index: 999">
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     @foreach ($directorates as $directorate)
                       <option>{{ $directorate->name }}</option>
                     @endforeach
                   </select>
                 </div>
-                <div class="input-group position-relative flex-nowrap" style="z-index: 999">
-                  <select class="ui search selection dropdown search-select" id="search-select">
+                <div class="input-group position-relative flex-nowrap me-3 " style="z-index: 999">
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     @foreach ($neighborhoods as $neighborhood)
                       <option>{{ $neighborhood->name }}</option>
                     @endforeach
                   </select>
-                </div>
-                <div class="col-sm-4">
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
                 </div>
               </div>
             </div>
@@ -75,7 +69,7 @@
           @endif
           </p>
       </div>
-      <a class="btn bg-secondary-dark rounded-botton-3 fw-bold text-dark-50 p-3" href="">أطلب دوائك</a>
+      <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;" href="">أطلب دوائك</a>
       </article>
     </div>
     @endforeach

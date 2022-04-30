@@ -33,9 +33,9 @@ class SiteController extends Controller
   public function updateAboutUs(Request $request)
   {
     $request->validate([
-      "title"     => 'required|min:10|string|max:100',
-      "sub_title" => 'required|min:20|string|max:500',
-      "about"     => 'nullable|min:20|string|max:255'
+      "title"     => 'required|min:5|max:100|string',
+      "sub_title" => 'required|min:20|max:500|string',
+      "about"     => 'nullable|min:20|max:255|string'
     ]);
 
     $result = AboutUs::where([])->first()->update([
@@ -50,8 +50,8 @@ class SiteController extends Controller
   public function addService(Request $request)
   {
     $request->validate([
-      "name" => 'required|min:10|string|max:100|alpha',
-      "desc" => 'required|min:10|string|max:255',
+      "name" => 'required|min:10|max:100|string',
+      "desc" => 'required|min:10|max:255|string',
       "icon" => 'required|image|mimes:png,jpg'
     ]);
 
@@ -77,7 +77,7 @@ class SiteController extends Controller
   public function updateService(Request $request, $id)
   {
     $request->validate([
-      "name" => 'required|min:10|alpha',
+      "name" => 'required|min:10|string',
       "desc" => 'required|min:10|string',
       "icon" => 'nullable|image|mimes:png,jpg'
     ]);
@@ -123,10 +123,10 @@ class SiteController extends Controller
   public function updateSocial(Request $request)
   {
     $request->validate([
-      "facebook"  => 'nullable|min:5|max:255',
-      "whatsapp"  => 'nullable|min:5|max:255',
-      "twitter"   => 'nullable|min:5|max:255',
-      "instagram" => 'nullable|min:5|max:255',
+      "facebook"  => 'nullable|min:5|max:255|url',
+      "whatsapp"  => 'nullable|min:5|max:255|url',
+      "twitter"   => 'nullable|min:5|max:255|url',
+      "instagram" => 'nullable|min:5|max:255|url',
     ]);
 
     $result = SocialMedia::first()->update([
@@ -135,8 +135,6 @@ class SiteController extends Controller
       "twitter"     => $request->input('twitter'),
       "instagram"   => $request->input('instagram'),
     ]);
-    return redirect()->back();
-
-    // return ['updated' => $result, 'data' => SocialMedia::first()];
+    return redirect()->back()->with('status', 'social media updated');
   }
 }

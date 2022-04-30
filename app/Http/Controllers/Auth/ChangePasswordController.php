@@ -12,25 +12,27 @@ class ChangePasswordController extends Controller
 {
   public function updatePassword(Request $request)
   {
-      # Validation
-      $request->validate([
-        'old_password' => ['required', 'string', 'min:8'],
-        'new_password' => ['required', 'string', 'min:8', 'confirmed', 'confirmed']
-      ]);
+    # Validation
+    $request->validate([
+      'old_password' => ['required', 'string', 'min:8'],
+      'new_password' => ['required', 'string', 'min:8', 'confirmed', 'confirmed']
+    ]);
 
 
-      #Match The Old Password
-      if(!Hash::check($request->old_password, Auth::user()->password)){
-        return back()->with("error", "كلمة السر القديمة غير صحيحة!");
-      }
+    #Match The Old Password
+    if (!Hash::check($request->old_password, Auth::user()->password)) {
+      return back()->with("error", "كلمة السر القديمة غير صحيحة!")
+        ->with("status", "كلمة السر القديمة غير صحيحة!");
+    }
 
 
-      #Update the new Password
-      User::whereId(Auth::id())->update([
-        'password' => Hash::make($request->new_password)
-      ]);
+    #Update the new Password
+    User::whereId(Auth::id())->update([
+      'password' => Hash::make($request->new_password)
+    ]);
 
-      return back()
-        ->with('success', 'تم تغير كلمة السر بنجاح');
+    return back()
+      ->with('success', 'تم تغير كلمة السر بنجاح')
+      ->with('status', 'تم تغير كلمة السر بنجاح');
   }
 }
