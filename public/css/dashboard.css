@@ -1070,6 +1070,7 @@ svg {
 }
 
 .pharmacy-profile .profile-form .address-selects select{
+  margin-bottom: 1rem;
   flex: 1 1 0%;
 }
 
