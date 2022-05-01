@@ -20,8 +20,8 @@ return new class extends Migration
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
 
-            $table->foreignId('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->foreignId('neighborhood_id');
             $table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');

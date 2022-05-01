@@ -17,12 +17,16 @@ return new class extends Migration
             $table->id();
             $table->boolean('periodic')->default(0);
             $table->date('re_order_date')->nullable();
+            $table->string('status');
 
-            $table->foreignId('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->foreignId('pharmacy_id');
             $table->foreign('pharmacy_id')->references('id')->on('pharmacies')->onDelete('cascade');
+
+            $table->foreignId('address_id');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();

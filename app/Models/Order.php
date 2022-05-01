@@ -46,4 +46,13 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+    /**
+     * Get Address
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
 }

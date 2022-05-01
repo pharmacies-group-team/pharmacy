@@ -81,7 +81,7 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 
     //    Route::resource('/', pharmacy\PharmacyController::class);
 
-    Route::view('/o', 'pharmacy.dashboard.setting')->name('dashboard');
+    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
     Route::view('/orders', [pharmacy\PharmacyController::class, 'orders'])->name('orders');
 
   });

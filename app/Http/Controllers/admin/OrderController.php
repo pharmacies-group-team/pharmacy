@@ -10,8 +10,9 @@ class OrderController extends Controller
 {
   public function index()
   {
-    $orders = Order::select()->with('orderDetails', 'client', 'pharmacy')->get();
+    $orders = Order::select()->with('address', 'user', 'pharmacy')->get();
+    // return response($orders);
+    return view('admin.orders', compact('orders'));
 
-    return response($orders);
   }
 }
