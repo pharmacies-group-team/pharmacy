@@ -8,25 +8,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bill extends Model
+class Quotation extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     /**
-     * Get Bill Details
+     * Get Order
      */
-    public function billDetails(): HasMany
+    public function order(): BelongsTo
     {
-        return $this->hasMany(BillDetails::class);
+      return $this->belongsTo(Order::class);
     }
 
     /**
      * Get Order
      */
-    public function order(): BelongsTo
+    public function details(): HasMany
     {
-        return $this->belongsTo(Order::class);
+      return $this->hasMany(QuotationDetails::class);
     }
 }

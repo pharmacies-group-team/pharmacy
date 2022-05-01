@@ -7,25 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Address extends Model
+class QuotationDetails extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     /**
-     * Get User
+     * Get Order
      */
-    public function user(): BelongsTo
+    public function quotation(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get Neighborhood
-     */
-    public function neighborhood(): BelongsTo
-    {
-        return $this->belongsTo(Neighborhood::class);
+      return $this->belongsTo(Quotation::class);
     }
 }

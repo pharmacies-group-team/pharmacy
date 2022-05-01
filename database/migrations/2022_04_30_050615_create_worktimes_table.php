@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('worktimes', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('phone');
+            $table->string('today');
+            $table->string('time_rate');
+            $table->boolean('is_full_time')->default(0);
+            $table->time('from')->nullable();
+            $table->time('to')->nullable();
 
-            $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('pharmacy_id');
+            $table->foreign('pharmacy_id')->references('id')->on('pharmacies')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('worktimes');
     }
 };
