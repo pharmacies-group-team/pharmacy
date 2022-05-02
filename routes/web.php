@@ -38,10 +38,12 @@ Debugbar::disable();
 //   return view('client.profile');
 // });
 
+
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
+
 });
 
 /*
@@ -82,8 +84,10 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
     //    Route::resource('/', pharmacy\PharmacyController::class);
 
     Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
-    Route::view('/orders', [pharmacy\PharmacyController::class, 'orders'])->name('orders');
 
+    /*------------------------------ orders ------------------------------*/
+    Route::get('/orders', [pharmacy\OrderController::class, 'index'])
+  ->name('orders');
   });
 
 /*
