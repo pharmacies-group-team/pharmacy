@@ -14,8 +14,8 @@ class OrderController extends Controller
   public function index()
   {
 
-  $user_id = Auth::user()->id;
-  $orders=Order::select('user_id','pharmacy_id','status','created_at')->where('pharmacy_id', $user_id)->with(['user:id,name,avatar'])->get();
+  $pharmacy_id = Auth::user()->id;
+  $orders=Order::select('user_id','pharmacy_id','status','created_at')->where('pharmacy_id', $pharmacy_id)->with(['user:id,name,avatar'])->get();
 
    return view('pharmacy.dashboard.orders', compact('orders'));
   // return response( $request);
