@@ -61,9 +61,17 @@ Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
     Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
 
   });
+});
 
-  Route::get('/notification', [NotificationController::class, 'getAll'])->name('notification');
+/*
+|--------------------------------------------------------------------------
+| Notifications Routes
+|--------------------------------------------------------------------------
+*/
 
+Route::controller(NotificationController::class)->group(function (){
+    Route::get('/notification', 'getAll')->name('notification');
+    Route::post('/read/notification', 'read')->name('notification.read');
 });
 
 /*
