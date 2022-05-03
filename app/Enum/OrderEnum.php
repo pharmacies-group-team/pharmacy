@@ -11,4 +11,5 @@ class OrderEnum
     const CONFIRMED_ORDER    = 'CONFIRMED';
     const UNPAID_ORDER       = 'UNPAID';
     const PAID_ORDER         = 'PAID';
+    const REFUSAL_ORDER      = 'REFUSAL';
 }
