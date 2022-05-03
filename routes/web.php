@@ -98,6 +98,7 @@ Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 
     Route::controller(pharmacy\OrderController::class)->group(function (){
 
         Route::get('/order', 'getAll')->name('orders');
+        Route::get('/order/refusal/{id}', 'orderRefusal')->name('order.refusal');
 
     });
   });
