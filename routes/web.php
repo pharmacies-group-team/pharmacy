@@ -161,6 +161,9 @@ Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role
     ->name('update-profile');
 
   Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+  Route::resource('/addresses', client\AddressController ::class);
+
 });
 
 Auth::routes(['verify' => true]);
