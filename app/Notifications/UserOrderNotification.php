@@ -66,7 +66,7 @@ class UserOrderNotification extends Notification implements ShouldQueue
       return [
         'client_name'   => $this->user->name,
         'client_avatar' => $this->user->avatar,
-        'order'         => $this->order->orderDetails->order
+        'order'         => $this->order->order
       ];
     }
 }

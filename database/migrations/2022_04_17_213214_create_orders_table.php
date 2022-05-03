@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\OrderEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->string('order')->nullable();
             $table->string('image')->nullable();
 
-            $table->string('status');
+            $table->string('status')->default(OrderEnum::NEW_ORDER);
 
 //            $table->unsignedBigInteger('invoice_id'); // TODO
 

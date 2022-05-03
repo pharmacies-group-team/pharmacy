@@ -21,23 +21,19 @@ class OrderController extends Controller
 
     public function order(Request $request): RedirectResponse
     {
+      dd($request->input('image'));
         // validator
-        Validator::validate($request->all(), OrderDetails::roles(), OrderDetails::messages());
+        Validator::validate($request->all(), Order::roles(), Order::messages());
 
         // upload image
         $image = $this->storeImage($request->input('image'),OrderEnum::ORDER_IMAGE_PATH);
 
         $order = Order::create(
         [
-          'client_id'   => $request->input('client_id'),
-          'pharmacy_id' => $request->input('pharmacy_id')
-        ]);
-
-        OrderDetails::create(
-        [
-          'image'    => $image,
-          'order'    => $request->input('order'),
-          'order_id' => $order->id
+          'user_id'     => Auth::id(),
+          'pharmacy_id' => $request->input('pharmacy_id'),
+          'image'       => $image,
+          'order'       => $request->input('order'),
         ]);
 
         $pharmacy = User::find($request->input('pharmacy_id'));
