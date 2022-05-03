@@ -23,8 +23,6 @@ class OrderSeeder extends Seeder
         Order::create(['periodic' =>1 , 're_order_date' =>"2022-05-03 17:01:18" ,'status' =>"جاهز" , 'user_id' => 5, 'pharmacy_id' => 1,'address_id'=>3]);
 
 
-        OrderDetails::create(['order_id' =>1 , 'image' =>"med.jpg" ]);
-        OrderDetails::create(['order_id' =>3 , 'image' =>"med2.jpg" ]);
 
     }
 }

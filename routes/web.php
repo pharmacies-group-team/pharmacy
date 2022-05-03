@@ -164,6 +164,9 @@ Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role
 
   Route::resource('/addresses', client\AddressController ::class);
 
+  Route::get('/orders', [client\OrderController::class, 'index'])->name('orders');
+
+
 });
 
 Auth::routes(['verify' => true]);
