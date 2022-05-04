@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientProfileController extends Controller
@@ -13,7 +13,7 @@ class ClientProfileController extends Controller
     // TODO
     $id = $request->query('id');
 
-    $adminData = Client::select()
+    $adminData = User::select()
       ->where('id', $id)
       ->first();
     return response($adminData);
@@ -29,7 +29,7 @@ class ClientProfileController extends Controller
       'phone'       => 'required|min:9|max:16|numeric'
     ]);
 
-    $result = Client::where('id', $id)
+    $result = User::where('id', $id)
       ->update([
         'full_name' => $request->input('full_name'),
         'phone'     => $request->input('phone'),
@@ -37,7 +37,7 @@ class ClientProfileController extends Controller
 
     return response([
       'updated'   => (bool) $result,
-      'user_data' => Client::find($id) ?? []
+      'user_data' => User::find($id) ?? []
     ]);
   }
 }
