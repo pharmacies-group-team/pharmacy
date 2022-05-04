@@ -949,6 +949,7 @@ textarea.form-control{
 
 .sidebar .list-item-link{
   display: flex;
+  align-items: center;
   border-radius: 0.25rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -960,6 +961,10 @@ textarea.form-control{
   background-color: rgb(221 233 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.sidebar .list-item-link.active .icon svg, .sidebar .list-item-link.active .icon svg path{
+  fill: #588FF4;
 }
 
 .sidebar .list-item-link.active::before {
@@ -979,6 +984,16 @@ textarea.form-control{
   margin-left: 1.25rem;
   margin-right: 1.25rem;
   width: 1.25rem;
+}
+
+.sidebar .icon{
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  width: 1.25rem;
+}
+
+.sidebar .icon svg, .sidebar .icon path{
+  fill: #F7F9FE;
 }
 
 body{
