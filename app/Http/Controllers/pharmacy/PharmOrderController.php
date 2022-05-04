@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Quotation;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 //use App\Models\Quotation;
 use App\Models\QuotationDetails;
@@ -141,4 +142,26 @@ class PharmOrderController extends Controller
   {
     //
   }
+
+  public function showPurchaseSale()
+  {
+    $PurchaseSale = Invoice::with(['user.*', 'order.*', 'pharmacy.name', 'invoice.created_at', 'address.'])->get();
+
+    return response($PurchaseSale);
+  }
+  // to display:
+
+// date of order (created_at)
+
+// date of invoice
+
+// pharmacy name
+
+// address (delivery location for user)
+
+// user info
+
+// order details
+
+// total
 }
