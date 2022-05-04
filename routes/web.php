@@ -88,16 +88,25 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
-  ->name('pharmacies.')->group(function () {
+// TODO only for debugging
+// ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+Route::prefix('/dashboard/pharmacies')
+  ->name('pharmacies.dashboard.')->group(function () {
+    // Route::resource('/', pharmacy\PharmacyController::class);
+    // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
-    //    Route::resource('/', pharmacy\PharmacyController::class);
-    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+    Route::controller(pharmacy\DashboardController::class)->group(function () {
+      // profile
+      Route::get('/', 'index')->name('index');
+      Route::get('/profile', 'profile')->name('profile');
+      Route::get('/messages', 'messages')->name('messages');
+      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+    });
+
 
     Route::controller(pharmacy\OrderController::class)->group(function () {
-
-      Route::get('/order', 'getAll')->name('orders');
-      Route::get('/order/refusal/{id}', 'orderRefusal')->name('order.refusal');
+      Route::get('/orders', 'getAll')->name('orders');
+      Route::get('/orders/refusal/{id}', 'orderRefusal')->name('order.refusal');
     });
   });
 
@@ -106,10 +115,10 @@ Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-// TODO only for debugging
-// ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
 Route::prefix('/admin')
-  ->name('admin.')->group(function () {
+  ->name('admin.')
+  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
