@@ -25,11 +25,10 @@ class PharmacyController extends Controller
   }
   public function showPharmacyProfile()
   {
-    $pharmacy_profile= Pharmacy::all();
+    $pharmacy_profile= Pharmacy::role(RoleEnum::PHARMACY)->first();
 
    
     return view('admin.pharmacy_profile', compact('pharmacy_contacts', 'pharmacies'));
   }
 
- 
 }
