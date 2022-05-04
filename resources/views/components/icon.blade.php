@@ -411,7 +411,7 @@
     <hr>
     <hr>
     {{-- {{ $type }} --}}
-    you need to pass icon `$type` on `x-icon $type`
+    you need to pass icon `$icon` on `x-icon $icon=''`
     <hr>
     <hr>
   </div>
