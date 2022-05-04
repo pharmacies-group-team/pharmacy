@@ -21,7 +21,6 @@ class OrderController extends Controller
 
     public function order(Request $request): RedirectResponse
     {
-      dd($request->input('image'));
         // validator
         Validator::validate($request->all(), Order::roles(), Order::messages());
 

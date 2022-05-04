@@ -77,9 +77,17 @@ Route::resource('/pharmacies', PharmacyController::class);
     Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
 
   });
+});
 
-  Route::get('/notification', [NotificationController::class, 'getAll'])->name('notification');
+/*
+|--------------------------------------------------------------------------
+| Notifications Routes
+|--------------------------------------------------------------------------
+*/
 
+Route::controller(NotificationController::class)->group(function (){
+    Route::get('/notification', 'getAll')->name('notification');
+    Route::post('/read/notification', 'read')->name('notification.read');
 });
 
 /*
@@ -97,12 +105,18 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacies.')->group(function () {
 
     //    Route::resource('/', pharmacy\PharmacyController::class);
-
     Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+    Route::controller(pharmacy\OrderController::class)->group(function (){
+
+        Route::get('/order', 'getAll')->name('orders');
+        Route::get('/order/refusal/{id}', 'orderRefusal')->name('order.refusal');
+
+    });
   });
 
 /*
