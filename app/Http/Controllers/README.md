@@ -14,6 +14,8 @@ php artisan make:controller admin/NameController --resource
 
 ```bash
 php artisan make:controller client/NameController --resource
+
+
 ```
 
 ## web
