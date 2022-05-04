@@ -95,12 +95,15 @@ Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 
     //    Route::resource('/', pharmacy\PharmacyController::class);
     Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
-    Route::controller(pharmacy\OrderController::class)->group(function (){
+    Route::controller(pharmacy\OrderController::class)
+      ->prefix('/order')->name('order.')->group(function (){
 
-        Route::get('/order', 'getAll')->name('orders');
-        Route::get('/order/refusal/{id}', 'orderRefusal')->name('order.refusal');
+        Route::get('/', 'getAll')->name('index');
+        Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
 
     });
+
+    Route::get('/quotation/{id}', [pharmacy\QuotationController::class, 'createQuotation'])->name('quotation.create');
   });
 
 /*
