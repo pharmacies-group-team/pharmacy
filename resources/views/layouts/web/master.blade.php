@@ -13,6 +13,7 @@
 
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
+  @livewireStyles
   <title>@yield('title')</title>
 
 </head>
@@ -40,10 +41,8 @@
   @include('layouts.web.footer')
 
   {{-- scripts --}}
-  <script src="{{ asset('js/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-  <script src="{{ asset('js/semantic.min.js') }}"></script>
-  <script src="{{ asset('js/script.js') }}"></script>
+  @include('layouts.web.script')
+  @livewireScripts
 
 </body>
 

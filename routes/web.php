@@ -103,13 +103,14 @@ Route::prefix('/dashboard/pharmacies')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
     });
 
+    Route::controller(pharmacy\OrderController::class)
+      ->prefix('/order')->name('order.')->group(function () {
+        Route::get('/', 'getAll')->name('index');
+        Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
+      });
 
-    Route::controller(pharmacy\OrderController::class)->group(function () {
-      Route::get('/orders', 'getAll')->name('orders');
-      Route::get('/orders/refusal/{id}', 'orderRefusal')->name('order.refusal');
-    });
+    Route::get('/quotation/{id}', [pharmacy\QuotationController::class, 'createQuotation'])->name('quotation.create');
   });
-
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
