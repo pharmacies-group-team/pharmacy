@@ -11,43 +11,15 @@
         <form action="">
           {{-- name --}}
           <div class="form-group">
-            <label for="pharmacy-name" class="text-base">اسم الصيدلية:</label>
+            <label for="pharmacy-name" class="text-base">name admin:</label>
 
-            <input type="text" class="form-control" name="name" placeholder="اسم الصيدلية">
-          </div>
-
-          {{-- address --}}
-          <div class="form-group">
-            <label for="pharmacy-address" class="text-base">موقع الصيدلية:</label>
-
-            <div class="address-selects">
-              {{-- city --}}
-              <select name="address" id="pharmacy-address" class="form-control">
-                <option value="1">one</option>
-                <option value="2">two</option>
-              </select>
-
-              {{--  --}}
-              <select name="address" id="pharmacy-address" class="form-control">
-                <option value="1">one</option>
-                <option value="2">two</option>
-              </select>
-
-              {{--  --}}
-              <select name="address" id="pharmacy-address" class="form-control">
-                <option value="1">one</option>
-                <option value="2">two</option>
-              </select>
-            </div>
-
-            {{-- address description --}}
-            <textarea name="desc" rows="3" class="form-control" placeholder="وصف الموقع"></textarea>
+            <input type="text" class="form-control" name="name" placeholder="name admin">
           </div>
 
           {{-- about --}}
           <div class="form-group">
-            <label for="pharmacy-name" class="text-base">عن الصيدلية:</label>
-            <textarea name="about" rows="3" class="form-control" placeholder="نبذه عن الصيدلية"></textarea>
+            <label for="pharmacy-name" class="text-base">عن admin:</label>
+            <textarea name="about" rows="3" class="form-control" placeholder="نبذه عن admin"></textarea>
           </div>
 
           <button type="submit" class="btn btn-full">حفظ</button>
@@ -82,131 +54,6 @@
         </x-modal>
 
       </div>
-    </div>
-
-
-    <hr class="divided" />
-
-    {{-- contact us --}}
-    <div class="contact-us">
-      {{-- title --}}
-      <div class="contact-us-header">
-        <h2 class="text-base">معلومات الإتصال</h2>
-
-        <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10 2.5C14.125 2.5 17.5 5.875 17.5 10C17.5 14.125 14.125 17.5 10 17.5C5.875 17.5 2.5 14.125 2.5 10C2.5 5.875 5.875 2.5 10 2.5ZM10 1.25C5.1875 1.25 1.25 5.1875 1.25 10C1.25 14.8125 5.1875 18.75 10 18.75C14.8125 18.75 18.75 14.8125 18.75 10C18.75 5.1875 14.8125 1.25 10 1.25Z"
-              fill="url(#paint0_linear_264_3433)" />
-            <path d="M15 9.375H10.625V5H9.375V9.375H5V10.625H9.375V15H10.625V10.625H15V9.375Z"
-              fill="url(#paint1_linear_264_3433)" />
-            <defs>
-              <linearGradient id="paint0_linear_264_3433" x1="12.6786" y1="11.9643" x2="10" y2="18.75"
-                gradientUnits="userSpaceOnUse">
-                <stop stop-color="#5D93FF" />
-                <stop offset="1" stop-color="#877EFF" />
-              </linearGradient>
-              <linearGradient id="paint1_linear_264_3433" x1="11.5306" y1="11.1224" x2="10" y2="15"
-                gradientUnits="userSpaceOnUse">
-                <stop stop-color="#5D93FF" />
-                <stop offset="1" stop-color="#877EFF" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-        </div>
-      </div>
-
-      {{-- list --}}
-      <ul class="list">
-        {{-- item --}}
-        <li class="item">
-          {{-- email --}}
-          <div class="item__column">
-            <x-icon icon='email' />
-
-            <span>ahlam.m.alfashq@gmail.com </span>
-          </div>
-
-          {{-- phone --}}
-          <div class="item__column">
-            <x-icon icon='phone' />
-
-            <span>737341940</span>
-          </div>
-
-          {{-- action --}}
-          <div class="item__column">
-            <x-icon icon='edit' />
-
-            {{-- remove icon --}}
-            <x-icon icon="remove" />
-          </div>
-        </li>
-        {{-- item --}}
-        <li class="item">
-          {{-- email --}}
-          <div class="item__column">
-            <x-icon icon='email' />
-
-            <span>ahlam.m.alfashq@gmail.com </span>
-          </div>
-
-          {{-- phone --}}
-          <div class="item__column">
-            <x-icon icon='phone' />
-
-            <span>737341940</span>
-          </div>
-
-          {{-- action --}}
-          <div class="item__column">
-            <x-icon icon='edit' />
-
-            {{-- remove icon --}}
-            <x-icon icon="remove" />
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <hr class="divided">
-
-    {{-- social media --}}
-    <div class="social">
-      {{-- title --}}
-      <h2 class="text-base">مواقع التواصل الإجتماعي</h2>
-
-      {{-- form --}}
-      <form action="">
-        <ul class="list">
-          {{-- facebook --}}
-          <li class="item">
-            <x-icon icon='facebook' />
-            <input type="url" name="" class="form-control">
-          </li>
-
-          {{-- whatsapp --}}
-          <li class="item">
-            <x-icon icon='whatsapp' />
-            <input type="url" name="" class="form-control">
-          </li>
-
-          {{-- website --}}
-          <li class="item">
-            <x-icon icon='website' />
-            <input type="url" name="" class="form-control">
-          </li>
-
-          {{-- twitter --}}
-          <li class="item">
-            <x-icon icon='twitter' />
-            <input type="url" name="" class="form-control">
-          </li>
-        </ul>
-
-        <button type="submit" class="btn btn-full">حفظ</button>
-      </form>
     </div>
   </main>
 @stop
