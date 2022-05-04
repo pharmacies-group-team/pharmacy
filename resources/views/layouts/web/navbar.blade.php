@@ -83,7 +83,7 @@
                   <a class="dropdown-item text-primary-dark d-flex align-items-center"
                     href="@if (Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) {{ route('admin.ads.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
-                            {{ route('pharmacies.dashboard') }}
+                            {{ route('pharmacies.dashboard.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                             {{ route('clients.dashboard') }} @endif">
                     <i class="bi bi-speedometer text-primary-light m-2"></i> لوحة التحكم
