@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -63,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function userOrders(): HasMany
     {
-      return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class);
     }
 
     /**
@@ -71,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function pharmacyOrders(): HasMany
     {
-      return $this->hasMany(Order::class, 'pharmacy_id');
+        return $this->hasMany(Order::class, 'pharmacy_id');
     }
 
     /**
@@ -93,6 +94,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected static function newFactory()
     {
-      return UserFactory::new();
+        return UserFactory::new();
     }
 }
