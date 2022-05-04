@@ -9,6 +9,7 @@ use App\Enum\PharmacyEnum;
 @section('content')
 
   <main class="pharmacies" x-data="{ addOrderModal: false, pharmacy: {} }">
+    <div class="pharmacies-bg"></div>
 
     {{-- page header --}}
     <section class="container">
@@ -118,7 +119,7 @@ use App\Enum\PharmacyEnum;
             </div>
           </template>
 
-          {{-- viewer image --}}
+          {{-- image viewer --}}
           <template x-if="imageUrl">
             <div class="viewer-image">
               <img :src="imageUrl" width="100%">
@@ -126,7 +127,7 @@ use App\Enum\PharmacyEnum;
           </template>
         </div>
 
-        <div class="or"> <span>Or</span> </div>
+        <div class="or"></div>
 
         {{-- form --}}
         <form action="" method="POST" enctype="multipart/form-data">
@@ -135,10 +136,10 @@ use App\Enum\PharmacyEnum;
           {{-- pharmacy id --}}
           <input type="hidden" name="pharmacy-id" :value="pharmacy.id">
 
-          {{-- input file --}}
+          {{-- file --}}
           <input type="file" accept="image/*" name="order-image" x-ref="inputFileOrder" @change="fileChosen">
 
-          {{-- form description --}}
+          {{-- description / note --}}
           <div>
             <h3 class="form-title">اكتب طلبك</h3>
             <p class="form-description">
@@ -146,6 +147,20 @@ use App\Enum\PharmacyEnum;
             </p>
 
             <textarea class="form-control" name="desc" rows="5" placeholder="مثال: علبة بنادول و بامبرز مقاس 4"></textarea>
+          </div>
+
+          {{-- user address --}}
+          <div>
+            <label for="user-address-select-id" class="form-title">العنوان</label>
+            <select name="user-address" class="form-control" id="user-address-select-id">
+              <option value="1">Yemen</option>
+              <option value="2">Tokyo</option>
+              <option value="3">Paries</option>
+            </select>
+
+            <div class="or"></div>
+            <label for="">اضافه عنوان جديد</label>
+            <input type="text" name="new-user-address" class="form-control">
           </div>
 
           <button type="submit" class="btn btn-full">

@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap");
 
 /*
@@ -1216,6 +1218,11 @@ svg {
   /********* modal ***********/
 }
 
+.pharmacies-bg {
+  min-height: 15rem;
+  background-image: url("data:image/svg+xml;base64,PCEtLSBSZXBsYWNlIHRoZSBjb250ZW50cyBvZiB0aGlzIGVkaXRvciB3aXRoIHlvdXIgU1ZHIGNvZGUgLS0+Cgo8c3ZnIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjI1OSIgdmlld0JveD0iMCAwIDE0NDAgMjU5IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgIDxyZWN0IHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjI1OSIgZmlsbD0iIzk2QkJGRiIgLz4KICAgICAgICA8cGF0aCBkPSJNMTMxLjE2MyA3NVYxMDEuMTYzSDEwNVYxMjEuODM3SDEzMS4xNjNWMTQ4SDE1MS44MzdWMTIxLjgzN0gxNzhWMTAxLjE2M0gxNTEuODM3Vjc1SDEzMS4xNjNaIgogICAgICAgICAgZmlsbD0iI0Y3RjlGRSIgZmlsbC1vcGFjaXR5PSIwLjg3IiAvPgogICAgICA8L3N2Zz4=");
+}
+
 .pharmacies-header{
   display: flex;
   flex-direction: column;
@@ -1234,7 +1241,18 @@ svg {
   border-radius: 0.5rem;
   border-width: 1px;
   border-color: rgb(209 213 219 / 0.8);
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
   padding: 1rem;
+  margin-bottom: -2rem;
+  --tw-translate-y: -3rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@media (min-width: 768px){
+  .pharmacies-header{
+    margin-bottom: -1.5rem;
+  }
 }
 
 .pharmacies-header .header-select{
@@ -1419,6 +1437,10 @@ svg {
   margin-top: 1rem;
 }
 
+.pharmacies .image-file-upload form select, .pharmacies .image-file-upload form input[type=text]{
+  margin-top: 0.5rem;
+}
+
 .pharmacies .image-file-upload .description{
   margin-top: 2.5rem;
   font-size: 0.875rem;
@@ -1433,7 +1455,8 @@ svg {
   justify-content: center;
 }
 
-.or span{
+.or::before {
+  content: "او";
   position: relative;
   z-index: 20;
   height: 2.5rem;
