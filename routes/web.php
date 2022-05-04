@@ -178,10 +178,16 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
 
   Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
-  Route::controller(client\OrderController::class)->group(function (){
-    Route::post('/order', 'order')->name('order');
+  Route::controller(client\OrderController::class)
+    ->prefix('/orders')->name('order.')->group(function (){
+
+    Route::get('/', 'getAll')->name('index');
+    Route::post('/', 'storeOrder')->name('store');
+
   });
 
 });
+
+Route::view('/clients/order', '0-testing.create-order');
 
 Auth::routes(['verify' => true]);

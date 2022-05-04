@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
-use App\Notifications\UserOrderNotification;
+use App\Notifications\PharmacyOrderNotification;
 use App\Traits\UploadsTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,13 @@ class OrderController extends Controller
 {
     use UploadsTrait;
 
-    public function order(Request $request): RedirectResponse
+    public function getAll()
+    {
+      $orders = Auth::user()->userOrders()->get();
+      return response($orders);
+    }
+
+    public function storeOrder(Request $request): RedirectResponse
     {
         // validator
         Validator::validate($request->all(), Order::roles(), Order::messages());
@@ -39,7 +45,7 @@ class OrderController extends Controller
         $data     = ['client' => Auth::user(), 'order' => $order];
 
         // send and save notification in DB
-        Notification::send($pharmacy, new UserOrderNotification($data));
+        Notification::send($pharmacy, new PharmacyOrderNotification($data));
 
         return redirect()->back()->with('success', 'تم بنجاح');
     }
