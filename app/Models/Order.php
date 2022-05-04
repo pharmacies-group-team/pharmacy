@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,19 +15,19 @@ class Order extends Model
     protected $guarded = [];
 
     /**
-     * Get Order Details
+     * Get Order Invoice
      */
-    public function orderDetails(): HasOne
+    public function Invoice(): HasOne
     {
-        return $this->hasOne(OrderDetails::class);
+        return $this->hasOne(Invoice::class);
     }
 
     /**
-     * Get Order Bill
+     * Get Order Quotation
      */
-    public function bill(): HasOne
+    public function quotation(): HasOne
     {
-        return $this->hasOne(Bill::class);
+      return $this->hasOne(Quotation::class);
     }
 
     /**
@@ -36,14 +35,43 @@ class Order extends Model
      */
     public function pharmacy(): BelongsTo
     {
-        return $this->belongsTo(Pharmacy::class);
+        return $this->belongsTo(User::class,'pharmacy_id');
     }
 
     /**
      * Get Client
      */
-    public function client(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * validation
+     */
+    public static function roles()
+    {
+        return
+          [
+            'image' => 'required_without:order|image|mimes:jpeg,jpg,png,svg|max:2048|file',
+            'order' => 'required_without:image|string|max:255|nullable'
+          ];
+    }
+
+    /**
+     * messages
+     */
+    public static function messages()
+    {
+        return
+          [
+            'image.required_without' => 'يجب إدخال أحد الحقلين.',
+            'image.image'            => 'يجب أن يكون الحقل المُدخل صورة.',
+            'image.mimes'            => 'يجب أن تكون الصورة ملفًا من النوع jpeg,jpg,png,svg.',
+            'image.max'              => 'يجب ألا تكون الصورة أكبر من 2048 كيلوبايت.',
+            'order.required_without' => 'يجب إدخال أحد الحقلين',
+            'order.string'           => 'يجب أن يكون الحقل سلسلة نصية.',
+            'order.max'              => 'يجب ألا يكون النص أكبر من 255 من الأحرف.'
+          ];
     }
 }
