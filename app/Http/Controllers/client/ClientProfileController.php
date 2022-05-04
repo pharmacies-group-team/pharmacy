@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\User\RoleEnum;
 class UserProfileController extends Controller
 {
   public function index(Request $request)
@@ -40,4 +42,19 @@ class UserProfileController extends Controller
       'user_data' => User::find($id) ?? []
     ]);
   }
+
+  public function showMyOrders(Request $request)
+  {
+
+    $id = $request->query('id');
+
+    $MyOrders =Order::select()
+      ->where('id', $id)
+      ->all();
+    return response($MyOrders);
+ 
+    return view('client.MyOrders', compact('orders', 'addresses'));
+  }
+
+
 }
