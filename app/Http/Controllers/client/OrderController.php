@@ -25,6 +25,12 @@ class OrderController extends Controller
       return response($orders);
     }
 
+    public function showOrder($id)
+    {
+      $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
+      return response($order);
+    }
+
     public function storeOrder(Request $request): RedirectResponse
     {
         // validator

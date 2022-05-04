@@ -183,6 +183,7 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
 
     Route::get('/', 'getAll')->name('index');
     Route::post('/', 'storeOrder')->name('store');
+    Route::get('/{id}', 'showOrder')->name('show');
 
   });
 
