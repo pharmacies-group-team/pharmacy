@@ -14,10 +14,13 @@ class Ad extends Model
 
     protected $guarded = [];
 
-public function user(): BelongsTo
-{
-    return $this->belongsTo(User::class);
-}
+    /**
+     * Get user
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
 

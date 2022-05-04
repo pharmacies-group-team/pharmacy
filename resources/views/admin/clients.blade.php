@@ -92,6 +92,8 @@
             </table>
 
           </div>
+          <button onclick="window.print();" class="btn btn primary">Print
+          </button>
         </div>
       </div>
 

@@ -16,13 +16,9 @@ return new class extends Migration
         Schema::create('pharmacies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->string('about')->nullable();
             $table->string('email')->nullable();
-
-            $table->boolean('is_full_time')->default(0);
-            $table->time('from')->nullable();
-            $table->time('to')->nullable();
 
             $table->string('address')->nullable();
             $table->double('lat')->nullable();
@@ -31,7 +27,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreignId('neighborhood_id');
+            $table->foreignId('neighborhood_id')->nullable();
             $table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
 
 

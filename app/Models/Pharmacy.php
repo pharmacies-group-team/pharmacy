@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Filters\PharmacyFilter;
 use Illuminate\Database\Eloquent\Builder;
+
 class Pharmacy extends Model
 {
     use HasFactory, SoftDeletes;
@@ -18,23 +19,19 @@ class Pharmacy extends Model
     protected $guarded = [];
 
     /**
-     * Get pharmacy Orders
-     */
-    // public function scopeFilter(Builder $builder, $request)
-    // {
-    //     return (new PharmacyFilter($request))->filter($builder);
-    // }
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    /**
      * Get User Data
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get pharmacy worktimes
+     */
+    public function worktimes(): HasMany
+    {
+        return $this->hasMany(Worktime::class);
     }
 
     /**

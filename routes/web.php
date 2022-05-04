@@ -3,6 +3,7 @@
 use App\Enum\RoleEnum;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
@@ -10,7 +11,13 @@ use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\admin\AdController;
+use App\Http\Controllers\advertisement\advertisementController;
+use App\Http\Controllers\advertisement\AdvertisementController as AdvertisementAdvertisementController;
+
+use App\Http\Controllers\pharmacy\PharmacyController;
 use Illuminate\Support\Facades\Route;
+
 use Barryvdh\Debugbar\Facades\Debugbar;
 
 // TODO
@@ -42,17 +49,25 @@ Route::controller(web\HomeController::class)->group(function () {
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
 });
-//                            PharmacySearchControlle
-// Route::get('/pharmacies',[pharmacy\PharmacySearchController::class,'index'])->name('pharmacies');
-//Route::get('/pharmacies/{city}',[pharmacy\PharmacySearchController::class,'showBycity'])->name('pharmacies');;
-Route::get('/cities/{city}', [pharmacy\PharmacySearchController::class, 'showBycity']);
-/*                                                                            showBycity
+
+/*
 |--------------------------------------------------------------------------
 | General Routes
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
   Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// change-password 
+Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+
+Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
+
+
+// pharmacies
+Route::resource('/pharmacies', PharmacyController::class);
 
   Route::controller(SettingController::class)->group(function () {
 
@@ -60,7 +75,19 @@ Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
     Route::get('/setting', 'index')->name('index');
     Route::post('/setting', 'updateAccount')->name('update.account');
     Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
+
   });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Notifications Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::controller(NotificationController::class)->group(function (){
+    Route::get('/notification', 'getAll')->name('notification');
+    Route::post('/read/notification', 'read')->name('notification.read');
 });
 
 /*
@@ -78,12 +105,18 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacies.')->group(function () {
 
     //    Route::resource('/', pharmacy\PharmacyController::class);
-
     Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+    Route::controller(pharmacy\OrderController::class)->group(function (){
+
+        Route::get('/order', 'getAll')->name('orders');
+        Route::get('/order/refusal/{id}', 'orderRefusal')->name('order.refusal');
+
+    });
   });
 
 /*
@@ -144,14 +177,12 @@ Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
     });
   });
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
+Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
   Route::get('/', [client\ClientProfileController::class, 'index'])
     ->name('profile');
 
@@ -159,6 +190,11 @@ Route::prefix('/dashboard/clients')->name('clients.')->middleware(['auth', 'role
     ->name('update-profile');
 
   Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+  Route::controller(client\OrderController::class)->group(function (){
+    Route::post('/order', 'order')->name('order');
+  });
+
 });
 
 Auth::routes(['verify' => true]);

@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BillDetails extends Model
+class QuotationDetails extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     /**
-     * Get Bill
+     * Get Order
      */
-    public function bill(): BelongsTo
+    public function quotation(): BelongsTo
     {
-        return $this->belongsTo(Bill::class);
+      return $this->belongsTo(Quotation::class);
     }
 }

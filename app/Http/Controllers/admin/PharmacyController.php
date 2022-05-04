@@ -23,4 +23,12 @@ class PharmacyController extends Controller
 
     return redirect()->back()->with('status', $result ? ' change pharmacy statue successfully' : 'failed');
   }
+  public function showPharmacyProfile()
+  {
+    $pharmacy_profile= Pharmacy::role(RoleEnum::PHARMACY)->first();
+
+   
+    return view('admin.pharmacy_profile', compact('pharmacy_contacts', 'pharmacies'));
+  }
+
 }

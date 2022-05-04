@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\pharmacy;
 
+//quotation_details
 use App\Http\Controllers\Controller;
 use App\Models\Pharmacy;
 use Illuminate\Http\Request;
