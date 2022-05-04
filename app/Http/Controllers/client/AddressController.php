@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Address;
+use App\Models\Neighborhood;
 use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
@@ -18,9 +19,12 @@ class AddressController extends Controller
     {
       $Client_id = Auth::user()->id;
       $addresses=Address::select('id','desc','lat','lng','neighborhood_id','name','phone','address_type')->where('user_id', $Client_id)->with(['neighborhood:id,name'])->get();
-      // return response($addresses);
-      // return view('client.addresses', compact('addresses'));
-      return view('0-testing.clients.addresses', compact('addresses'));
+      // for the drop down
+      $neighborhoods=Neighborhood::select()->get();
+
+      // return response($addresses,$neighborhoods);
+      // return view('client.addresses', compact('addresses','addresses'));
+      return view('0-testing.clients.addresses', compact('addresses','neighborhoods'));
 
 
     }
