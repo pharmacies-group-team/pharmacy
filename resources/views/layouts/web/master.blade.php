@@ -9,8 +9,9 @@
   <meta name="description" content="pharmacy online">
 
   @include('layouts.web.style')
-  @livewireStyles
   <title>@yield('title')</title>
+
+  @livewireStyles()
 
 </head>
 <body>
@@ -32,7 +33,8 @@
   @include('layouts.web.footer')
 
   @include('layouts.web.script')
-  @livewireScripts
+
+  @livewireScripts()
 
 </body>
 </html>
