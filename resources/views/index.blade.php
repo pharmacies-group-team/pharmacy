@@ -82,7 +82,8 @@ $count = 0;
                   @endif
                 </p>
               </div>
-              <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;" href="">أطلب دوائك</a>
+              <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;"
+                href="">أطلب دوائك</a>
             </article>
           @endforeach
         @endif

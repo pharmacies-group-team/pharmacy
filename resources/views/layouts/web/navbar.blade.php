@@ -7,8 +7,9 @@
       {{-- Logo --}}
       <div class="col-3">
         <a class="navbar-brand h4 text-decoration-none m-0" href="{{ route('home') }}">
-{{--          <img src="{{ asset('images/logo.svg') }}">--}}
-          <h1 class="text-primary-darker fs-3 fw-bold">PHARMACY <span class="fs-6 fw-normal text-primary-base">online</span></h1>
+          {{-- <img src="{{ asset('images/logo.svg') }}"> --}}
+          <h1 class="text-primary-darker fs-3 fw-bold">PHARMACY <span
+              class="fs-6 fw-normal text-primary-base">online</span></h1>
         </a>
       </div>
 
@@ -67,7 +68,7 @@
                 <span class="me-2" style="cursor: pointer">{{ Auth::user()->name }}</span>
               </div>
 
-              <ul class="dropdown-menu" aria-labelledby="dropdown08" style="z-index: 9999999999">
+              <ul class="dropdown-menu" style="z-index: 9999999999">
                 @if (!Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                   <li>
                     <a class="dropdown-item text-primary-dark d-flex align-items-center"
@@ -78,10 +79,11 @@
                     </a>
                   </li>
                 @endif
-                <li><a class="dropdown-item text-primary-dark d-flex align-items-center"
+                <li>
+                  <a class="dropdown-item text-primary-dark d-flex align-items-center"
                     href="@if (Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) {{ route('admin.ads.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
-                            {{ route('pharmacies.dashboard') }}
+                            {{ route('pharmacies.dashboard.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                             {{ route('clients.dashboard') }} @endif">
                     <i class="bi bi-speedometer text-primary-light m-2"></i> لوحة التحكم
@@ -100,9 +102,11 @@
             </div>
           @else
             <div class="d-none d-lg-flex align-items-center gap-3">
-              <a class="btn btn-primary__linear" href="{{ route('login') }}">تسجيل الدخول</a>
+              <a class="btn-rounded" href="{{ route('login') }}">
+                تسجيل الدخول
+              </a>
               @if (Route::has('register'))
-                <a class="btn btn-primary__linear" href="{{ route('register') }}">إنشاء حساب</a>
+                <a class="btn-rounded" href="{{ route('register') }}">إنشاء حساب</a>
               @endif
             </div>
           @endauth

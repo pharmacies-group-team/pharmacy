@@ -1,56 +1,105 @@
-<nav id="sidebar" class="sidebar js-sidebar">
-  <div class="sidebar-content js-simplebar">
-    {{-- link to home page --}}
-    <a class="sidebar-brand" href="{{ route('home') }}">
-      <span class="align-middle">صيدلية اون لاين</span>
-    </a>
-    {{-- sidebar links --}}
-    <ul class="sidebar-nav">
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('admin.profile') }}">
-          <i class="align-middle" data-feather="user"></i>
-          <span class="align-middle">الصفحة الشخصية</span>
-        </a>
-      </li>
+<nav class="sidebar" x-show="isSidebarOpen"
+  @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('admin.ads.index') }}">
-          <i class="fas fa-fw fa-bullhorn align-middle"></i>
+  {{-- link to home page --}}
+  <a class="sidebar-brand" href="{{ route('admin.index') }}">
+    <span>صيدلية اون لاين</span>
+  </a>
 
-          <span class="align-middle">الاعلانات</span>
-        </a>
-      </li>
+  {{-- sidebar links --}}
+  <ul class="list">
+    {{-- profile --}}
+    <li>
 
-      <li class="sidebar-item">
-        <a data-bs-target="#multi" data-bs-toggle="collapse" class="sidebar-link" aria-expanded="true">
-          <i class="align-middle" data-feather="users"></i>
 
-          <span class="align-middle">إدارات المستخدم </span>
-        </a>
-        <ul id="multi" class="list-unstyled collapse show" data-bs-parent="#sidebar">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.profile') active @endif" href="{{ route('admin.profile') }}">
+        <div class="list-item-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-bell align-middle">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
 
-          <li class="sidebar-item">
-            <a data-bs-target="#multi-2" class="sidebar-link collapsed" aria-expanded="false"
-              href="{{ route('admin.pharmacies') }}">الصيدليات</a>
-          </li>
+        <span>الصفحة الشخصية</span>
+      </a>
+    </li>
 
-          <li class="sidebar-item">
-            <a data-bs-target="#multi-2" class="sidebar-link collapsed" aria-expanded="false"
-              href="{{ route('admin.clients') }}">الزبائن</a>
-          </li>
-        </ul>
-      </li>
+    {{-- ads --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.ads.index') active @endif" href="{{ route('admin.ads.index') }}">
+        <div class="list-item-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-bell align-middle">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
 
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('admin.site') }}">
-          <i class="align-middle" data-feather="sliders"></i>
-          <span class="align-middle">أدارة بيانات الموقع</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+        <span>الإعلانات</span>
+      </a>
+    </li>
+
+    {{-- pharmacies --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
+        <div class="list-item-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-bell align-middle">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+
+        <span>الصيدليات</span>
+      </a>
+    </li>
+
+    {{-- clients --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
+        <div class="list-item-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-bell align-middle">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+
+        <span>الزبائن</span>
+      </a>
+    </li>
+
+    {{-- orders --}}
+    {{-- <li>
+      <div class="list-item-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-bell align-middle">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </div>
+      <a class="list-item-link  @if (Route::currentRouteName() === 'admin.orders') active @endif" href="{{ route('admin.orders') }}">الزبائن</a>
+    </li> --}}
+
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.site') active @endif" href="{{ route('admin.site') }}">
+        <div class="list-item-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-bell align-middle">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+
+        <span>أدارة بيانات الموقع</span>
+      </a>
+    </li>
+  </ul>
 </nav>
-
-{{-- <div class="mb-2">
-    <i class="align-middle me-2 fas fa-fw fa-bullhorn"></i> <span class="align-middle">bullhorn</span>
-  </div> --}}

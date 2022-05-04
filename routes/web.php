@@ -47,7 +47,7 @@ Debugbar::disable();
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
 });
 
 /*
@@ -75,7 +75,6 @@ Route::resource('/pharmacies', PharmacyController::class);
     Route::get('/setting', 'index')->name('index');
     Route::post('/setting', 'updateAccount')->name('update.account');
     Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
-
   });
 });
 
@@ -85,9 +84,9 @@ Route::resource('/pharmacies', PharmacyController::class);
 |--------------------------------------------------------------------------
 */
 
-Route::controller(NotificationController::class)->group(function (){
-    Route::get('/notification', 'getAll')->name('notification');
-    Route::post('/read/notification', 'read')->name('notification.read');
+Route::controller(NotificationController::class)->group(function () {
+  Route::get('/notification', 'getAll')->name('notification');
+  Route::post('/read/notification', 'read')->name('notification.read');
 });
 
 /*
@@ -105,17 +104,25 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
-  ->name('pharmacies.')->group(function () {
+// TODO only for debugging
+// ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+Route::prefix('/dashboard/pharmacies')
+  ->name('pharmacies.dashboard.')->group(function () {
+    // Route::resource('/', pharmacy\PharmacyController::class);
+    // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
-    //    Route::resource('/', pharmacy\PharmacyController::class);
-    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+    Route::controller(pharmacy\DashboardController::class)->group(function () {
+      // profile
+      Route::get('/', 'index')->name('index');
+      Route::get('/profile', 'profile')->name('profile');
+      Route::get('/messages', 'messages')->name('messages');
+      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+    });
 
-    Route::controller(pharmacy\OrderController::class)->group(function (){
 
-        Route::get('/order', 'getAll')->name('orders');
-        Route::get('/order/refusal/{id}', 'orderRefusal')->name('order.refusal');
-
+    Route::controller(pharmacy\OrderController::class)->group(function () {
+      Route::get('/orders', 'getAll')->name('orders');
+      Route::get('/orders/refusal/{id}', 'orderRefusal')->name('order.refusal');
     });
   });
 
@@ -124,8 +131,10 @@ Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
-  ->name('admin.')->group(function () {
+Route::prefix('/admin')
+  ->name('admin.')
+  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
@@ -191,10 +200,9 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
 
   Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
-  Route::controller(client\OrderController::class)->group(function (){
+  Route::controller(client\OrderController::class)->group(function () {
     Route::post('/order', 'order')->name('order');
   });
-
 });
 
 Auth::routes(['verify' => true]);
