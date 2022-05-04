@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
   public function index()
   {
-    $orders = Order::select()->with('orderDetails', 'client', 'pharmacy')->get();
+    $orders = Order::select()->with('invoice', 'client', 'pharmacy')->get();
 
     return response($orders);
   }
