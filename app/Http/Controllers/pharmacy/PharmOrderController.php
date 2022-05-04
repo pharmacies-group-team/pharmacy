@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Bill;
+namespace App\Http\Controllers\Quotation;
 
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-//use App\Models\Bill;
-use App\Models\BillDetails;
+//use App\Models\Quotation;
+use App\Models\QuotationDetails;
 
-class PharmBillController extends Controller
+class PharmOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class PharmBillController extends Controller
      */
     public function index()
     {
-        $pharm_Bill = BillDetails::with(['Bill'])->get();
+        $pharm_Quotation = QuotationDetails::with(['Quotation'])->get();
 
-        return response($pharm_Bill);
+        return response($pharm_Quotation);
     }
 
     /**
@@ -41,27 +41,30 @@ class PharmBillController extends Controller
      */
     public function store(Request $request)
     {
-        // id	drug_name	type	quantity	price	total	bill_id	
+       // 	id	product_name	product_unit	quantity	price	total	currency	quotation_id
         //TODO check validation
         $validator = Validator::make($request->all(), [
-            'drug_name' => 'required|min:5|max:100|string',
-            'drug_image' => 'required|image|mimes:png,jpg',
+            'product_name' => 'required|min:5|max:100|string',
+            'product_unit' => 'required|min:5|max:100|string',
             'type' => 'required|min:5|max:10|string',
             'quantity' => 'required|numeric|max:12',
             'price' => 'required|numeric|max:12',
             'total' => 'required|numeric|max:12',
-            'Bill_id' => 'required|numeric|max:12',
+          'currency' => 'required|min:1|max:5|string',
+            'Quotation_id' => 'required|numeric|max:12',
         ]);
 
-        BillDetails::create([
-            'drug_name' => $request->input('drug_name'),
-            'drug_image' => $request->input('drug_image'),
+        QuotationDetails::create([
+            'product_name' => $request->input('product_name'),
+            'product_unit' => $request->input('product_unit'),
             'type' => $request->input('type'),
             'quantity' => $request->input('quantity'),
            	
             ' price' => $request->input(' price'),
             'total' => $request->input('total'),
-            'Bill_id' => $request->input('Bill_id')
+             ' price' => $request->input(' price'),
+             'currency' => $request->input('currency'),
+            'Quotation_id' => $request->input('Quotation_id')
 
         ]);
 
@@ -76,8 +79,8 @@ class PharmBillController extends Controller
      */
     public function show($id)
     {
-        $pharm_BillDetails = BillDetails::with(['Bill'])->where('id', $id)->get();
-        return response($pharm_BillDetails);
+        $pharm_QuotationDetails = QuotationDetails::with(['Quotation'])->where('id', $id)->get();
+        return response($pharm_QuotationDetails);
     }
 
     /**
@@ -102,24 +105,26 @@ class PharmBillController extends Controller
     {
         //TODO check validation
         $validator = Validator::make($request->all(), [
-            'drug_name' => 'required|min:5|max:100|string',
-            'drug_image' => 'required|image|mimes:png,jpg',
-            'type' => 'required|min:5|max:10|string',
-            'quantity' => 'required|numeric|max:12',
-            'price' => 'required|numeric|max:12',
-            'total' => 'required|numeric|max:12',
-            'Bill_id' => 'required|numeric|max:12',
+      'product_name' => 'required|min:5|max:100|string',
+      'product_unit' => 'required|min:5|max:100|string',
+      'type' => 'required|min:5|max:10|string',
+      'quantity' => 'required|numeric|max:12',
+      'price' => 'required|numeric|max:12',
+      'total' => 'required|numeric|max:12',
+      'currency' => 'required|min:1|max:5|string',
+      'Quotation_id' => 'required|numeric|max:12',
         ]);
 
-        BillDetails::where('id', $id)
+        QuotationDetails::where('id', $id)
             ->update([
-                'drug_name' => $request->input('drug_name'),
-                'drug_image' => $request->input('drug_image'),
+                'product_name' => $request->input('product_name'),
+                'product_unit' => $request->input('product_unit'),
                 'type' => $request->input('type'),
                 'quantity' => $request->input('quantity'),
             'price' => $request->input('price'),
             'total' => $request->input('total'),
-                'Bill_id' => $request->input('Bill_id')
+      'currency' => $request->input('currency'),
+                'Quotation_id' => $request->input('Quotation_id')
 
             ]);
 
