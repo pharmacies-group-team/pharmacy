@@ -14,8 +14,29 @@ class OrderController extends Controller
 {
     public function getAll()
     {
-        $orders = Auth::user()->pharmacyOrders()->get();
-        return view('0-testing.all-orders', compact('orders'));
+        // TODO Bug
+        // $orders = Auth::user()->pharmacyOrders()->get();
+        $orders = [
+            (object) [
+                'id' => 1,
+                'status' => 1,
+                'client' => 'ali',
+                'date' => '2002/2/10',
+            ],
+            (object) [
+                'id' => 2,
+                'status' => 1,
+                'client' => 'Ahmed',
+                'date' => '2002/2/10',
+            ]
+        ];
+
+        // echo $orders[0]->id;
+        // exit;
+
+        return view('pharmacy.dashboard.orders', compact('orders'));
+//        $orders = Auth::user()->pharmacyOrders()->get();
+//        return view('0-testing.all-orders', compact('orders'));
     }
 
     public function orderRefusal($id)

@@ -7,7 +7,7 @@
 
   @include('includes.alerts')
   <main>
-    index
+    account-settings.blade
   </main>
 
 @stop

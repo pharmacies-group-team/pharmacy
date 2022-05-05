@@ -2,81 +2,205 @@
 
 @section('title') Pharmacies @stop
 
-@php use App\Enum\PharmacyEnum;  @endphp
+@php
+use App\Enum\PharmacyEnum;
+@endphp
 
 @section('content')
 
-  <section>
-    <div class="container-lg">
-      <div class="row">
-        <div class="col-12">
-          <div class="card card-blur p-3">
-            <div class="row">
-              <div class="col-8 d-flex justify-content-start flex-row">
-                <div class="input-group position-relative flex-nowrap me-3 " style="z-index: 999">
-                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    @foreach ($cities as $city)
-                      <option>{{ $city->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="input-group position-relative flex-nowrap me-3 " style="z-index: 999">
-                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    @foreach ($directorates as $directorate)
-                      <option>{{ $directorate->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="input-group position-relative flex-nowrap me-3 " style="z-index: 999">
-                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    @foreach ($neighborhoods as $neighborhood)
-                      <option>{{ $neighborhood->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-            </div>
+  <main class="pharmacies" x-data="{ addOrderModal: false, pharmacy: {} }">
+    <div class="pharmacies-bg"></div>
+
+    {{-- page header --}}
+    <section class="container">
+      <form action="" method="GET" class="pharmacies-header">
+        {{-- address --}}
+        <div class="header-select">
+          {{-- cities --}}
+          <select class="form-control" name="city">
+            @foreach ($cities as $city)
+              <option value="{{ $city->id }}">{{ $city->name }}</option>
+            @endforeach
+          </select>
+
+
+          {{-- directorates --}}
+          <select class="form-control" name="directorate">
+            @foreach ($directorates as $directorate)
+              <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
+            @endforeach
+          </select>
+
+
+          {{-- neighborhood --}}
+          <select class="form-control" name="neighborhood">
+            @foreach ($neighborhoods as $neighborhood)
+              <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
+            @endforeach
+          </select>
+
+        </div>
+
+        {{-- search --}}
+        <div class="header-input">
+          <div class="search-group">
+            {{-- search input --}}
+            <input type="search" class="form-control" name="search-query" placeholder="بحث">
+
+            <button type="submit">
+              <x-icon icon="search" />
+            </button>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </form>
+    </section>
 
-  <section>
-    <div class="container-lg mt-4">
-      <div class="row">
-        @if (isset($pharmacies))
-          @foreach ($pharmacies as $pharmacy)
-            <div class="col-lg-3 col-md-6 col-12 mb-4">
-              <article class="card bg-secondary-light rounded-3 card--hover shadow"
-                style="min-height: 272px;height: 272px;">
-                <div class="d-flex flex-column justify-content-center align-items-center p-4"
-                  style="min-height: 220px;height: 220px;">
-                  <img src="@if(isset($pharmacy->logo))
-                              {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH.$pharmacy->logo) }}
-                             @else
-                              {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
-                             @endif" width="50%"
-                    class="rounded-circle img-fluid" alt="">
-                  <a href="{{ route('pharmacy.profile', $pharmacy->id) }}"
-                    class="fs-5 fw-bold text-primary-dark mt-4">{{ $pharmacy->name }}</a>
-                  <p class="text-dark-100">
-                    <span class="text-dark-50">
-                      @if (isset($pharmacy->neighborhood->name))
+    {{-- pharmacies list --}}
+    @if (isset($pharmacies))
+      <section class="list container">
+        @foreach ($pharmacies as $pharmacy)
+          <article class="item">
+            <a class="item-header" href="{{ route('pharmacy.profile', $pharmacy->id) }}">
+              {{-- logo --}}
+              <img
+                src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
+                width="50%" class="item-logo" alt="pharmacy logo">
+
+              {{-- content --}}
+              <div>
+                <h3 class="item-title">
+                  {{ $pharmacy->name }}
+                </h3>
+
+                @if (isset($pharmacy->neighborhood->name))
+                  <div class="item-address">
+                    <x-icon icon='location' />
+
+                    <div>
+                      <span>
                         {{ $pharmacy->neighborhood->name }} /
-                    </span>
-                    <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
-          @endif
-          </p>
-      </div>
-      <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;" href="">أطلب دوائك</a>
-      </article>
-    </div>
-    @endforeach
+                      </span>
+                      <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
+                    </div>
+                  </div>
+                @endif
+              </div>
+            </a>
+
+            {{-- action --}}
+            <button class="btn btn-full item-link" @click="addOrderModal = true; pharmacy = {{ $pharmacy }}">أطلب
+              دوائك</butt>
+          </article>
+        @endforeach
+      </section>
     @endif
-    </div>
-    </div>
-    </div>
-  </section>
+
+    {{-- modals --}}
+    <x-modal open="addOrderModal" title="اضافة طلب">
+
+      {{-- pharmacy info --}}
+      <div class="pharmacy-info">
+        <span class="pharmacy-sub-title">
+          طلب دواء من صيدلية:
+        </span>
+
+        <h3 class="pharmacy-title" x-text="pharmacy.name"> ddd</h3>
+      </div>
+
+      <div x-data="imageViewer" class="image-file-upload">
+        {{-- add image --}}
+        <div class="file-upload" @click="$refs.inputFileOrder.click()">
+          {{-- add image input --}}
+          <template x-if="!imageUrl">
+            <div>
+              <x-icon icon='add-image' />
+
+              <p class="title">أضف صورة الروشتة أو المنتج الذي تريده</p>
+            </div>
+          </template>
+
+          {{-- image viewer --}}
+          <template x-if="imageUrl">
+            <div class="viewer-image">
+              <img :src="imageUrl" width="100%">
+            </div>
+          </template>
+        </div>
+
+        <div class="or"></div>
+
+        {{-- form --}}
+        <form action="" method="POST" enctype="multipart/form-data">
+          @csrf
+
+          {{-- pharmacy id --}}
+          <input type="hidden" name="pharmacy-id" :value="pharmacy.id">
+
+          {{-- file --}}
+          <input type="file" accept="image/*" name="order-image" x-ref="inputFileOrder" @change="fileChosen">
+
+          {{-- description / note --}}
+          <div>
+            <h3 class="form-title">اكتب طلبك</h3>
+            <p class="form-description">
+              اكتب هنا اسم الدواء أو المنتج الذي تريد طلبه من الصيدلية
+            </p>
+
+            <textarea class="form-control" name="desc" rows="5" placeholder="مثال: علبة بنادول و بامبرز مقاس 4"></textarea>
+          </div>
+
+          {{-- user address --}}
+          {{-- <div>
+            <label for="user-address-select-id" class="form-title">العنوان</label>
+            <select name="user-address" class="form-control" id="user-address-select-id">
+              <option value="1">Yemen</option>
+              <option value="2">Tokyo</option>
+              <option value="3">Paries</option>
+            </select>
+
+            <div class="or"></div>
+            <label for="">اضافه عنوان جديد</label>
+            <input type="text" name="new-user-address" class="form-control">
+          </div> --}}
+
+          <button type="submit" class="btn btn-full">
+            إتمام الطلب
+          </button>
+        </form>
+
+        {{-- description --}}
+        <p class="description">
+          موقع صيدلية أونلاين يساعدك في طلب كافة احتياجاتك من الصيدلية، ولكن صيدلية أونلاين غير مسئولة عن بيع أو صرف أو
+          توزيع أي أدوية، وتتحمل الصيدليات وحدها مسئولية بيع الأدوية وصرفها وتوزيعها ،لمزيد من التفاصيل يرجى مراجعة شروط
+          الإستخدام.
+        </p>
+      </div>
+    </x-modal>
+  </main>
 
 @stop
+
+@section('alpine-script')
+
+  <script>
+    function imageViewer() {
+      return {
+        imageUrl: '',
+
+        fileChosen(event) {
+          this.fileToDataUrl(event, src => this.imageUrl = src)
+        },
+
+        fileToDataUrl(event, callback) {
+          if (!event.target.files.length) return
+
+          let file = event.target.files[0],
+            reader = new FileReader()
+
+          reader.readAsDataURL(file)
+          reader.onload = e => callback(e.target.result)
+        },
+      }
+    }
+  </script>
+@endsection

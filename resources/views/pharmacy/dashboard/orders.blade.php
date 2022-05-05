@@ -1,72 +1,71 @@
-@extends('layouts/dashboard/dashboard-master')
+@extends('layouts/pharmacy/master')
+
+
+
 @section('content')
 
-  <div class="container px-5">
-    @include('includes.alerts')
-  </div>
 
-  <main class="ads" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
+  @include('includes.alerts')
+  <main class="dashboard-pharmacies-orders" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
     <div class="container">
       <section class="section-header">
-        <h2 class="text-large">نشر الأعلان</h2>
-
-        {{ json_encode(old()) }}
-        <button class="btn" @click="addModal = true; ad = {{ json_encode(old()) }} ?? {}">اضافه اعلان</button>
+        <h2 class="text-large">أدارة الطلبات</h2>
       </section>
 
       <div class="table-wrapper">
-        {{-- table --}}
         <table class="table">
           <thead>
             <tr>
-              <th class="sorting sorting_desc" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
-                style="width: 147px" aria-label="Name: activate to sort column ascending" aria-sort="descending">
-                الصورة
-              </th>
-              <th class="sorting" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
-                style="width: 225px" aria-label="Position: activate to sort column ascending">
-                العنوان
-              </th>
-              <th class="sorting" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
-                style="width: 55px" aria-label="Office: activate to sort column ascending">
-                الرابط
-              </th>
-              {{-- <th class="sorting" tabindex="0" aria-controls="datatables-multi"
-                              rowspan="1" colspan="1" style="width: 55px"
-                              aria-label="Office: activate to sort column ascending">
-                              المكان
-                          </th> --}}
-              <th class="sorting" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
-                style="width: 94px" aria-label="Age: activate to sort column ascending">
-                حذف
-              </th>
+              {{-- order id --}}
+              <th> رقم الطلب</th>
+
+              {{-- status --}}
+              <th>حالة الطلب</th>
+
+              {{-- client name --}}
+              <th> اسم العميل</th>
+
+              {{-- email --}}
+              <th>التاريخ</th>
+
+              {{-- actions --}}
+              <th></th>
             </tr>
           </thead>
+
           <tbody>
-            @foreach ($ads as $ad)
-              <tr>
-                <td>
-                  <img :src="'{{ url('images/ads') }}/{{ $ad->image }}'" />
-                  <input type="hidden" name="image" value="{{ $ad->id }}" />
-                </td>
+            @if (isset($orders))
+              @foreach ($orders as $order)
+                <tr>
+                  {{-- id --}}
+                  <td>{{ $order->id }} </td>
 
-                <td class="dtr-control sorting_1" tabindex="0">
-                  {{ $ad->title }}
+                  {{-- status --}}
+                  <td>
+                    @if ($order->status)
+                      <div class="badge badge-info">
+                        مُكتمل
+                      </div>
+                    @else
+                      <div class="badge badge-danger">
+                        in progress
+                      </div>
+                    @endif
+                  </td>
 
-                </td>
-                <td>{{ $ad->link }}</td>
+                  {{-- client --}}
+                  <td>{{ $order->client }} </td>
 
-                <td class="table-action">
-                  <button @click=" id = {{ $ad->id }}; ad = {{ $ad }}; editModal = true">
-                    <x-icon icon='edit' />
-                  </button>
+                  {{-- client --}}
+                  <td>{{ $order->date }} </td>
 
-                  <button @click="id = {{ $ad->id }};ad = {{ $ad }}; deleteModal = true">
-                    <x-icon icon='remove' />
-                  </button>
-                </td>
-              </tr>
-            @endforeach
+                  {{-- action --}}
+                  <td>
+
+                  </td>
+                </tr>
+              @endforeach
+            @endif
           </tbody>
         </table>
       </div>
@@ -202,8 +201,8 @@
           <div class="form-group">
             <label>را'بط
               الموقع</label>
-            <input type="text" name="link" :value="ad.link"
-              class="form-control @error('link') is-invalid @enderror" placeholder="ادخل رابط الموقع" />
+            <input type="text" name="link" :value="ad.link" class="form-control @error('link') is-invalid @enderror"
+              placeholder="ادخل رابط الموقع" />
             @error('link')
               <span class="invalid-feedback">{{ $message }}</span>
             @enderror

@@ -42,7 +42,7 @@ Debugbar::disable();
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
 });
 
 /*
@@ -59,7 +59,6 @@ Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
     Route::get('/setting', 'index')->name('index');
     Route::post('/setting', 'updateAccount')->name('update.account');
     Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
-
   });
 });
 
@@ -69,9 +68,9 @@ Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::controller(NotificationController::class)->group(function (){
-    Route::get('/notification', 'getAll')->name('notification');
-    Route::post('/read/notification', 'read')->name('notification.read');
+Route::controller(NotificationController::class)->group(function () {
+  Route::get('/notification', 'getAll')->name('notification');
+  Route::post('/read/notification', 'read')->name('notification.read');
 });
 
 /*
@@ -89,19 +88,27 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
-  ->name('pharmacies.')->group(function () {
 
-    //    Route::resource('/', pharmacy\PharmacyController::class);
-    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+// TODO only for debugging
+Route::prefix('/pharmacy')
+  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->name('pharmacy.')->group(function () {
+    // Route::resource('/', pharmacy\PharmacyController::class);
+    // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+    Route::controller(pharmacy\DashboardController::class)->group(function () {
+      // profile
+      Route::get('/', 'index')->name('index');
+      Route::get('/profile', 'profile')->name('profile');
+      Route::get('/messages', 'messages')->name('messages');
+      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+    });
 
     Route::controller(pharmacy\OrderController::class)
-      ->prefix('/order')->name('order.')->group(function (){
-
+      ->prefix('/orders')->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
         Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
-
-    });
+      });
 
     Route::controller(pharmacy\QuotationController::class)
       ->prefix('/quotation')->name('quotation.')->group(function (){
@@ -112,14 +119,15 @@ Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 
       });
 
   });
-
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/admin')->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
-  ->name('admin.')->group(function () {
+Route::prefix('/admin')
+  ->name('admin.')
+  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
@@ -193,7 +201,6 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
     Route::get('/{id}', 'showOrder')->name('show');
 
   });
-
 });
 
 // TESTING

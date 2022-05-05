@@ -102,6 +102,13 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 ---
 
+## laravel components
+
+```bash
+php artisan make:component icon --view
+
+```
+
 ### Validation roles
 
 ```php

@@ -6,8 +6,9 @@
 
 
   @include('includes.alerts')
-  <main>
-    index
+
+  <main class="">
+    messages
   </main>
 
 @stop
