@@ -89,7 +89,7 @@ use App\Enum\PharmacyEnum;
 
             {{-- action --}}
             <button class="btn btn-full item-link" @click="addOrderModal = true; pharmacy = {{ $pharmacy }}">أطلب
-              دوائك</butt>
+              دوائك</button>
           </article>
         @endforeach
       </section>
@@ -118,7 +118,6 @@ use App\Enum\PharmacyEnum;
               <p class="title">أضف صورة الروشتة أو المنتج الذي تريده</p>
             </div>
           </template>
-
           {{-- image viewer --}}
           <template x-if="imageUrl">
             <div class="viewer-image">
@@ -126,18 +125,24 @@ use App\Enum\PharmacyEnum;
             </div>
           </template>
         </div>
+        @error('image')
+        <span class="text-danger" role="alert">
+            {{ $message }}
+          </span>
+        @enderror
 
         <div class="or"></div>
 
         {{-- form --}}
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('clients.order.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
+          {{--   TODO       --}}
           {{-- pharmacy id --}}
-          <input type="hidden" name="pharmacy-id" :value="pharmacy.id">
-
+{{--          <input type="hidden" name="pharmacy_id" :value="pharmacy.id">--}}
+          <input type="hidden" name="pharmacy_id" value="2">
           {{-- file --}}
-          <input type="file" accept="image/*" name="order-image" x-ref="inputFileOrder" @change="fileChosen">
+          <input type="file" accept="image/*" name="image" x-ref="inputFileOrder" @change="fileChosen">
 
           {{-- description / note --}}
           <div>
@@ -146,7 +151,14 @@ use App\Enum\PharmacyEnum;
               اكتب هنا اسم الدواء أو المنتج الذي تريد طلبه من الصيدلية
             </p>
 
-            <textarea class="form-control" name="desc" rows="5" placeholder="مثال: علبة بنادول و بامبرز مقاس 4"></textarea>
+            <textarea class="form-control" name="order" rows="5" placeholder="مثال: علبة بنادول و بامبرز مقاس 4">
+              {{ old('order') }}
+            </textarea>
+            @error('order')
+            <span class="text-danger" role="alert">
+                 {{ $message }}
+            </span>
+            @enderror
           </div>
 
           {{-- user address --}}

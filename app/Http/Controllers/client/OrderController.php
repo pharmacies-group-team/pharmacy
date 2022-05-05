@@ -37,7 +37,7 @@ class OrderController extends Controller
         Validator::validate($request->all(), Order::roles(), Order::messages());
 
         // upload image
-        $image = $this->storeImage($request->input('image'),OrderEnum::ORDER_IMAGE_PATH);
+        $image = $this->storeImage($request->image,OrderEnum::ORDER_IMAGE_PATH);
 
         $order = Order::create(
         [
@@ -53,6 +53,6 @@ class OrderController extends Controller
         // send and save notification in DB
         Notification::send($pharmacy, new PharmacyOrderNotification($data));
 
-        return redirect()->back()->with('success', 'تم بنجاح');
+        return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
     }
 }
