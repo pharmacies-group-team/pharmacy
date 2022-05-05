@@ -4,7 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\{AboutUs, City, ContactUs, Directorate, Neighborhood, Pharmacy, Service, SocialMedia};
+use App\Models\{AboutUs, Ad, City, ContactUs, Directorate, Neighborhood, Pharmacy, Service, SocialMedia};
 
 class HomeController extends Controller
 {
@@ -15,8 +15,16 @@ class HomeController extends Controller
     $contactUs  = ContactUs::first();
     $social     = SocialMedia::first();
     $pharmacies = Pharmacy::all();
+    $ads = Ad::all();
 
-    return view('index', compact('aboutUs', 'services', 'contactUs', 'social', 'pharmacies'));
+    return view('index', compact(
+      'aboutUs',
+      'services',
+      'contactUs',
+      'social',
+      'pharmacies',
+      'ads'
+    ));
   }
 
   public function showPharmacies()
