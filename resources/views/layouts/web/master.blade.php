@@ -22,7 +22,7 @@
 <body>
   {{-- run alpinejs before any html element --}}
   @yield('alpine-script')
-  <script src="{{ asset('js/alpine.min.js') }}"></script>i
+  <script src="{{ asset('js/alpine.min.js') }}"></script>
 
   @include('includes.alert-web')
   {{-- Navbar --}}
