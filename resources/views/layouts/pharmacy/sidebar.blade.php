@@ -2,7 +2,7 @@
   @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
   {{-- link to home page --}}
-  <a class="sidebar-brand" href="{{ route('pharmacies.dashboard.index') }}">
+  <a class="sidebar-brand" href="{{ route('pharmacy.index') }}">
     <span>صيدلية اون لاين</span>
   </a>
 
@@ -10,8 +10,7 @@
   <ul class="list">
     {{-- index --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacies.dashboard.index') active @endif"
-        href="{{ route('pharmacies.dashboard.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.index') active @endif" href="{{ route('pharmacy.index') }}">
 
         <x-icon icon="home" />
 
@@ -21,8 +20,8 @@
 
     {{-- message --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacies.dashboard.messages') active @endif"
-        href="{{ route('pharmacies.dashboard.messages') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.messages') active @endif"
+        href="{{ route('pharmacy.messages') }}">
 
         <x-icon icon="message" />
 
@@ -32,8 +31,8 @@
 
     {{-- orders --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacies.dashboard.orders') active @endif"
-        href="{{ route('pharmacies.dashboard.orders') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.orders.index') active @endif"
+        href="{{ route('pharmacy.orders.index') }}">
 
         <x-icon icon="order" />
 
@@ -43,8 +42,7 @@
 
     {{-- profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacies.dashboard.profile') active @endif"
-        href="{{ route('pharmacies.dashboard.profile') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
 
         <x-icon icon="profile" />
 
@@ -54,8 +52,8 @@
 
     {{-- account settings --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacies.dashboard.account-settings') active @endif"
-        href="{{ route('pharmacies.dashboard.account-settings') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
+        href="{{ route('pharmacy.account-settings') }}">
 
         <x-icon icon="setting" />
 

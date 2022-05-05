@@ -104,10 +104,11 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
+
 // TODO only for debugging
-// ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
-Route::prefix('/dashboard/pharmacies')
-  ->name('pharmacies.dashboard.')->group(function () {
+Route::prefix('/pharmacy')
+  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->name('pharmacy.')->group(function () {
     // Route::resource('/', pharmacy\PharmacyController::class);
     // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
@@ -119,13 +120,14 @@ Route::prefix('/dashboard/pharmacies')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
     });
 
+    Route::controller(pharmacy\OrderController::class)
+      ->prefix('/orders')->name('orders.')->group(function () {
+        Route::get('/', 'getAll')->name('index');
+        Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
+      });
 
-    Route::controller(pharmacy\OrderController::class)->group(function () {
-      Route::get('/orders', 'getAll')->name('orders');
-      Route::get('/orders/refusal/{id}', 'orderRefusal')->name('order.refusal');
-    });
+    Route::get('/quotation/{id}', [pharmacy\QuotationController::class, 'createQuotation'])->name('quotation.create');
   });
-
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
