@@ -1434,11 +1434,11 @@ svg {
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
 
-.pharmacies .image-file-upload{
+.image-file-upload{
   margin-top: 1rem;
 }
 
-.pharmacies .image-file-upload .file-upload{
+.image-file-upload .file-upload{
   border-width: 1px;
   border-style: dashed;
   --tw-border-opacity: 1;
@@ -1447,24 +1447,24 @@ svg {
   cursor: pointer;
 }
 
-.pharmacies .image-file-upload .file-upload .title{
+.image-file-upload .file-upload .title{
   margin-top: 1rem;
   text-align: center;
 }
 
-.pharmacies .image-file-upload .viewer-image{
+.image-file-upload .viewer-image{
   margin-left: auto;
   margin-right: auto;
   width: 80%;
 }
 
-.pharmacies .image-file-upload form > :not([hidden]) ~ :not([hidden]){
+.image-file-upload form > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.pharmacies .image-file-upload form .form-title{
+.image-file-upload form .form-title{
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
@@ -1472,26 +1472,26 @@ svg {
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
 
-.pharmacies .image-file-upload form .form-description{
+.image-file-upload form .form-description{
   font-size: 0.75rem;
   line-height: 1rem;
   --tw-text-opacity: 1;
   color: rgb(88 143 244 / var(--tw-text-opacity));
 }
 
-.pharmacies .image-file-upload form input[type=file]{
+.image-file-upload form input[type=file]{
   display: none;
 }
 
-.pharmacies .image-file-upload form textarea{
+.image-file-upload form textarea{
   margin-top: 1rem;
 }
 
-.pharmacies .image-file-upload form select, .pharmacies .image-file-upload form input[type=text]{
+.image-file-upload form select, .image-file-upload form input[type=text]{
   margin-top: 0.5rem;
 }
 
-.pharmacies .image-file-upload .description{
+.image-file-upload .description{
   margin-top: 2.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;

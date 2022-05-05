@@ -1,81 +1,156 @@
-@extends('layouts/dashboard/client-dashboard-master')
+@extends('layouts/client/master')
 @section('content')
 
   <div class="container px-5">
     @include('includes.alerts')
   </div>
 
-  <main class="content reverse-direction" x-data="{ id: null, client: {} }">
-    <div class="container-fluid p-0">
+  <main class="pharmacy-profile">
 
-      <div class="row">
-        <div class="col-md-3 col-xl-2">
+    <div class="section-header">
+      <h1 class="text-large">بروفايل</h1>
+    </div>
 
-          <div class="card">
+    <div class="pharmacy-info">
 
-            <div class="list-group list-group-flush" role="tablist">
-              <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#account" role="tab">الصفحة
-                الشخصية</a>
-              <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab">الطلبات
-                السابقة</a>
+      <div class="profile-form">
+        {{-- form --}}
+        <form action="">
+          {{-- name --}}
+          <div class="form-group">
+            <label class="text-base">اسم </label>
 
-            </div>
+            <input type="text" class="form-control" name="name" placeholder="اسم ">
           </div>
-        </div>
 
-        <div class="col-md-9 col-xl-10">
-          <div class="tab-content">
-            <div class="tab-pane fade show active" id="account" role="tabpanel">
-              <div class="card">
-                <div class="card-header">
+          {{-- email --}}
+          <div class="form-group">
+            <label class="text-base">الايميل </label>
 
-                  <h5 class="card-title mb-0">المعلومات الشخصية</h5>
-                </div>
-                <div class="card-body" method="post" class="needs-validation" novalidate>
-                  <form class="px-3">
-                    @csrf
-                    @method('put')
-                    <div class="row">
-                      <div class="col-md-8">
-                        <div class="mb-3">
-                          <label class="form-label" for="inputUsername">الأسم</label>
-                          <input type="text" class="form-control" id="inputUsername" placeholder="الأسم">
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label" for="inputEmail4">الايميل</label>
-                          <input type="email" class="form-control" id="inputEmail4" placeholder="الايميل">
-                        </div>
-
-                      </div>
-                      <div class="col-md-4">
-                        <div class="text-center">
-                          <img alt="Charles Hall" src="img/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2"
-                            width="128" height="128">
-                          <div class="mt-2">
-                            <span class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="17 8 12 3 7 8"></polyline>
-                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                              </svg> تحميل</span>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">حفظ</button>
-                  </form>
-
-                </div>
-              </div>
-            </div>
+            <input type="text" class="form-control" name="email">
           </div>
-        </div>
+
+
+          <button type="submit" class="btn btn-full">حفظ</button>
+        </form>
       </div>
+
+      {{-- avatar --}}
+      <div class="upload-image" x-data="{ uploadImageModal: false }">
+        {{-- TODO change the src later --}}
+        <img src="{{ asset('img/avatars/avatar.jpg') }}" alt="profile avatar" class="avatar">
+
+        <button class="update-btn" @click="uploadImageModal = true">
+          <x-icon icon='camera' />
+        </button>
+
+        {{-- modal --}}
+        <x-modal title='upload image' open="uploadImageModal">
+          <div x-data="imageViewer" class="image-file-upload">
+
+            <div class="file-upload" @click="$refs.inputFileOrder.click()">
+              {{-- add image input --}}
+              <template x-if="!imageUrl">
+                <div>
+                  <x-icon icon='add-image' />
+
+                  <p class="title">أضف صورة </p>
+                </div>
+              </template>
+
+              {{-- image viewer --}}
+              <template x-if="imageUrl">
+                <div class="viewer-image">
+                  <img :src="imageUrl" width="100%">
+                </div>
+              </template>
+            </div>
+
+            @error('image')
+              <span class="text-danger" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+
+            {{-- form --}}
+            <form action="{{ route('setting.update.avatar') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+
+              {{-- file --}}
+              <input type="file" accept="image/*" name="avatar" x-ref="inputFileOrder" @change="fileChosen">
+
+              <button type="submit" class="btn btn-full">
+                تحديث الصورة
+              </button>
+            </form>
+          </div>
+        </x-modal>
+      </div>
+    </div>
+
+
+    <hr class="divided">
+
+    {{-- change password --}}
+    <div class="profile-info">
+      <h2 class="text-large">تغيير كلمه المرور</h2>
+
+      <form action="{{ route('setting.update.password') }}" method="POST">
+        @csrf
+
+        {{-- old password --}}
+        <div class="form-group">
+          <label class="text-base">كلمه السر القديمة </label>
+
+          <input type="text" class="form-control" name="old_password" placeholder="كلمه السر القديمة ">
+        </div>
+
+        {{-- new password --}}
+        <div class="form-group">
+          <label class="text-base">كلمه السر الجديدة </label>
+
+          <input type="text" class="form-control" name="new_password" placeholder="كلمه السر الجديدة ">
+        </div>
+
+        {{-- confirm new password --}}
+        <div class="form-group">
+          <label class="text-base">تاكيد كلمه السر الجديدة </label>
+
+          <input type="text" class="form-control" name="confirmed" placeholder="تاكيد كلمه السر الجديدة ">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-full">حفظ</button>
+      </form>
     </div>
   </main>
 
 @stop
+
+
+
+@section('alpine-script')
+
+  <script>
+    function imageViewer() {
+      return {
+        imageUrl: '',
+
+        fileChosen(event) {
+          this.fileToDataUrl(event, src => this.imageUrl = src)
+        },
+
+        fileToDataUrl(event, callback) {
+          if (!event.target.files.length) return
+
+          let file = event.target.files[0],
+            reader = new FileReader()
+
+          reader.readAsDataURL(file)
+          reader.onload = e => callback(e.target.result)
+        },
+      }
+    }
+  </script>
+@endsection

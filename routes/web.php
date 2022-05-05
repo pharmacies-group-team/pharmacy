@@ -17,7 +17,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 
 // TODO
 // disable Debug
-Debugbar::disable();
+// Debugbar::disable();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,17 +50,26 @@ Route::controller(web\HomeController::class)->group(function () {
 | General Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
-  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+Route::middleware(['auth', 'verified'])
+  ->name('setting.')
+  ->group(function () {
 
-  Route::controller(SettingController::class)->group(function () {
+    Route::post(
+      '/change/password',
+      [ChangePasswordController::class, 'updatePassword']
+    )->name('update.password');
 
-    Route::post('/update/logo', 'updateLogo')->name('update.logo')->middleware('role:' . RoleEnum::PHARMACY);
-    Route::get('/setting', 'index')->name('index');
-    Route::post('/setting', 'updateAccount')->name('update.account');
-    Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
+    Route::controller(SettingController::class)
+      ->group(function () {
+
+        Route::post('/update/logo', 'updateLogo')
+          ->name('update.logo')->middleware('role:' . RoleEnum::PHARMACY);
+
+        Route::get('/setting', 'index')->name('index');
+        Route::post('/setting', 'updateAccount')->name('update.account');
+        Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
+      });
   });
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -189,8 +198,8 @@ Route::prefix('/client')
 
     Route::controller(client\DashboardController::class)
       ->group(function () {
-        Route::get('/',  'getProfile')->name('profile');
-        Route::post('/',  'updateProfile')->name('profile.update');
+        Route::get('/',  'index')->name('index');
+        Route::get('/profile',  'getProfile')->name('profile');
       });
 
     // orders
@@ -205,6 +214,6 @@ Route::prefix('/client')
   });
 
 // TESTING
-Route::view('/clients/order', '0-testing.create-order');
+// Route::view('/clients/order', '0-testing.create-order');
 
 Auth::routes(['verify' => true]);

@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    public function index()
+    {
+        return view('client.index');
+    }
     public function getProfile()
     {
         return view('client.profile');
-    }
-
-    public function updateProfile(Request $request)
-    {
-        return redirect()->back()->with('success', 'updated');
     }
 }

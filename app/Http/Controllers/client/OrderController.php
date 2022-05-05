@@ -20,8 +20,10 @@ class OrderController extends Controller
   public function getAll()
   {
     // BUG need to fix
-    $orders = Auth::user()->userOrders()->get();
-    return response($orders);
+    // $orders = Auth::user()->userOrders()->get();
+    // return response($orders);
+
+    return view('client.orders');
   }
 
   public function showOrder($id)
