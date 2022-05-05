@@ -41,8 +41,8 @@ Debugbar::disable();
 
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
-  Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
+  Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
 });
 
 /*

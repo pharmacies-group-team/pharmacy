@@ -36,7 +36,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-primary-darker" href="{{ route('pharmacies') }}">
+              <a class="nav-link text-primary-darker" href="{{ route('show.pharmacies') }}">
                 الصيدليات
               </a>
             </li>

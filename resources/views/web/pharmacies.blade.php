@@ -60,7 +60,7 @@ use App\Enum\PharmacyEnum;
       <section class="list container">
         @foreach ($pharmacies as $pharmacy)
           <article class="item">
-            <a class="item-header" href="{{ route('pharmacy.profile', $pharmacy->id) }}">
+            <a class="item-header" href="{{ route('show.pharmacy.profile', $pharmacy->id) }}">
               {{-- logo --}}
               <img
                 src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
