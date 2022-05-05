@@ -34,10 +34,10 @@
   <span>{{ $message }}</span>
   @enderror <hr>
 
-  total<input type="text" wire:model.defer="total.0">
-  @error('total.0')
-  <span>{{ $message }}</span>
-  @enderror
+{{--  total<input type="text" wire:model.defer="total.0">--}}
+{{--  @error('total.0')--}}
+{{--  <span>{{ $message }}</span>--}}
+{{--  @enderror--}}
 
   <button wire:click.prevent="add({{$i}})">Add</button> <hr>
 
@@ -72,10 +72,10 @@
     <span>{{ $message }}</span>
     @enderror <hr>
 
-    total<input type="text" wire:model.defer="total.{{ $value }}">
-    @error('total'.$value)
-    <span>{{ $message }}</span>
-    @enderror
+{{--    total<input type="text" wire:model.defer="total.{{ $value }}">--}}
+{{--    @error('total'.$value)--}}
+{{--    <span>{{ $message }}</span>--}}
+{{--    @enderror--}}
 
     <button wire:click.prevent="remove({{$key}})">remove</button> <hr>
 
