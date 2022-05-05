@@ -109,7 +109,7 @@ use App\Enum\PharmacyEnum;
 
       <div x-data="imageViewer" class="image-file-upload">
         {{-- add image --}}
-        <div class="file-upload" @click="console.log($refs.inputFileOrder); $refs.inputFileOrder.click()">
+        <div class="file-upload" @click="$refs.inputFileOrder.click()">
           {{-- add image input --}}
           <template x-if="!imageUrl">
             <div>
@@ -150,7 +150,7 @@ use App\Enum\PharmacyEnum;
           </div>
 
           {{-- user address --}}
-          <div>
+          {{-- <div>
             <label for="user-address-select-id" class="form-title">العنوان</label>
             <select name="user-address" class="form-control" id="user-address-select-id">
               <option value="1">Yemen</option>
@@ -161,7 +161,7 @@ use App\Enum\PharmacyEnum;
             <div class="or"></div>
             <label for="">اضافه عنوان جديد</label>
             <input type="text" name="new-user-address" class="form-control">
-          </div>
+          </div> --}}
 
           <button type="submit" class="btn btn-full">
             إتمام الطلب

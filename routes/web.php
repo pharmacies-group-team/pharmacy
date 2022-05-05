@@ -88,10 +88,11 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 | Pharmacies Routes
 |--------------------------------------------------------------------------
 */
+
 // TODO only for debugging
-// ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
-Route::prefix('/dashboard/pharmacies')
-  ->name('pharmacies.dashboard.')->group(function () {
+Route::prefix('/pharmacy')
+  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->name('pharmacy.')->group(function () {
     // Route::resource('/', pharmacy\PharmacyController::class);
     // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
@@ -104,7 +105,7 @@ Route::prefix('/dashboard/pharmacies')
     });
 
     Route::controller(pharmacy\OrderController::class)
-      ->prefix('/order')->name('order.')->group(function () {
+      ->prefix('/orders')->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
         Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
       });
