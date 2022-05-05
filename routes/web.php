@@ -111,13 +111,11 @@ Route::prefix('/pharmacy')
       });
 
     Route::controller(pharmacy\QuotationController::class)
-      ->prefix('/quotation')->name('quotation.')->group(function (){
+      ->prefix('/quotation')->name('quotation.')->group(function () {
 
         Route::get('/', 'getAll')->name('index');
         Route::get('/{id}', 'createQuotation')->name('create');
-
       });
-
   });
 /*
 |--------------------------------------------------------------------------
@@ -184,24 +182,27 @@ Route::prefix('/admin')
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
-  Route::get('/', [client\ClientProfileController::class, 'index'])
-    ->name('profile');
+Route::prefix('/client')
+  ->name('client.')
+  // ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  ->group(function () {
 
-  Route::post('/', [client\ClientProfileController::class, 'updateProfile'])
-    ->name('update-profile');
+    Route::controller(client\DashboardController::class)
+      ->group(function () {
+        Route::get('/',  'getProfile')->name('profile');
+        Route::post('/',  'updateProfile')->name('profile.update');
+      });
 
-  Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
-
-  Route::controller(client\OrderController::class)
-    ->prefix('/orders')->name('order.')->group(function (){
-
-    Route::get('/', 'getAll')->name('index');
-    Route::post('/', 'storeOrder')->name('store');
-    Route::get('/{id}', 'showOrder')->name('show');
-
+    // orders
+    Route::controller(client\OrderController::class)
+      ->prefix('/orders')
+      ->name('orders.')
+      ->group(function () {
+        Route::get('/', 'getAll')->name('index');
+        Route::post('/', 'storeOrder')->name('store');
+        Route::get('/{id}', 'showOrder')->name('show');
+      });
   });
-});
 
 // TESTING
 Route::view('/clients/order', '0-testing.create-order');

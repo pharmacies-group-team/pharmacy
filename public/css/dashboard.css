@@ -784,6 +784,41 @@ textarea.form-control{
   --tw-shadow: var(--tw-shadow-colored);
 }
 
+.or{
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.or::before {
+  content: "او";
+  position: relative;
+  z-index: 20;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.or::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  z-index: 10;
+  height: 1px;
+  width: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(177 201 242 / var(--tw-bg-opacity));
+}
+
 .table{
   width: 100%;
   border-radius: 0.5rem;
@@ -1460,39 +1495,4 @@ svg {
   margin-top: 2.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.or{
-  position: relative;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-}
-
-.or::before {
-  content: "او";
-  position: relative;
-  z-index: 20;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.or::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0px;
-  z-index: 10;
-  height: 1px;
-  width: 100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: rgb(177 201 242 / var(--tw-bg-opacity));
 }

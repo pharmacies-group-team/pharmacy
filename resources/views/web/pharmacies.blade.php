@@ -126,7 +126,7 @@ use App\Enum\PharmacyEnum;
           </template>
         </div>
         @error('image')
-        <span class="text-danger" role="alert">
+          <span class="text-danger" role="alert">
             {{ $message }}
           </span>
         @enderror
@@ -134,12 +134,12 @@ use App\Enum\PharmacyEnum;
         <div class="or"></div>
 
         {{-- form --}}
-        <form action="{{ route('clients.order.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('client.orders.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
-          {{--   TODO       --}}
+          {{-- TODO --}}
           {{-- pharmacy id --}}
-{{--          <input type="hidden" name="pharmacy_id" :value="pharmacy.id">--}}
+          {{-- <input type="hidden" name="pharmacy_id" :value="pharmacy.id"> --}}
           <input type="hidden" name="pharmacy_id" value="2">
           {{-- file --}}
           <input type="file" accept="image/*" name="image" x-ref="inputFileOrder" @change="fileChosen">
@@ -155,9 +155,9 @@ use App\Enum\PharmacyEnum;
               {{ old('order') }}
             </textarea>
             @error('order')
-            <span class="text-danger" role="alert">
-                 {{ $message }}
-            </span>
+              <span class="text-danger" role="alert">
+                {{ $message }}
+              </span>
             @enderror
           </div>
 
