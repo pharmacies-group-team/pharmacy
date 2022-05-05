@@ -53,7 +53,7 @@ class Order extends Model
     {
         return
           [
-            'image' => 'required_without:order|image|mimes:jpeg,jpg,png,svg|max:2048|file',
+            'image' => 'required_without:order|image|mimes:jpeg,jpg,png,svg|max:2048',
             'order' => 'required_without:image|string|max:255|nullable'
           ];
     }

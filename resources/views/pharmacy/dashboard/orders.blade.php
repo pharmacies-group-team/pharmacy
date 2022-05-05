@@ -1,6 +1,6 @@
 @extends('layouts/pharmacy/master')
 
-
+@php use App\Enum\OrderEnum; @endphp
 
 @section('content')
 
@@ -42,22 +42,38 @@
 
                   {{-- status --}}
                   <td>
-                    @if ($order->status)
+                    @if ($order->status === OrderEnum::NEW_ORDER)
                       <div class="badge badge-info">
-                        مُكتمل
+                        {{OrderEnum::NEW_ORDER}}
                       </div>
-                    @else
+                    @elseif($order->status === OrderEnum::UNPAID_ORDER)
+                      <div class="badge bg-light text-dark">
+                        {{ OrderEnum::UNPAID_ORDER }}
+                      </div>
+                    @elseif($order->status === OrderEnum::PAID_ORDER)
+                      <div class="badge bg-success">
+                        {{ OrderEnum::PAID_ORDER }}
+                      </div>
+                    @elseif($order->status === OrderEnum::DELIVERY_ORDER)
                       <div class="badge badge-danger">
-                        in progress
+                        {{ OrderEnum::DELIVERY_ORDER }}
+                      </div>
+                    @elseif($order->status === OrderEnum::DELIVERED_ORDER)
+                      <div class="badge badge-danger">
+                        {{ OrderEnum::DELIVERED_ORDER }}
+                      </div>
+                    @elseif($order->status === OrderEnum::REFUSAL_ORDER)
+                      <div class="badge badge-danger">
+                        {{ OrderEnum::REFUSAL_ORDER }}
                       </div>
                     @endif
                   </td>
 
                   {{-- client --}}
-                  <td>{{ $order->client }} </td>
+                  <td>{{ $order->user->name }} </td>
 
                   {{-- client --}}
-                  <td>{{ $order->date }} </td>
+                  <td>{{ $order->created_at->format('Y-m-d') }} </td>
 
                   {{-- action --}}
                   <td>
