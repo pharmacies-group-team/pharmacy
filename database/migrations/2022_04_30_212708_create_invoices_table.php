@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('drug_name')->nullable();
-            $table->string('drug_image')->nullable();
-            $table->string('type')->nullable();
-            $table->string('quantity')->nullable();
-            $table->string('details')->nullable();
+            $table->double('total');
+            $table->string('currency');
 
-            $table->foreignId('order_id');
+            $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+            $table->foreignId('payment_user_id');
+            $table->foreign('payment_user_id')->references('id')->on('payment_users')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_details');
+        Schema::dropIfExists('invoices');
     }
 };

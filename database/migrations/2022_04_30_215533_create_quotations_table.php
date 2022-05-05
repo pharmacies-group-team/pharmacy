@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bills', function (Blueprint $table) {
+        Schema::create('quotations', function (Blueprint $table) {
             $table->id();
-            $table->double('total');
+            $table->double('total')->default(0);
+            $table->string('currency')->default('YER');
 
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-
-            $table->foreignId('payment_user_id');
-            $table->foreign('payment_user_id')->references('id')->on('payment_users')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('quotations');
     }
 };

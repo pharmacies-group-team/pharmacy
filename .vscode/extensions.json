@@ -6,6 +6,7 @@
     "onecentlin.laravel-blade",
     "onecentlin.laravel5-snippets",
     "amiralizadeh9480.laravel-extra-intellisense",
-    "shufo.vscode-blade-formatter"
+    "shufo.vscode-blade-formatter",
+    "Zignd.html-css-class-completion"
   ]
 }

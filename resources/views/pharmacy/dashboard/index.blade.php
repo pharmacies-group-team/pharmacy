@@ -1,7 +1,13 @@
-@extends('layouts.web.user-dashboard.master')
+@extends('layouts/pharmacy/master')
 
-@section('title') Dashboard @stop
+
 
 @section('content')
 
-@endsection
+
+  @include('includes.alerts')
+  <main>
+    index
+  </main>
+
+@stop

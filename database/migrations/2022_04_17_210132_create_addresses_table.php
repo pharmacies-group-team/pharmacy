@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
 
-            $table->string('desc')->nullable();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('type_address');
+            $table->string('desc');
+
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
 

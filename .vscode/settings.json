@@ -1,7 +1,11 @@
 {
   "cSpell.words": [
+    "الروشتة",
+    "بامبرز",
+    "بنادول",
     "Barryvdh",
     "datetime",
+    "evenodd",
     "flatpickr",
     "onclick",
     "Spatie",
@@ -9,5 +13,15 @@
   ],
   "html-css-class-completion.enableEmmetSupport": true,
   "cssvar.enableGotoDef": true,
-  "cssvar.files": ["color.css", "resources/sass/index.scss"]
+  "cssvar.files": ["color.css", "resources/sass/index.scss"],
+  "cSpell.enableFiletypes": ["blade", "css"],
+  "html-css-class-completion.JavaScriptLanguages": [],
+  "html-css-class-completion.excludeGlobPattern": "",
+  "html-css-class-completion.includeGlobPattern": "public\\css\\dashboard.css",
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.hg/**",
+    "**/resources/**"
+  ]
 }

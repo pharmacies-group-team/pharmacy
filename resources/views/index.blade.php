@@ -53,7 +53,7 @@ $count = 0;
       <h1 class="text-primary-darker fw-bold fs-1">الصيدليات</h1>
     </header>
     <div class="container-lg owl-2-style mt-2">
-      <a href="{{ route('pharmacies') }}"
+      <a href="{{ route('show.pharmacies') }}"
         class="d-block text-start d-flex justify-content-lg-end text-primary-base align-items-center mb-4 gap-2">
         <span>عرض جميع الصيدليات</span>
         <i class="bi bi-arrow-left mt-1"></i>
@@ -70,7 +70,7 @@ $count = 0;
                           @else
                             {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
                   width="50%" class="rounded-circle img-fluid" alt="">
-                <a href="{{ route('pharmacy.profile', $pharmacy->id) }}" class="fs-5 fw-bold text-primary-dark mt-4">
+                <a href="{{ route('show.pharmacy.profile', $pharmacy->id) }}" class="fs-5 fw-bold text-primary-dark mt-4">
                   {{ $pharmacy->name }}
                 </a>
                 <p class="text-dark-100">
@@ -82,7 +82,8 @@ $count = 0;
                   @endif
                 </p>
               </div>
-              <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;" href="">أطلب دوائك</a>
+              <a class="btn bg-secondary-dark fw-bold text-dark-50 p-2 pb-3" style="border-radius: 0 0 20px 20px;"
+                href="">أطلب دوائك</a>
             </article>
           @endforeach
         @endif

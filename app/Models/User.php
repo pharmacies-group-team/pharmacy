@@ -26,7 +26,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'avatar'
+        'avatar',
+        'phone',
+        'is_active'
     ];
 
     /**
@@ -49,19 +51,27 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get Client
-     */
-    public function client(): HasOne
-    {
-        return $this->hasOne(Client::class);
-    }
-
-    /**
      * Get Pharmacy
      */
     public function pharmacy(): HasOne
     {
         return $this->hasOne(Pharmacy::class);
+    }
+
+    /**
+     * Get User Orders
+     */
+    public function userOrders(): HasMany
+    {
+      return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get Pharmacy Orders
+     */
+    public function pharmacyOrders(): HasMany
+    {
+      return $this->hasMany(Order::class, 'pharmacy_id');
     }
 
     /**
@@ -102,4 +112,6 @@ class User extends Authenticatable implements MustVerifyEmail
   {
     return UserFactory::new();
   }
+
+
 }
