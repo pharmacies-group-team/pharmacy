@@ -60,4 +60,26 @@ class Pharmacy extends Model
     {
         return PharmacyFactory::new();
     }
+
+    /**
+     * validation
+     */
+    public static function rolesLogo()
+    {
+      return [ 'logo'  => 'required|image|mimes:jpeg,jpg,png,svg|max:2048'];
+    }
+
+    /**
+     * messages
+     */
+    public static function messagesLogo()
+    {
+      return
+        [
+          'logo.required'         => 'يبدوا انك نسيت إدخال الصورة.',
+          'logo.image'            => 'يجب أن يكون الحقل المُدخل صورة.',
+          'logo.mimes'            => 'يجب أن تكون الصورة ملفًا من النوع jpeg,jpg,png,svg.',
+          'logo.max'              => 'يجب ألا تكون الصورة أكبر من 2048 كيلوبايت.',
+        ];
+    }
 }
