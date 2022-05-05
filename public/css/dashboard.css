@@ -1179,6 +1179,10 @@ svg {
   fill: #4E7DCB;
 }
 
+.pharmacy-profile .contact-us{
+  max-width: 36rem
+}
+
 .pharmacy-profile .contact-us-header{
   display: flex;
   align-items: center;
@@ -1196,6 +1200,10 @@ svg {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.pharmacy-profile .contact-us .form{
+  margin-top: 1.75rem;
 }
 
 .pharmacy-profile .social{
@@ -1510,4 +1518,10 @@ svg {
   border: 1px solid rgb(255 255 255 / 35%);
   box-shadow: -1px 3px 4px #00000042;
   color: #ffffff;
+}
+
+.error{
+  padding: 4px;
+  font-size: 14px;
+  color: #dc2626;
 }
