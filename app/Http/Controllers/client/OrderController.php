@@ -19,6 +19,7 @@ class OrderController extends Controller
 {
   public function getAll()
   {
+    // BUG
     $orders = Auth::user()->userOrders()->get();
     return response($orders);
   }
