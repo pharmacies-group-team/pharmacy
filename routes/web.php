@@ -103,7 +103,14 @@ Route::prefix('/pharmacies')->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 
 
     });
 
-    Route::get('/quotation/{id}', [pharmacy\QuotationController::class, 'createQuotation'])->name('quotation.create');
+    Route::controller(pharmacy\QuotationController::class)
+      ->prefix('/quotation')->name('quotation.')->group(function (){
+
+        Route::get('/', 'getAll')->name('index');
+        Route::get('/{id}', 'createQuotation')->name('create');
+
+      });
+
   });
 
 /*
@@ -189,6 +196,7 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
 
 });
 
+// TESTING
 Route::view('/clients/order', '0-testing.create-order');
 
 Auth::routes(['verify' => true]);
