@@ -1179,6 +1179,10 @@ svg {
   fill: #4E7DCB;
 }
 
+.pharmacy-profile .contact-us{
+  max-width: 36rem
+}
+
 .pharmacy-profile .contact-us-header{
   display: flex;
   align-items: center;
@@ -1198,11 +1202,17 @@ svg {
   gap: 1rem;
 }
 
-.pharmacy-profile .social{
+.pharmacy-profile .contact-us .form{
+  margin-top: 1.75rem;
+}
+
+.pharmacy-profile .social,
+.pharmacy-profile .security{
   max-width: 36rem;
 }
 
-.pharmacy-profile .social .item{
+.pharmacy-profile .social .item,
+.pharmacy-profile .security .item{
   position: relative;
   margin-top: 1rem;
   display: flex;
@@ -1210,7 +1220,8 @@ svg {
   gap: 1rem;
 }
 
-.pharmacy-profile .social .item .icon{
+.pharmacy-profile .social .item .icon,
+.pharmacy-profile .security .item .icon{
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -1222,6 +1233,12 @@ svg {
   width: 100%;
   padding-right: 3rem;
   direction: ltr;
+}
+
+.pharmacy-profile .security .item input{
+  width: 100%;
+  padding-right: 3rem;
+  direction: rtl;
 }
 
 .pharmacy-profile .social .btn, .pharmacy-profile .social .btn-rounded{
@@ -1495,4 +1512,25 @@ svg {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-bg-opacity: 1;
   background-color: rgb(177 201 242 / var(--tw-bg-opacity));
+}
+
+.alert-box{
+  width: 25%;
+  padding: 18px;
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  backdrop-filter: blur(3px) saturate(200%);
+  -webkit-backdrop-filter: blur(3px) saturate(200%);
+  background-color: rgba(56, 105, 186, 0.6);
+  border-radius: 8px;
+  border: 1px solid rgb(255 255 255 / 35%);
+  box-shadow: -1px 3px 4px #00000042;
+  color: #ffffff;
+}
+
+.error{
+  padding: 4px;
+  font-size: 14px;
+  color: #dc2626;
 }

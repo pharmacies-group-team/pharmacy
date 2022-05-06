@@ -22,7 +22,7 @@
                 <div class="position-absolute top-50 end-0 translate-middle-y me-4" style="z-index: 999;">
                   <i class="bi bi-envelope text-black-50"></i>
                 </div>
-                <input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror rounded-2 pr" placeholder="البريد الإلكتروني" aria-label="email" aria-describedby="addon-wrapping">
+                <input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror rounded-2" placeholder="البريد الإلكتروني" aria-label="email" aria-describedby="addon-wrapping" style="padding-right: 40px">
               </div>
               @error('email')
               <span class="text-danger" role="alert">
@@ -33,7 +33,7 @@
                 <div class="position-absolute top-50 end-0 translate-middle-y me-4" style="z-index: 999;">
                   <i class="bi bi-lock text-black-50"></i>
                 </div>
-                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror rounded-2 pr" placeholder="كلمة السر" aria-label="email" aria-describedby="addon-wrapping">
+                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror rounded-2 pr" placeholder="كلمة السر" aria-label="email" aria-describedby="addon-wrapping" style="padding-right: 40px">
               </div>
               @error('password')
               <span class="text-danger" role="alert">

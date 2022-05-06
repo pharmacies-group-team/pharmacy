@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdController extends Controller
@@ -39,7 +40,7 @@ class AdController extends Controller
         'ad_position' => $request->input('ad_position'),
         'start_at'    => $request->input('start_at'),
         'end_at'      => $request->input('end_at'),
-        'user_id'     => 1
+        'user_id'     => Auth::id()
       ]);
     }
 
