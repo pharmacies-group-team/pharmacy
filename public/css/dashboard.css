@@ -1206,11 +1206,13 @@ svg {
   margin-top: 1.75rem;
 }
 
-.pharmacy-profile .social{
+.pharmacy-profile .social,
+.pharmacy-profile .security{
   max-width: 36rem;
 }
 
-.pharmacy-profile .social .item{
+.pharmacy-profile .social .item,
+.pharmacy-profile .security .item{
   position: relative;
   margin-top: 1rem;
   display: flex;
@@ -1218,7 +1220,8 @@ svg {
   gap: 1rem;
 }
 
-.pharmacy-profile .social .item .icon{
+.pharmacy-profile .social .item .icon,
+.pharmacy-profile .security .item .icon{
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -1230,6 +1233,12 @@ svg {
   width: 100%;
   padding-right: 3rem;
   direction: ltr;
+}
+
+.pharmacy-profile .security .item input{
+  width: 100%;
+  padding-right: 3rem;
+  direction: rtl;
 }
 
 .pharmacy-profile .social .btn, .pharmacy-profile .social .btn-rounded{
