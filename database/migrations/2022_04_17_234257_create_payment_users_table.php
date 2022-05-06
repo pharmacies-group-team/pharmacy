@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_payments', function (Blueprint $table) {
+        Schema::create('payment_users', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreignId('method_id');
-            $table->foreign('method_id')->references('id')->on('payment_methods')->onDelete('cascade');
+            $table->foreignId('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_payments');
+        Schema::dropIfExists('payment_users');
     }
 };
