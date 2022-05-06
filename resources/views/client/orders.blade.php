@@ -1,4 +1,8 @@
 @extends('layouts/client/master')
+@php
+    use App\Enum\OrderEnum;
+    use App\Enum\PharmacyEnum;
+@endphp
 @section('content')
 
   <div class="container px-5">
@@ -18,11 +22,17 @@
             {{-- order id --}}
             <th> رقم الطلب</th>
 
-            {{-- status --}}
-            <th>حالة الطلب</th>
+            {{-- pharmacy name --}}
+            <th>اسم الصيدلية</th>
 
             {{-- date --}}
             <th>التاريخ</th>
+
+            {{-- hour --}}
+            <th>التوقيت</th>
+
+            {{-- status --}}
+            <th>حالة الطلب</th>
 
             {{-- actions --}}
             <th></th>
@@ -35,6 +45,29 @@
               <tr>
                 {{-- id --}}
                 <td>{{ $order->id }} </td>
+
+                {{-- pharmacy name --}}
+                <td>
+                  <div class="user-table">
+
+                    <img src="@if(isset($order->pharmacy->logo))
+                    {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH.$order->pharmacy->logo) }}
+                    @else
+                    {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
+                    @endif"
+                         alt="profile avatar">
+
+                    <a href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}" style="color: #3869BA">
+                      {{ $order->pharmacy->name }}
+                    </a>
+                  </div>
+                </td>
+
+                {{-- date --}}
+                <td>{{ $order->created_at->format('Y-m-d') }} </td>
+
+                {{-- date --}}
+                <td>{{ $order->created_at->format('h:m A') }} </td>
 
                 {{-- status --}}
                 <td>
@@ -65,12 +98,11 @@
                   @endif
                 </td>
 
-                {{-- client --}}
-                <td>{{ $order->created_at->format('Y-m-d') }} </td>
-
                 {{-- action --}}
                 <td>
-
+                  <div class="badge badge-info">
+                    <a href="{{ route('client.orders.show', $order->id) }}">تفاصيل الطلب</a>
+                  </div>
                 </td>
               </tr>
             @endforeach
