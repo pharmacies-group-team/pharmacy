@@ -25,7 +25,7 @@
       {{-- whatsapp --}}
       <li class="item">
         <x-icon icon='whatsapp' />
-        <input type="url" wire:model="whatsapp" value="@if(isset($pharmacy->social->whatsapp)) {{ $pharmacy->social->whatsapp }} @endif" class="form-control">
+        <input type="url" wire:model="whatsapp" class="form-control">
       </li>
       @error('whatsapp')
         <span class="error">{{ $message }}</span>

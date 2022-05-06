@@ -34,5 +34,6 @@ class Contact extends Component
         ]);
 
         $this->phone = '';
+        session()->flash('message', 'تم الإضافة بنجاح.');
     }
 }

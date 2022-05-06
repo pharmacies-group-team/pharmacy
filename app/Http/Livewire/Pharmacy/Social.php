@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Pharmacy;
 
 use App\Models\Pharmacy;
 use App\Models\PharmacySocial;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Social extends Component
@@ -12,14 +14,16 @@ class Social extends Component
     public $website;
     public $facebook;
     public $twitter;
-    public Pharmacy $pharmacy;
+    public $pharmacy;
 
     public function mount()
     {
-        $this->facebook = $this->pharmacy->social->facebook;
-        $this->twitter  = $this->pharmacy->social->twitter;
-        $this->website  = $this->pharmacy->social->website;
-        $this->whatsapp = $this->pharmacy->social->whatsapp;
+        $this->pharmacy = Pharmacy::where('user_id', Auth::id())->first();
+
+        $this->facebook = isset($this->pharmacy->social) ? $this->pharmacy->social->facebook : '';
+        $this->twitter  = isset($this->pharmacy->social) ? $this->pharmacy->social->twitter : '';
+        $this->website  = isset($this->pharmacy->social) ? $this->pharmacy->social->website : '';
+        $this->whatsapp = isset($this->pharmacy->social) ? $this->pharmacy->social->whatsapp : '';
     }
 
     public function render()
@@ -36,9 +40,7 @@ class Social extends Component
     {
         $this->validate( PharmacySocial::roles(), PharmacySocial::messages());
 
-        $pharmacy = Pharmacy::find($this->pharmacy->id)->first();
-
-        PharmacySocial::updateOrCreate( ['pharmacy_id' => $pharmacy->id],
+        PharmacySocial::updateOrCreate( ['pharmacy_id' => $this->pharmacy->id],
         [
           'whatsapp'    => $this->whatsapp,
           'website'     => $this->website,

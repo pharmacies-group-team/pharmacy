@@ -28,10 +28,10 @@ class PharmacySocial extends Model
     {
       return
         [
-          'whatsapp' => 'nullable|url|active_url',
-          'website'  => 'nullable|url|active_url',
-          'facebook' => 'nullable|url|active_url',
-          'twitter'  => 'nullable|url|active_url',
+          'whatsapp' => 'nullable|url',
+          'website'  => 'nullable|url',
+          'facebook' => 'nullable|url',
+          'twitter'  => 'nullable|url',
         ];
     }
 
@@ -46,10 +46,6 @@ class PharmacySocial extends Model
           'website.url'          => 'يجب أن يكون عنوان URL صحيحاً.',
           'facebook.url'         => 'يجب أن يكون عنوان URL صحيحاً.',
           'twitter.url'          => 'يجب أن يكون عنوان URL صحيحاً.',
-          'whatsapp.active_url'  => 'هذا العنوان غير صالحاً.',
-          'website.active_url'   => 'هذا العنوان غير صالحاً.',
-          'facebook.active_url'  => 'هذا العنوان غير صالحاً.',
-          'twitter.active_url'   => 'هذا العنوان غير صالحاً.'
         ];
     }
 }

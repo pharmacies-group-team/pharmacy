@@ -37,6 +37,7 @@
           <x-icon icon='phone' />
 
           <span>{{ $contact->phone }}</span>
+          {{--  TODO Update and Delete (when modal it's ready)  --}}
           <div style="display:flex; gap: 18px">
             <x-icon icon='edit' />
 
