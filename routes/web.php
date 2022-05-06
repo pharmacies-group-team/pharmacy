@@ -190,13 +190,13 @@ Route::prefix('/admin')
 // TODO only for debugging
 Route::prefix('/client')
   ->name('client.')
-  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  // ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
   ->group(function () {
 
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-      Route::get('/', 'getProfile')->name('profile');
+      Route::get('/profile', 'getProfile')->name('profile');
     });
 
     Route::controller(client\OrderController::class)

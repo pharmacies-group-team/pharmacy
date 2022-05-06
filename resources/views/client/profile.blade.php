@@ -89,41 +89,7 @@
     </div>
 
 
-    <hr class="divided">
-
-    {{-- change password --}}
-    <div class="profile-info">
-      <h2 class="text-large">تغيير كلمه المرور</h2>
-
-      <form action="{{ route('setting.update.password') }}" method="POST">
-        @csrf
-
-        {{-- old password --}}
-        <div class="form-group">
-          <label class="text-base">كلمه السر القديمة </label>
-
-          <input type="text" class="form-control" name="old_password" placeholder="كلمه السر القديمة ">
-        </div>
-
-        {{-- new password --}}
-        <div class="form-group">
-          <label class="text-base">كلمه السر الجديدة </label>
-
-          <input type="text" class="form-control" name="new_password" placeholder="كلمه السر الجديدة ">
-        </div>
-
-        {{-- confirm new password --}}
-        <div class="form-group">
-          <label class="text-base">تاكيد كلمه السر الجديدة </label>
-
-          <input type="text" class="form-control" name="confirmed" placeholder="تاكيد كلمه السر الجديدة ">
-        </div>
-
-
-
-        <button type="submit" class="btn btn-full">حفظ</button>
-      </form>
-    </div>
+    @livewire('security')
   </main>
 
 @stop
