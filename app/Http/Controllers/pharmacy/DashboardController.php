@@ -27,6 +27,7 @@ class DashboardController extends Controller
 
     public function accountSettings()
     {
-        return view('pharmacy.dashboard.account-settings');
+        $user = Auth::user();
+        return view('pharmacy.dashboard.account-settings', compact('user'));
     }
 }
