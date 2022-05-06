@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             WebInfoSeeder::class,
             CitySeeder::class,
             PharmacySeeder::class,
-            AdSeeder::class
+            AdSeeder::class,
+            OrderSeeder::class
         ]);
     }
 }
