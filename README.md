@@ -4,7 +4,7 @@
 
 `v-2.2/branchName`
 
-example
+example 2
 
 ```
 `v-2.2/login`
