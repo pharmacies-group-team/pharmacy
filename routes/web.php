@@ -178,7 +178,8 @@ Route::prefix('/admin')
         ->name('pharmacies.toggle');
     });
 
-    Route::view('/account-settings', 'admin.account-settings')->name('account-settings');
+    Route::view('/account-settings', 'admin.account-settings')
+      ->name('account-settings');
   });
 
 /*
@@ -186,35 +187,24 @@ Route::prefix('/admin')
 | Client Routes
 |--------------------------------------------------------------------------
 */
-
 // TODO only for debugging
-Route::prefix('/clients')->name('clients.')
-  //  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+Route::prefix('/client')
+  ->name('client.')
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
   ->group(function () {
-    //  Route::get('/', [client\ClientProfileController::class, 'index'])
-    //    ->name('profile');
-    //
-    //  Route::post('/', [client\ClientProfileController::class, 'updateProfile'])
-    //    ->name('update-profile');
 
-    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+    // dashboard
+    Route::controller(client\DashboardController::class)->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/', 'getProfile')->name('profile');
+    });
 
     Route::controller(client\OrderController::class)
-      ->prefix('/orders')->name('order.')->group(function () {
-
+      ->prefix('/orders')
+      ->name('order.')->group(function () {
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
-
-        // orders
-        Route::controller(client\OrderController::class)
-          ->prefix('/orders')
-          ->name('orders.')
-          ->group(function () {
-            Route::get('/', 'getAll')->name('index');
-            Route::post('/', 'storeOrder')->name('store');
-            Route::get('/{id}', 'showOrder')->name('show');
-          });
       });
   });
 
