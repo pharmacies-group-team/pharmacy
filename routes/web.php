@@ -84,7 +84,7 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 
 // TODO only for debugging
 Route::prefix('/pharmacy')
-  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
     // Route::resource('/', pharmacy\PharmacyController::class);
     // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
@@ -120,10 +120,9 @@ Route::prefix('/pharmacy')
 |--------------------------------------------------------------------------
 */
 
-// TODO only for debugging
 Route::prefix('/admin')
   ->name('admin.')
-  //  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
@@ -190,7 +189,7 @@ Route::prefix('/admin')
 // TODO only for debugging
 Route::prefix('/client')
   ->name('client.')
-  // ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
   ->group(function () {
 
     // dashboard
