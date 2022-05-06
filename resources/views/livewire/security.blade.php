@@ -1,46 +1,47 @@
-
-<div class="security">
-  {{-- title --}}
-  <h2 class="text-base">الحماية والخصوصية</h2>
-
-  {{-- form --}}
-  <form>
-    <div>
-      @if (session()->has('message'))
-        <div class="alert-box">
-          {{ session('message') }}
-        </div>
-      @endif
+<div class="livewire-security">
+  @if (session()->has('message'))
+    <div class="alert-box">
+      {{ session('message') }}
     </div>
-    <ul class="list">
+  @endif
+
+  <div class="profile-info">
+    <h2 class="text-large">الحماية والخصوصية</h2>
+
+    <form>
       {{-- old password --}}
-      <li class="item">
-        <x-icon icon='facebook' />
-        <input wire:model="oldPassword" type="password" class="form-control">
-      </li>
-      @error('oldPassword')
-      <span class="error">{{ $message }}</span>
-      @enderror
+      <div class="form-group">
+        <label class="text-base">كلمه السر القديمة </label>
+
+        <input wire:model="oldPassword" type="password" class="form-control" placeholder="كلمه السر القديمة ">
+        @error('oldPassword')
+          <span class="error">{{ $message }}</span>
+        @enderror
+      </div>
 
       {{-- new password --}}
-      <li class="item">
-        <x-icon icon='whatsapp' />
-        <input wire:model="newPassword" type="password"  class="form-control">
-      </li>
-      @error('newPassword')
-      <span class="error">{{ $message }}</span>
-      @enderror
+      <div class="form-group">
+        <label class="text-base">كلمه السر الجديدة </label>
 
-      {{-- confirm --}}
-      <li class="item">
-        <x-icon icon='website' />
-        <input wire:model="confirmPassword" type="password"  class="form-control">
-      </li>
-      @error('confirmPassword')
-      <span class="error">{{ $message }}</span>
-      @enderror
+        <input wire:model="newPassword" type="password" class="form-control" placeholder="كلمه السر الجديدة ">
+        @error('newPassword')
+          <span class="error">{{ $message }}</span>
+        @enderror
+      </div>
 
+      {{-- confirm new password --}}
+      <div class="form-group">
+        <label class="text-base">تاكيد كلمه السر الجديدة </label>
 
-    <button wire:click.prevent="store()" class="btn btn-full">حفظ</button>
-  </form>
+        <input placeholder="تاكيد كلمه السر الجديدة " wire:model="confirmPassword" type="password"
+          class="form-control">
+
+        @error('confirmPassword')
+          <span class="error">{{ $message }}</span>
+        @enderror
+      </div>
+
+      <button wire:click.prevent="store()" class="btn btn-full">حفظ</button>
+    </form>
+  </div>
 </div>

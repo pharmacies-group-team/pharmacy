@@ -1517,3 +1517,7 @@ svg {
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
+
+.livewire-security h2{
+  margin-bottom: 1rem;
+}

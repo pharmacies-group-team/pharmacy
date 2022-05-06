@@ -7,15 +7,17 @@
         </div>
       @endif
     </div>
+
     {{-- name --}}
     <div class="form-group">
       <label for="pharmacy-name" class="text-base">اسم المستخدم:</label>
 
       <input wire:model="name" type="text" class="form-control" placeholder="اسم المستخدم">
       @error('name')
-      <span class="error">{{ $message }}</span>
+        <span class="error">{{ $message }}</span>
       @enderror
     </div>
+
 
 
     {{-- about --}}
@@ -23,7 +25,7 @@
       <label for="pharmacy-name" class="text-base">البريد الإلكتروني:</label>
       <input wire:model="email" type="text" class="form-control" placeholder="البريد الإلكتروني ">
       @error('email')
-      <span class="error">{{ $message }}</span>
+        <span class="error">{{ $message }}</span>
       @enderror
     </div>
 
