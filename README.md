@@ -2,12 +2,12 @@
 
 ## branch's name
 
-`v-2/branchName`
+`v-2.2/branchName`
 
 example
 
 ```
-`v-2/login`
+`v-2.2/login`
 ```
 
 ## Github/git roles
