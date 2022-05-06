@@ -66,11 +66,11 @@ class WebInfoSeeder extends Seeder
 
     SocialMedia::create(
       [
-        'facebook' => '',
-        'whatsapp' => '',
-        'twitter' => '',
+        'facebook'  => '',
+        'whatsapp'  => '',
+        'twitter'   => '',
         'instagram' => '',
-        'user_id' => User::role(RoleEnum::SUPER_ADMIN)->first()->id
+        'user_id'   => 1
       ]
     );
   }

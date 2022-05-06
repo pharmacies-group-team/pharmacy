@@ -506,6 +506,27 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.alert-box {
+  width: 25%;
+  padding: 18px;
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  backdrop-filter: blur(3px) saturate(200%);
+  -webkit-backdrop-filter: blur(3px) saturate(200%);
+  background-color: rgba(56, 105, 186, 0.6);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.2588235294);
+  color: #ffffff;
+}
+
+.error {
+  padding: 4px;
+  font-size: 14px;
+  color: #dc2626;
+}
+
 .badge{
   display: inline-block;
   border-radius: 0.25rem;
@@ -709,6 +730,69 @@ textarea.form-control{
 
 .search-group input[type=search]{
   padding-left: 3.5rem;
+}
+
+.image-file-upload{
+  margin-top: 1rem;
+}
+
+.image-file-upload .file-upload{
+  border-width: 1px;
+  border-style: dashed;
+  --tw-border-opacity: 1;
+  border-color: rgb(177 201 242 / var(--tw-border-opacity));
+  padding: 1.5rem;
+  cursor: pointer;
+}
+
+.image-file-upload .file-upload .title{
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.image-file-upload .viewer-image{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.image-file-upload form > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.image-file-upload form .form-title{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(56 105 186 / var(--tw-text-opacity));
+}
+
+.image-file-upload form .form-description{
+  font-size: 0.75rem;
+  line-height: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(88 143 244 / var(--tw-text-opacity));
+}
+
+.image-file-upload form input[type=file]{
+  display: none;
+}
+
+.image-file-upload form textarea{
+  margin-top: 1rem;
+}
+
+.image-file-upload form select, .image-file-upload form input[type=text]{
+  margin-top: 0.5rem;
+}
+
+.image-file-upload .description{
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .modal{
@@ -1432,67 +1516,4 @@ svg {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.image-file-upload{
-  margin-top: 1rem;
-}
-
-.image-file-upload .file-upload{
-  border-width: 1px;
-  border-style: dashed;
-  --tw-border-opacity: 1;
-  border-color: rgb(177 201 242 / var(--tw-border-opacity));
-  padding: 1.5rem;
-  cursor: pointer;
-}
-
-.image-file-upload .file-upload .title{
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.image-file-upload .viewer-image{
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
-
-.image-file-upload form > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
-.image-file-upload form .form-title{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.image-file-upload form .form-description{
-  font-size: 0.75rem;
-  line-height: 1rem;
-  --tw-text-opacity: 1;
-  color: rgb(88 143 244 / var(--tw-text-opacity));
-}
-
-.image-file-upload form input[type=file]{
-  display: none;
-}
-
-.image-file-upload form textarea{
-  margin-top: 1rem;
-}
-
-.image-file-upload form select, .image-file-upload form input[type=text]{
-  margin-top: 0.5rem;
-}
-
-.image-file-upload .description{
-  margin-top: 2.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }

@@ -109,6 +109,4 @@
     </div>
   </section>
 
-  <!-- Modal Edit Logo Profile -->
-  @include('pharmacy.modal.update-logo')
 @stop

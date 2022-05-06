@@ -22,7 +22,7 @@
                 </div>
                 <input name="email" value="{{ old('email') }}" type="email"
                   class="form-control @error('email') is-invalid @enderror rounded-2 pr" placeholder="البريد الإلكتروني"
-                  aria-label="email" aria-describedby="addon-wrapping">
+                  aria-label="email" aria-describedby="addon-wrapping" style="padding-right: 40px">
               </div>
               @error('email')
                 <span class="invalid-feedback" role="alert">

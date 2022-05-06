@@ -20,4 +20,32 @@ class PharmacySocial extends Model
     {
         return $this->belongsTo(Pharmacy::class);
     }
+
+    /**
+     * validation
+     */
+    public static function roles()
+    {
+      return
+        [
+          'whatsapp' => 'nullable|url',
+          'website'  => 'nullable|url',
+          'facebook' => 'nullable|url',
+          'twitter'  => 'nullable|url',
+        ];
+    }
+
+    /**
+     * messages
+     */
+    public static function messages()
+    {
+      return
+        [
+          'whatsapp.url'         => 'يجب أن يكون عنوان URL صحيحاً.',
+          'website.url'          => 'يجب أن يكون عنوان URL صحيحاً.',
+          'facebook.url'         => 'يجب أن يكون عنوان URL صحيحاً.',
+          'twitter.url'          => 'يجب أن يكون عنوان URL صحيحاً.',
+        ];
+    }
 }

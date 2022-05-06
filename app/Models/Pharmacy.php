@@ -60,4 +60,50 @@ class Pharmacy extends Model
     {
         return PharmacyFactory::new();
     }
+
+    /**
+     * validation
+     */
+    public static function roles()
+    {
+      return [
+        'name'            => 'required|max:100|string',
+        'about'           => 'nullable|min:50|string',
+        'address'         => 'nullable|min:10|string',
+//        'neighborhood_id' => 'nullable'
+      ];
+    }
+
+    public static function rolesLogo()
+    {
+      return [ 'logo'  => 'required|image|mimes:jpeg,jpg,png,svg|max:2048'];
+    }
+
+    /**
+     * messages
+     */
+    public static function messages()
+    {
+      return
+        [
+          'name.required'       => 'يجب إدخال اسم الصيدلية.',
+          'name.max'            => 'يجب ألا يكون الاسم أكبر من 100 حرف.',
+          'name.string'         => 'يجب ان يكون الاسم نصاً.',
+          'about.min'           => 'يجب ألا تقل عن 50 حرف.',
+          'address.min'         => 'يجب ألا يقل العنوان المُدخل عن 10 أحرف.',
+          'address.string'      => 'يجب ان يكون العنوان نصاً.',
+
+        ];
+    }
+
+    public static function messagesLogo()
+    {
+      return
+        [
+          'logo.required'         => 'يبدوا انك نسيت إدخال الصورة.',
+          'logo.image'            => 'يجب أن يكون الحقل المُدخل صورة.',
+          'logo.mimes'            => 'يجب أن تكون الصورة ملفًا من النوع jpeg,jpg,png,svg.',
+          'logo.max'              => 'يجب ألا تكون الصورة أكبر من 2048 كيلوبايت.',
+        ];
+    }
 }

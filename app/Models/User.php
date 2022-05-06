@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -94,5 +95,50 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static function newFactory()
     {
       return UserFactory::new();
+    }
+
+    /**
+     * validation
+     */
+    public static function role()
+    {
+      return [
+        'name'  => ['required', 'string', 'max:255', 'min:5'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::id()],
+      ];
+    }
+
+    public static function rolesAvatar()
+    {
+      return [ 'avatar'  => 'required|image|mimes:jpeg,jpg,png,svg|max:2048'];
+    }
+
+    /**
+     * messages
+     */
+    public static function messages()
+    {
+      return
+        [
+          'name.required'     => 'يجب إدخال اسم المستخدم.',
+          'name.string'       => 'يجب ان يكون الاسم نصاً.',
+          'name.min'          => 'يجب ألا يقل الاسم عن 5 أحرف.',
+          'email.required'    => 'يجب إدخال البريد الإلكتروني.',
+          'email.email'       => 'يرجى التأكد من صحة البريد الإلكتروني',
+          'email.unique'      => 'البريد الإلكتروني مُستخدم من قبل.',
+          'email.string'      => 'يجب ان يكون البريد الإلكتروني نصاً.',
+          'max'               => 'يجب ألا يزيد هذا الحقل عن 255 حرف.',
+        ];
+    }
+
+    public static function messagesAvatar()
+    {
+      return
+        [
+          'avatar.required'         => 'يبدوا انك نسيت إدخال الصورة.',
+          'avatar.image'            => 'يجب أن يكون الحقل المُدخل صورة.',
+          'avatar.mimes'            => 'يجب أن تكون الصورة ملفًا من النوع jpeg,jpg,png,svg.',
+          'avatar.max'              => 'يجب ألا تكون الصورة أكبر من 2048 كيلوبايت.',
+        ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\pharmacy;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pharmacy;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -14,7 +15,7 @@ class DashboardController extends Controller
 
     public function profile()
     {
-        $pharmacy = Pharmacy::find(1)->with(['user', 'social', 'neighborhood.directorate.city'])->get();
+        $pharmacy = Auth::user()->pharmacy()->first();
 
         return view('pharmacy.dashboard.profile', compact('pharmacy'));
     }
@@ -26,6 +27,7 @@ class DashboardController extends Controller
 
     public function accountSettings()
     {
-        return view('pharmacy.dashboard.account-settings');
+        $user = Auth::user();
+        return view('pharmacy.dashboard.account-settings', compact('user'));
     }
 }

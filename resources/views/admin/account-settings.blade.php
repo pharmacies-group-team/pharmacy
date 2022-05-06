@@ -1,9 +1,8 @@
-@extends('layouts/pharmacy/master')
+@extends('layouts/dashboard/dashboard-master')
 
 @php use \App\Enum\UserEnum;  @endphp
 
 @section('content')
-
 
   @include('includes.alerts')
 
@@ -16,8 +15,8 @@
       {{-- avatar --}}
       <div class="upload-image" x-data="{ uploadImageModal: false }">
 
-        <img src="@if(isset($user->avatar))
-        {{ asset(UserEnum::USER_AVATAR_PATH.$user->avatar) }}
+        <img src="@if(Auth::user()->avatar)
+        {{ asset(UserEnum::USER_AVATAR_PATH.Auth::user()->avatar) }}
         @else
         {{ asset(UserEnum::USER_AVATAR_DEFAULT) }}
         @endif"

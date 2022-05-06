@@ -24,22 +24,16 @@ class CreateQuotation extends Component
         return view('livewire.pharmacy.create-quotation');
     }
 
-    protected $rules = [
-      'product_name.0' => 'required',
-      'product_unit.0' => 'required',
-      'quantity.0'     => 'required|numeric',
-      'price.0'        => 'required|numeric',
-      'currency.0'     => 'currency',
-      'product_name.*' => 'required',
-      'product_unit.*' => 'required',
-      'quantity.*'     => 'required|numeric',
-      'price.*'        => 'required|numeric',
-      'currency.*'     => 'currency'
-    ];
+    public function updated($propertyName)
+    {
+      $this->validateOnly($propertyName,QuotationDetails::roles(), QuotationDetails::messages());
+    }
+
 
     public function storeQuotation()
     {
-        $this->validate($this->rules);
+        $this->validate(QuotationDetails::roles(), QuotationDetails::messages());
+
         $quotation = Quotation::updateOrCreate(['order_id' => $this->order->id]);
 
         foreach ($this->product_name as $key => $value) {
@@ -75,7 +69,6 @@ class CreateQuotation extends Component
 
     public function add($i)
     {
-//        $this->total[$i] = $this->price[$i] * $this->quantity[$i];
         $i = $i + 1;
         $this->i = $i;
         array_push($this->inputs ,$i);
@@ -96,4 +89,3 @@ class CreateQuotation extends Component
         $this->price        = '';
     }
 }
-

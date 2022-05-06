@@ -9,6 +9,8 @@
 
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
 
+  @livewireStyles()
+
 </head>
 
 <body>
@@ -26,6 +28,8 @@
       @yield('content')
     </div>
   </div>
+
+  @livewireScripts()
 
 </body>
 
