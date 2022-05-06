@@ -506,6 +506,27 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.alert-box {
+  width: 25%;
+  padding: 18px;
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  backdrop-filter: blur(3px) saturate(200%);
+  -webkit-backdrop-filter: blur(3px) saturate(200%);
+  background-color: rgba(56, 105, 186, 0.6);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.2588235294);
+  color: #ffffff;
+}
+
+.error {
+  padding: 4px;
+  font-size: 14px;
+  color: #dc2626;
+}
+
 .badge{
   display: inline-block;
   border-radius: 0.25rem;
@@ -711,6 +732,69 @@ textarea.form-control{
   padding-left: 3.5rem;
 }
 
+.image-file-upload{
+  margin-top: 1rem;
+}
+
+.image-file-upload .file-upload{
+  border-width: 1px;
+  border-style: dashed;
+  --tw-border-opacity: 1;
+  border-color: rgb(177 201 242 / var(--tw-border-opacity));
+  padding: 1.5rem;
+  cursor: pointer;
+}
+
+.image-file-upload .file-upload .title{
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.image-file-upload .viewer-image{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.image-file-upload form > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.image-file-upload form .form-title{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(56 105 186 / var(--tw-text-opacity));
+}
+
+.image-file-upload form .form-description{
+  font-size: 0.75rem;
+  line-height: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(88 143 244 / var(--tw-text-opacity));
+}
+
+.image-file-upload form input[type=file]{
+  display: none;
+}
+
+.image-file-upload form textarea{
+  margin-top: 1rem;
+}
+
+.image-file-upload form select, .image-file-upload form input[type=text]{
+  margin-top: 0.5rem;
+}
+
+.image-file-upload .description{
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .modal{
   position: fixed;
   top: 0px;
@@ -782,6 +866,41 @@ textarea.form-control{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   --tw-shadow-color: #73A4FF;
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.or{
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.or::before {
+  content: "او";
+  position: relative;
+  z-index: 20;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.or::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  z-index: 10;
+  height: 1px;
+  width: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(177 201 242 / var(--tw-bg-opacity));
 }
 
 .table{
@@ -1179,10 +1298,6 @@ svg {
   fill: #4E7DCB;
 }
 
-.pharmacy-profile .contact-us{
-  max-width: 36rem
-}
-
 .pharmacy-profile .contact-us-header{
   display: flex;
   align-items: center;
@@ -1202,17 +1317,11 @@ svg {
   gap: 1rem;
 }
 
-.pharmacy-profile .contact-us .form{
-  margin-top: 1.75rem;
-}
-
-.pharmacy-profile .social,
-.pharmacy-profile .security{
+.pharmacy-profile .social{
   max-width: 36rem;
 }
 
-.pharmacy-profile .social .item,
-.pharmacy-profile .security .item{
+.pharmacy-profile .social .item{
   position: relative;
   margin-top: 1rem;
   display: flex;
@@ -1220,8 +1329,7 @@ svg {
   gap: 1rem;
 }
 
-.pharmacy-profile .social .item .icon,
-.pharmacy-profile .security .item .icon{
+.pharmacy-profile .social .item .icon{
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -1233,12 +1341,6 @@ svg {
   width: 100%;
   padding-right: 3rem;
   direction: ltr;
-}
-
-.pharmacy-profile .security .item input{
-  width: 100%;
-  padding-right: 3rem;
-  direction: rtl;
 }
 
 .pharmacy-profile .social .btn, .pharmacy-profile .social .btn-rounded{
@@ -1414,123 +1516,4 @@ svg {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.pharmacies .image-file-upload{
-  margin-top: 1rem;
-}
-
-.pharmacies .image-file-upload .file-upload{
-  border-width: 1px;
-  border-style: dashed;
-  --tw-border-opacity: 1;
-  border-color: rgb(177 201 242 / var(--tw-border-opacity));
-  padding: 1.5rem;
-  cursor: pointer;
-}
-
-.pharmacies .image-file-upload .file-upload .title{
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.pharmacies .image-file-upload .viewer-image{
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
-
-.pharmacies .image-file-upload form > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
-.pharmacies .image-file-upload form .form-title{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.pharmacies .image-file-upload form .form-description{
-  font-size: 0.75rem;
-  line-height: 1rem;
-  --tw-text-opacity: 1;
-  color: rgb(88 143 244 / var(--tw-text-opacity));
-}
-
-.pharmacies .image-file-upload form input[type=file]{
-  display: none;
-}
-
-.pharmacies .image-file-upload form textarea{
-  margin-top: 1rem;
-}
-
-.pharmacies .image-file-upload form select, .pharmacies .image-file-upload form input[type=text]{
-  margin-top: 0.5rem;
-}
-
-.pharmacies .image-file-upload .description{
-  margin-top: 2.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.or{
-  position: relative;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-}
-
-.or::before {
-  content: "او";
-  position: relative;
-  z-index: 20;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.or::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0px;
-  z-index: 10;
-  height: 1px;
-  width: 100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: rgb(177 201 242 / var(--tw-bg-opacity));
-}
-
-.alert-box{
-  width: 25%;
-  padding: 18px;
-  position: fixed;
-  bottom: 30px;
-  left: 20px;
-  backdrop-filter: blur(3px) saturate(200%);
-  -webkit-backdrop-filter: blur(3px) saturate(200%);
-  background-color: rgba(56, 105, 186, 0.6);
-  border-radius: 8px;
-  border: 1px solid rgb(255 255 255 / 35%);
-  box-shadow: -1px 3px 4px #00000042;
-  color: #ffffff;
-}
-
-.error{
-  padding: 4px;
-  font-size: 14px;
-  color: #dc2626;
 }

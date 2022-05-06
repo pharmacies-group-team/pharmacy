@@ -70,7 +70,8 @@ $count = 0;
                           @else
                             {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
                   width="50%" class="rounded-circle img-fluid" alt="">
-                <a href="{{ route('show.pharmacy.profile', $pharmacy->id) }}" class="fs-5 fw-bold text-primary-dark mt-4">
+                <a href="{{ route('show.pharmacy.profile', $pharmacy->id) }}"
+                  class="fs-5 fw-bold text-primary-dark mt-4">
                   {{ $pharmacy->name }}
                 </a>
                 <p class="text-dark-100">
@@ -92,6 +93,25 @@ $count = 0;
   </section>
   <!-- End Pharmacies Section -->
 
+  {{-- start ads section --}}
+  <section class="mt-5">
+    <div class="container-lg owl-2-style mt-2">
+      <div class="owl-carousel owl-2">
+        @if (isset($ads))
+          @foreach ($ads as $ad)
+            <a href="{{ $ad->link }}" class="card bg-secondary-light rounded-3 card--hover shadow"
+              style="min-height: 272px;height: 272px;">
+
+              <img src="uploads/ads/{{ $ad->image }}" width="80%" class="rounded-circle img-fluid" alt="">
+
+            </a>
+          @endforeach
+        @endif
+      </div>
+    </div>
+  </section>
+  {{-- end ads section --}}
+
   <!-- Start Register Pharmacy -->
   <section class="mt-5 py-5" style="background-image: url({{ asset('images/map.svg') }})">
     <div class="container">
@@ -112,3 +132,5 @@ $count = 0;
   <!-- End Register Pharmacy -->
 
 @stop
+
+@yield('script')
