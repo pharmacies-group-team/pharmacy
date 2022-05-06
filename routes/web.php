@@ -201,7 +201,7 @@ Route::prefix('/client')
 
     Route::controller(client\OrderController::class)
       ->prefix('/orders')
-      ->name('order.')->group(function () {
+      ->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
