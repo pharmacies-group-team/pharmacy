@@ -101,5 +101,16 @@
         <span>أدارة بيانات الموقع</span>
       </a>
     </li>
+
+    {{-- account settings --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.account-settings') active @endif"
+         href="{{ route('admin.account-settings') }}">
+
+        <x-icon icon="setting" />
+
+        <span>أعدادات الحساب</span>
+      </a>
+    </li>
   </ul>
 </nav>
