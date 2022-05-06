@@ -17,42 +17,44 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    use UploadsTrait;
+  public function getAll()
+  {
+    // BUG need to fix
+    // $orders = Auth::user()->userOrders()->get();
+    // return response($orders);
 
-    public function getAll()
-    {
-      $orders = Auth::user()->userOrders()->get();
-      return response($orders);
-    }
+    return view('client.orders');
+  }
 
-    public function showOrder($id)
-    {
-      $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
-      return response($order);
-    }
+  public function showOrder($id)
+  {
+    $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
+    return response($order);
+  }
 
-    public function storeOrder(Request $request): RedirectResponse
-    {
-        // validator
-        Validator::validate($request->all(), Order::roles(), Order::messages());
+  public function storeOrder(Request $request): RedirectResponse
+  {
+    // validator
+    Validator::validate($request->all(), Order::roles(), Order::messages());
 
-        // upload image
-        $image = $this->storeImage($request->image,OrderEnum::ORDER_IMAGE_PATH);
+    // upload image
+    $image = $this->storeImage($request->image, OrderEnum::ORDER_IMAGE_PATH);
 
-        $order = Order::create(
-        [
-          'user_id'     => Auth::id(),
-          'pharmacy_id' => $request->input('pharmacy_id'),
-          'image'       => $image,
-          'order'       => $request->input('order'),
-        ]);
+    $order = Order::create(
+      [
+        'user_id'     => Auth::id(),
+        'pharmacy_id' => $request->input('pharmacy_id'),
+        'image'       => $image,
+        'order'       => $request->input('order'),
+      ]
+    );
 
-        $pharmacy = User::find($request->input('pharmacy_id'));
-        $data     = ['client' => Auth::user(), 'order' => $order];
+    $pharmacy = User::find($request->input('pharmacy_id'));
+    $data     = ['client' => Auth::user(), 'order' => $order];
 
-        // send and save notification in DB
-        Notification::send($pharmacy, new PharmacyOrderNotification($data));
+    // send and save notification in DB
+    Notification::send($pharmacy, new PharmacyOrderNotification($data));
 
-        return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
-    }
+    return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
+  }
 }

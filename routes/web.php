@@ -17,7 +17,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 
 // TODO
 // disable Debug
-Debugbar::disable();
+// Debugbar::disable();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,10 +46,14 @@ Route::controller(web\HomeController::class)->group(function () {
 | General Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
-//  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-  Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])->name('update.avatar');
-});
+Route::middleware(['auth', 'verified'])
+  ->name('setting.')
+  ->group(function () {
+    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+
+    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
+      ->name('update.avatar');
+  });
 
 /*
 |--------------------------------------------------------------------------
@@ -101,15 +105,14 @@ Route::prefix('/pharmacy')
       });
 
     Route::controller(pharmacy\QuotationController::class)
-      ->prefix('/quotation')->name('quotation.')->group(function (){
+      ->prefix('/quotation')->name('quotation.')->group(function () {
 
         Route::get('/', 'getAll')->name('index');
         Route::get('/{id}', 'createQuotation')->name('create');
-
       });
 
-    Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])->name('update.logo');
-
+    Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
+      ->name('update.logo');
   });
 /*
 |--------------------------------------------------------------------------
@@ -120,7 +123,7 @@ Route::prefix('/pharmacy')
 // TODO only for debugging
 Route::prefix('/admin')
   ->name('admin.')
-//  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  //  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
@@ -134,7 +137,7 @@ Route::prefix('/admin')
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
 
-    /*------------------------------ ads ------------------------------*/
+    /*------------------------------ payments ------------------------------*/
     Route::resource('/payments', admin\PaymentController::class);
 
     /*------------------------------ website content ------------------------------*/
@@ -175,7 +178,8 @@ Route::prefix('/admin')
         ->name('pharmacies.toggle');
     });
 
-    Route::view('/account-settings','admin.account-settings')->name('account-settings');
+    Route::view('/account-settings', 'admin.account-settings')
+      ->name('account-settings');
   });
 
 /*
@@ -183,27 +187,25 @@ Route::prefix('/admin')
 | Client Routes
 |--------------------------------------------------------------------------
 */
-
 // TODO only for debugging
-Route::prefix('/clients')->name('clients.')
-//  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+Route::prefix('/client')
+  ->name('client.')
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
   ->group(function () {
-//  Route::get('/', [client\ClientProfileController::class, 'index'])
-//    ->name('profile');
-//
-//  Route::post('/', [client\ClientProfileController::class, 'updateProfile'])
-//    ->name('update-profile');
 
-  Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+    // dashboard
+    Route::controller(client\DashboardController::class)->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/', 'getProfile')->name('profile');
+    });
 
-  Route::controller(client\OrderController::class)
-    ->prefix('/orders')->name('order.')->group(function (){
-
-    Route::get('/', 'getAll')->name('index');
-    Route::post('/', 'storeOrder')->name('store');
-    Route::get('/{id}', 'showOrder')->name('show');
-
+    Route::controller(client\OrderController::class)
+      ->prefix('/orders')
+      ->name('orders.')->group(function () {
+        Route::get('/', 'getAll')->name('index');
+        Route::post('/', 'storeOrder')->name('store');
+        Route::get('/{id}', 'showOrder')->name('show');
+      });
   });
-});
 
 Auth::routes(['verify' => true]);

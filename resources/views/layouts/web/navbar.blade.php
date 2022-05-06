@@ -58,8 +58,9 @@
           @auth
             <div class="dropdown d-lg-inline-flex d-none w-100">
               {{-- user info --}}
-              <div class="nav-link dropdown-toggle text-primary-darker cursor-pointer w-100 d-flex align-items-center gap-2" id="dropdown08"
-                data-bs-toggle="dropdown" aria-expanded="false">
+              <div
+                class="nav-link dropdown-toggle text-primary-darker w-100 d-flex align-items-center cursor-pointer gap-2"
+                id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
                 <img
                   src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
                   width="30" height="20" class="img-fluid rounded-circle border-1 border-secondary border shadow-sm"
@@ -68,7 +69,7 @@
                 <span class="me-2" style="cursor: pointer">{{ Auth::user()->name }}</span>
               </div>
 
-              <ul class="dropdown-menu end-0 start-50 " style="z-index: 9999999999">
+              <ul class="dropdown-menu end-0 start-50" style="z-index: 9999999999">
                 @if (!Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                   <li>
                     <a class="dropdown-item text-primary-dark d-flex align-items-center"
@@ -85,7 +86,7 @@
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
                             {{ route('pharmacy.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
-                            {{ route('clients.dashboard') }} @endif">
+                            {{ route('client.index') }} @endif">
                     <i class="bi bi-speedometer text-primary-light m-2"></i> لوحة التحكم
                   </a>
                 </li>

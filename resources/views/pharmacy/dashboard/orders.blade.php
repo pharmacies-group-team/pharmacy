@@ -6,6 +6,7 @@
 
 
   @include('includes.alerts')
+
   <main class="dashboard-pharmacies-orders" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
     <div class="container">
       <section class="section-header">
@@ -44,7 +45,7 @@
                   <td>
                     @if ($order->status === OrderEnum::NEW_ORDER)
                       <div class="badge badge-info">
-                        {{OrderEnum::NEW_ORDER}}
+                        {{ OrderEnum::NEW_ORDER }}
                       </div>
                     @elseif($order->status === OrderEnum::UNPAID_ORDER)
                       <div class="badge bg-light text-dark">

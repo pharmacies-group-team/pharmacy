@@ -40,7 +40,7 @@
           </template>
         </div>
         @error('image')
-        <span class="text-danger" role="alert">
+          <span class="text-danger" role="alert">
             {{ $message }}
           </span>
         @enderror
@@ -48,13 +48,13 @@
         <div class="or"></div>
 
         {{-- form --}}
-        <form action="{{ route('clients.order.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('client.orders.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
-          {{--   TODO       --}}
+          {{-- TODO fixed need to test :) --}}
           {{-- pharmacy id --}}
-{{--          <input type="hidden" name="pharmacy_id" :value="pharmacy.id">--}}
-          <input type="hidden" name="pharmacy_id" value="2">
+          <input type="hidden" name="pharmacy_id" :value="pharmacy.id">
+
           {{-- file --}}
           <input type="file" accept="image/*" name="image" x-ref="inputFileOrder" @change="fileChosen">
 
@@ -69,25 +69,11 @@
               {{ old('order') }}
             </textarea>
             @error('order')
-            <span class="text-danger" role="alert">
-                 {{ $message }}
-            </span>
+              <span class="text-danger" role="alert">
+                {{ $message }}
+              </span>
             @enderror
           </div>
-
-          {{-- user address --}}
-          {{-- <div>
-            <label for="user-address-select-id" class="form-title">العنوان</label>
-            <select name="user-address" class="form-control" id="user-address-select-id">
-              <option value="1">Yemen</option>
-              <option value="2">Tokyo</option>
-              <option value="3">Paries</option>
-            </select>
-
-            <div class="or"></div>
-            <label for="">اضافه عنوان جديد</label>
-            <input type="text" name="new-user-address" class="form-control">
-          </div> --}}
 
           <button type="submit" class="btn btn-full">
             إتمام الطلب
