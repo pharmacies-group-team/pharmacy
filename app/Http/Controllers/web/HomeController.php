@@ -21,12 +21,7 @@ class HomeController extends Controller
 
   public function showPharmacies()
   {
-    $pharmacies    = Pharmacy::all();
-    $cities        = City::all();
-    $directorates  = Directorate::all();
-    $neighborhoods = Neighborhood::all();
-
-    return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates', 'neighborhoods'));
+    return view('web.pharmacies');
   }
 
   public function showPharmacy($id)
