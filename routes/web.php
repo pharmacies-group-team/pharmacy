@@ -3,6 +3,7 @@
 use App\Enum\RoleEnum;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\clint\PayController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
@@ -84,7 +85,7 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 
 // TODO only for debugging
 Route::prefix('/pharmacy')
-  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+//   ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
     // Route::resource('/', pharmacy\PharmacyController::class);
     // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
@@ -109,6 +110,7 @@ Route::prefix('/pharmacy')
 
         Route::get('/', 'getAll')->name('index');
         Route::get('/{id}', 'createQuotation')->name('create');
+        Route::get('/details/{id}', 'getQuotationDetails')->name('details');
       });
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
@@ -123,7 +125,7 @@ Route::prefix('/pharmacy')
 // TODO only for debugging
 Route::prefix('/admin')
   ->name('admin.')
-  //  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+//    ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
@@ -190,13 +192,15 @@ Route::prefix('/admin')
 // TODO only for debugging
 Route::prefix('/client')
   ->name('client.')
-  // ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+//   ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
   ->group(function () {
 
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-      Route::get('/profile', 'getProfile')->name('profile');
+//      Route::get('/profile', 'getProfile')->name('profile'); // X
+      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+      Route::get('/address', 'address')->name('address');
     });
 
     Route::controller(client\OrderController::class)
@@ -206,6 +210,14 @@ Route::prefix('/client')
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
       });
+
+    Route::get('/quotation/details/{id}', [client\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
+
+    Route::controller(client\PayController::class)->group(function (){
+      Route::post('/pay',  'payment')->name('payment');
+      Route::get('/success',  'success')->name('success');
+      Route::get('/cancel', 'cancel')->name('cancel');
+    });
   });
 
 Auth::routes(['verify' => true]);
