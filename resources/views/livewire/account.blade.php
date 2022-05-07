@@ -27,6 +27,15 @@
       @enderror
     </div>
 
+    {{-- phone --}}
+    <div class="form-group">
+      <label for="pharmacy-name" class="text-base">رقم الهاتف:</label>
+      <input wire:model="phone" type="text" class="form-control" placeholder="رقم الهاتف">
+      @error('phone')
+      <span class="error">{{ $message }}</span>
+      @enderror
+    </div>
+
     <button wire:click.prevent="store()" class="btn btn-full">حفظ</button>
   </form>
 </div>
