@@ -1,5 +1,19 @@
 # Project and code roles
 
+## lang
+
+```php
+{{ __('client.profile') }}
+```
+
+## livewire
+
+```bash
+php artisan make:livewire user/profile
+
+
+```
+
 ## branch's name
 
 `v-2.2/branchName`
