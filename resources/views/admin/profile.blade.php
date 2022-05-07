@@ -1,7 +1,7 @@
 @extends('layouts/dashboard/dashboard-master')
 @section('content')
 
-  @include('includes.alerts')
+  <x-alert type="status" />
 
   <main class="pharmacy-profile">
     <div class="pharmacy-info">

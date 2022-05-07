@@ -1,17 +1,11 @@
-
 <div class="social">
   {{-- title --}}
   <h2 class="text-base">مواقع التواصل الإجتماعي</h2>
 
   {{-- form --}}
   <form>
-    <div>
-      @if (session()->has('message'))
-        <div class="alert-box">
-          {{ session('message') }}
-        </div>
-      @endif
-    </div>
+    <x-alert type="message" />
+
     <ul class="list">
       {{-- facebook --}}
       <li class="item">

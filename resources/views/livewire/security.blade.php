@@ -1,19 +1,16 @@
 <div class="livewire-security">
-  @if (session()->has('message'))
-    <div class="alert-box">
-      {{ session('message') }}
-    </div>
-  @endif
+  <x-alert type="message" />
 
-  <div class="profile-info">
-    <h2 class="text-large">الحماية والخصوصية</h2>
+  <div>
+    <h2 class="text-large">@lang('heading.protection-and-privacy')</h2>
 
-    <form>
+    <form wire:submit.prevent="submit">
       {{-- old password --}}
       <div class="form-group">
-        <label class="text-base">كلمه السر القديمة </label>
+        <label class="text-base">@lang('form.old-password') </label>
 
-        <input wire:model="oldPassword" type="password" class="form-control" placeholder="كلمه السر القديمة ">
+        <input wire:model="oldPassword" type="password" class="form-control" placeholder="@lang('form.old-password')"
+          autocomplete="current-password">
         @error('oldPassword')
           <span class="error">{{ $message }}</span>
         @enderror
@@ -21,9 +18,10 @@
 
       {{-- new password --}}
       <div class="form-group">
-        <label class="text-base">كلمه السر الجديدة </label>
+        <label class="text-base">@lang('form.new-password') </label>
 
-        <input wire:model="newPassword" type="password" class="form-control" placeholder="كلمه السر الجديدة ">
+        <input wire:model="newPassword" type="password" class="form-control" placeholder="@lang('form.new-password')"
+          autocomplete="new-password">
         @error('newPassword')
           <span class="error">{{ $message }}</span>
         @enderror
@@ -31,17 +29,17 @@
 
       {{-- confirm new password --}}
       <div class="form-group">
-        <label class="text-base">تاكيد كلمه السر الجديدة </label>
+        <label class="text-base">@lang('form.confirm-new-password') </label>
 
-        <input placeholder="تاكيد كلمه السر الجديدة " wire:model="confirmPassword" type="password"
-          class="form-control">
+        <input placeholder="@lang('form.confirm-new-password') " wire:model="confirmPassword" type="password"
+          class="form-control" autocomplete="new-password">
 
         @error('confirmPassword')
           <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
-      <button wire:click.prevent="store()" class="btn btn-full">حفظ</button>
+      <button wire:click.prevent="store" class="btn btn-full">@lang('form.update')</button>
     </form>
   </div>
 </div>
