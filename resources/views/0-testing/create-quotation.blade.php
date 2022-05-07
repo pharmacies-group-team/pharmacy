@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Tokyo">
-  <meta name="keywords" content="pharmacy online">
-  <meta name="description" content="pharmacy online">
+@extends('layouts.pharmacy.master')
+@section('content')
 
-  @livewireStyles()
+  <div class="container px-5">
+    @include('includes.alerts')
+  </div>
 
-</head>
-<body>
-<livewire:pharmacy.create-quotation :order="$order"  />
+  <main class="pharmacy-profile">
 
-@livewireScripts()
+    <div class="section-header">
+      <h1 class="text-large">إنشاء عرض سعر</h1>
+    </div>
 
-</body>
-</html>
+    <div class="pharmacy-info">
+
+      <livewire:pharmacy.create-quotation :order="$order"  />
+
+    </div>
+  </main>
+
+@stop
+
