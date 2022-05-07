@@ -6,7 +6,7 @@
 @section('content')
 
   <div class="container px-5">
-    @include('includes.alerts')
+    <x-alert type="status" />
   </div>
 
 

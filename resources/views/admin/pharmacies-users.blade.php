@@ -3,7 +3,7 @@
 
 
   <main class="users">
-    @include('includes.alerts')
+    <x-alert type="status" />
 
     <div class="container">
       {{-- title --}}

@@ -5,7 +5,7 @@
 @section('content')
 
 
-  @include('includes.alerts')
+  <x-alert type="status" />
 
   <main class="pharmacy-profile">
     <div class="pharmacy-info">
@@ -16,12 +16,11 @@
       {{-- avatar --}}
       <div class="upload-image" x-data="{ uploadImageModal: false }">
 
-        <img src="@if(isset($user->avatar))
-        {{ asset(UserEnum::USER_AVATAR_PATH.$user->avatar) }}
+        <img
+          src="@if (isset($user->avatar)) {{ asset(UserEnum::USER_AVATAR_PATH . $user->avatar) }}
         @else
-        {{ asset(UserEnum::USER_AVATAR_DEFAULT) }}
-        @endif"
-             alt="profile avatar" class="avatar">
+        {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
+          alt="profile avatar" class="avatar">
 
         <button class="update-btn" @click="uploadImageModal = !uploadImageModal">
           <div class="icon">
@@ -40,17 +39,17 @@
         <x-modal title='upload image' open="uploadImageModal">
 
           <form action="{{ route('setting.update.avatar') }}" method="post" enctype="multipart/form-data"
-                class="row g-3 needs-validation" novalidate>
+            class="row g-3 needs-validation" novalidate>
             @csrf
             <div class="col-12">
               <div class="input-group mb-3">
                 <input name="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror"
-                       id="inputGroupFile02">
+                  id="inputGroupFile02">
               </div>
               @error('avatar')
-              <span class="text-danger" role="alert">
-                {{ $message }}
-              </span>
+                <span class="text-danger" role="alert">
+                  {{ $message }}
+                </span>
               @enderror
             </div>
             <div class="modal-footer">

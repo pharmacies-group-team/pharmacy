@@ -2,7 +2,7 @@
 @section('content')
 
   <div class="container px-5">
-    @include('includes.alerts')
+    <x-alert type="status" />
   </div>
 
   <main class="ads" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">

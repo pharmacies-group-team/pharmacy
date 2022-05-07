@@ -2,14 +2,15 @@
 @section('content')
 
   <div class="container px-5">
-    @include('includes.alerts')
+    <x-alert type="status" />
   </div>
 
   <main class="ads" x-data="{ id: null, payment: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
     <div class="container">
       <section class="section-header">
         <h2 class="text-large">إدارة طرق الدفع</h2>
-        <button class="btn" @click="addModal = true; payment = {{ json_encode(old()) }} ?? {}">اضافه طريقة دفع</button>
+        <button class="btn" @click="addModal = true; payment = {{ json_encode(old()) }} ?? {}">اضافه طريقة
+          دفع</button>
       </section>
 
       <div class="table-wrapper">
@@ -40,7 +41,7 @@
             @foreach ($payments as $payment)
               <tr>
                 <td>
-                  <img src="{{ asset(\App\Enum\PaymentEnum::IMAGE_PATH.$payment->image) }}" style="margin: auto" />
+                  <img src="{{ asset(\App\Enum\PaymentEnum::IMAGE_PATH . $payment->image) }}" style="margin: auto" />
                   <input type="hidden" name="image" value="{{ $payment->id }}" />
                 </td>
 
@@ -87,8 +88,8 @@
           {{-- link --}}
           <div class="form-group">
             <label>اسم البنك</label>
-            <input type="text" name="bank_name" :value="payment.bank_name" class="form-control @error('bank_name') is-invalid @enderror"
-              placeholder="اسم البنك اللإلكتروني" />
+            <input type="text" name="bank_name" :value="payment.bank_name"
+              class="form-control @error('bank_name') is-invalid @enderror" placeholder="اسم البنك اللإلكتروني" />
             @error('bank_name')
               <span class="invalid-feedback">{{ $message }}</span>
             @enderror
@@ -116,7 +117,7 @@
         <form :action="'{{ url('/admin/payments') }}/' + payment.id" method="post" enctype="multipart/form-data"
           x-ref='editForm'>
           @method('PUT')
-          {{--  name    --}}
+          {{-- name --}}
           @csrf
           <div class="form-group">
             <label for="ad-name-label">أسم طريقة الدفع</label>
@@ -166,8 +167,8 @@
 
           <div>
             <img :src="'{{ \App\Enum\PaymentEnum::IMAGE_PATH }}'
-            payment.image" width="200" height="150" alt="payment image"
-              style="display: block; margin: 1rem auto;">
+            payment.image" width="200" height="150"
+              alt="payment image" style="display: block; margin: 1rem auto;">
             <div x-text="payment.name"></div>
           </div>
 

@@ -5,7 +5,7 @@
 @section('content')
 
 
-  @include('includes.alerts')
+  <x-alert type="status" />
   <main>
     index
   </main>

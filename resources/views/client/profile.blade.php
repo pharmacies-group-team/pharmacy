@@ -88,6 +88,7 @@
       </div>
     </div>
 
+    <hr class="divided">
 
     @livewire('security')
   </main>
