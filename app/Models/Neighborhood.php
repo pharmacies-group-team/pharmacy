@@ -23,14 +23,6 @@ class Neighborhood extends Model
     }
 
     /**
-     * Get Neighborhood Addresses
-     */
-    public function addresses(): HasMany
-    {
-        return $this->hasMany(Address::class);
-    }
-
-    /**
      * Get Directorate
      */
     public function directorate(): BelongsTo
