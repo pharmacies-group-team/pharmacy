@@ -73,11 +73,11 @@
                 <td>
                   @if ($order->status === OrderEnum::NEW_ORDER)
                     <div class="badge badge-info">
-                      {{ OrderEnum::NEW_ORDER }}
+                      قيد الموافقه عليه
                     </div>
                   @elseif($order->status === OrderEnum::UNPAID_ORDER)
                     <div class="badge bg-light text-dark">
-                      {{ OrderEnum::UNPAID_ORDER }}
+                      <a href="{{ route('client.quotation.details', $order->quotation->id) }}">عرض سعر</a>
                     </div>
                   @elseif($order->status === OrderEnum::PAID_ORDER)
                     <div class="badge bg-success">
@@ -93,7 +93,7 @@
                     </div>
                   @elseif($order->status === OrderEnum::REFUSAL_ORDER)
                     <div class="badge badge-danger">
-                      {{ OrderEnum::REFUSAL_ORDER }}
+                      تم رفض الطلب
                     </div>
                   @endif
                 </td>
