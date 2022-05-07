@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function getAll()
     {
         $orders = Auth::user()->pharmacyOrders()->get();
-        return view('pharmacy.dashboard.orders', compact('orders'));
+        return view('pharmacy.dashboard.testing-orders', compact('orders'));
     }
 
     public function getOrder($id)
