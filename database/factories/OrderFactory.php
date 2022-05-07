@@ -19,7 +19,7 @@ class OrderFactory extends Factory
     {
       return [
           'order'           => $this->faker->text,
-          'image'           => 'pharmacy.png',
+          'image'           => 'default.jpg',
           'status'          => OrderEnum::NEW_ORDER,
           'user_id'         => 3,
           'pharmacy_id'     => 2
