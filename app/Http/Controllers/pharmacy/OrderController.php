@@ -15,29 +15,28 @@ class OrderController extends Controller
     public function getAll()
     {
         $orders = Auth::user()->pharmacyOrders()->get();
-        return view('pharmacy.dashboard.testing-orders', compact('orders'));
+        return view('pharmacy.testing-orders', compact('orders'));
     }
 
     public function getOrder($id)
     {
-      $order = Auth::user()->pharmacyOrders()->where('id', $id)->first();
-      return view('0-testing.order', compact('order'));
+        $order = Auth::user()->pharmacyOrders()->where('id', $id)->first();
+        return view('0-testing.order', compact('order'));
     }
 
     public function orderRefusal($id)
     {
         $order = Order::find($id);
 
-        if ($order)
-        {
+        if ($order) {
             $order->update(['status' => OrderEnum::REFUSAL_ORDER]);
 
             // send and save notification in DB
             $user  = User::find($order->user_id);
             $data  = [
-              'pharmacy' => Auth::user(),
-              'order'    => $order,
-              'message'  => 'عذراً لا يتوفر لدينا طلبك'
+                'pharmacy' => Auth::user(),
+                'order'    => $order,
+                'message'  => 'عذراً لا يتوفر لدينا طلبك'
             ];
             Notification::send($user, new UserOrderNotification($data));
 

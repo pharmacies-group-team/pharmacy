@@ -9,8 +9,8 @@
       <div class="form-group">
         <label class="text-base">@lang('form.old-password') </label>
 
-        <input wire:model="oldPassword" type="password" class="form-control" placeholder="@lang('form.old-password')"
-          autocomplete="current-password">
+        <input wire:model.debounce.500md="oldPassword" type="password" class="form-control"
+          placeholder="@lang('form.old-password')" autocomplete="current-password">
         @error('oldPassword')
           <span class="error">{{ $message }}</span>
         @enderror
@@ -20,8 +20,8 @@
       <div class="form-group">
         <label class="text-base">@lang('form.new-password') </label>
 
-        <input wire:model="newPassword" type="password" class="form-control" placeholder="@lang('form.new-password')"
-          autocomplete="new-password">
+        <input wire:model.debounce.500md="newPassword" type="password" class="form-control"
+          placeholder="@lang('form.new-password')" autocomplete="new-password">
         @error('newPassword')
           <span class="error">{{ $message }}</span>
         @enderror
@@ -31,8 +31,8 @@
       <div class="form-group">
         <label class="text-base">@lang('form.confirm-new-password') </label>
 
-        <input placeholder="@lang('form.confirm-new-password') " wire:model="confirmPassword" type="password"
-          class="form-control" autocomplete="new-password">
+        <input placeholder="@lang('form.confirm-new-password') " wire:model.debounce.500md="confirmPassword"
+          type="password" class="form-control" autocomplete="new-password">
 
         @error('confirmPassword')
           <span class="error">{{ $message }}</span>

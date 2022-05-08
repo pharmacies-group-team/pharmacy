@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +16,6 @@
 
 <body class="bg-body">
 
-{{--  @include('includes.alert-web')--}}
 
   <!-- Left Panel -->
   @include('layouts.web.user-dashboard.sidebar')
@@ -34,7 +34,8 @@
     <div class="clearfix"></div>
   </div>
 
-<!-- Scripts -->
-@include('layouts.web.user-dashboard.script')
+  <!-- Scripts -->
+  @include('layouts.web.user-dashboard.script')
 </body>
+
 </html>

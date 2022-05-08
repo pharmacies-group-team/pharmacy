@@ -78,7 +78,7 @@
 
                   {{-- action --}}
                   <td>
-
+                    <livewire:orders.order-details :order="$order">
                   </td>
                 </tr>
               @endforeach

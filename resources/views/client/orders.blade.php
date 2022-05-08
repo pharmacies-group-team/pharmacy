@@ -1,14 +1,12 @@
 @extends('layouts/client/master')
 @php
-    use App\Enum\OrderEnum;
-    use App\Enum\PharmacyEnum;
+use App\Enum\OrderEnum;
+use App\Enum\PharmacyEnum;
 @endphp
+
 @section('content')
 
-  <div class="container px-5">
-    <x-alert type="status" />
-  </div>
-
+  <x-alert type="status" />
 
   <main class="container">
     <section class="section-header">
@@ -50,12 +48,11 @@
                 <td>
                   <div class="user-table">
 
-                    <img src="@if(isset($order->pharmacy->logo))
-                    {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH.$order->pharmacy->logo) }}
+                    <img
+                      src="@if (isset($order->pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->logo) }}
                     @else
-                    {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}
-                    @endif"
-                         alt="profile avatar">
+                    {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
+                      alt="profile avatar">
 
                     <a href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}" style="color: #3869BA">
                       {{ $order->pharmacy->name }}
@@ -112,27 +109,3 @@
     </div>
   </main>
 @stop
-
-@section('alpine-script')
-  <script>
-    function imageViewer() {
-      return {
-        imageUrl: '',
-
-        fileChosen(event) {
-          this.fileToDataUrl(event, src => this.imageUrl = src)
-        },
-
-        fileToDataUrl(event, callback) {
-          if (!event.target.files.length) return
-
-          let file = event.target.files[0],
-            reader = new FileReader()
-
-          reader.readAsDataURL(file)
-          reader.onload = e => callback(e.target.result)
-        },
-      }
-    }
-  </script>
-@endsection
