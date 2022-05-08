@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Filters\PharmacyFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class Pharmacy extends Model
 {
@@ -29,7 +31,7 @@ class Pharmacy extends Model
      */
     public function worktimes(): HasMany
     {
-      return $this->hasMany(Worktime::class);
+        return $this->hasMany(Worktime::class);
     }
 
     /**
@@ -61,3 +63,4 @@ class Pharmacy extends Model
         return PharmacyFactory::new();
     }
 }
+

@@ -11,6 +11,11 @@ use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\admin\AdController;
+use App\Http\Controllers\advertisement\advertisementController;
+use App\Http\Controllers\advertisement\AdvertisementController as AdvertisementAdvertisementController;
+
+use App\Http\Controllers\pharmacy\PharmacyController;
 use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -55,6 +60,17 @@ Route::controller(web\HomeController::class)->group(function () {
 */
 Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
   Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// change-password 
+Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+
+Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
+
+
+// pharmacies
+Route::resource('/pharmacies', PharmacyController::class);
 
   Route::controller(SettingController::class)->group(function () {
 

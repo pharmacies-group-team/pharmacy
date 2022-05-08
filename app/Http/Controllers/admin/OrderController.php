@@ -11,7 +11,6 @@ class OrderController extends Controller
 {
   public function index()
   {
-
     $orders=Order::select('id','user_id','pharmacy_id','address_id','status','created_at')->with(['user:id,name,avatar','pharmacy:id,name','pharmacy:id,name','address:id,desc'])->get();
 
     // return response($orders);

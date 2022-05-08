@@ -6,7 +6,7 @@ namespace App\Http\Controllers\client;
 use App\Enum\OrderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\OrderDetails;
+
 use App\Models\User;
 use App\Notifications\PharmacyOrderNotification;
 use App\Traits\UploadsTrait;
@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
-
+//	id	order	image	status	periodic	re_order_date	user_id	pharmacy_id	deleted_at	created_at	updated_at	
 class OrderController extends Controller
 {
   
@@ -58,13 +58,41 @@ class OrderController extends Controller
           'order'       => $request->input('order'),
         ]);
 
-        $pharmacy = User::find($request->input('pharmacy_id'));
+       $client = User::find($request->input('pharmacy_id'));
         $data     = ['client' => Auth::user(), 'order' => $order];
 
         // send and save notification in DB
+
         Notification::send($pharmacy, new PharmacyOrderNotification($data));
+
+        Notification::send($client, new UserOrderNotification($data));
 
         return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
     }
 
+  public function show($id)
+  {
+   $client = Order::with(['user', 'pharmacy', 'addresse'])->where('id', $id)->get();
+
+    return response($client);
+  }
+    //Data to display:
+
+// user name.
+
+// user avatar
+
+// date of order (created_at)
+
+// pharmacy name
+
+// pharmacy id
+
+// address (delivery location for user)
+
+// order
+
+// image
+
+// status order
 }
