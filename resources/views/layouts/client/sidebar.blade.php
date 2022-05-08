@@ -20,7 +20,8 @@
 
     {{-- profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif" href="{{ route('client.account-settings') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
+        href="{{ route('client.account-settings') }}">
 
         <x-icon icon="profile" />
 
@@ -41,8 +42,7 @@
 
     {{-- orders --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif"
-         href="{{ route('client.address') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
         {{-- TODO --}}
         <x-icon icon="order" />
 
