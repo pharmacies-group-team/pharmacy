@@ -25,10 +25,18 @@ use App\Enum\PharmacyEnum;
 
       {{-- user avatar --}}
       @if (isset($pharmacy))
-        <div class="nav-avatar">
+        <div class="nav-avatar t-dropdown" x-data="{ dropdown: false }" @mouseover="dropdown = true"
+          @mouseover.away="dropdown = false">
+
           <img
-            src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-            width="50%" class="rounded-circle img-fluid" alt="">
+            src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif">
+
+
+          <form class="dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
+            @csrf
+
+            <button type="submit">Log out</button>
+          </form>
         </div>
       @endif
     </div>

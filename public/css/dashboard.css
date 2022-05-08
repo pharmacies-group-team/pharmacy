@@ -1534,11 +1534,11 @@ svg {
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
 
-.dropdown{
+.t-dropdown{
   position: relative;
 }
 
-.dropdown-item{
+.t-dropdown-item{
   position: absolute;
   bottom: -2.25rem;
   left: 50%;
@@ -1557,14 +1557,14 @@ svg {
   line-height: 1.25rem;
 }
 
-.dropdown-item button{
+.t-dropdown-item button{
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
 
-.dropdown-item button:hover{
+.t-dropdown-item button:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(88 143 244 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;

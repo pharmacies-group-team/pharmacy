@@ -1,5 +1,13 @@
 # Project and code roles
 
+## for custom css class you should use `t-` prefix
+
+```css
+.t-modal {
+  color: red;
+}
+```
+
 ## lang
 
 ```php

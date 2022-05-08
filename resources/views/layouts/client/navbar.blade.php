@@ -29,7 +29,7 @@ $user = User::find(Auth::id());
 
       {{-- user avatar --}}
       @if (isset($user))
-        <div class="nav-avatar dropdown" x-data="{ dropdown: false }" @mouseover="dropdown = true"
+        <div class="nav-avatar t-dropdown" x-data="{ dropdown: false }" @mouseover="dropdown = true"
           @mouseover.away="dropdown = false">
           <img
             src="@if (isset($user->avatar)) {{ asset(UserEnum::USER_AVATAR_PATH . $user->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif">
