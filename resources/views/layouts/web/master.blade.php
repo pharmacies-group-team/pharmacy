@@ -24,7 +24,6 @@
   @yield('alpine-script')
   <script src="{{ asset('js/alpine.min.js') }}"></script>
 
-  @include('includes.alert-web')
   {{-- Navbar --}}
   @include('layouts.web.navbar')
 

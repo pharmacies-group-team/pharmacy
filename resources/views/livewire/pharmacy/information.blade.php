@@ -1,12 +1,7 @@
 <div class="profile-form">
   <form>
-    <div>
-      @if (session()->has('message'))
-        <div class="alert-box">
-          {{ session('message') }}
-        </div>
-      @endif
-    </div>
+    <x-alert type="message" />
+
     {{-- name --}}
     <div class="form-group">
       <label for="pharmacy-name" class="text-base">اسم الصيدلية:</label>
@@ -25,7 +20,7 @@
         {{-- city --}}
         <select wire:model="cityID" id="pharmacy-address" class="form-control">
           <option selected disabled>حدد اسم المدينة</option>
-          @foreach($cities as $city)
+          @foreach ($cities as $city)
             <option value="{{ $city->id }}">{{ $city->name }}</option>
           @endforeach
         </select>
@@ -33,7 +28,7 @@
         {{-- directorates --}}
         <select wire:model="directorateID" id="pharmacy-address" class="form-control">
           <option selected disabled>حدد اسم المديرية</option>
-          @foreach($directorates as $directorate)
+          @foreach ($directorates as $directorate)
             <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
           @endforeach
         </select>
@@ -41,7 +36,7 @@
         {{-- neighborhoods --}}
         <select wire:model="neighborhoodID" id="pharmacy-address" class="form-control">
           <option selected disabled>حدد اسم الحي</option>
-          @foreach($neighborhoods as $neighborhood)
+          @foreach ($neighborhoods as $neighborhood)
             <option>{{ $neighborhood->name }}</option>
           @endforeach
         </select>
