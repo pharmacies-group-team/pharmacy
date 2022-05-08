@@ -22,10 +22,34 @@ class Address extends Model
     }
 
     /**
-     * Get Neighborhood
+     * validation
      */
-    public function neighborhood(): BelongsTo
+    public static function roles()
     {
-        return $this->belongsTo(Neighborhood::class);
+      return [
+        'phone'        => 'required|regex:/^([0-9]*)$/|not_regex:/[a-z]/|min:8|max:9|starts_with:77,73,71,70,0',
+        'name'         => 'required|max:100|string',
+        'type_address' => 'required'
+      ];
+    }
+
+    /**
+     * messages
+     */
+    public static function messages()
+    {
+      return
+        [
+          'phone.required'        => 'يجب إدخال رقم الهاتف.',
+          'phone.not_regex'       => 'لا يمكنك ادخال حروف او رموز.',
+          'phone.regex'           => 'لا يمكنك ادخال حروف او رموز.',
+          'phone.min'             => 'يجب ألا يقل عن 8 أرقام.',
+          'phone.max'             => 'يجب أن لا يزيد عن 9 أرقام.',
+          'phone.starts_with'     => 'الرجاء إدخال رقم هاتف صحيح.',
+          'name.required'         => 'يجب إدخال الاسم.',
+          'name.max'              => 'يجب ألا يكون الاسم أكبر من 100 حرف.',
+          'name.string'           => 'يجب ان يكون الاسم نصاً.',
+          'type_address.required' => 'يجب تحديد نوع العنوان.'
+        ];
     }
 }

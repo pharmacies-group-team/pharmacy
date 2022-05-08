@@ -14,10 +14,16 @@ class DashboardController extends Controller
     {
         return view('client.index');
     }
-    public function getProfile()
-    {
-        $client = User::find(Auth::id());
 
-        return view('client.profile', compact('client'));
+
+    public function accountSettings()
+    {
+        $user = Auth::user();
+        return view('client.account-setting', compact('user'));
+    }
+
+    public function address()
+    {
+        return view('client.address');
     }
 }

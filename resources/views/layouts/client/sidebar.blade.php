@@ -20,7 +20,7 @@
 
     {{-- profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.profile') active @endif" href="{{ route('client.profile') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif" href="{{ route('client.account-settings') }}">
 
         <x-icon icon="profile" />
 
@@ -38,5 +38,17 @@
         <span>إدارة الطلبات</span>
       </a>
     </li>
+
+    {{-- orders --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif"
+         href="{{ route('client.address') }}">
+        {{-- TODO --}}
+        <x-icon icon="order" />
+
+        <span>إدارة عناوين التوصيل </span>
+      </a>
+    </li>
+
   </ul>
 </nav>

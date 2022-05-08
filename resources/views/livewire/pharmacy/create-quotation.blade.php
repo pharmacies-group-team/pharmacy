@@ -1,86 +1,123 @@
 {{-- TODO --}}
 
-@if (session()->has('message'))
-  <div>
-    {{ session('message') }}
+<div class="profile-form">
+  @if (session()->has('message'))
+    <div class="alert-box">
+      {{ session('message') }}
+    </div>
+  @endif
+  {{-- form --}}
+  <div style="display:flex; gap: 12px; align-items: center">
+    <input hidden name="order" value="{{ $order }}">
+    <div class="form-group">
+      <label class="text-base">اسم المنتج </label>
+
+      <input type="text" wire:model="product_name.0" class="form-control">
+      @error('product_name.0')
+      <span>{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <label class="text-base">نوع المنتج </label>
+
+{{--      <input type="text" wire:model="product_unit.0" class="form-control">--}}
+      <select wire:model="product_unit.0" class="form-control">
+        <option selected>حدد نوع المنتج</option>
+        <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
+        <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
+        <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
+      </select>
+      @error('product_unit.0')
+      <span>{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <label class="text-base">الكمية </label>
+
+      <input type="number" wire:model="quantity.0" class="form-control">
+      @error('quantity.0')
+      <span>{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <label class="text-base">سعر المنتج </label>
+
+      <input type="text" wire:model="price.0" class="form-control">
+      @error('price.0')
+      <span>{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <label class="text-base">العملة</label>
+
+      <input type="text" wire:model.defer="currency.0" class="form-control">
+      @error('currency.0')
+      <span>{{ $message }}</span>
+      @enderror
+    </div>
+    <button style="background: #4e7dcb;color: #fff;padding: 5px 20px;border-radius: 8px;" wire:click.prevent="add({{$i}})">إضافة</button>
   </div>
-@endif
-
-<div>
-  <input hidden name="order" value="{{ $order }}">
-
-  product_name<input type="text" wire:model="product_name.0">
-  @error('product_name.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
-
-  product_unit<input type="text" wire:model="product_unit.0">
-  @error('product_unit.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
-
-  quantity<input type="number" wire:model="quantity.0">
-  @error('quantity.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
-
-  price<input type="text" wire:model="price.0">
-  @error('price.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
-
-  currency<input type="text" wire:model.defer="currency.0">
-  @error('currency.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
-
-{{--  total<input type="text" wire:model.defer="total.0">--}}
-{{--  @error('total.0')--}}
-{{--  <span>{{ $message }}</span>--}}
-{{--  @enderror--}}
-
-  <button wire:click.prevent="add({{$i}})">Add</button> <hr>
-
-{{--  <button wire:click.prevent="storeQuotation()">save</button>--}}
-
   @foreach($inputs as $key => $value)
 
-    <input hidden name="order" value="{{ $order }}">
+    <div style="display:flex; gap: 12px; align-items: center">
+      <div class="form-group">
+        <label class="text-base">اسم المنتج </label>
 
-    product_name<input type="text" wire:model="product_name.{{ $value }}" >
-    @error('product_name'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+        <input type="text" wire:model="product_name.{{ $value }}" class="form-control">
+        @error('product_name'.$value)
+        <span>{{ $message }}</span>
+        @enderror
+      </div>
 
-    product_unit<input type="text" wire:model="product_unit.{{ $value }}">
-    @error('product_unit'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+      <div class="form-group">
+        <label class="text-base">نوع المنتج </label>
 
-    quantity<input type="number" wire:model="quantity.{{ $value }}">
-    @error('quantity'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+{{--        <input type="text" wire:model="product_unit.{{ $value }}" class="form-control">--}}
+        <select wire:model="product_unit.{{ $value }}" class="form-control">
+          <option selected>حدد نوع المنتج</option>
+          <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
+          <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
+          <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
+        </select>
+        @error('product_unit'.$value)
+        <span>{{ $message }}</span>
+        @enderror
+      </div>
 
-    price<input type="text" wire:model="price.{{ $value }}">
-    @error('price'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+      <div class="form-group">
+        <label class="text-base">الكمية </label>
 
-    currency<input type="text" wire:model.defer="currency.{{ $value }}">
-    @error('currency'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+        <input type="number" wire:model="quantity.{{ $value }}" class="form-control">
+        @error('quantity'.$value)
+        <span>{{ $message }}</span>
+        @enderror
+      </div>
 
-{{--    total<input type="text" wire:model.defer="total.{{ $value }}">--}}
-{{--    @error('total'.$value)--}}
-{{--    <span>{{ $message }}</span>--}}
-{{--    @enderror--}}
+      <div class="form-group">
+        <label class="text-base">سعر المنتج </label>
 
-    <button wire:click.prevent="remove({{$key}})">remove</button> <hr>
+        <input type="text" wire:model="price.{{ $value }}" class="form-control">
+        @error('price'.$value)
+        <span>{{ $message }}</span>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label class="text-base">العملة</label>
+
+        <input type="text" wire:model.defer="currency.{{ $value }}" class="form-control">
+        @error('currency'.$value)
+        <span>{{ $message }}</span>
+        @enderror
+      </div>
+      <button style="background: #B13232;color: #fff;padding: 5px 20px;border-radius: 8px;" wire:click.prevent="remove({{$key}})">حذف</button>
+
+    </div>
 
   @endforeach
-
-  <button type="button" wire:click.prevent="storeQuotation()" class="btn btn-success btn-sm">Save</button>
-
+  <button wire:click.prevent="storeQuotation()" class="btn btn-full">حفظ</button>
 </div>

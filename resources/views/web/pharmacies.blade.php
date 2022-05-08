@@ -2,98 +2,12 @@
 
 @section('title') Pharmacies @stop
 
-@php
-use App\Enum\PharmacyEnum;
-@endphp
-
 @section('content')
 
   <main class="pharmacies" x-data="{ addOrderModal: false, pharmacy: {} }">
     <div class="pharmacies-bg"></div>
 
-    {{-- page header --}}
-    <section class="container">
-      <form action="" method="GET" class="pharmacies-header">
-        {{-- address --}}
-        <div class="header-select">
-          {{-- cities --}}
-          <select class="form-control" name="city">
-            @foreach ($cities as $city)
-              <option value="{{ $city->id }}">{{ $city->name }}</option>
-            @endforeach
-          </select>
-
-
-          {{-- directorates --}}
-          <select class="form-control" name="directorate">
-            @foreach ($directorates as $directorate)
-              <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
-            @endforeach
-          </select>
-
-
-          {{-- neighborhood --}}
-          <select class="form-control" name="neighborhood">
-            @foreach ($neighborhoods as $neighborhood)
-              <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
-            @endforeach
-          </select>
-
-        </div>
-
-        {{-- search --}}
-        <div class="header-input">
-          <div class="search-group">
-            {{-- search input --}}
-            <input type="search" class="form-control" name="search-query" placeholder="بحث">
-
-            <button type="submit">
-              <x-icon icon="search" />
-            </button>
-          </div>
-        </div>
-      </form>
-    </section>
-
-    {{-- pharmacies list --}}
-    @if (isset($pharmacies))
-      <section class="list container">
-        @foreach ($pharmacies as $pharmacy)
-          <article class="item">
-            <a class="item-header" href="{{ route('show.pharmacy.profile', $pharmacy->id) }}">
-              {{-- logo --}}
-              <img
-                src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-                width="50%" class="item-logo" alt="pharmacy logo">
-
-              {{-- content --}}
-              <div>
-                <h3 class="item-title">
-                  {{ $pharmacy->name }}
-                </h3>
-
-                @if (isset($pharmacy->neighborhood->name))
-                  <div class="item-address">
-                    <x-icon icon='location' />
-
-                    <div>
-                      <span>
-                        {{ $pharmacy->neighborhood->name }} /
-                      </span>
-                      <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
-                    </div>
-                  </div>
-                @endif
-              </div>
-            </a>
-
-            {{-- action --}}
-            <button class="btn btn-full item-link" @click="addOrderModal = true; pharmacy = {{ $pharmacy }}">أطلب
-              دوائك</button>
-          </article>
-        @endforeach
-      </section>
-    @endif
+    <livewire:search />
 
     {{-- modals --}}
     <x-modal open="addOrderModal" title="اضافة طلب">

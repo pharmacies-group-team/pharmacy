@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\OrderFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -74,4 +75,9 @@ class Order extends Model
             'order.max'              => 'يجب ألا يكون النص أكبر من 255 من الأحرف.'
           ];
     }
+
+  protected static function newFactory()
+  {
+    return OrderFactory::new();
+  }
 }

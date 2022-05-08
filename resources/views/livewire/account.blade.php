@@ -22,6 +22,17 @@
       @enderror
     </div>
 
+    {{-- phone --}}
+    <div class="form-group">
+      <label class="text-base">@lang('form.phone')</label>
+      <input wire:model="phone" type="number" class="form-control" placeholder="@lang('form.phone')">
+
+      @error('phone')
+        <span class="error">{{ $message }}</span>
+      @enderror
+    </div>
+
     <button wire:click.prevent="store()" class="btn btn-full">@lang('form.update')</button>
+
   </form>
 </div>

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use function PHPUnit\Framework\returnArgument;
 
 class OrderController extends Controller
 {
@@ -27,7 +28,7 @@ class OrderController extends Controller
   public function showOrder($id)
   {
     $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
-    return response($order);
+    return view('client.details-order', compact('order'));
   }
 
   public function storeOrder(Request $request): RedirectResponse

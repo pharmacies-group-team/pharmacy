@@ -39,7 +39,7 @@
               @foreach ($orders as $order)
                 <tr>
                   {{-- id --}}
-                  <td>{{ $order->id }} </td>
+                  <td><a href="{{ route('pharmacy.orders.single', $order->id) }}">{{ $order->id }} </a></td>
 
                   {{-- status --}}
                   <td>
