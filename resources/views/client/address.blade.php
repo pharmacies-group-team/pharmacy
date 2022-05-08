@@ -4,7 +4,7 @@
 
 @section('content')
 
-  @include('includes.alerts')
+{{--  @include('includes.alerts')--}}
 
   <main>
     <livewire:client.address  />

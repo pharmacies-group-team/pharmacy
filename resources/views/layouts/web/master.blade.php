@@ -24,7 +24,7 @@
   @yield('alpine-script')
   <script src="{{ asset('js/alpine.min.js') }}"></script>
 
-  @include('includes.alert-web')
+{{--  @include('includes.alert-web')--}}
   {{-- Navbar --}}
   @include('layouts.web.navbar')
 
@@ -44,11 +44,10 @@
   {{-- scripts --}}
   @include('layouts.web.script')
 
-  @livewireScripts()
 
   @yield('script')
 
-
+  @livewireScripts()
 </body>
 
 </html>

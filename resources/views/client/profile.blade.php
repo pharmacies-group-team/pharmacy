@@ -2,7 +2,7 @@
 @section('content')
 
   <div class="container px-5">
-    @include('includes.alerts')
+{{--    @include('includes.alerts')--}}
   </div>
 
   <main class="pharmacy-profile">

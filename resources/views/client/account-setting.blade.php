@@ -5,7 +5,7 @@
 @section('content')
 
 
-  @include('includes.alerts')
+{{--  @include('includes.alerts')--}}
 
   <main class="pharmacy-profile">
     <div class="pharmacy-info">

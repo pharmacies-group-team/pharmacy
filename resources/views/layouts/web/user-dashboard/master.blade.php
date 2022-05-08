@@ -15,7 +15,7 @@
 
 <body class="bg-body">
 
-  @include('includes.alert-web')
+{{--  @include('includes.alert-web')--}}
 
   <!-- Left Panel -->
   @include('layouts.web.user-dashboard.sidebar')
