@@ -10,24 +10,24 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('pharmacy.dashboard.index');
+        return view('pharmacy.index');
     }
 
     public function profile()
     {
         $pharmacy = Auth::user()->pharmacy()->first();
 
-        return view('pharmacy.dashboard.profile', compact('pharmacy'));
+        return view('pharmacy.profile', compact('pharmacy'));
     }
 
     public function messages()
     {
-        return view('pharmacy.dashboard.messages');
+        return view('pharmacy.messages');
     }
 
     public function accountSettings()
     {
         $user = Auth::user();
-        return view('pharmacy.dashboard.account-settings', compact('user'));
+        return view('pharmacy.account-settings', compact('user'));
     }
 }

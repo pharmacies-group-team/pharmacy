@@ -17,7 +17,7 @@ class SettingController extends Controller
 
   public function index()
   {
-    return view('pharmacy.dashboard.setting');
+    return view('pharmacy.setting');
   }
 
   //  public function updateAccount(Request $request)

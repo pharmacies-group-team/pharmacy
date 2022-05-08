@@ -41,6 +41,6 @@ class HomeController extends Controller
   {
     $pharmacy = Pharmacy::find($id);
 
-    return view('pharmacy.profile', compact('pharmacy'));
+    return view('web.profile', compact('pharmacy'));
   }
 }
