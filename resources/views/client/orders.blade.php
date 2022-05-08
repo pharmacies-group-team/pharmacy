@@ -1,10 +1,9 @@
 @extends('layouts/client/master')
 @section('content')
 
-  <div class="container px-5">
-    <x-alert type="status" />
-  </div>
+  @php use App\Enum\OrderEnum; @endphp
 
+  <x-alert type="status" />
 
   <main class="container">
     <section class="section-header">
@@ -70,7 +69,7 @@
 
                 {{-- action --}}
                 <td>
-
+                  <livewire:orders.order-details :order="$order" />
                 </td>
               </tr>
             @endforeach

@@ -52,26 +52,3 @@
   </x-modal>
 
 </div>
-
-{{-- { 
-  order:{
-    "id":1,
-    "order":"djkfjl jljljfdljjlkfj lkjlkjfdkjkjfkkdjlkjfkjdkjklfjk jk",
-   "image":"16520242596231695.jpg",
-   "status":"NEW",
-   "periodic":0,
-   "re_order_date":null,
-   "user_id":3,
-   "pharmacy_id":2,
-   "deleted_at":null,
-   "created_at":"2022-05-08T15:37:39.000000Z",
-   "updated_at":"2022-05-08T15:37:39.000000Z",
-   "user":{
-     "id":3,
-     "name":"client",
-     "avatar":"16520174541483500340.png",
-     "email":"client@gmail.com",
-     "phone":null,
-     "email_verified_at":"2022-05-06T20:42:10.000000Z",
-     "is_active":1,"created_at":"2022-05-06T20:42:10.000000Z","updated_at":"2022-05-08T13:44:14.000000Z"}
-  }} --}}
