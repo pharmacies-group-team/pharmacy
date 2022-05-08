@@ -5,11 +5,15 @@ namespace App\Http\Controllers\pharmacy;
 //quotation_details
 use App\Http\Controllers\Controller;
 use App\Models\Pharmacy;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class PharmacyController extends Controller
 {
+
+
+
   /**
    * Display a listing of the resource.
    *
@@ -97,4 +101,8 @@ class PharmacyController extends Controller
   {
     return Pharmacy::where('id', $id)->delete() ? "deleted" : 'not deleted';
   }
+
+
+
+
 }

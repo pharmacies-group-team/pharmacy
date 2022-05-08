@@ -39,13 +39,20 @@ class Order extends Model
     }
 
     /**
-     * Get Client
+     * Get User
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+
+    /**
+     * Get Address
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     /**
      * validation
      */
@@ -53,7 +60,7 @@ class Order extends Model
     {
         return
           [
-            'image' => 'required_without:order|image|mimes:jpeg,jpg,png,svg|max:2048|file',
+            'image' => 'required_without:order|image|mimes:jpeg,jpg,png,svg|max:2048',
             'order' => 'required_without:image|string|max:255|nullable'
           ];
     }

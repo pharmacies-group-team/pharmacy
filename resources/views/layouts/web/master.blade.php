@@ -13,15 +13,16 @@
 
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
-  @livewireStyles
   <title>@yield('title')</title>
+
+  @livewireStyles()
 
 </head>
 
 <body>
   {{-- run alpinejs before any html element --}}
   @yield('alpine-script')
-  <script src="{{ asset('js/alpine.min.js') }}"></script>i
+  <script src="{{ asset('js/alpine.min.js') }}"></script>
 
   @include('includes.alert-web')
   {{-- Navbar --}}
@@ -42,7 +43,8 @@
 
   {{-- scripts --}}
   @include('layouts.web.script')
-  @livewireScripts
+
+  @livewireScripts()
 
 </body>
 

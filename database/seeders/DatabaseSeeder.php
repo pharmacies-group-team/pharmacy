@@ -20,5 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(WebInfoSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(PharmacySeeder::class);
+        $this->call(AddressSeeder::class);
+        $this->call(OrderSeeder::class);
+
     }
 }

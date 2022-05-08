@@ -44,10 +44,13 @@ Debugbar::disable();
 //   return view('client.profile');
 // });
 
+
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
+
+
 });
 
 /*
@@ -120,13 +123,28 @@ Route::prefix('/pharmacy')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
     });
 
+
+    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+
+    /*------------------------------ orders ------------------------------*/
+//     Route::get('/orders', [pharmacy\OrderController::class, 'index'])
+//   ->name('orders');
+//   });
     Route::controller(pharmacy\OrderController::class)
       ->prefix('/orders')->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
         Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
       });
 
-    Route::get('/quotation/{id}', [pharmacy\QuotationController::class, 'createQuotation'])->name('quotation.create');
+
+    Route::controller(pharmacy\QuotationController::class)
+      ->prefix('/quotation')->name('quotation.')->group(function (){
+
+        Route::get('/', 'getAll')->name('index');
+        Route::get('/{id}', 'createQuotation')->name('create');
+
+      });
+
   });
 /*
 |--------------------------------------------------------------------------
@@ -175,8 +193,8 @@ Route::prefix('/admin')
     });
 
     /*------------------------------ orders ------------------------------*/
-    // Route::get('/orders', [admin\OrderController::class, 'index'])
-    //   ->name('admin.orders'); // TODO
+    Route::get('/orders', [admin\OrderController::class, 'index'])
+      ->name('admin.orders'); // TODO
 
     // pharmacies
     Route::controller(admin\PharmacyController::class)->group(function () {
@@ -202,9 +220,24 @@ Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleE
 
   Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
-  Route::controller(client\OrderController::class)->group(function () {
-    Route::post('/order', 'order')->name('order');
+
+  Route::resource('/addresses', client\AddressController ::class);
+
+//   Route::get('/orders', [client\OrderController::class, 'index'])->name('orders');
+
+
+
+  Route::controller(client\OrderController::class)
+    ->prefix('/orders')->name('order.')->group(function (){
+
+    Route::get('/', 'getAll')->name('index');
+    Route::post('/', 'storeOrder')->name('store');
+    Route::get('/{id}', 'showOrder')->name('show');
+
   });
 });
+
+// TESTING
+Route::view('/clients/order', '0-testing.create-order');
 
 Auth::routes(['verify' => true]);

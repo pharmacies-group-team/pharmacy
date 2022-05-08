@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+
             $table->string('order')->nullable();
             $table->string('image')->nullable();
 
@@ -31,6 +32,9 @@ return new class extends Migration
 
             $table->foreignId('pharmacy_id');
             $table->foreign('pharmacy_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreignId('address_id');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();

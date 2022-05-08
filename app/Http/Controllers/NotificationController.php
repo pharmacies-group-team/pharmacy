@@ -12,7 +12,7 @@ class NotificationController extends Controller
     {
       $notifications = auth()->user()->notifications;
 
-      return response($notifications);
+      return view('0-testing.all-notification', compact('notifications'));
     }
 
     public function read(Request $request)

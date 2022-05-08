@@ -9,13 +9,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserOrderNotification extends Notification implements ShouldQueue
+class PharmacyOrderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $user;
-    public $order;
-    public $message;
+    protected $user;
+    protected $order;
 
     /**
      * Create a new notification instance.
@@ -24,13 +23,11 @@ class UserOrderNotification extends Notification implements ShouldQueue
      */
     public function __construct($data = [])
     {
-      $this->user    = new User();
-      $this->user    = $data['pharmacy'];
+        $this->user  = new User();
+        $this->user  = $data['client'];
 
-      $this->order   = new Order();
-      $this->order   = $data['order'];
-
-      $this->message = $data['message'];
+        $this->order = new Order();
+        $this->order = $data['order'];
     }
 
     /**
@@ -41,7 +38,7 @@ class UserOrderNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-      return [ 'database'];
+        return [ 'database'];
     }
 
     /**
@@ -66,10 +63,10 @@ class UserOrderNotification extends Notification implements ShouldQueue
      */
     public function toArray($notifiable)
     {
-        return [
-          'pharmacy_name' => $this->user->pharmacy->name,
-          'pharmacy_logo' => $this->user->pharmacy->logo,
-          'order_id'      => $this->order->id,
-        ];
+      return [
+        'client_name'   => $this->user->name,
+        'client_avatar' => $this->user->avatar,
+        'order_id'      => $this->order->id
+      ];
     }
 }
