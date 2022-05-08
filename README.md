@@ -12,12 +12,13 @@
 
 ```php
 {{ __('client.profile') }}
+@lang('client.profile') // better
 ```
 
 ## livewire
 
 ```bash
-php artisan make:livewire user/profile
+php artisan make:livewire orders/order-details
 
 
 ```
