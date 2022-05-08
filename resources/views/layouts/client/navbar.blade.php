@@ -34,7 +34,7 @@ $user = User::find(Auth::id());
           <img
             src="@if (isset($user->avatar)) {{ asset(UserEnum::USER_AVATAR_PATH . $user->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif">
 
-          <form class="dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
+          <form class="t-dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
             @csrf
 
             <button type="submit">Log out</button>

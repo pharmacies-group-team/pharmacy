@@ -34,55 +34,7 @@ use App\Enum\UserEnum;
 
     {{-- avatar --}}
     @if (isset($avatar))
-      <div class="upload-image" x-data="{ uploadImageModal: false }">
-        <img src="{{ asset(UserEnum::USER_AVATAR_PATH . $avatar) }}" alt="profile avatar" class="avatar">
-
-        <button class="update-btn" @click="uploadImageModal = true">
-          <x-icon icon='camera' />
-        </button>
-
-        {{-- modal --}}
-        <x-modal title='upload image' open="uploadImageModal">
-          <div x-data="imageViewer" class="image-file-upload">
-
-            <div class="file-upload" @click="$refs.inputFileOrder.click()">
-              {{-- add image input --}}
-              <template x-if="!imageUrl">
-                <div>
-                  <x-icon icon='add-image' />
-
-                  <p class="title">@lang('form.add-image') </p>
-                </div>
-              </template>
-
-              {{-- image viewer --}}
-              <template x-if="imageUrl">
-                <div class="viewer-image">
-                  <img :src="imageUrl" width="100%">
-                </div>
-              </template>
-            </div>
-
-            @error('image')
-              <span class="text-danger" role="alert">
-                {{ $message }}
-              </span>
-            @enderror
-
-            {{-- form --}}
-            <form action="{{ route('setting.update.avatar') }}" method="POST" enctype="multipart/form-data">
-              @csrf
-
-              {{-- file --}}
-              <input type="file" name="avatar" x-ref="inputFileOrder" @change="fileChosen">
-
-              <button type="submit" class="btn btn-full">
-                @lang('form.update-image')
-              </button>
-            </form>
-          </div>
-        </x-modal>
-      </div>
+      <x-image :image="asset(UserEnum::USER_AVATAR_PATH . $avatar)" :uploadTo="route('setting.update.avatar')" name="avatar" />
     @endif
   </div>
 </div>

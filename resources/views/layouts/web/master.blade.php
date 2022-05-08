@@ -20,9 +20,6 @@
 </head>
 
 <body>
-  {{-- run alpinejs before any html element --}}
-  @yield('alpine-script')
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
 
   {{-- Navbar --}}
   @include('layouts.web.navbar')
@@ -46,6 +43,9 @@
   @livewireScripts()
 
   @yield('script')
+
+  @yield('alpine-script')
+  <script src="{{ asset('js/alpine.min.js') }}"></script>
 
 
 </body>

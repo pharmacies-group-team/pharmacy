@@ -14,9 +14,6 @@
 </head>
 
 <body>
-  {{-- load alpinejs before any html element #fix modal light show/hide issues --}}
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
-
   <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
     @include('layouts.pharmacy.sidebar')
@@ -30,6 +27,9 @@
   </div>
 
   @livewireScripts()
+  {{-- load alpinejs before any html element #fix modal light show/hide issues --}}
+  @yield('alpine-script')
+  <script src="{{ asset('js/alpine.min.js') }}"></script>
 
 </body>
 

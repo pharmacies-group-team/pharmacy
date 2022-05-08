@@ -1,5 +1,9 @@
 @php
-use App\Enum\PharmacyEnum;
+use App\Enum\UserEnum;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+$user = User::find(Auth::id());
 @endphp
 
 <header>
@@ -24,15 +28,15 @@ use App\Enum\PharmacyEnum;
       </div>
 
       {{-- user avatar --}}
-      @if (isset($pharmacy))
+      @if (isset($user))
         <div class="nav-avatar t-dropdown" x-data="{ dropdown: false }" @mouseover="dropdown = true"
           @mouseover.away="dropdown = false">
 
           <img
-            src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif">
+            src="@if (isset($user->avatar)) {{ asset(UserEnum::USER_AVATAR_PATH . $user->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif">
 
 
-          <form class="dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
+          <form class="t-dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
             @csrf
 
             <button type="submit">Log out</button>
