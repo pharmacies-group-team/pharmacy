@@ -6,58 +6,56 @@ use App\Models\City;
 use App\Models\Directorate;
 use App\Models\Neighborhood;
 use App\Models\Pharmacy;
+use Illuminate\Pagination\Paginator;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Search extends Component
 {
-    public $pharmacies;
+    use WithPagination;
 
-    public $searchQuery;
+    public $search = '';
 
     public $cities, $cityID;
     public $directorates, $directorateID;
     public $neighborhoods, $neighborhoodID;
 
+    public $neighborhoodPharmacies;
+
+    public $currentPage = 1;
+
     public function mount()
     {
       $this->cities  = City::orderby('name')->get();
-      $this->pharmacies = new Pharmacy();
 
-      if ($this->cityID != '') {
-        $this->directorates = Directorate::where('city_id', $this->cityID)->orderby('name')->get();
-      }
-      else {
+      $this->cityID != '' ?
+        $this->directorates = Directorate::where('city_id', $this->cityID)->orderby('name')->get():
         $this->directorates = [];
-      }
 
-      if ($this->directorateID != '') {
-        $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)->orderby('name')->get();
-      }
-      else {
+      $this->directorateID != '' ?
+        $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)->orderby('name')->get():
         $this->neighborhoods = [];
-      }
-      if ($this->neighborhoodID != '') {
-        $this->pharmacies  = Pharmacy::where('neighborhood_id', $this->neighborhoodID)->get();
-      }
-      else {
-        $this->pharmacies = Pharmacy::all();
-      }
+
     }
 
     public function render()
     {
-//      $this->searchQuery != '' ?
-//        $this->pharmacies = Pharmacy::where('name', 'like', $this->searchQuery)->get():
-//        $this->pharmacies = Pharmacy::all();
-      $this->pharmacies = $this->pharmacies;
-
-        return view('livewire.search');
+        return view('livewire.search', [
+          'pharmacies' => $this->fillter()
+        ]);
     }
 
-    public function updatedsearchQuery()
+    public function fillter()
     {
-      $searchTerm = '%' . 'Dream' . '%';
-      $this->pharmacies = Pharmacy::where('name', 'like', $searchTerm)->get();
+      if ($this->neighborhoodID != ''){
+        return Pharmacy::where('neighborhood_id', $this->neighborhoodID)->paginate(12) ;
+      }
+      elseif ($this->directorateID != ''){
+        Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
+      }
+      else
+        return Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
+
     }
 
     public function updatedcityID()
@@ -66,16 +64,20 @@ class Search extends Component
         ->orderby('name')->get();
     }
 
-    public function updatedneighborhoodID()
-    {
-//      dd($this->neighborhoodID);
-      $this->pharmacies  = Pharmacy::where('neighborhood_id', $this->neighborhoodID)->get();
-    }
-
-
     public function updateddirectorateID()
     {
       $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)
         ->orderby('name')->get();
+    }
+
+//    public function updatedneighborhoodID()
+//    {
+//      $this->neighborhoodPharmacies = $this->neighborhoodID;
+//    }
+
+    // Resetting Pagination After Filtering Data
+    public function updatedSearch()
+    {
+      $this->resetPage();
     }
 }
