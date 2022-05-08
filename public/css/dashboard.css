@@ -803,7 +803,7 @@ textarea.form-control{
   line-height: 1.25rem;
 }
 
-.modal{
+.t-modal{
   position: fixed;
   top: 0px;
   left: 0px;
@@ -811,7 +811,7 @@ textarea.form-control{
   height: 100vh;
   width: 100vw;
   background-color: rgb(31 41 55 / 0.4);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding-left: 1.5rem;
@@ -820,7 +820,11 @@ textarea.form-control{
   overflow: auto;
 }
 
-.modal-container{
+.t-modal.open{
+  display: flex;
+}
+
+.t-modal-container{
   width: 100%;
   max-width: 35rem;
   border-radius: 0.25rem;
@@ -830,12 +834,12 @@ textarea.form-control{
   color: rgb(78 125 203 / var(--tw-text-opacity));
 }
 
-.modal .title{
+.t-modal .title{
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
 
-.modal-header{
+.t-modal-header{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -849,12 +853,12 @@ textarea.form-control{
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.modal-header .close-btn .icon{
+.t-modal-header .close-btn .icon{
   height: 2rem;
   width: 2rem;
 }
 
-.modal-content{
+.t-modal-content{
   max-height: 24rem;
   min-height: 10rem;
   overflow-y: scroll;
@@ -864,7 +868,7 @@ textarea.form-control{
   padding-right: 1.5rem;
 }
 
-.modal-footer{
+.t-modal-footer{
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.75rem;
