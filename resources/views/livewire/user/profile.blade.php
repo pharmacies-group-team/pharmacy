@@ -31,10 +31,5 @@ use App\Enum\UserEnum;
         <button type="submit" class="btn btn-full">@lang('form.update')</button>
       </form>
     </div>
-
-    {{-- avatar --}}
-    @if (isset($avatar))
-      <x-image :image="asset(UserEnum::USER_AVATAR_PATH . $avatar)" :uploadTo="route('setting.update.avatar')" name="avatar" />
-    @endif
   </div>
 </div>
