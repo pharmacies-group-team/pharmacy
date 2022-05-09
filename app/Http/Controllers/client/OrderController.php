@@ -25,11 +25,6 @@ class OrderController extends Controller
     return view('client.orders', compact('orders'));
   }
 
-  public function showOrder($id)
-  {
-    $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
-    return view('client.details-order', compact('order'));
-  }
 
   public function storeOrder(Request $request): RedirectResponse
   {
