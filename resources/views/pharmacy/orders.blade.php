@@ -43,9 +43,10 @@
               @foreach ($orders as $order)
                 <tr>
                   {{-- id --}}
-                  <td><a href="{{ route('pharmacy.orders.single', $order->id) }}">{{ $order->id }} </a></td>
+                  <td>
+                    <{{ $order->id }}< /td>
 
-                  {{-- status --}}
+                      {{-- status --}}
                   <td>
                     @if ($order->status === OrderEnum::NEW_ORDER)
                       <div class="badge badge-info">
