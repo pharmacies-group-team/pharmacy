@@ -1000,8 +1000,13 @@ textarea.form-control{
   margin-top: 1rem;
 }
 
-.t-order-details-description img{
+.t-order-details-description img.t-order-image{
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 0.5rem;
+  max-width: 12rem;
+  max-width: 200px;
+  margin: auto;
 }
 
 .t-order-details-actions{

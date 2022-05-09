@@ -10,7 +10,7 @@
         <div class="t-order-details-user">
           {{-- avatar --}}
           <div>
-            <img src="{{ asset('uploads/user/' . $order->user->avatar) }}" alt="user avatar">
+            <img src="{{ asset('uploads/user/' . $order->user->avatar) }}" alt="user avatar" class="t-order-image">
           </div>
 
           <div>
