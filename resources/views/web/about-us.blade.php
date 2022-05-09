@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="normal-content">
-  <p dir="RTL" style="text-align: right;"><strong><font face="DINNextLTW23-Regular" color="#12B3AB">عن منصة صيدليه اون لين</font></strong></p>
+  <p dir="RTL" class="text-primary-darker fw-bold fs-3" >عن منصة صيدليه اون لين</p>
 </div>
 
 
