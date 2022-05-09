@@ -3,14 +3,50 @@
 @section('title') About US @stop
 
 @section('content')
-<div class="container my-5">
-  <h1 class="text-primary-darker fw-bold fs-3" >عن منصة صيدليه اون لين</h1>
-  <p class="text-primary-dark mt-4">
-    هدفنا تسهيل عملية شراء الدواء كما نسعى الى توفير الأدوية النادرة لطالبيها
-      و تعريف الصيدلية الأدوية التي يجب توفيرها
-    وتوفير أدوية بشكل دوري لأصحاب الأمراض  المزمنة
-  </p>
+  <!-- Navigation-->
   
-</div>
+  <img src="{{ asset('img/avatars/avatar-2.jpg') }}" alt="..." class="d-block w-100" /></a>
 
+<header class="masthead">
+  <div class="container">
+      <div class="masthead-subheading">مرحبن بك !</div>
+      <div class="masthead-heading text-uppercase"> صحتكم تهمنا  </div>
+      <a class="btn btn-primary btn-xl text-uppercase" href="#services">تعرف اكثر</a>
+  </div>
+</header>
+       <!-- Services-->
+       <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">خدماتناء</h2>
+                <h3 class="section-subheading text-muted">تمثل خدمتنا في ايصال الدواء</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">E-Commerce</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Responsive Design</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Web Security</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
