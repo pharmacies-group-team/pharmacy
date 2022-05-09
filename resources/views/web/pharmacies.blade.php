@@ -3,7 +3,7 @@
 @section('title') Pharmacies @stop
 
 @section('content')
-
+<x-alert type="success"/>
   <main class="pharmacies" x-data="{ addOrderModal: false, pharmacy: {} }">
     <div class="pharmacies-bg"></div>
 

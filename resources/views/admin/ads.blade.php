@@ -1,16 +1,16 @@
 @extends('layouts/admin/master')
 @section('content')
 
-  <div class="container px-5">
-    <x-alert type="status" />
-  </div>
+
+  <x-alert type="status" />
+  <x-alert type="any" />
+
 
   <main class="ads" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
     <div class="container">
       <section class="section-header">
         <h2 class="text-large">نشر الأعلان</h2>
 
-        {{ json_encode(old()) }}
         <button class="btn" @click="addModal = true; ad = {{ json_encode(old()) }} ?? {}">اضافه اعلان</button>
       </section>
 
@@ -29,7 +29,11 @@
               </th>
               <th class="sorting" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
                 style="width: 55px" aria-label="Office: activate to sort column ascending">
-                الرابط
+                تاريخ البدء
+              </th>
+              <th class="sorting" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
+                  style="width: 55px" aria-label="Office: activate to sort column ascending">
+                تاريخ الإنتهاء
               </th>
               {{-- <th class="sorting" tabindex="0" aria-controls="datatables-multi"
                               rowspan="1" colspan="1" style="width: 55px"
@@ -46,7 +50,7 @@
             @foreach ($ads as $ad)
               <tr>
                 <td>
-                  <img :src="'{{ url('images/ads') }}/{{ $ad->image }}'" />
+                  <img src="{{ asset(\App\Enum\AdEnum::AD_PATH.$ad->image) }}" style="margin: auto;" />
                   <input type="hidden" name="image" value="{{ $ad->id }}" />
                 </td>
 
@@ -54,7 +58,10 @@
                   {{ $ad->title }}
 
                 </td>
-                <td>{{ $ad->link }}</td>
+
+                <td>{{ $ad->start_at }}</td>
+
+                <td>{{ $ad->end_at }}</td>
 
                 <td class="table-action">
                   <button @click=" id = {{ $ad->id }}; ad = {{ $ad }}; editModal = true">
@@ -251,11 +258,11 @@
           <p class="text-danger">
             هل انت متاكد من حذف الاعلان ؟
           </p>
-
+{{--TODO--}}
           <div>
-            <img :src="'{{ url('images/ads') }}/'
-            ad.image" width="200" height="150" alt="ad image"
-              style="display: block; margin: 1rem auto;">
+{{--            <img :src="'{{ url('images/ads') }}/'--}}
+{{--            ad.image" width="200" height="150" alt="ad image"--}}
+{{--              style="display: block; margin: 1rem auto;">--}}
             <div x-text="ad.title"></div>
           </div>
 

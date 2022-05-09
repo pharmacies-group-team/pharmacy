@@ -1,8 +1,8 @@
 @extends('layouts/admin/master')
 @section('content')
 
+  <x-alert type="status" />
   <main class="users container">
-    <x-alert type="status" />
 
     <div class="section-header">
       <h1 class="text-large">لوحة تحكم <strong>الزبائن</strong></h1>
