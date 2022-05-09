@@ -75,7 +75,7 @@
                       </div>
                     @elseif($order->status === OrderEnum::UNPAID_ORDER)
                       <div class="badge bg-light text-dark">
-                        <a href="{{ route('client.quotation.details', $order->quotation->id) }}">قيد الدفع</a>
+                        <a href="{{ route('pharmacy.quotation.details', $order->quotation->id) }}">قيد الدفع</a>
                       </div>
                     @elseif($order->status === OrderEnum::PAID_ORDER)
                       <div class="badge bg-success">
@@ -100,19 +100,23 @@
                   <td>
                     <x-order-details :order="$order">
                       @slot('footer')
-                        <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
-                          <x-icon icon="order" />
-                          @lang('action.create-quote')
-                        </a>
+                        @if($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                          <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
+                            <x-icon icon="order" />
+                            @lang('action.create-quote')
+                          </a>
+                        @endif
 
                         <a href="#" class="btn">
                           <x-icon icon="message" />
                           @lang('action.send-message')
                         </a>
 
-                        <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
-                          @lang('action.not-found')
-                        </a>
+                        @if($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                            <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
+                              @lang('action.not-found')
+                            </a>
+                        @endif
                       @endslot
                     </x-order-details>
                   </td>
