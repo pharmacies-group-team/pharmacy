@@ -35,7 +35,7 @@
           @endif
         </div>
 
-        @if ($footer)
+        @if (isset($footer))
           <div class="t-order-details-actions">
             {{ $footer }}
           </div>
