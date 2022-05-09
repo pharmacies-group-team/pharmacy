@@ -26,58 +26,73 @@ class Search extends Component
 
     public function mount()
     {
-      $this->cities  = City::orderby('name')->get();
+        $this->cities  = City::orderby('name')->get();
 
-      $this->cityID != '' ?
-        $this->directorates = Directorate::where('city_id', $this->cityID)->orderby('name')->get():
-        $this->directorates = [];
+        $this->cityID != '' ?
+          $this->directorates = Directorate::where('city_id', $this->cityID)->orderby('name')->get():
+          $this->directorates = [];
 
-      $this->directorateID != '' ?
-        $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)->orderby('name')->get():
-        $this->neighborhoods = [];
-
+        $this->directorateID != '' ?
+          $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)->orderby('name')->get():
+          $this->neighborhoods = [];
     }
 
     public function render()
     {
-        return view('livewire.search', [
-          'pharmacies' => $this->fillter()
-        ]);
+        return view('livewire.search', ['pharmacies' => $this->fillter()]);
     }
 
     public function fillter()
     {
-      if ($this->neighborhoodID != ''){
-        return Pharmacy::where('neighborhood_id', $this->neighborhoodID)->paginate(12) ;
-      }
-      elseif ($this->directorateID != ''){
-        Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
-      }
-      else
-        return Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
+        // Search By Neighborhood
+        if ($this->neighborhoodID != '') {
+          return Pharmacy::where('neighborhood_id', $this->neighborhoodID)->paginate(12);
+        }
 
+        // Search By Directorate
+        elseif ($this->directorateID != '') {
+          return Pharmacy::where('neighborhood_id', function ($query) {
+                            $query->select('id')-> from('directorates')->
+                            where('id', $this->directorateID);})
+                ->paginate(12);
+        }
+
+
+        // Search By City
+        elseif ($this->cityID != '') {
+          return Pharmacy::whereIn('neighborhood_id', function ($query){
+                            $query->select('id')->from('directorates')->where('city_id', function ($query){
+                              $query->select('id')-> from('cities')-> where('id', $this->cityID);
+                            });})
+                ->paginate(12);
+        }
+
+        // Search By Name Pharmacy
+        else
+          return Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
     }
 
     public function updatedcityID()
     {
-      $this->directorates = Directorate::where('city_id', $this->cityID)
-        ->orderby('name')->get();
+      $this->directorates = Directorate::where('city_id', $this->cityID)->orderby('name')->get();
     }
 
     public function updateddirectorateID()
     {
-      $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)
-        ->orderby('name')->get();
+      $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)->orderby('name')->get();
     }
-
-//    public function updatedneighborhoodID()
-//    {
-//      $this->neighborhoodPharmacies = $this->neighborhoodID;
-//    }
 
     // Resetting Pagination After Filtering Data
     public function updatedSearch()
     {
-      $this->resetPage();
+        $this->resetPage();
+    }
+
+    public function gotoPage($url)
+    {
+        $this->currentPage = explode('page=', $url)[1];
+        Paginator::currentPageResolver(function(){
+          return $this->currentPage;
+        });
     }
 }

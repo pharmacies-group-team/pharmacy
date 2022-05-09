@@ -87,6 +87,6 @@
     @endforeach
   </section>
   <div style="display: flex; justify-content: center; margin-top: 50px ">
-    {{ $pharmacies->links('pagination::bootstrap-4') }}
+    {{ $pharmacies->links('livewire.livewire-pagination') }}
   </div>
 </div>
