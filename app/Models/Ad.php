@@ -14,7 +14,7 @@ class Ad extends Model
 
     protected $guarded = [];
 
-    /**
+  /**
      * Get user
      */
     public function user(): BelongsTo
