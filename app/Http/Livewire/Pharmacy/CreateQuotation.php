@@ -49,7 +49,7 @@ class CreateQuotation extends Component
             'quantity'      => $this->quantity[$key],
             'price'         => $this->price[$key],
             'total'         => $this->price[$key] * $this->quantity[$key],
-            'currency'      => "YEM",
+            'currency'      => "﷼",
             'quotation_id'  => $quotation->id
           ]
         );
