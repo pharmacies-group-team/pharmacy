@@ -44,9 +44,10 @@
                 <tr>
                   {{-- id --}}
                   <td>
-                    <{{ $order->id }}< /td>
+                    {{ $order->id }}
+                  </td>
 
-                      {{-- status --}}
+                  {{-- status --}}
                   <td>
                     @if ($order->status === OrderEnum::NEW_ORDER)
                       <div class="badge badge-info">

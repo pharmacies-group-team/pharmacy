@@ -196,6 +196,7 @@ Route::prefix('/client')
       Route::get('/address', 'address')->name('address');
     });
 
+    // order
     Route::controller(client\OrderController::class)
       ->prefix('/orders')
       ->name('orders.')->group(function () {
@@ -204,8 +205,10 @@ Route::prefix('/client')
         Route::get('/{id}', 'showOrder')->name('show');
       });
 
+    // quotation
     Route::get('/quotation/details/{id}', [client\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
 
+    // payment
     Route::controller(client\PayController::class)->group(function () {
       Route::post('/pay',  'payment')->name('payment');
       Route::get('/success',  'success')->name('success');

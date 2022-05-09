@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class QuotationController extends Controller
 {
-    public function getQuotationDetails($id)
-    {
-      $quotationID = $id;
-      return view('client.testing-details-quotation',compact('quotationID'));
-    }
+  public function getQuotationDetails($id)
+  {
+    $quotationID = $id;
+    return view('client.details-quotation', compact('quotationID'));
+  }
 }

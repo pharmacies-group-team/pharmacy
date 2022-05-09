@@ -1,19 +1,15 @@
 @extends('layouts.client.master')
 @section('content')
-  {{-- TODO --}}
-  <div class="container px-5">
-{{--    @include('includes.alerts')--}}
-  </div>
+  <x-alert type="message" />
 
-  <main class="pharmacy-profile">
+  <main class="pharmacy-profile page-quotation-details">
 
     <livewire:client.details-quotation :quotationID="$quotationID" />
-    <form action="{{ route('client.payment') }}" method="post">
+
+    <form class="t-form" action="{{ route('client.payment') }}" method="post">
       @csrf
       <input hidden value="{{ $quotationID }}" name="quotation_id">
       <button type="submit" class="btn btn-full">دفع الفاتورة</button>
     </form>
   </main>
-
 @stop
-
