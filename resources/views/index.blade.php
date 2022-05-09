@@ -96,7 +96,7 @@ $count = 0;
   {{-- start ads section --}}
   <section class="mt-5">
     <div class="container-lg owl-2-style mt-2">
-      <div class="owl-carousel owl-2">
+      <div class="owl-carousel owl-ads">
         @if (isset($ads))
           @foreach ($ads as $ad)
             <a href="{{ $ad->link }}" class="card bg-secondary-light rounded-3 card--hover shadow"

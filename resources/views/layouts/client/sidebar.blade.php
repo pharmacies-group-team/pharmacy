@@ -2,7 +2,7 @@
   @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
   {{-- link to home page --}}
-  <a class="sidebar-brand" href="{{ route('client.index') }}">
+  <a class="sidebar-brand" href="{{ route('home') }}">
     <span>صيدلية اون لاين</span>
   </a>
 

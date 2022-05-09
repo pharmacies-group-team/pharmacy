@@ -1,52 +1,55 @@
 @php
   use App\Enum\PharmacyEnum;
 @endphp
-{{-- page header --}}
-<section class="container">
-  <form class="pharmacies-header">
-    {{--address--}}
-    <div class="header-select">
-{{--       cities--}}
-      <select wire:model="cityID" class="form-control" name="city">
+<div>
+  {{-- page header --}}
+  <section class="container">
+    <form class="pharmacies-header">
+      {{--address--}}
+      <div class="header-select">
+        {{--cities--}}
+        <select wire:model="cityID" class="form-control" name="city">
+          <option> المدينة</option>
         @foreach($cities as $city)
           <option value="{{ $city->id }}">{{ $city->name }}</option>
         @endforeach
-      </select>
+        </select>
 
 
-      {{--directorates--}}
-      <select wire:model="directorateID" class="form-control" name="directorate">
+        {{--directorates--}}
+        <select wire:model="directorateID" class="form-control" name="directorate">
+          <option> المديرية</option>
         @foreach($directorates as $directorate)
           <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
         @endforeach
-      </select>
+        </select>
 
 
-      {{--neighborhood--}}
-      <select wire:model="neighborhoodID" class="form-control" name="neighborhood">
-        @foreach($neighborhoods as $neighborhood)
+        {{--neighborhood--}}
+        <select wire:model="neighborhoodID" class="form-control" name="neighborhood">
+          <option>الحي </option>
+          @foreach($neighborhoods as $neighborhood)
           <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
         @endforeach
-      </select>
+        </select>
 
-    </div>
-
-    {{--search--}}
-    <div class="header-input">
-      <div class="search-group">
-        {{--search input--}}
-        <input wire:model="searchQuery" type="text" class="form-control"  placeholder="بحث">
-
-        <button>
-          <x-icon icon="search" />
-        </button>
       </div>
-    </div>
-  </form>
-</section>
 
-{{-- pharmacies list --}}
-@if (isset($pharmacies))
+      {{--search--}}
+      <div class="header-input">
+        <div class="search-group">
+          {{--search input--}}
+          <input wire:model="search" type="text" class="form-control"  placeholder="بحث">
+
+          <button>
+            <x-icon icon="search" />
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  {{-- pharmacies list --}}
   <section class="list container">
     @foreach ($pharmacies as $pharmacy)
       <article class="item">
@@ -83,4 +86,7 @@
       </article>
     @endforeach
   </section>
-@endif
+  <div style="display: flex; justify-content: center; margin-top: 50px ">
+    {{ $pharmacies->links('livewire.livewire-pagination') }}
+  </div>
+</div>
