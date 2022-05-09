@@ -18,12 +18,6 @@ class OrderController extends Controller
         return view('pharmacy.orders', compact('orders'));
     }
 
-    public function getOrder($id)
-    {
-        $order = Auth::user()->pharmacyOrders()->where('id', $id)->first();
-        return view('0-testing.order', compact('order'));
-    }
-
     public function orderRefusal($id)
     {
         $order = Order::find($id);
