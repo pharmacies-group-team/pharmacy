@@ -101,7 +101,6 @@ Route::prefix('/pharmacy')
     Route::controller(pharmacy\OrderController::class)
       ->prefix('/orders')->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
-        Route::get('/{id}', 'getOrder')->name('single');
         Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
       });
 
@@ -197,7 +196,7 @@ Route::prefix('/client')
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-//      Route::get('/profile', 'getProfile')->name('profile'); // X
+      //      Route::get('/profile', 'getProfile')->name('profile'); // X
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
     });
@@ -212,7 +211,7 @@ Route::prefix('/client')
 
     Route::get('/quotation/details/{id}', [client\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
 
-    Route::controller(client\PayController::class)->group(function (){
+    Route::controller(client\PayController::class)->group(function () {
       Route::post('/pay',  'payment')->name('payment');
       Route::get('/success',  'success')->name('success');
       Route::get('/cancel', 'cancel')->name('cancel');
