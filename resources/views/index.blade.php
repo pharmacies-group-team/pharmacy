@@ -102,7 +102,7 @@ $count = 0;
             <a href="{{ $ad->link }}" class="card bg-secondary-light rounded-3 card--hover shadow"
               style="min-height: 272px;height: 272px;">
 
-              <img src="uploads/ads/{{ $ad->image }}" width="80%" class="rounded-circle img-fluid" alt="">
+              <img src="{{ asset(\App\Enum\AdEnum::AD_PATH.$ad->image) }}" width="80%" class=" img-fluid" alt="">
 
             </a>
           @endforeach

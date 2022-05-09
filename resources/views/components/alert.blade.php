@@ -21,10 +21,10 @@
 
 
     {{-- any errors --}}
-    {{-- @elseif($errors->any())
+     @elseif($type === 'any' && $errors->any())
     <div class="alert-box" x-init="setTimeout(() => $refs.alertErrorMessage.parentNode.removeChild($refs.alertErrorMessage), 3000)" x-ref="alertErrorMessage">
       يُرجى التأكد من إدخال البيانات الصحيحة
-    </div> --}}
+    </div>
   @endif
 @else
   {{-- this only for dev team 🤣 --}}
