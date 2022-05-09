@@ -1833,3 +1833,20 @@ svg {
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
+
+.page-quotation-details .t-address{
+  margin: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-quotation-details .t-address select{
+  display: inline-block;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.page-quotation-details .t-form{
+  margin-top: 1rem;
+}

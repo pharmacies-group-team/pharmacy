@@ -59,7 +59,7 @@
             <div class="dropdown d-lg-inline-flex d-none w-100">
               {{-- user info --}}
               <div
-                class="nav-link dropdown-toggle text-primary-darker w-100 d-flex align-items-center cursor-pointer gap-2"
+                class="nav-link dropdown-toggle text-primary-darker w-100 d-flex align-items-center justify-content-end cursor-pointer gap-2"
                 id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
                 <img
                   src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"

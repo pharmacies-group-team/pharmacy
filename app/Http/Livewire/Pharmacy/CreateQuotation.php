@@ -49,7 +49,7 @@ class CreateQuotation extends Component
             'quantity'      => $this->quantity[$key],
             'price'         => $this->price[$key],
             'total'         => $this->price[$key] * $this->quantity[$key],
-            'currency'      => $this->currency[$key],
+            'currency'      => "﷼",
             'quotation_id'  => $quotation->id
           ]
         );
@@ -75,9 +75,10 @@ class CreateQuotation extends Component
 
     Notification::send($user, new UserOrderNotification($data));
 
-    $this->reset();
 
-    //        session()->flash('message', 'لقد تم إرسال عرض السعر');
+    session()->flash('message', 'لقد تم إرسال عرض السعر');
+
+    $this->reset();
 
     return redirect()->route('pharmacy.quotation.details', $quotation->id);
   }
