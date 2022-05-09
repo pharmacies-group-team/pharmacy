@@ -68,8 +68,11 @@ class Search extends Component
         }
 
         // Search By Name Pharmacy
-        else
+        elseif($this->search != '')
           return Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
+
+        else
+          return Pharmacy::with(['user'])->paginate(12);
     }
 
     public function updatedcityID()

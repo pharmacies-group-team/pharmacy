@@ -53,7 +53,7 @@
 
           {{-- TODO fixed need to test :) --}}
           {{-- pharmacy id --}}
-          <input type="hidden" name="pharmacy_id" :value="pharmacy.id">
+          <input type="hidden" name="pharmacy_id" :value="pharmacy.user.id">
 
           {{-- file --}}
           <input type="file" accept="image/*" name="image" x-ref="inputFileOrder" @change="fileChosen">
