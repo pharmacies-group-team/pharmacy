@@ -73,7 +73,7 @@
                 @if (!Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                   <li>
                     <a class="dropdown-item text-primary-dark d-flex align-items-center"
-                      href="@if (Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) {{ route('admin.profile') }}
+                      href="@if (Auth::user()->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) {{ route('admin.account-settings') }}
                       @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
                         {{ route('pharmacy.profile', Auth::user()->pharmacy->id) }} @endif">
                       <i class="bi bi-person-fill text-primary-light m-2"></i> الملف الشخصي

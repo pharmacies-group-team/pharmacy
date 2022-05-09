@@ -1,4 +1,4 @@
-@extends('layouts/dashboard/dashboard-master')
+@extends('layouts/admin/master')
 @section('content')
 
   <div class="container mt-4">
@@ -69,6 +69,5 @@
         </div> <!-- end card-->
       </div> <!-- end col-->
     </div> <!-- end row -->
-
   </div>
 @stop

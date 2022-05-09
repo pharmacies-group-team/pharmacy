@@ -20,7 +20,7 @@
 
     <div class="dashboard-content">
       {{-- navbar --}}
-      @include('layouts.pharmacy.navbar')
+      @include('layouts.shared.navbar')
 
       @yield('content')
     </div>

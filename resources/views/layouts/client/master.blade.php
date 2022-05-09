@@ -26,7 +26,7 @@
 
     <div class="dashboard-content">
       {{-- navbar --}}
-      @include('layouts.client.navbar')
+      @include('layouts.shared.navbar')
 
       @yield('content')
     </div>
