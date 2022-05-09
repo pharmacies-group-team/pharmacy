@@ -82,11 +82,6 @@
     </table>
   </div>
 
-
-
-
-
-
   <div class="t-address">
     <h3> حدد العنوان</h3>
 
