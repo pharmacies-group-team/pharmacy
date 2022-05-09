@@ -7,6 +7,7 @@ use App\Http\Controllers\clint\PayController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
+use App\Http\Controllers\web\AboutController;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\pharmacy;
@@ -31,15 +32,15 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 */
 
 /*
-|--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
-
+Route::get('/about-us', [AboutController::class, 'index']);
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
+//--------------------------------------------------------------------------
 });
 
 /*
