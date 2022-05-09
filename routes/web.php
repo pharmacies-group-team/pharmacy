@@ -35,7 +35,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 | Web Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/about-us', [AboutController::class, 'index']);
+Route::get('/about-us', [AboutController::class, 'index']) ->name('about');
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');

@@ -4,7 +4,6 @@
 
 @section('content')
 
-
   <x-alert type="status" />
 
   <main class="dashboard-pharmacies-orders" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
