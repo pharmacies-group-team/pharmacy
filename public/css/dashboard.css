@@ -1714,3 +1714,76 @@ svg {
   --tw-border-opacity: 1;
   border-color: rgb(115 164 255 / var(--tw-border-opacity));
 }
+
+.page-create-quotation{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  width: 91.666667%;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
+  padding: 2rem;
+}
+
+.page-create-quotation .t-form-group{
+  display: flex;
+  flex-direction: column;
+}
+
+.page-create-quotation .t-form-group label{
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.page-create-quotation .t-order-item{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px){
+  .page-create-quotation .t-order-item{
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+}
+
+.page-create-quotation .t-form-btn-action{
+  width: 82%;
+}
+
+.page-create-quotation .t-btn-add-new{
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.page-create-quotation .t-btn-add-new::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
+}
+
+.page-create-quotation .t-btn-remove-item{
+  display: flex;
+  width: 2.5rem;
+  align-items: flex-end;
+}
+
+.page-create-quotation .t-btn-remove-item .icon{
+  width: 1.5rem;
+}
+
+.page-create-quotation .t-form-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.page-create-quotation .divided{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
