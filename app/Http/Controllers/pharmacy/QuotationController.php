@@ -28,6 +28,6 @@ class QuotationController extends Controller
     $quotationDetails = QuotationDetails::where('quotation_id', $id)->get();
     $quotation        = Quotation::find($id);
 
-    return view('pharmacy.testing-details-quotation', compact('quotationDetails', 'quotation'));
+    return view('pharmacy.quotation-details', compact('quotationDetails', 'quotation'));
   }
 }
