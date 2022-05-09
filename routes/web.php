@@ -128,12 +128,7 @@ Route::prefix('/admin')
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
-    // admin profile
-    Route::get('profile', [admin\AdminProfileController::class, 'index'])
-      ->name('profile'); //X
 
-    Route::put('profile', [admin\AdminProfileController::class, 'updateProfile'])
-      ->name('update-profile'); //X
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
 
