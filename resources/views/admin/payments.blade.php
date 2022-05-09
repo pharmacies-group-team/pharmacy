@@ -1,9 +1,7 @@
 @extends('layouts/dashboard/dashboard-master')
 @section('content')
 
-  <div class="container px-5">
-    <x-alert type="status" />
-  </div>
+  <x-alert type="status" />
 
   <main class="ads" x-data="{ id: null, payment: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
     <div class="container">
@@ -166,9 +164,9 @@
           </p>
 
           <div>
-            <img :src="'{{ \App\Enum\PaymentEnum::IMAGE_PATH }}'
-            payment.image" width="200" height="150"
-              alt="payment image" style="display: block; margin: 1rem auto;">
+{{--            <img :src="'{{ \App\Enum\PaymentEnum::IMAGE_PATH }}'--}}
+{{--            payment.image" width="200" height="150"--}}
+{{--              alt="payment image" style="display: block; margin: 1rem auto;">--}}
             <div x-text="payment.name"></div>
           </div>
 

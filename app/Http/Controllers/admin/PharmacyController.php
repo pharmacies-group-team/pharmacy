@@ -21,6 +21,6 @@ class PharmacyController extends Controller
   {
     $result = User::where('id', $id)->update(['is_active' => !User::find($id)->is_active]);
 
-    return redirect()->back()->with('status', $result ? ' change pharmacy statue successfully' : 'failed');
+    return redirect()->back()->with('status', $result ? 'تمت العملية بنجاح.' : 'failed');
   }
 }
