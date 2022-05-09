@@ -97,9 +97,11 @@ use App\Enum\PharmacyEnum;
 
                 {{-- action --}}
                 <td>
-                  <div class="badge badge-info">
-                    <a href="{{ route('client.orders.show', $order->id) }}">تفاصيل الطلب</a>
-                  </div>
+                  <x-order-details :order="$order">
+                    @slot('footer')
+                      <x-client.order-details-footer :order="$order" />
+                    @endslot
+                  </x-order-details>
                 </td>
               </tr>
             @endforeach
