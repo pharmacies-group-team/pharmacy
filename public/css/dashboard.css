@@ -1473,6 +1473,150 @@ svg {
   margin-top: 1.5rem;
 }
 
+.page-pharmacy-orders .t-profile{
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(115 164 255 / var(--tw-border-opacity));
+}
+
+.page-create-quotation{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  width: 91.666667%;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
+  padding: 2rem;
+}
+
+.page-create-quotation .t-form-group{
+  display: flex;
+  flex-direction: column;
+}
+
+.page-create-quotation .t-form-group label{
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.page-create-quotation .t-order-item{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px){
+  .page-create-quotation .t-order-item{
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+}
+
+.page-create-quotation .t-form-btn-action{
+  width: 82%;
+}
+
+.page-create-quotation .t-btn-add-new{
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.page-create-quotation .t-btn-add-new::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
+}
+
+.page-create-quotation .t-btn-remove-item{
+  display: flex;
+  width: 2.5rem;
+  align-items: flex-end;
+}
+
+.page-create-quotation .t-btn-remove-item .icon{
+  width: 1.5rem;
+}
+
+.page-create-quotation .t-form-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.page-create-quotation .divided{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.page-pharmacy-profile .t-bg{
+  height: 20rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(177 201 242 / var(--tw-bg-opacity));
+}
+
+.page-pharmacy-profile .t-content{
+  max-width: 42rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(56 105 186 / var(--tw-text-opacity));
+  margin-left: auto;
+  margin-right: auto;
+  --tw-translate-y: -10rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  padding: 2rem;
+}
+
+.page-pharmacy-profile .t-content .t-pharmacy-logo{
+  display: flex;
+  --tw-translate-y: -7rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  justify-content: center;
+  text-align: center;
+}
+
+.page-pharmacy-profile .t-content .t-pharmacy-logo img{
+  height: 10rem;
+  width: 10rem;
+  border-radius: 0.25rem;
+  border-width: 8px;
+  --tw-border-opacity: 1;
+  border-color: rgb(150 187 255 / var(--tw-border-opacity));
+}
+
+.page-pharmacy-profile .t-content .t-about{
+  margin-top: -3rem;
+  text-align: center;
+}
+
+.page-pharmacy-profile .t-content .t-header{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 800;
+  --tw-text-opacity: 1;
+  color: rgb(56 105 186 / var(--tw-text-opacity));
+}
+
+.page-pharmacy-profile .t-content .t-address{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.page-pharmacy-profile .t-content .t-social{
+  display: flex;
+  gap: 1rem;
+}
+
 .pharmacies {
   /********* page content ***********/
   /********* modal ***********/
@@ -1642,148 +1786,4 @@ svg {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.page-pharmacy-profile .t-bg{
-  height: 20rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(177 201 242 / var(--tw-bg-opacity));
-}
-
-.page-pharmacy-profile .t-content{
-  max-width: 42rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(56 105 186 / var(--tw-text-opacity));
-  margin-left: auto;
-  margin-right: auto;
-  --tw-translate-y: -10rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  padding: 2rem;
-}
-
-.page-pharmacy-profile .t-content .t-pharmacy-logo{
-  display: flex;
-  --tw-translate-y: -7rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  justify-content: center;
-  text-align: center;
-}
-
-.page-pharmacy-profile .t-content .t-pharmacy-logo img{
-  height: 10rem;
-  width: 10rem;
-  border-radius: 0.25rem;
-  border-width: 8px;
-  --tw-border-opacity: 1;
-  border-color: rgb(150 187 255 / var(--tw-border-opacity));
-}
-
-.page-pharmacy-profile .t-content .t-about{
-  margin-top: -3rem;
-  text-align: center;
-}
-
-.page-pharmacy-profile .t-content .t-header{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  font-weight: 800;
-  --tw-text-opacity: 1;
-  color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.page-pharmacy-profile .t-content .t-address{
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.page-pharmacy-profile .t-content .t-social{
-  display: flex;
-  gap: 1rem;
-}
-
-.page-pharmacy-orders .t-profile{
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(115 164 255 / var(--tw-border-opacity));
-}
-
-.page-create-quotation{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2rem;
-  width: 91.666667%;
-  border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
-  padding: 2rem;
-}
-
-.page-create-quotation .t-form-group{
-  display: flex;
-  flex-direction: column;
-}
-
-.page-create-quotation .t-form-group label{
-  margin-bottom: 1rem;
-  display: inline-block;
-}
-
-.page-create-quotation .t-order-item{
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-@media (min-width: 1024px){
-  .page-create-quotation .t-order-item{
-    flex-direction: row;
-    gap: 1.25rem;
-  }
-}
-
-.page-create-quotation .t-form-btn-action{
-  width: 82%;
-}
-
-.page-create-quotation .t-btn-add-new{
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.page-create-quotation .t-btn-add-new::before {
-  content: "";
-  height: 2px;
-  width: 100%;
-  --tw-bg-opacity: 1;
-  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
-}
-
-.page-create-quotation .t-btn-remove-item{
-  display: flex;
-  width: 2.5rem;
-  align-items: flex-end;
-}
-
-.page-create-quotation .t-btn-remove-item .icon{
-  width: 1.5rem;
-}
-
-.page-create-quotation .t-form-btn{
-  display: flex;
-  justify-content: center;
-}
-
-.page-create-quotation .divided{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }

@@ -1,4 +1,4 @@
-@extends('layouts/dashboard/dashboard-master')
+@extends('layouts/admin/master')
 
 @php use \App\Enum\UserEnum;  @endphp
 

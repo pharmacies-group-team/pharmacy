@@ -19,7 +19,7 @@
 
   <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
-    @include('layouts.dashboard.sidebar')
+    @include('layouts.admin.sidebar')
 
     <div class="dashboard-content">
       {{-- navbar --}}
