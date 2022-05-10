@@ -4,9 +4,29 @@
 
 @section('content')
   <!-- Navigation-->
-  
-  <img src="{{ asset('img/avatars/avatar-2.jpg') }}" alt="..." class="d-block w-100" /></a>
 
+
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{ asset('img/about/mid1.jpg') }}{{ asset('img/about/drivly.jpg') }}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/about/drivly.jpg') }}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/about/mid2.jpg) }}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 <header class="masthead">
   <div class="container">
       <div class="masthead-subheading">مرحبن بك !</div>
@@ -14,8 +34,8 @@
       <a class="btn btn-primary btn-xl text-uppercase" href="#services">تعرف اكثر</a>
   </div>
 </header>
-       <!-- Services-->
-       <section class="page-section" id="services">
+        <!-- Services-->
+        <section class="page-section" id="services">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">خدماتناء</h2>
