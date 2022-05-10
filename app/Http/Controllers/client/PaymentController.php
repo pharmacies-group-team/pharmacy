@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class PayController extends Controller
+class PaymentController extends Controller
 {
   public function payment(Request $request)
   {
