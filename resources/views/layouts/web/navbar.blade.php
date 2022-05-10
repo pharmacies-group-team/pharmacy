@@ -69,7 +69,7 @@
                 <span class="me-2" style="cursor: pointer">{{ Auth::user()->name }}</span>
               </div>
 
-              <ul class="dropdown-menu end-0 start-50" style="z-index: 9999999999">
+              <ul class="dropdown-menu" style="z-index: 9999999999">
                 @if (!Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
                   <li>
                     <a class="dropdown-item text-primary-dark d-flex align-items-center"

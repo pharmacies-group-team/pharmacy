@@ -39,9 +39,6 @@
 
             {{-- total --}}
             <th>المجموع</th>
-
-            {{-- actions --}}
-            <th></th>
           </tr>
         </thead>
 
@@ -69,14 +66,8 @@
                 <td> {{ $details->price }} {{ $details->currency }} </td>
 
                 {{-- total --}}
-                <td> {{ $details->price }} {{ $details->total }} </td>
+                <td> {{ $details->total }} </td>
 
-                {{-- action --}}
-                <td>
-
-                  {{-- TODO talk to Ahlam --}}
-                  {{-- <button wire:click="delete({{ $details->id }})" class="badge badge-danger">حذف</button> --}}
-                </td>
               </tr>
             @endforeach
           @endif

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
-            $table->foreignId('address_id')->unique();
+            $table->foreignId('address_id')->nullable();
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
 
             $table->softDeletes();

@@ -21,17 +21,17 @@
               {{-- order id --}}
               <th> رقم الطلب</th>
 
-              {{-- status --}}
-              <th>حالة الطلب</th>
+              {{-- pharmacy name --}}
+              <th>اسم العميل</th>
 
-              {{-- client name --}}
-              <th> اسم العميل</th>
-
-              {{-- email --}}
+              {{-- date --}}
               <th>التاريخ</th>
 
-              {{-- email --}}
+              {{-- hour --}}
               <th>التوقيت</th>
+
+              {{-- status --}}
+              <th>حالة الطلب</th>
 
               {{-- actions --}}
               <th></th>
@@ -47,42 +47,13 @@
                     {{ $order->id }}
                   </td>
 
-                  {{-- status --}}
-                  <td>
-                    @if ($order->status === OrderEnum::NEW_ORDER)
-                      <div class="badge badge-info">
-                        {{ OrderEnum::NEW_ORDER }}
-                      </div>
-                    @elseif($order->status === OrderEnum::UNPAID_ORDER)
-                      <div class="badge bg-light text-dark">
-                        {{ OrderEnum::UNPAID_ORDER }}
-                      </div>
-                    @elseif($order->status === OrderEnum::PAID_ORDER)
-                      <div class="badge bg-success">
-                        {{ OrderEnum::PAID_ORDER }}
-                      </div>
-                    @elseif($order->status === OrderEnum::DELIVERY_ORDER)
-                      <div class="badge badge-danger">
-                        {{ OrderEnum::DELIVERY_ORDER }}
-                      </div>
-                    @elseif($order->status === OrderEnum::DELIVERED_ORDER)
-                      <div class="badge badge-danger">
-                        {{ OrderEnum::DELIVERED_ORDER }}
-                      </div>
-                    @elseif($order->status === OrderEnum::REFUSAL_ORDER)
-                      <div class="badge badge-danger">
-                        {{ OrderEnum::REFUSAL_ORDER }}
-                      </div>
-                    @endif
-                  </td>
-
-                  {{-- pharmacy name --}}
+                  {{-- client name --}}
                   <td>
                     <div style="display: flex; justify-content: center;gap: 12px;align-items: center;">
 
                       <img class="t-profile"
-                        src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
-                        alt="profile avatar">
+                           src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
+                           alt="profile avatar">
 
                       <span class="text-base">
                         {{ $order->user->name }}
@@ -96,23 +67,56 @@
                   {{-- Date --}}
                   <td>{{ $order->created_at->format('h:m A') }} </td>
 
+                  {{-- status --}}
+                  <td>
+                    @if ($order->status === OrderEnum::NEW_ORDER)
+                      <div class="badge badge-info">
+                        طلب جديد
+                      </div>
+                    @elseif($order->status === OrderEnum::UNPAID_ORDER)
+                      <div class="badge bg-light text-dark">
+                        <a href="{{ route('pharmacy.quotation.details', $order->quotation->id) }}">قيد الدفع</a>
+                      </div>
+                    @elseif($order->status === OrderEnum::PAID_ORDER)
+                      <div class="badge bg-success">
+                        تم الدفع
+                      </div>
+                    @elseif($order->status === OrderEnum::DELIVERY_ORDER)
+                      <div class="badge badge-danger">
+                        قيد التسليم
+                      </div>
+                    @elseif($order->status === OrderEnum::DELIVERED_ORDER)
+                      <div class="badge badge-danger">
+                        تم التسليم
+                      </div>
+                    @elseif($order->status === OrderEnum::REFUSAL_ORDER)
+                      <div class="badge badge-danger">
+                        تم رفض الطلب
+                      </div>
+                    @endif
+                  </td>
+
                   {{-- action --}}
                   <td>
                     <x-order-details :order="$order">
                       @slot('footer')
-                        <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
-                          <x-icon icon="order" />
-                          @lang('action.create-quote')
-                        </a>
+                        @if($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                          <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
+                            <x-icon icon="order" />
+                            @lang('action.create-quote')
+                          </a>
+                        @endif
 
                         <a href="#" class="btn">
                           <x-icon icon="message" />
                           @lang('action.send-message')
                         </a>
 
-                        <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
-                          @lang('action.not-found')
-                        </a>
+                        @if($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                            <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
+                              @lang('action.not-found')
+                            </a>
+                        @endif
                       @endslot
                     </x-order-details>
                   </td>
