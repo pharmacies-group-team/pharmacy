@@ -14,11 +14,11 @@ php artisan serve
 
 ## todo
 
-- [] client invoice
+- [x] client invoice
+- [x] notification
 - [] pharmacy add order 'add total price'
 - [] **_ alert bg color_**
 - [] web pharmacy profile
-- [] notification
 
 - [] contact
 - [] about us
