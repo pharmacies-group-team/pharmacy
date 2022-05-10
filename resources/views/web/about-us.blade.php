@@ -3,7 +3,7 @@
 @section('title') About US @stop
 
 @section('content')
-  <!-- Navigation-->
+  {{-- <!-- Navigation--> --}}
 
 
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -15,7 +15,7 @@
         <img src="{{ asset('img/about/drivly.jpg') }}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{{ asset('img/about/mid2.jpg) }}" class="d-block w-100" alt="...">
+        <img src="{{ asset('img/about/mid2.jpg') }}" class="d-block w-100" alt="...">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -23,7 +23,7 @@
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
@@ -46,16 +46,18 @@
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        <x-icon icon='search' />
                     </span>
-                    <h4 class="my-3">E-Commerce</h4>
+                    <h4 class="my-3">معرفه</h4>
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                        <x-icon icon='insert-file' />
                     </span>
-                    <h4 class="my-3">Responsive Design</h4>
+                    <h4 class="my-3">توفير</h4>
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
                 <div class="col-md-4">
@@ -63,7 +65,7 @@
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="my-3">Web Security</h4>
+                    <h4 class="my-3">إيصال</h4>
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
             </div>
