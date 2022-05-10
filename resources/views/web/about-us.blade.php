@@ -9,13 +9,13 @@
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{{ asset('img/about/mid1.jpg') }}{{ asset('img/about/drivly.jpg') }}" class="d-block w-100" alt="...">
+        <img src="{{ asset('img/about/mid2.jpg') }}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
         <img src="{{ asset('img/about/drivly.jpg') }}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{{ asset('img/about/mid2.jpg') }}" class="d-block w-100" alt="...">
+        <img src="{{ asset('img/about/home1.jpg') }}" class="d-block w-100" alt="...">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -27,7 +27,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<header class="masthead">
+<header class="masthead carousel-caption">
   <div class="container">
       <div class="masthead-subheading">مرحبن بك !</div>
       <div class="masthead-heading text-uppercase"> صحتكم تهمنا  </div>
@@ -44,29 +44,30 @@
             <div class="row text-center">
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        {{-- <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> --}}
                         <x-icon icon='search' />
                     </span>
                     <h4 class="my-3">معرفه</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">نقوم بمعرفة احتي جاتك من الصحية</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        <x-icon icon='insert-file' />
+                        {{-- <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> --}}
+                        <x-icon icon='payment' />
                     </span>
                     <h4 class="my-3">توفير</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">بعد معرفة إحتياجاتك نقوم تبوفيره لك</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                        {{-- <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-lock fa-stack-1x fa-inverse"></i> --}}
+                        <x-icon icon='location' />
                     </span>
                     <h4 class="my-3">إيصال</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">نقوم بتوفير العناء وأيصالها الى المنزل</p>
                 </div>
             </div>
         </div>
