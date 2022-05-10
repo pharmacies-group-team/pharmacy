@@ -12,8 +12,8 @@ class PharmacyController extends Controller
 {
   public function index()
   {
-    $users = User::role(RoleEnum::PHARMACY)->orderBy('id', 'DESC')->get();
-
+    $users = Pharmacy::all();
+    
     return view('admin.pharmacies-users', compact('users'));
   }
 
