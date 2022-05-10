@@ -20,7 +20,7 @@ class OrderController extends Controller
 {
   public function getAll()
   {
-    $orders = Auth::user()->userOrders()->get();
+    $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->get();
 
     return view('client.orders', compact('orders'));
   }
