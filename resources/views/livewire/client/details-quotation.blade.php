@@ -62,7 +62,7 @@
               <td> {{ $details->price }} {{ $details->currency }} </td>
 
               {{-- total --}}
-              <td> {{ $details->price }} {{ $details->total }} </td>
+              <td> {{ $details->total }} {{ $details->currency }}</td>
 
               {{-- action --}}
               <td>
@@ -76,7 +76,7 @@
           <td>
             الأجمالي
           </td>
-          <td colspan="5"> {{ $quotation->total }} </td>
+          <td colspan="5"> {{ $quotation->total }} {{ $details->currency }}</td>
         </tr>
       </tbody>
     </table>
