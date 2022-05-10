@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 
-// TODO
 // disable Debug
 // Debugbar::disable();
 /*
@@ -83,7 +82,6 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 |--------------------------------------------------------------------------
 */
 
-// TODO only for debugging
 Route::prefix('/pharmacy')
   ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
@@ -182,7 +180,7 @@ Route::prefix('/admin')
 | Client Routes
 |--------------------------------------------------------------------------
 */
-// TODO only for debugging
+
 Route::prefix('/client')
   ->name('client.')
   ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
