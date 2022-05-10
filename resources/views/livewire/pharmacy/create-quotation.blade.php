@@ -19,7 +19,7 @@
 
       {{-- type --}}
       <div class="t-form-group">
-        <label class="text-base">نوع المنتج </label>
+        <label class="text-base">الوحده </label>
 
         <select wire:model="product_unit.0" class="form-control">
           <option selected>حدد نوع المنتج</option>
