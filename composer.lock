@@ -4,8 +4,92 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7443fc18dea9ee662029988e1251df55",
+    "content-hash": "64a40066ab95d79c8a97a58692f3b2ec",
     "packages": [
+        {
+            "name": "bavix/laravel-wallet",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bavix/laravel-wallet.git",
+                "reference": "79f34401a9dcc558037f2f5182fd7c3c9562cf15"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bavix/laravel-wallet/zipball/79f34401a9dcc558037f2f5182fd7c3c9562cf15",
+                "reference": "79f34401a9dcc558037f2f5182fd7c3c9562cf15",
+                "shasum": ""
+            },
+            "require": {
+                "brick/math": "~0.8",
+                "doctrine/dbal": "^2.8|^3.0",
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "illuminate/contracts": "^9.0",
+                "illuminate/database": "^9.0",
+                "php": "^8.0",
+                "ramsey/uuid": "^4.0"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.4",
+                "cknow/laravel-money": "^6.3",
+                "ergebnis/phpstan-rules": "^1.0",
+                "infection/infection": "~0.26",
+                "laravel/cashier": "^13.8",
+                "nunomaduro/collision": "^6.2",
+                "orchestra/testbench": "^7.4",
+                "phpstan/phpstan": "^1.6",
+                "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.12",
+                "symplify/easy-coding-standard": "^10.2",
+                "vimeo/psalm": "^4.22"
+            },
+            "suggest": {
+                "bavix/laravel-wallet-swap": "Addition to the laravel-wallet library for quick setting of exchange rates",
+                "bavix/laravel-wallet-warmup": "Addition to the laravel-wallet library for refresh balance wallets"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bavix\\Wallet\\WalletServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bavix\\Wallet\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Babichev Maxim",
+                    "email": "info@babichev.net"
+                }
+            ],
+            "description": "Easy work with virtual wallet.",
+            "homepage": "https://bavix.github.io/laravel-wallet/",
+            "keywords": [
+                "bavix",
+                "credits",
+                "currency",
+                "laravel",
+                "laravel-package",
+                "laravel-wallet",
+                "payments",
+                "virtual",
+                "wallet"
+            ],
+            "support": {
+                "issues": "https://github.com/bavix/laravel-wallet/issues",
+                "source": "https://github.com/bavix/laravel-wallet/tree/9.0.0"
+            },
+            "time": "2022-05-02T07:52:12+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.9.3",

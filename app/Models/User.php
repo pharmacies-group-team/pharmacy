@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use Bavix\Wallet\Interfaces\Customer;
+use Bavix\Wallet\Interfaces\Wallet;
+use Bavix\Wallet\Traits\CanPay;
+use Bavix\Wallet\Traits\HasWallet;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,9 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, Wallet, Customer
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasWallet, CanPay;
 
     /**
      * The attributes that are mass assignable.
