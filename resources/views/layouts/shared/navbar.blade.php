@@ -18,45 +18,22 @@ $user = User::find(Auth::id());
       {{-- notification --}}
       <div class="t-notification" x-data="{ open: false }" @click="open = true" @click.away="open = false">
         {{-- icon --}}
-        <div class="t-notification-icon active">
-          <x-icon icon="notification" />
+        <div class="t-notification-icon dropdown-notifications-js">
+          <a style="position: relative" data-toggle="dropdown">
+            <x-icon icon="notification" />
+            <span class="notif-count" style="position: absolute;top: 0px;background: #e87e00; border-radius: 50%; width: 10px;height: 10px;"  data-count="9">9</span>
+          </a>
         </div>
 
         {{-- content --}}
-        <div class="t-notification-content" :class="open ? 'is-open' : ''">
+        <ul class="t-notification-content dropdown-menu" :class="open ? 'is-open' : ''">
           {{-- notification item --}}
-          <div class="t-item">
-            <a href="#body=hi">
-              <header class="t-header">
-                {{-- user avatar --}}
-                <img src="{{ asset('uploads/user/default_user.png') }}" alt="user avatar" class="t-avatar"
-                  width="40">
-
-                {{-- name --}}
-                <h4 class="t-name">Ali</h4>
-              </header>
-
-              {{-- desc --}}
-              <p class="t-desc">bla bla bal</p>
+          <li class="t-item">
+            <a>
+              <p class="t-desc">الإشعارات</p>
             </a>
-          </div>
-          {{-- notification item --}}
-          <div class="t-item">
-            <a href="#">
-              <header class="t-header">
-                {{-- user avatar --}}
-                <img src="{{ asset('uploads/user/default_user.png') }}" alt="user avatar" class="t-avatar"
-                  width="40">
-
-                {{-- name --}}
-                <h4 class="t-name">Ali</h4>
-              </header>
-
-              {{-- desc --}}
-              <p class="t-desc">bla bla bal</p>
-            </a>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
 
       {{-- user avatar --}}

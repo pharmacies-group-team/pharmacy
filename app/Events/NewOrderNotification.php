@@ -2,16 +2,13 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrderNotification
+class NewOrderNotification implements ShouldBroadcast
 {
     public $user, $message, $link;
 
@@ -24,7 +21,7 @@ class NewOrderNotification
      */
     public function __construct($data = [])
     {
-        $this->user = $data['user'];
+        $this->user    = $data['user'];
         $this->message = $data['message'];
         $this->link    = $data['link'];
     }
@@ -37,5 +34,10 @@ class NewOrderNotification
     public function broadcastOn()
     {
       return ['new-notification'];
+    }
+
+    public function broadcastAs()
+    {
+      return 'NewOrderNotification';
     }
 }
