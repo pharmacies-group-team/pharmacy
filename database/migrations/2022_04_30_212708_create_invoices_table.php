@@ -18,6 +18,8 @@ return new class extends Migration
             $table->double('total');
             $table->string('currency')->default('YER');
 
+            $table->unsignedBigInteger('invoice_id')->nullable();
+
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
