@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\client;
 
 use App\Enum\OrderEnum;
+use App\Events\NewOrderNotification;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
+use App\Notifications\OrderNotification;
 use App\Notifications\PharmacyOrderNotification;
 use App\Traits\UploadsTrait;
 use Illuminate\Http\RedirectResponse;
@@ -44,10 +46,16 @@ class OrderController extends Controller
     );
 
     $pharmacy = User::find($request->input('pharmacy_id'));
-    $data     = ['client' => Auth::user(), 'order' => $order];
+    $data     = [
+      'user' => $pharmacy,
+      'link' => '/home',
+      'message' => 'order created'
+    ];
 
     // send and save notification in DB
-    Notification::send($pharmacy, new PharmacyOrderNotification($data));
+    Notification::send($pharmacy, new OrderNotification($data));
+
+    event(new NewOrderNotification($data));
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
