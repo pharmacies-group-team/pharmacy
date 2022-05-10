@@ -1519,6 +1519,23 @@ svg {
   margin-top: 1.5rem;
 }
 
+.page-quotation-details .t-address{
+  margin: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-quotation-details .t-address select{
+  display: inline-block;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.page-quotation-details .t-form{
+  margin-top: 1rem;
+}
+
 .page-pharmacy-orders .t-profile{
   height: 2.5rem;
   width: 2.5rem;
@@ -1599,23 +1616,6 @@ svg {
 .page-create-quotation .divided{
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.page-quotation-details .t-address{
-  margin: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.page-quotation-details .t-address select{
-  display: inline-block;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.page-quotation-details .t-form{
-  margin-top: 1rem;
 }
 
 .page-pharmacy-profile .t-bg{
@@ -1849,4 +1849,210 @@ svg {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
+}
+
+.page-invoice{
+  width: 100%;
+}
+
+@media (min-width: 640px){
+  .page-invoice{
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px){
+  .page-invoice{
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px){
+  .page-invoice{
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px){
+  .page-invoice{
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px){
+  .page-invoice{
+    max-width: 1536px;
+  }
+}
+
+.page-invoice{
+  margin-top: 2rem;
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+@media (min-width: 640px) {
+  .page-invoice .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-invoice .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-invoice .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-invoice .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .page-invoice .container {
+    max-width: 1536px;
+  }
+}
+
+.page-invoice{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.page-invoice .container {
+  width: 100%;
+}
+
+.page-invoice .divided{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+
+.page-invoice .t-header .t-title{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.page-invoice .t-header .t-invoice-info{
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.page-invoice .t-header .t-item-key{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.page-invoice .t-header .t-item-value{
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.page-invoice .t-invoice-desc{
+  margin-top: 2rem;
+  display: flex;
+  gap: 10rem;
+}
+
+.page-invoice .t-invoice-desc .t-item > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+
+.page-invoice .t-invoice-desc .t-item *{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-invoice .t-invoice-desc .t-item * .icon{
+  width: 1rem;
+}
+
+.page-invoice .t-invoice-desc .t-item .t-title{
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.page-invoice .t-invoice-desc .t-item .t-name{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.page-invoice .t-total > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.page-invoice .t-total{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.page-invoice .t-total .t-item{
+  max-width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-invoice .t-total .t-key{
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.page-invoice .t-total .t-price{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.page-invoice table{
+  margin-top: 2rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: #f3f4f6;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.page-invoice table thead th{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding: 1rem;
+}
+
+.page-invoice table tbody td{
+  white-space: nowrap;
+  padding: 1rem;
+  text-align: center;
+}
+
+.page-invoice table tbody tr:nth-of-type(odd) td{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.page-invoice table tbody img {
+  max-width: 80px;
 }
