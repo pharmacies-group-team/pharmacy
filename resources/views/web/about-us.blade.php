@@ -46,7 +46,7 @@
                     <span class="fa-stack fa-4x">
                         {{-- <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> --}}
-                        <x-icon icon='search' />
+                        <x-icon icon='location' />
                     </span>
                     <h4 class="my-3">معرفه</h4>
                     <p class="text-muted">نقوم بمعرفة احتي جاتك من الصحية</p>
@@ -55,7 +55,7 @@
                     <span class="fa-stack fa-4x">
                         {{-- <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> --}}
-                        <x-icon icon='payment' />
+                        <x-icon icon='location' />
                     </span>
                     <h4 class="my-3">توفير</h4>
                     <p class="text-muted">بعد معرفة إحتياجاتك نقوم تبوفيره لك</p>
@@ -72,106 +72,66 @@
             </div>
         </div>
     </section>
-            <!-- Portfolio Grid-->
-            <section class="page-section bg-light" id="portfolio">
-              <div class="container">
-                  <div class="text-center">
-                      <h2 class="section-heading text-uppercase">Portfolio</h2>
-                      <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                  </div>
-                  <div class="row">
-                      <div class="col-lg-4 col-sm-6 mb-4">
-                          <!-- Portfolio item 1-->
-                          <div class="portfolio-item">
-                              <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                  <div class="portfolio-hover">
-                                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                  </div>
-                                  <img class="img-fluid" src="{{ asset('img/about/home1.jpg') }}" alt="..." />
-                              </a>
-                              <div class="portfolio-caption">
-                                  <div class="portfolio-caption-heading">Threads</div>
-                                  <div class="portfolio-caption-subheading text-muted">Illustration</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-4 col-sm-6 mb-4">
-                          <!-- Portfolio item 2-->
-                          <div class="portfolio-item">
-                              <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                  <div class="portfolio-hover">
-                                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                  </div>
-                                  <img class="img-fluid" src="{{ asset('img/about/home1.jpg') }}" alt="..." />
-                              </a>
-                              <div class="portfolio-caption">
-                                  <div class="portfolio-caption-heading">Explore</div>
-                                  <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-4 col-sm-6 mb-4">
-                          <!-- Portfolio item 3-->
-                          <div class="portfolio-item">
-                              <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                                  <div class="portfolio-hover">
-                                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                  </div>
-                                  < class="img-fluid" src="{{ asset('img/about/home1.jpg') }}" alt="..." />
-                              </a>
-                              <div class="portfolio-caption">
-                                  <div class="portfolio-caption-heading">Finish</div>
-                                  <div class="portfolio-caption-subheading text-muted">Identity</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                          <!-- Portfolio item 4-->
-                          <div class="portfolio-item">
-                              <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                                  <div class="portfolio-hover">
-                                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                  </div>
-                                  <img class="img-fluid" src={{ asset('img/about/home1.jpg') }}" alt="..." />
-                              </a>
-                              <div class="portfolio-caption">
-                                  <div class="portfolio-caption-heading">Lines</div>
-                                  <div class="portfolio-caption-subheading text-muted">Branding</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                          <!-- Portfolio item 5-->
-                          <div class="portfolio-item">
-                              <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                                  <div class="portfolio-hover">
-                                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                  </div>
-                                  <img class="img-fluid" src="{{ asset('img/about/home1.jpg') }}" alt="..." />
-                              </a>
-                              <div class="portfolio-caption">
-                                  <div class="portfolio-caption-heading">Southwest</div>
-                                  <div class="portfolio-caption-subheading text-muted">Website Design</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-4 col-sm-6">
-                          <!-- Portfolio item 6-->
-                          <div class="portfolio-item">
-                              <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-                                  <div class="portfolio-hover">
-                                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                  </div>
-                                  <img class="img-fluid" src="{{ asset('img/about/home1.jpg') }}" alt="..." />
-                              </a>
-                              <div class="portfolio-caption">
-                                  <div class="portfolio-caption-heading">Window</div>
-                                  <div class="portfolio-caption-subheading text-muted">Photography</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
-          <!-- About-->
+                <!-- About-->
+                <section class="page-section" id="about">
+                    <div class="container">
+                        <div class="text-center">
+                            <h2 class="section-heading text-uppercase">About</h2>
+                            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                        </div>
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4>2009-2011</h4>
+                                        <h4 class="subheading">Our Humble Beginnings</h4>
+                                    </div>
+                                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                                </div>
+                            </li>
+                            <li class="timeline-inverted">
+                                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." /></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4>March 2011</h4>
+                                        <h4 class="subheading">An Agency is Born</h4>
+                                    </div>
+                                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4>December 2015</h4>
+                                        <h4 class="subheading">Transition to Full Service</h4>
+                                    </div>
+                                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                                </div>
+                            </li>
+                            <li class="timeline-inverted">
+                                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4>July 2020</h4>
+                                        <h4 class="subheading">Phase Two Expansion</h4>
+                                    </div>
+                                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                                </div>
+                            </li>
+                            <li class="timeline-inverted">
+                                <div class="timeline-image">
+                                    <h4>
+                                        Be Part
+                                        <br />
+                                        Of Our
+                                        <br />
+                                        Story!
+                                    </h4>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
 @endsection
