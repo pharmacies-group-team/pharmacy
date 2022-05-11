@@ -13,8 +13,9 @@ class Address extends Component
 
     public function render()
     {
-        $this->addresses = Addresses::all();
-        return view('livewire.client.address');
+//        $this->addresses = Addresses::where('user_id', Auth::id());
+        return view('livewire.client.address',
+        ['addresses' => Addresses::where('user_id', Auth::id())->get()]);
     }
 
     public function updated($propertyName)
