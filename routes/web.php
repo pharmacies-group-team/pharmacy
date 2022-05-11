@@ -3,7 +3,6 @@
 use App\Enum\RoleEnum;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
-use App\Http\Controllers\clint\PayController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
@@ -208,10 +207,12 @@ Route::prefix('/client')
 
     // payment
     Route::controller(client\PaymentController::class)->group(function () {
-      Route::post('/pay',  'payment')->name('payment');
+      //  TODO IT MIGHT BE DELETED
+//      Route::post('/pay',  'payment')->name('payment');
       Route::get('/success',  'success')->name('success');
       Route::get('/cancel', 'cancel')->name('cancel');
     });
   });
+
 
 Auth::routes(['verify' => true]);
