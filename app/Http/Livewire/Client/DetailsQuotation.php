@@ -8,20 +8,17 @@ use App\Enum\RoleEnum;
 use App\Models\Invoice;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
-use App\Models\User;
+use App\Models\{User, Address};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class DetailsQuotation extends Component
 {
-    public $quotationDetails;
-    public $quotation;
-    public $quotationID;
-    public $quantity;
-    public $addressID;
+    public $quotationDetails, $quotation, $quotationID;
+    public $quantity, $addressID, $addresses;
+    public $name, $phone, $type_address, $desc;
 
-    public $addresses;
     public $active = 0;
 
     public function render()
@@ -35,6 +32,11 @@ class DetailsQuotation extends Component
       $this->active = $invoice == '' ? 0 : $invoice->is_active;
 
       return view('livewire.client.details-quotation');
+    }
+
+    public function updated($propertyName)
+    {
+      $this->validateOnly($propertyName, Address::roles(), Address::messages());
     }
 
     //********* Delete From Quotation Details *********//
@@ -156,5 +158,30 @@ class DetailsQuotation extends Component
           'invoice_id' => $response != null ? $response['invoice']['invoice_referance'] : '',
           'address_id' => $this->addressID
         ]);
+    }
+
+    //********* Create Address *********//
+    public function store()
+    {
+      Address::create(
+        [
+          'name'         => $this->name,
+          'phone'        => $this->phone,
+          'desc'         => $this->desc,
+          'type_address' => $this->type_address,
+          'user_id'      => Auth::id()
+        ]
+      );
+
+      $this->resetInputFields();
+      session()->flash('message', 'تم إضافة عنوان جديد.');
+    }
+
+    public function resetInputFields()
+    {
+      $this->name         = '';
+      $this->phone        = '';
+      $this->type_address = '';
+      $this->desc         = '';
     }
 }

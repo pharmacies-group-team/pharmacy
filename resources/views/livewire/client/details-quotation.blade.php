@@ -1,5 +1,5 @@
 {{-- TODO --}}
-<div>
+<div x-data="{ addModal: false }">
   <x-alert type="message" />
 
   <div class="section-header">
@@ -86,20 +86,78 @@
   @if($active === 0)
     <div class="t-address">
       <h3> حدد العنوان</h3>
-
       <div>
-        <select wire:model="addressID" class="form-control">
+        <select wire:model="addressID" class="form-control" style="width: 240px;">
           <option>...</option>
           @foreach ($addresses as $address)
             <option value="{{ $address->id }}">{{ $address->name }}</option>
           @endforeach
         </select>
-
-        @error('addressID')
-          <span class="error">{{ $message }}</span>
-        @enderror
       </div>
+
+      <button class="form-control" @click="addModal = true" >
+        +
+        إضافة عنوان جديد
+      </button>
     </div>
     <button wire:click="pay" class="btn btn-full">دفع الفاتورة</button>
   @endif
+  <div>
+    {{-- delete ad modal --}}
+    <x-modal title="إضافة عنوان جديد" open="addModal">
+      <form>
+        {{-- Name --}}
+        <div class="form-group">
+          <label for="ad-name-label">الاسم</label>
+          <input wire:model="name" id="ad-name-label"  type="text"
+                 class="form-control " placeholder="الاسم " />
+          @error('name')
+          <span class="error">{{ $message }}</span>
+          @enderror
+        </div>
+
+        {{-- phone --}}
+        <div class="form-group">
+          <label for="ad-name-label">رقم الهاتف </label>
+          <input  wire:model="phone" id="ad-name-label"  type="text"
+                 class="form-control " placeholder="رقم الهاتف " />
+          @error('phone')
+          <span class="error">{{ $message }}</span>
+          @enderror
+        </div>
+
+        {{-- type_address --}}
+        <div class="form-group">
+          <label>نوع العنوان</label>
+
+          <select wire:model="type_address"
+                  class="form-control ">
+            <option>نوع العنوان</option>
+            <option value="{{ \App\Enum\UserEnum::TYPE_ADDRESS_HOME }}">
+              منزل
+            </option>
+            <option value="{{ \App\Enum\UserEnum::TYPE_ADDRESS_WORK }}">
+              عمل
+            </option>
+          </select>
+
+          @error('type_address')
+          <span class="error">{{ $message }}</span>
+          @enderror
+        </div>
+
+        {{--    desc    --}}
+        <div class="form-group">
+          <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع" style="margin-top: 10px "></textarea>
+          @error('desc')
+          <span class="error">{{ $message }}</span>
+          @enderror
+        </div>
+
+        <x-slot:footer>
+          <button class="btn" wire:click.prevent="store()">حفظ</button>
+        </x-slot:footer>
+      </form>
+    </x-modal>
+  </div>
 </div>
