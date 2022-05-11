@@ -54,7 +54,7 @@
                         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> --}}
                         <x-icon icon='location' />
                     </span>
-                    <h4 class="my-3 text-primary-dark mt-4">معرفه</h4>
+                    <h4 class="my-3 text-primary-dark fs-4">معرفه</h4>
                     <p class="text-muted">نقوم بمعرفة احتي جاتك من الصحية</p>
                 </div>
                 <div class="col-md-4">
