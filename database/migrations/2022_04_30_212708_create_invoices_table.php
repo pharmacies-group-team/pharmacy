@@ -17,13 +17,14 @@ return new class extends Migration
             $table->id();
             $table->double('total');
             $table->string('currency')->default('YER');
+            $table->boolean('is_active')->default(0);
 
-            $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->string('invoice_id');
 
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
-            $table->foreignId('payment_user_id');
+            $table->foreignId('payment_user_id')->nullable();
             $table->foreign('payment_user_id')->references('id')->on('payment_users')->onDelete('cascade');
 
             $table->softDeletes();

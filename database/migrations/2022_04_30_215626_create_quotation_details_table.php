@@ -19,7 +19,7 @@ return new class extends Migration
           $table->string('product_unit');
           $table->integer('quantity');
           $table->integer('price');
-          $table->integer('total');
+          $table->double('total');
           $table->string('currency')->default('YER');
 
           $table->foreignId('quotation_id');
