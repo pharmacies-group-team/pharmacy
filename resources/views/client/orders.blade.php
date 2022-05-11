@@ -78,7 +78,7 @@ use App\Enum\PharmacyEnum;
                     </div>
                   @elseif($order->status === OrderEnum::PAID_ORDER)
                     <div class="badge bg-success">
-                      {{ OrderEnum::PAID_ORDER }}
+                      تم الدفع
                     </div>
                   @elseif($order->status === OrderEnum::DELIVERY_ORDER)
                     <div class="badge badge-danger">
