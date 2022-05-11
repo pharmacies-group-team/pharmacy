@@ -69,14 +69,20 @@
       </tr>
       </thead>
       <tbody>
-        @foreach($addresses as $address)
+        @if(isset($addresses))
+          @foreach($addresses as $address)
+            <tr>
+              <th scope="row"></th>
+              <td>{{ $address->name }}</td>
+              <td>{{ $address->phone }}</td>
+              <td>{{ $address->type_address }}</td>
+            </tr>
+          @endforeach
+        @else
           <tr>
-            <th scope="row"></th>
-            <td>{{ $address->name }}</td>
-            <td>{{ $address->phone }}</td>
-            <td>{{ $address->type_address }}</td>
+            <td colspan="4" style="text-align: center">لايوجد بيانات</td>
           </tr>
-        @endforeach
+        @endif
       </tbody>
     </table>
   </div>
