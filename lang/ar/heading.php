@@ -21,6 +21,9 @@ return [
   "product-price" => "price",
 
 
+  "invoice-profile" => "invoice profile"
+
+
   // "" => "",
   // "" => "",
   // "" => "",
