@@ -54,8 +54,8 @@
                         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> --}}
                         <x-icon icon='location' />
                     </span>
-                    <h4 class="my-3 text-primary-dark fs-4">معرفه</h4>
-                    <p class="text-muted">نقوم بمعرفة احتي جاتك من الصحية</p>
+                    <h4 class="my-3 text-primary-dark fw-bold fs-6">معرفه</h4>
+                    <p class="text-muted text-primary-dark mt-6">نقوم بمعرفة احتي جاتك من الصحية</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -63,8 +63,8 @@
                         <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> --}}
                         <x-icon icon='location' />
                     </span>
-                    <h4 class="my-3">توفير</h4>
-                    <p class="text-muted">بعد معرفة إحتياجاتك نقوم تبوفيره لك</p>
+                    <h4 class="my-3 text-primary-dark fw-bold fs-6">توفير</h4>
+                    <p class="text-muted text-primary-dark mt-6">بعد معرفة إحتياجاتك نقوم تبوفيره لك</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -72,8 +72,8 @@
                         <i class="fas fa-lock fa-stack-1x fa-inverse"></i> --}}
                         <x-icon icon='location' />
                     </span>
-                    <h4 class="my-3">إيصال</h4>
-                    <p class="text-muted">نقوم بتوفير العناء وأيصالها الى المنزل</p>
+                    <h4 class="my-3 text-primary-dark fw-bold fs-6">إيصال</h4>
+                    <p class="text-muted text-primary-dark mt-6">نقوم بتوفير العناء وأيصالها الى المنزل</p>
                 </div>
             </div>
         </div>
