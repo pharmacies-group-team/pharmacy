@@ -40,13 +40,25 @@
       </a>
     </li>
 
-    {{-- orders --}}
+    {{-- addresses --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
         {{-- TODO --}}
         <x-icon icon="order" />
 
         <span>إدارة عناوين التوصيل </span>
+      </a>
+    </li>
+
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.invoice-profile') active @endif"
+        href="{{ route('client.invoice-profile') }}">
+        {{-- TODO --}}
+        <x-icon icon="order" />
+
+        <span>@lang('heading.invoice-profile')</span>
       </a>
     </li>
 
