@@ -26,4 +26,11 @@ class DashboardController extends Controller
     {
         return view('client.address');
     }
+
+    public function invoiceProfile()
+    {
+        $user = Auth::user();
+
+        return view('client.invoice-profile', compact('user'));
+    }
 }

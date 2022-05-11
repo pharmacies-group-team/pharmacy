@@ -192,6 +192,7 @@ Route::prefix('/client')
       //      Route::get('/profile', 'getProfile')->name('profile'); // X
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
+      Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
     });
 
     // order
