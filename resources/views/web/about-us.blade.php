@@ -41,11 +41,11 @@
           </p>
         </div>
         <!-- Services-->
-        <section class="page-section" id="services">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">خدماتناء</h2>
-                <h3 class="section-subheading text-muted">تمثل خدمتنا في ايصال الدواء</h3>
+        <section class="page-section my-5" id="services">
+        <div class="container ">
+            <div class="text-center my-5">
+                <h2 class="section-heading text-uppercase text-primary-darker fw-bold fs-3">خدماتناء</h2>
+                <h3 class="section-subheading text-muted text-primary-dark mt-4">تمثل خدمتنا في ايصال الدواء</h3>
             </div>
             <div class="row text-center">
                 <div class="col-md-4">
@@ -54,7 +54,7 @@
                         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> --}}
                         <x-icon icon='location' />
                     </span>
-                    <h4 class="my-3">معرفه</h4>
+                    <h4 class="my-3 text-primary-dark mt-4">معرفه</h4>
                     <p class="text-muted">نقوم بمعرفة احتي جاتك من الصحية</p>
                 </div>
                 <div class="col-md-4">
