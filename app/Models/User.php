@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail, Wallet, Customer
+class User extends Authenticatable implements MustVerifyEmail, Wallet
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasWallet, CanPay;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasWallet;
 
     /**
      * The attributes that are mass assignable.

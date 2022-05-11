@@ -65,9 +65,11 @@
               <td> {{ $details->total }} {{ $details->currency }}</td>
 
               {{-- action --}}
-              <td>
-                <button wire:click="delete({{ $details->id }})" class="badge badge-danger">حذف</button>
-              </td>
+              @if($active === 0)
+                <td>
+                  <button wire:click="delete({{ $details->id }})" class="badge badge-danger">حذف</button>
+                </td>
+              @endif
             </tr>
           @endforeach
         @endif
@@ -76,25 +78,28 @@
           <td>
             الأجمالي
           </td>
-          <td colspan="5"> {{ $quotation->total }} {{ $details->currency }}</td>
+          <td colspan="5"> {{ $quotation->total }} {{ $quotation->currency }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+  @if($active === 0)
+    <div class="t-address">
+      <h3> حدد العنوان</h3>
 
-  <div class="t-address">
-    <h3> حدد العنوان</h3>
+      <div>
+        <select wire:model="addressID" class="form-control">
+          <option>...</option>
+          @foreach ($addresses as $address)
+            <option value="{{ $address->id }}">{{ $address->name }}</option>
+          @endforeach
+        </select>
 
-    <div>
-      <select wire:model="addressID" class="form-control">
-        @foreach ($addresses as $address)
-          <option value="{{ $address->id }}">{{ $address->name }}</option>
-        @endforeach
-      </select>
-
-      @error('addressID')
-        <span class="error">{{ $message }}</span>
-      @enderror
+        @error('addressID')
+          <span class="error">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
-  </div>
+    <button wire:click="pay" class="btn btn-full">دفع الفاتورة</button>
+  @endif
 </div>
