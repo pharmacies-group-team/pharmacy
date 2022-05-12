@@ -13,14 +13,19 @@ class Address extends Component
 
     public function render()
     {
-//        $this->addresses = Addresses::where('user_id', Auth::id());
-        return view('livewire.client.address',
-        ['addresses' => Addresses::where('user_id', Auth::id())->get()]);
+
+        $this->addresses  = Auth::user()->addresses()->get();
+        return view('livewire.client.address');
     }
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName, Addresses::roles(), Addresses::messages());
+    }
+
+    public function create()
+    {
+      $this->resetInputFields();
     }
 
     public function store()
@@ -37,6 +42,15 @@ class Address extends Component
 
         $this->resetInputFields();
         session()->flash('message', 'تم إضافة عنوان جديد.');
+    }
+
+    public function update($id)
+    {
+      $address            = Addresses::find($id);
+      $this->name         = $address->name;
+      $this->phone        = $address->phone;
+      $this->type_address = $address->type_address;
+      $this->desc         = $address->desc;
     }
 
     public function edit($id)
