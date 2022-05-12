@@ -92,7 +92,9 @@ Route::prefix('/pharmacy')
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
       Route::get('/messages', 'messages')->name('messages');
-      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+      Route::get('/account-settings', 'accountSettings')
+        ->name('account-settings');
+      Route::get('/invoice-profile', 'getInvoiceProfile')->name('invoice-profile');
     });
 
     Route::controller(pharmacy\OrderController::class)
@@ -191,6 +193,7 @@ Route::prefix('/client')
       //      Route::get('/profile', 'getProfile')->name('profile'); // X
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
+      Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
     });
 
     // order

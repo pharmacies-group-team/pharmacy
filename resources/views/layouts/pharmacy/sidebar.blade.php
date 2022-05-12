@@ -60,5 +60,16 @@
         <span>أعدادات الحساب</span>
       </a>
     </li>
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.invoice-profile') active @endif"
+        href="{{ route('pharmacy.invoice-profile') }}">
+        {{-- TODO --}}
+        <x-icon icon="order" />
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
   </ul>
 </nav>
