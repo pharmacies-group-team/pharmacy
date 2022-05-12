@@ -923,6 +923,42 @@ textarea.form-control{
   --tw-shadow: var(--tw-shadow-colored);
 }
 
+.t-modal .t-description{
+  margin-bottom: 2rem;
+  white-space: normal;
+}
+
+.t-modal .t-zoom-img{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 50;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(17 24 39 / 0.3);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-delay: 200ms;
+}
+
+.t-modal .t-zoom-img img{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-delay: 200ms;
+  transform: translate(-50%, -50%) scale(2);
+  cursor: auto;
+}
+
+.t-modal .zoom-full.t-zoom-img{
+  display: block;
+}
+
 .t-notification{
   position: relative;
   display: flex;

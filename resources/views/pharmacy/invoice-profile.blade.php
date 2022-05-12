@@ -1,4 +1,4 @@
-@extends('layouts/client/master')
+@extends('layouts/pharmacy/master')
 @section('content')
   <x-alert type="status" />
 

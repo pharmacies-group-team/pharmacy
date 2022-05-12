@@ -16,6 +16,8 @@ php artisan serve
 
 - [x] client invoice
 - [x] notification
+- [x] pharmacy/client invoice profile
+
 - [] pharmacy add order 'add total price'
 - [] **_ alert bg color_**
 - [] web pharmacy profile
