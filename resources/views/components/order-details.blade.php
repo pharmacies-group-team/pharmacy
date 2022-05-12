@@ -10,7 +10,9 @@
         <div class="t-order-details-user">
           {{-- avatar --}}
           <div>
-            <img src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}" alt="user avatar" class="t-order-image">
+            <img
+              src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
+              alt="user avatar" class="t-order-image">
           </div>
 
           <div>
@@ -31,7 +33,15 @@
           </p>
 
           @if ($order->image !== '0')
-            <img src="{{ asset('uploads/order/' . $order->image) }}" alt="order-image" class="t-order-image">
+            <div x-data="{ isZoom: false }">
+
+              <img src="{{ asset('uploads/order/' . $order->image) }}" alt="order-image" class="t-order-image"
+                @click="isZoom = true" @click.away="isZoom = false">
+
+              <div class="t-zoom-img" :class="isZoom ? 'zoom-full' : ''">
+                <img src="{{ asset('uploads/order/' . $order->image) }}" alt="order-image" class="t-order-image">
+              </div>
+            </div>
           @endif
         </div>
 

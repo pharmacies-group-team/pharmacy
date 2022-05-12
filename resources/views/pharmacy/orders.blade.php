@@ -52,8 +52,8 @@
                     <div style="display: flex; justify-content: center;gap: 12px;align-items: center;">
 
                       <img class="t-profile"
-                           src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
-                           alt="profile avatar">
+                        src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
+                        alt="profile avatar">
 
                       <span class="text-base">
                         {{ $order->user->name }}
@@ -100,7 +100,7 @@
                   <td>
                     <x-order-details :order="$order">
                       @slot('footer')
-                        @if($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                        @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                           <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
                             <x-icon icon="order" />
                             @lang('action.create-quote')
@@ -112,10 +112,10 @@
                           @lang('action.send-message')
                         </a>
 
-                        @if($order->status === \App\Enum\OrderEnum::NEW_ORDER)
-                            <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
-                              @lang('action.not-found')
-                            </a>
+                        @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                          <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
+                            @lang('action.not-found')
+                          </a>
                         @endif
                       @endslot
                     </x-order-details>
