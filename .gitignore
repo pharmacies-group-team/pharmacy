@@ -12,5 +12,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 
-# test
+# style
 styles/
+
+# image TODO
+public/uploads/**/[0-9]*

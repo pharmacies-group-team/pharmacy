@@ -17,10 +17,10 @@ return new class extends Migration
           $table->id();
           $table->string('product_name');
           $table->string('product_unit');
-          $table->string('quantity');
-          $table->double('price');
-          $table->double('total');
-          $table->string('currency');
+          $table->integer('quantity');
+          $table->integer('price');
+          $table->integer('total');
+          $table->string('currency')->default('YER');
 
           $table->foreignId('quotation_id');
           $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');

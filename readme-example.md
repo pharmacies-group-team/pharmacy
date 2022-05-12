@@ -11,3 +11,20 @@ pnpm dev
 php artisan serve
 
 ```
+
+## todo
+
+- [x] client invoice
+- [x] notification
+- [] pharmacy add order 'add total price'
+- [] **_ alert bg color_**
+- [] web pharmacy profile
+
+- [] contact
+- [] about us
+- [] footer
+- [] 404 page
+- [] 403 page
+- [] auth
+- [] report with pdf
+- [] order details image make it zoom

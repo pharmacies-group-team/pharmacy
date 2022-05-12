@@ -11,12 +11,14 @@ class Account extends Component
     public $user;
     public $name;
     public $email;
+    public $phone;
 
     public function mount()
     {
         $this->user  = Auth::user();
         $this->name  = $this->user->name;
         $this->email = $this->user->email;
+        $this->phone = $this->user->phone;
     }
 
     public function render()
@@ -26,17 +28,18 @@ class Account extends Component
 
     public function updated($propertyName)
     {
-      $this->validateOnly($propertyName, User::role(), User::messages());
+      $this->validateOnly($propertyName, User::roleUser(), User::messages());
     }
 
     public function store()
     {
-      $this->validate( User::role(), User::messages());
+      $this->validate( User::roleUser(), User::messages());
 
       $this->user->update(
         [
-          'name' => $this->name,
-          'email' => $this->email
+          'name'  => $this->name,
+          'email' => $this->email,
+          'phone' => $this->phone
         ]);
 
       session()->flash('message', 'تم تحديث بياناتك بنجاح.');

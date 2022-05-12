@@ -3,6 +3,7 @@
 use App\Enum\RoleEnum;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\clint\PayController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
@@ -15,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 
-// TODO
 // disable Debug
 // Debugbar::disable();
 /*
@@ -82,9 +82,8 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 |--------------------------------------------------------------------------
 */
 
-// TODO only for debugging
 Route::prefix('/pharmacy')
-  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
     // Route::resource('/', pharmacy\PharmacyController::class);
     // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
@@ -94,13 +93,14 @@ Route::prefix('/pharmacy')
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
       Route::get('/messages', 'messages')->name('messages');
-      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+      Route::get('/account-settings', 'accountSettings')
+        ->name('account-settings');
+      Route::get('/invoice-profile', 'getInvoiceProfile')->name('invoice-profile');
     });
 
     Route::controller(pharmacy\OrderController::class)
       ->prefix('/orders')->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
-        Route::get('/{id}', 'getOrder')->name('single');
         Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
       });
 
@@ -109,6 +109,7 @@ Route::prefix('/pharmacy')
 
         Route::get('/', 'getAll')->name('index');
         Route::get('/{id}', 'createQuotation')->name('create');
+        Route::get('/details/{id}', 'getQuotationDetails')->name('details');
       });
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
@@ -120,20 +121,14 @@ Route::prefix('/pharmacy')
 |--------------------------------------------------------------------------
 */
 
-// TODO only for debugging
 Route::prefix('/admin')
   ->name('admin.')
-  //  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
+  ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
-    // admin profile
-    Route::get('profile', [admin\AdminProfileController::class, 'index'])
-      ->name('profile'); //X
 
-    Route::put('profile', [admin\AdminProfileController::class, 'updateProfile'])
-      ->name('update-profile'); //X
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
 
@@ -187,7 +182,7 @@ Route::prefix('/admin')
 | Client Routes
 |--------------------------------------------------------------------------
 */
-// TODO only for debugging
+
 Route::prefix('/client')
   ->name('client.')
   ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
@@ -196,9 +191,13 @@ Route::prefix('/client')
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-      Route::get('/', 'getProfile')->name('profile');
+      //      Route::get('/profile', 'getProfile')->name('profile'); // X
+      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+      Route::get('/address', 'address')->name('address');
+      Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
     });
 
+    // order
     Route::controller(client\OrderController::class)
       ->prefix('/orders')
       ->name('orders.')->group(function () {
@@ -206,6 +205,16 @@ Route::prefix('/client')
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
       });
+
+    // quotation
+    Route::get('/quotation/details/{id}', [client\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
+
+    // payment
+    Route::controller(client\PayController::class)->group(function () {
+      Route::post('/pay',  'payment')->name('payment');
+      Route::get('/success',  'success')->name('success');
+      Route::get('/cancel', 'cancel')->name('cancel');
+    });
   });
 
 Auth::routes(['verify' => true]);

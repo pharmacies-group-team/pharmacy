@@ -14,24 +14,23 @@ class OrderController extends Controller
 {
     public function getAll()
     {
-         $orders = Auth::user()->pharmacyOrders()->get();
-         return view('pharmacy.dashboard.orders', compact('orders'));
+        $orders = Auth::user()->pharmacyOrders()->orderBy('created_at', 'DESC')->get();
+        return view('pharmacy.orders', compact('orders'));
     }
 
     public function orderRefusal($id)
     {
         $order = Order::find($id);
 
-        if ($order)
-        {
+        if ($order) {
             $order->update(['status' => OrderEnum::REFUSAL_ORDER]);
 
             // send and save notification in DB
             $user  = User::find($order->user_id);
             $data  = [
-              'pharmacy' => Auth::user(),
-              'order'    => $order,
-              'message'  => 'عذراً لا يتوفر لدينا طلبك'
+                'pharmacy' => Auth::user(),
+                'order'    => $order,
+                'message'  => 'عذراً لا يتوفر لدينا طلبك'
             ];
             Notification::send($user, new UserOrderNotification($data));
 

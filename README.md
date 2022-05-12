@@ -1,5 +1,28 @@
 # Project and code roles
 
+## for custom css class you should use `t-` prefix
+
+```css
+.t-modal {
+  color: red;
+}
+```
+
+## lang
+
+```php
+{{ __('client.profile') }}
+@lang('client.profile') // better
+```
+
+## livewire
+
+```bash
+php artisan make:livewire orders/order-details
+
+
+```
+
 ## branch's name
 
 `v-2.2/branchName`

@@ -11,21 +11,25 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function updateLogo(Request $request)
-    {
-        // validator
-        Validator::validate($request->all(), Pharmacy::rolesLogo(), Pharmacy::messagesLogo());
+  public function updateLogo(Request $request)
+  {
+    // validator
+    Validator::validate(
+      $request->all(),
+      Pharmacy::rolesLogo(),
+      Pharmacy::messagesLogo()
+    );
 
-        $logo = $this->updateImage(
-          $request->logo,
-          PharmacyEnum::PHARMACY_LOGO_PATH,
-          PharmacyEnum::PHARMACY_LOGO_PATH . Auth::user()->pharmacy->logo
-        );
+    $logo = $this->updateImage(
+      $request->logo,
+      PharmacyEnum::PHARMACY_LOGO_PATH,
+      PharmacyEnum::PHARMACY_LOGO_PATH . Auth::user()->pharmacy->logo
+    );
 
-        $pharmacy = Pharmacy::where('user_id', Auth::id())->first();
-        $pharmacy->update(['logo' => $logo]);
+    $pharmacy = Pharmacy::where('user_id', Auth::id())->first();
+    $pharmacy->update(['logo' => $logo]);
 
-        return redirect()->back()
-          ->with('status', 'تم تحديث صورة صيدليتك بنجاح');
-    }
+    return redirect()->back()
+      ->with('status', 'تم تحديث صورة صيدليتك بنجاح');
+  }
 }

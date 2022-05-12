@@ -2,7 +2,7 @@
   @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
   {{-- link to home page --}}
-  <a class="sidebar-brand" href="{{ route('client.index') }}">
+  <a class="sidebar-brand" href="{{ route('home') }}">
     <span>صيدلية اون لاين</span>
   </a>
 
@@ -20,7 +20,8 @@
 
     {{-- profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.profile') active @endif" href="{{ route('client.profile') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
+        href="{{ route('client.account-settings') }}">
 
         <x-icon icon="profile" />
 
@@ -38,5 +39,28 @@
         <span>إدارة الطلبات</span>
       </a>
     </li>
+
+    {{-- addresses --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
+        {{-- TODO --}}
+        <x-icon icon="order" />
+
+        <span>إدارة عناوين التوصيل </span>
+      </a>
+    </li>
+
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.invoice-profile') active @endif"
+        href="{{ route('client.invoice-profile') }}">
+        {{-- TODO --}}
+        <x-icon icon="order" />
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
+
   </ul>
 </nav>

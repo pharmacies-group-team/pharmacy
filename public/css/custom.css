@@ -1,0 +1,11 @@
+.user-table{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+.user-table > img {
+  border-radius: 50%;
+  width: 15%;
+  border: 1px solid #588FF4
+}

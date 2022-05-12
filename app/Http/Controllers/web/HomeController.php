@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 
 use App\Models\{AboutUs, Ad, City, ContactUs, Directorate, Neighborhood, Pharmacy, Service, SocialMedia};
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,8 @@ class HomeController extends Controller
     $contactUs  = ContactUs::first();
     $social     = SocialMedia::first();
     $pharmacies = Pharmacy::all();
-    $ads = Ad::all();
+    $ads        = Ad::where('start_at', '<=', Carbon::now()->format('Y-m-d'))
+                    ->where('end_at', '>=', Carbon::now()->format('Y-m-d'))->get();
 
     return view('index', compact(
       'aboutUs',
@@ -29,18 +31,13 @@ class HomeController extends Controller
 
   public function showPharmacies()
   {
-    $pharmacies    = Pharmacy::all();
-    $cities        = City::all();
-    $directorates  = Directorate::all();
-    $neighborhoods = Neighborhood::all();
-
-    return view('web.pharmacies', compact('pharmacies', 'cities', 'directorates', 'neighborhoods'));
+    return view('web.pharmacies');
   }
 
   public function showPharmacy($id)
   {
     $pharmacy = Pharmacy::find($id);
 
-    return view('pharmacy.profile', compact('pharmacy'));
+    return view('web.profile', compact('pharmacy'));
   }
 }

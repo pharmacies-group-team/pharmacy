@@ -14,23 +14,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use function PHPUnit\Framework\returnArgument;
 
 class OrderController extends Controller
 {
   public function getAll()
   {
-    // BUG need to fix
-    // $orders = Auth::user()->userOrders()->get();
-    // return response($orders);
+    $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->get();
 
-    return view('client.orders');
+    return view('client.orders', compact('orders'));
   }
 
-  public function showOrder($id)
-  {
-    $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
-    return response($order);
-  }
 
   public function storeOrder(Request $request): RedirectResponse
   {

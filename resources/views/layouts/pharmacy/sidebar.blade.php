@@ -2,7 +2,7 @@
   @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
   {{-- link to home page --}}
-  <a class="sidebar-brand" href="{{ route('pharmacy.index') }}">
+  <a class="sidebar-brand" href="{{ route('home') }}">
     <span>صيدلية اون لاين</span>
   </a>
 
@@ -58,6 +58,17 @@
         <x-icon icon="setting" />
 
         <span>أعدادات الحساب</span>
+      </a>
+    </li>
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.invoice-profile') active @endif"
+        href="{{ route('pharmacy.invoice-profile') }}">
+        {{-- TODO --}}
+        <x-icon icon="order" />
+
+        <span>@lang('heading.invoice-profile')</span>
       </a>
     </li>
   </ul>

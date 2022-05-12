@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enum\AdEnum;
+use App\Enum\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use Illuminate\Http\Request;
@@ -30,7 +32,7 @@ class AdController extends Controller
       'end_at'      => 'required|date|after:start_at',
     ]);
 
-    $imageName = $this->storeImage($request->file('image'), 'images/ads');
+    $imageName = $this->storeImage($request->file('image'), AdEnum::AD_PATH);
 
     if ($imageName) {
       Ad::create([
@@ -44,7 +46,7 @@ class AdController extends Controller
       ]);
     }
 
-    return redirect()->back()->with('status', 'added successfully');
+    return redirect()->back()->with('status', 'تم إضافة الإعلان بنجاح.');
   }
 
   // update
@@ -52,7 +54,7 @@ class AdController extends Controller
   {
     $request->validate([
       'title'       => 'required|min:5|max:100|string',
-      'image'       => 'required|image|mimes:png,jpg',
+      'image'       => 'image|mimes:png,jpg',
       'link'        => 'required|min:5|max:255|url',
       'ad_position' => 'required|min:5|max:100|string',
       'start_at'    => 'required|date|before:end_at',
@@ -62,7 +64,7 @@ class AdController extends Controller
     $imageOldName = Ad::find($id)->image;
 
     if ($request->file('image')) {
-      $imageName = $this->updateImage($request->file('image'), 'images/ads', $imageOldName);
+      $imageName = $this->updateImage($request->file('image'), AdEnum::AD_PATH, $imageOldName);
     } else {
       $imageName = $imageOldName;
     }
@@ -77,7 +79,7 @@ class AdController extends Controller
         'end_at'      => $request->input('end_at')
       ]);
 
-    return redirect()->back()->with('status', 'edit successfully');
+    return redirect()->back()->with('status', 'تم تعديل الإعلان بنجاح');
   }
 
   // delete
@@ -87,6 +89,6 @@ class AdController extends Controller
 
     $this->deleteImage($imageName);
 
-    return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
+    return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "تم حذف الإعلان بنجاح." : 'عذراَ قد يوجد هناك مشكلة.');
   }
 }

@@ -1,86 +1,134 @@
 {{-- TODO --}}
-
-@if (session()->has('message'))
-  <div>
-    {{ session('message') }}
-  </div>
-@endif
-
 <div>
-  <input hidden name="order" value="{{ $order }}">
+  <x-alert type="message" />
 
-  product_name<input type="text" wire:model="product_name.0">
-  @error('product_name.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
+  {{-- form --}}
+  <form>
+    {{-- <input hidden name="order" value="{{ $order }}"> --}}
+    <div class="t-order-item">
 
-  product_unit<input type="text" wire:model="product_unit.0">
-  @error('product_unit.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
+      {{-- name --}}
+      <div class="t-form-group">
+        <label class="text-base">اسم المنتج </label>
 
-  quantity<input type="number" wire:model="quantity.0">
-  @error('quantity.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
+        <input type="text" wire:model="product_name.0" class="form-control">
+        @error('product_name.0')
+          <span>{{ $message }}</span>
+        @enderror
+      </div>
 
-  price<input type="text" wire:model="price.0">
-  @error('price.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
+      {{-- type --}}
+      <div class="t-form-group">
+        <label class="text-base">نوع المنتج </label>
 
-  currency<input type="text" wire:model.defer="currency.0">
-  @error('currency.0')
-  <span>{{ $message }}</span>
-  @enderror <hr>
+        <select wire:model="product_unit.0" class="form-control">
+          <option selected>حدد نوع المنتج</option>
+          <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
+          <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
+          <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
+        </select>
+        @error('product_unit.0')
+          <span>{{ $message }}</span>
+        @enderror
+      </div>
 
-{{--  total<input type="text" wire:model.defer="total.0">--}}
-{{--  @error('total.0')--}}
-{{--  <span>{{ $message }}</span>--}}
-{{--  @enderror--}}
+      {{-- quantity --}}
+      <div class="t-form-group">
+        <label class="text-base">الكمية </label>
 
-  <button wire:click.prevent="add({{$i}})">Add</button> <hr>
+        <input type="number" wire:model="quantity.0" class="form-control">
+        @error('quantity.0')
+          <span>{{ $message }}</span>
+        @enderror
+      </div>
 
-{{--  <button wire:click.prevent="storeQuotation()">save</button>--}}
+      {{-- price --}}
+      <div class="t-form-group">
+        <label class="text-base">سعر المنتج </label>
 
-  @foreach($inputs as $key => $value)
+        <input type="text" wire:model="price.0" class="form-control">
+        @error('price.0')
+          <span>{{ $message }}</span>
+        @enderror
+      </div>
+    </div>
 
-    <input hidden name="order" value="{{ $order }}">
 
-    product_name<input type="text" wire:model="product_name.{{ $value }}" >
-    @error('product_name'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
 
-    product_unit<input type="text" wire:model="product_unit.{{ $value }}">
-    @error('product_unit'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+    @foreach ($inputs as $key => $value)
+      <hr class="divided">
 
-    quantity<input type="number" wire:model="quantity.{{ $value }}">
-    @error('quantity'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+      <div class="t-order-item">
+        <div class="t-form-group">
+          <label class="text-base">اسم المنتج </label>
 
-    price<input type="text" wire:model="price.{{ $value }}">
-    @error('price'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+          <input type="text" wire:model="product_name.{{ $value }}" class="form-control">
+          @error('product_name' . $value)
+            <span>{{ $message }}</span>
+          @enderror
+        </div>
 
-    currency<input type="text" wire:model.defer="currency.{{ $value }}">
-    @error('currency'.$value)
-    <span>{{ $message }}</span>
-    @enderror <hr>
+        <div class="t-form-group">
+          <label class="text-base">نوع المنتج </label>
 
-{{--    total<input type="text" wire:model.defer="total.{{ $value }}">--}}
-{{--    @error('total'.$value)--}}
-{{--    <span>{{ $message }}</span>--}}
-{{--    @enderror--}}
+          {{-- <input type="text" wire:model="product_unit.{{ $value }}" class="form-control"> --}}
+          <select wire:model="product_unit.{{ $value }}" class="form-control">
+            <option selected>حدد نوع المنتج</option>
+            <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
+            <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
+            <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
+          </select>
+          @error('product_unit' . $value)
+            <span>{{ $message }}</span>
+          @enderror
+        </div>
 
-    <button wire:click.prevent="remove({{$key}})">remove</button> <hr>
+        <div class="t-form-group">
+          <label class="text-base">الكمية </label>
 
-  @endforeach
+          <input type="number" wire:model="quantity.{{ $value }}" class="form-control">
+          @error('quantity' . $value)
+            <span>{{ $message }}</span>
+          @enderror
+        </div>
 
-  <button type="button" wire:click.prevent="storeQuotation()" class="btn btn-success btn-sm">Save</button>
+        <div class="t-form-group">
+          <label class="text-base">سعر المنتج </label>
+
+          <input type="text" wire:model="price.{{ $value }}" class="form-control"
+            placeholder="بالريال اليمني">
+          @error('price' . $value)
+            <span>{{ $message }}</span>
+          @enderror
+        </div>
+
+        <div class="t-btn-remove-item">
+          <button wire:click.prevent="remove({{ $key }})">
+            <x-icon icon="remove" />
+          </button>
+        </div>
+
+
+      </div>
+    @endforeach
+
+
+    <div class="t-form-btn-action">
+
+      <div class="t-btn-add-new">
+        <button wire:click.prevent="add({{ $i }})">
+          <x-icon icon="plus" />
+        </button>
+      </div>
+
+
+      <div class="t-form-btn">
+        <button wire:click.prevent="storeQuotation()" class="btn">
+          @lang('action.send')
+        </button>
+      </div>
+    </div>
+
+  </form>
 
 </div>
