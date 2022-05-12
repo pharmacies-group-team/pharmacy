@@ -21,7 +21,7 @@ return [
   "product-price" => "price",
 
 
-  "invoice-profile" => "invoice profile"
+  "invoice-profile" => "Activity timeline"
 
 
   // "" => "",
