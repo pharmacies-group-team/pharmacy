@@ -1,5 +1,5 @@
 {{-- TODO --}}
-<div x-data="{ addModal: false, payModal: false }">
+<div x-data="{ addModal: false, payModal: false, deleteModal: false }">
   <x-alert type="message" />
 
   <div class="section-header">
@@ -67,7 +67,9 @@
               {{-- action --}}
               @if($active === 0)
                 <td>
-                  <button wire:click="delete({{ $details->id }})" class="badge badge-danger">حذف</button>
+                  <button @click="id = {{ $details->id }};details = {{ $details }}; deleteModal = true" >
+                    <x-icon icon='remove' />
+                  </button>
                 </td>
               @endif
             </tr>
@@ -168,6 +170,21 @@
         </h1>
         <x-slot:footer>
           <button class="btn" @click="payModal = false" wire:click="pay">متابعة الدفع</button>
+        </x-slot:footer>
+      </form>
+    </x-modal>
+
+    {{-- delete product modal --}}
+    <x-modal title="حذف منتج" open="deleteModal">
+      <form style="display: flex; justify-content: center; align-items: center; height: 112px">
+        <h1 style="font-size: 20px">
+          هل انت متاكد من حذف المنتج ؟
+        </h1>
+        <div x-text="details.product_name"></div>
+
+        <x-slot:footer>
+          <button class="btn btn-danger" wire:click="delete(id)" @click="deleteModal = false">حذف
+          </button>
         </x-slot:footer>
       </form>
     </x-modal>
