@@ -65,6 +65,16 @@
 
                 للعمليات الداخلية بما يشمل حل المشاكل وتحليل البيانات والفحص والبحث وتحسين الخدمة.
                 </p>
+                <div class="list-group my-5">
+                  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    وإننا لن نتشارك في المعلومات التي نتلقاها بخصوص المستخدمين مع آخرين ما لم نكن قد:
+
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">حصلنا على اذن منك؛ أو</a>
+                  <a href="#" class="list-group-item list-group-item-action">  قمنا بمنح المستخدم إشعار بخصوص هذه السياسة؛ أو
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action"> قمنا بإزالة اسمك أو أية معلومات تعريفية شخصية أخرى منه.</a>
+                </div>
 
         </div>
 
