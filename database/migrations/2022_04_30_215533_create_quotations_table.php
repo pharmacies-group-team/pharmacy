@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->double('total')->default(0);
-            $table->string('currency')->default('YER');
+            $table->string('currency')->default('ريال يمني');
 
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

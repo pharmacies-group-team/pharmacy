@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->double('total');
-            $table->string('currency')->default('YER');
+            $table->string('currency')->default('ريال يمني');
             $table->boolean('is_active')->default(0);
 
             $table->string('invoice_id');
