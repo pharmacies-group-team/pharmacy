@@ -15,7 +15,6 @@ php artisan serve
 ## todo
 
 - pharmacy add order 'add total price'
-- **_ alert bg color_**
 - web pharmacy profile
 
 - contact
@@ -28,6 +27,7 @@ php artisan serve
 
 ## done
 
+- **_ alert bg color_**
 - client invoice
 - notification
 - order details modal image zoom on click
