@@ -181,7 +181,7 @@
 
                       </p>
                       <h3 class="text-primary-darker fw-bold fs-6  my-5" >
-                        حماية حقوق الأشخاص الاخرين
+                        احكام عامة
 
                       </h3>
 
