@@ -70,7 +70,7 @@ use App\Enum\PharmacyEnum;
                 <td>
                   @if ($order->status === OrderEnum::NEW_ORDER)
                     <div class="badge badge-info">
-                      قيد الموافقه عليه
+                      في إنتظار الرد
                     </div>
                   @elseif($order->status === OrderEnum::UNPAID_ORDER)
                     <div class="badge bg-light text-dark">
@@ -78,7 +78,7 @@ use App\Enum\PharmacyEnum;
                     </div>
                   @elseif($order->status === OrderEnum::PAID_ORDER)
                     <div class="badge bg-success">
-                      {{ OrderEnum::PAID_ORDER }}
+                      تم الدفع
                     </div>
                   @elseif($order->status === OrderEnum::DELIVERY_ORDER)
                     <div class="badge badge-danger">

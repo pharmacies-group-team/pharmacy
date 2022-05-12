@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
-            $table->integer('total')->default(0);
+            $table->double('total')->default(0);
             $table->string('currency')->default('YER');
 
             $table->foreignId('order_id')->unique();

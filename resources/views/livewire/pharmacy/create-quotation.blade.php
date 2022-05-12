@@ -19,10 +19,10 @@
 
       {{-- type --}}
       <div class="t-form-group">
-        <label class="text-base">نوع المنتج </label>
+        <label class="text-base">الوحده </label>
 
         <select wire:model="product_unit.0" class="form-control">
-          <option selected>حدد نوع المنتج</option>
+          <option selected>حدد الوحده</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
@@ -69,11 +69,11 @@
         </div>
 
         <div class="t-form-group">
-          <label class="text-base">نوع المنتج </label>
+          <label class="text-base">نوع الوحدة </label>
 
           {{-- <input type="text" wire:model="product_unit.{{ $value }}" class="form-control"> --}}
           <select wire:model="product_unit.{{ $value }}" class="form-control">
-            <option selected>حدد نوع المنتج</option>
+            <option selected>حدد الوحدة</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
