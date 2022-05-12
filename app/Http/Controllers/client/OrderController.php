@@ -46,16 +46,20 @@ class OrderController extends Controller
     );
 
     $pharmacy = User::find($request->input('pharmacy_id'));
+    $user     = Auth::user();
+
     $data     = [
-      'user' => $pharmacy,
-      'link' => '/home',
-      'message' => 'order created'
+      'sender'   => $user,
+      'receiver' => $pharmacy->id,
+      'link'     => 'pharmacy.orders.index',
+      'message'  => 'أرسل لك طلب جديد، يمكنك الإطلاع عليه.',
     ];
 
     // send and save notification in DB
-    Notification::send($pharmacy, new OrderNotification($data));
-
-    event(new NewOrderNotification($data));
+    if (\Notification::send($pharmacy, new NewOrderNotification($data)))
+    {
+      return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
+    }
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
