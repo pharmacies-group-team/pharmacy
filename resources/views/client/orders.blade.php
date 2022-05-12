@@ -78,7 +78,7 @@ use App\Enum\PharmacyEnum;
                     </div>
                   @elseif($order->status === OrderEnum::PAID_ORDER)
                     <div class="badge bg-success">
-                      تم الدفع
+                      <a href="{{ route('client.invoice', $order->invoice->id) }}">تم الدفع</a>
                     </div>
                   @elseif($order->status === OrderEnum::DELIVERY_ORDER)
                     <div class="badge badge-danger">
@@ -100,6 +100,12 @@ use App\Enum\PharmacyEnum;
                   <x-order-details :order="$order">
                     @slot('footer')
                       <x-client.order-details-footer :order="$order" />
+                      @if ($order->status === \App\Enum\OrderEnum::PAID_ORDER)
+                        <a href="{{ route('client.invoice', $order->invoice->id) }}" class="btn">
+                          <x-icon icon="order" />
+                          @lang('action.show-invoice')
+                        </a>
+                      @endif
                     @endslot
                   </x-order-details>
                 </td>
