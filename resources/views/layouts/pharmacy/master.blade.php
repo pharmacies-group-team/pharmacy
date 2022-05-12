@@ -38,7 +38,7 @@
 
 {{--  <script src="{{ asset('js/pusher/pharamcy.js') }}"></script>--}}
 
-<script>
+  <script>
 
   // Enable pusher logging - don't include this in production
   // Pusher.logToConsole = true;

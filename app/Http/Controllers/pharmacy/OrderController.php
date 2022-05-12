@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\pharmacy;
 
 use App\Enum\OrderEnum;
+use App\Events\NewOrderNotification;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
@@ -25,16 +26,22 @@ class OrderController extends Controller
         if ($order) {
             $order->update(['status' => OrderEnum::REFUSAL_ORDER]);
 
-            // send and save notification in DB
-            $user  = User::find($order->user_id);
-            $data  = [
-                'pharmacy' => Auth::user(),
-                'order'    => $order,
-                'message'  => 'عذراً لا يتوفر لدينا طلبك'
-            ];
-            Notification::send($user, new UserOrderNotification($data));
 
-            return back()->with('status', 'لقد تم رفض الطلب');
+          $pharmacy = Auth::user()->pharmacy;
+          $user     = User::find($order->user_id);
+
+          $data     = [
+            'sender'   => $pharmacy,
+            'receiver' => $user->id,
+            'link'     => 'client.orders.index',
+            'message'  => 'عذراً لا يتوفر لدينا طلبك..',
+          ];
+
+          // send and save notification in DB
+          Notification::send($user, new NewOrderNotification($data));
+
+          return back()->with('status', 'لقد تم رفض الطلب');
+
         }
 
         return back()->with('status', 'هُناك خطأ، يُرجى التأكد من صحة رقم الطلب');
