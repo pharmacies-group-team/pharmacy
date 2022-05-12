@@ -5,7 +5,8 @@ return [
   "profile" => "بروفايل",
   "protection-and-privacy" => "الحماية والخصوصية",
   "order-details" => "تفاصيل الطلب",
-  "invoice" => "فاتورة",
+  "invoice-buying" => "فاتورة شراء",
+  "invoice-sale" => "فاتورة بيع",
   "invoice_id" => "رقم فاتورة",
   "invoice-from" => "invoice from",
   "invoice-to" => "invoice to",
@@ -14,14 +15,15 @@ return [
   "total" => "الاجمالي",
   "date" => "تاريخ",
 
-  "product-name" => "name",
-  "product-description" => "description",
-  "product-cost" => "cost",
+  "product-name" => "اسم المنتج",
+  "product-description" => "الوحدة",
+  "product-cost" => "السعر",
   "product-amount" => "amount",
-  "product-price" => "price",
+  "product-quantity" => "الكمية",
+  "product-price" => "الإجمالي",
 
 
-  "invoice-profile" => "Activity timeline"
+  "invoice-profile" => "العمليات المالية"
 
 
   // "" => "",
