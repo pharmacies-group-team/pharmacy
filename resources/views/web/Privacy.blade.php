@@ -36,6 +36,12 @@
               </li>
               <li class="list-group-item">And a fifth one</li>
             </ul>
+            <h3 class="text-primary-darker fw-bold fs-6  my-5" >
+              الخصوصية
+              </h3>
+              <p class="text-primary-dark mt-6">
+                الحقوق والالتزامات
+              </p>
         </div>
 
 
