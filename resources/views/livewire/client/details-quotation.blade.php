@@ -1,5 +1,5 @@
 {{-- TODO --}}
-<div x-data="{ addModal: false }">
+<div x-data="{ addModal: false, payModal: false }">
   <x-alert type="message" />
 
   <div class="section-header">
@@ -100,10 +100,10 @@
         إضافة عنوان جديد
       </button>
     </div>
-    <button wire:click="pay" class="btn btn-full">دفع الفاتورة</button>
+    <button @click="payModal = true" class="btn btn-full">دفع الفاتورة</button>
   @endif
   <div>
-    {{-- delete ad modal --}}
+    {{-- Add Address Mofal --}}
     <x-modal title="إضافة عنوان جديد" open="addModal">
       <form>
         {{-- Name --}}
@@ -155,7 +155,19 @@
         </div>
 
         <x-slot:footer>
-          <button class="btn" wire:click.prevent="store()">حفظ</button>
+          <button class="btn" @click="addModal = false" wire:click.prevent="store()">حفظ</button>
+        </x-slot:footer>
+      </form>
+    </x-modal>
+
+    {{-- payment modal --}}
+    <x-modal title="تأكيد عملية الدفع" open="payModal">
+      <form style="display: flex; justify-content: center; align-items: center; height: 112px">
+        <h1 style="font-size: 20px">
+          هل تريد متابعة عملية الدفع ؟
+        </h1>
+        <x-slot:footer>
+          <button class="btn" @click="payModal = false" wire:click="pay">متابعة الدفع</button>
         </x-slot:footer>
       </form>
     </x-modal>
