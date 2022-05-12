@@ -30,4 +30,10 @@ class DashboardController extends Controller
         $user = Auth::user();
         return view('pharmacy.account-settings', compact('user'));
     }
+
+    public function getInvoiceProfile()
+    {
+        $user = Auth::user();
+        return view('pharmacy.invoice-profile', compact('user'));
+    }
 }
