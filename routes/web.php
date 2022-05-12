@@ -34,6 +34,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 | Web Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/privacy', [web\PrivacyController::class, 'index']) ->name('privacy');
 
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
