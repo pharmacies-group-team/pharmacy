@@ -60,10 +60,14 @@ class DetailsQuotation extends Component
       else {
         $amount = $this->quotation->total;
 
-        if (Auth::user()->balance >= $amount)
+        if (Auth::user()->balance >= $amount && $this->quotation->order->status === OrderEnum::UNPAID_ORDER)
           $this->paymentFromWallet($amount);
 
-        else return $this->paymentFromAPI();
+        elseif ($this->quotation->order->status === OrderEnum::UNPAID_ORDER)
+          return $this->paymentFromAPI();
+
+        else
+          session()->flash('message', 'يبدو أن هناك خطأ.');
       }
     }
 
@@ -83,7 +87,7 @@ class DetailsQuotation extends Component
     //********* Payment from the API *********//
     public function paymentFromAPI()
     {
-      $response = Http::withHeaders(
+      $response = Http::retry(3, 100)->withHeaders(
         [
           'content-Type' => 'application/x-www-form-urlencoded',
           'private-key'  => PaymentEnum::PRIVATE_KEY,
@@ -91,7 +95,10 @@ class DetailsQuotation extends Component
         ])
         ->post(PaymentEnum::WASL_API, $this->data());
 
-      if ($response->status() == '200') {
+      if ($response->serverError()) {
+        session()->flash('message', 'يبدو أن هناك خطأ في السيرفر...');
+      }
+      if ($response->successful()) {
         $this->createInvoice($response);
         return redirect($response['invoice']['next_url']);
       }
