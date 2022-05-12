@@ -2,6 +2,7 @@
 use App\Enum\UserEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Enum\RoleEnum;
 
 $user = User::find(Auth::id());
 @endphp
@@ -38,21 +39,16 @@ $user = User::find(Auth::id());
           </li>
           @if (isset(Auth::user()->unreadNotifications))
             @foreach (Auth::user()->unreadNotifications as $notification)
-
               @if($notification->type == 'App\Events\NewOrderNotification')
 
-                <li class="t-item">
-                  <a href="{{ route($notification->data['link']) }}">
-                    <header class="t-header">
-                      <img src="@if (isset($notification->data['user']['avatar']))
-                      {{ asset(UserEnum::USER_AVATAR_PATH . $notification->data['user']['avatar']) }}
-                      @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
-                           alt="user avatar" class="t-avatar" width="40">
-                      <h4 class="t-name">{{ $notification->data['user']['name'] }}</h4>
-                    </header>
-                    <p class="t-desc" style="font-size: 14px; color: #588FF4">{{ $notification->data['message'] }}</p>
-                  </a>
-                </li>
+                @if(Auth::user()->hasRole(RoleEnum::PHARMACY))
+                  @include('layouts.pharmacy.notification')
+
+                @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
+                  @include('layouts.client.notification')
+
+                @endif
+
               @endif
             @endforeach
           @endif
