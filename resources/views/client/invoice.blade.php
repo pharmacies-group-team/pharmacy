@@ -15,13 +15,13 @@
           {{-- date --}}
           <div class="t-item">
             <span class="t-item-key" style="margin-left: 8px; color: #3869BA">@lang('heading.date')</span>
-            <span class="t-item-value" style="color: #588FF4">2020/20/2</span>
+            <span class="t-item-value" style="color: #588FF4">{{ $invoice->created_at }}</span>
           </div>
 
           {{-- invoice id --}}
           <div class="t-item">
             <span class="t-item-key" style="margin-left: 8px; color: #3869BA">@lang('heading.invoice_id')</span>
-            <span class="t-item-value" style="color: #588FF4">1</span>
+            <span class="t-item-value" style="color: #588FF4">{{ $invoice->invoice_id }}</span>
           </div>
         </div>
       </header>
@@ -33,58 +33,74 @@
           <h4 class="t-title">@lang('heading.invoice-from')</h4>
 
           {{-- pharmacy name --}}
-          <h3 class="t-name" style="color: #3869BA">
+          <h3 class="t-name" style="color: #3869BA;font-size: 18px">
             {{-- TODO change this to pharmacy icon --}}
             <x-icon icon='home' />
-            PHarmacy name
+            {{ $pharmacy->name }}
           </h3>
 
           {{-- pharmacy address --}}
-          <h3 class="t-label" style="color: #588FF4">
-            <x-icon icon='location' />
-            PHarmacy address
-          </h3>
+          @if(isset($pharmacy->neighborhood_id))
+            <h3 class="t-label" style="color: #717171; font-size: 14px">
+              <x-icon icon='location' />
+              @if (isset($pharmacy->neighborhood->directorate->city))
+                <span>{{ $pharmacy->neighborhood->directorate->city->name }} - </span>
+              @endif
+              @if (isset($pharmacy->neighborhood->directorate))
+                <span>{{ $pharmacy->neighborhood->directorate->name }} - </span>
+              @endif
+              @if (isset($pharmacy->neighborhood))
+                <span>{{ $pharmacy->neighborhood->name }} </span>
+              @endif
+            </h3>
+          @endif
 
           {{-- pharmacy phone --}}
-          <h3 class="t-label" style="color: #588FF4">
-            <x-icon icon='phone' />
-            123456789
-          </h3>
+          @if(isset($pharmacy->contacts))
+            <h3 class="t-label" style="color: #717171 ;font-size: 14px">
+              <x-icon icon='phone' />
+              {{ $pharmacy->contacts->first()->phone }}
+            </h3>
+          @endif
 
           {{-- pharmacy email --}}
-          <h3 class="t-label" style="color: #588FF4">
-            <x-icon icon='email' />
-            pharmacy@g.com
-          </h3>
+          @if(isset($order->pharmacy->email))
+            <h3 class="t-label" style="color: #717171;font-size: 14px">
+              <x-icon icon='email' />
+              {{ $order->pharmacy->email }}
+            </h3>
+          @endif
         </div>
 
         {{-- invoice to --}}
         <div class="t-item">
-          <h4 class="t-title">@lang('heading.invoice-from')</h4>
+          <h4 class="t-title">@lang('heading.invoice-to')</h4>
 
           {{-- client name --}}
-          <h3 class="t-name" style="color: #3869BA">
+          <h3 class="t-name" style="color: #3869BA; font-size: 18px">
             {{-- TODO change this to client icon --}}
             <x-icon icon='home' />
-            client name
+            {{ $user->name }}
           </h3>
 
           {{-- client address --}}
-          <h3 class="t-label" style="color: #588FF4">
-            <x-icon icon='location' />
-            client address
-          </h3>
+{{--          <h3 class="t-label" style="color: #717171">--}}
+{{--            <x-icon icon='location' />--}}
+{{--            client address--}}
+{{--          </h3>--}}
 
           {{-- client phone --}}
-          <h3 class="t-label" style="color: #588FF4">
-            <x-icon icon='phone' />
-            123456789
-          </h3>
+          @if(isset($user->phone))
+            <h3 class="t-label" style="color: #717171;font-size: 14px">
+              <x-icon icon='phone' />
+              {{ $user->phone }}
+            </h3>
+          @endif
 
           {{-- client email --}}
-          <h3 class="t-label" style="color: #588FF4">
+          <h3 class="t-label" style="color: #717171;font-size: 14px">
             <x-icon icon='email' />
-            client@g.com
+            {{ $user->email }}
           </h3>
         </div>
       </div>
@@ -115,54 +131,24 @@
         </thead>
 
         <tbody>
-          <tr>
-            {{-- name --}}
-            <td>item 1</td>
+          @foreach($products as $product)
+            <tr>
+              {{-- name --}}
+              <td>{{ $product->product_name }}</td>
 
-            {{-- description --}}
-            <td> bla bla</td>
+              {{-- description --}}
+              <td> {{ $product->product_unit }} </td>
 
-            {{-- cost --}}
-            <td>10</td>
+              {{-- cost --}}
+              <td>{{ $product->price }}</td>
 
-            {{-- amount --}}
-            <td>1</td>
+              {{-- amount --}}
+              <td>{{ $product->quantity }}</td>
 
-            {{-- price --}}
-            <td>10</td>
-          </tr>
-          <tr>
-            {{-- name --}}
-            <td>item 1</td>
-
-            {{-- description --}}
-            <td> bla bla</td>
-
-            {{-- cost --}}
-            <td>10</td>
-
-            {{-- amount --}}
-            <td>1</td>
-
-            {{-- price --}}
-            <td>10</td>
-          </tr>
-          <tr>
-            {{-- name --}}
-            <td>item 1</td>
-
-            {{-- description --}}
-            <td> bla bla</td>
-
-            {{-- cost --}}
-            <td>10</td>
-
-            {{-- amount --}}
-            <td>1</td>
-
-            {{-- price --}}
-            <td>10</td>
-          </tr>
+              {{-- price --}}
+              <td>{{ $product->price * $product->quantity }}</td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -171,19 +157,19 @@
 
     {{-- invoice total --}}
     <div class="t-total" style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
-      <div class="t-item">
-        <h4 class="t-key" style="color: #3869BA">@lang('heading.subtotal')</h4>
-        <h4 class="t-value">2000.00</h4>
-      </div>
+{{--      <div class="t-item">--}}
+{{--        <h4 class="t-key" style="color: #3869BA">@lang('heading.subtotal')</h4>--}}
+{{--        <h4 class="t-value">2000.00</h4>--}}
+{{--      </div>--}}
 
-      <div class="t-item">
-        <h4 class="t-key" style="color: #3869BA">@lang('heading.taxes')</h4>
-        <h4 class="t-value">10%</h4>
-      </div>
+{{--      <div class="t-item">--}}
+{{--        <h4 class="t-key" style="color: #3869BA">@lang('heading.taxes')</h4>--}}
+{{--        <h4 class="t-value">10%</h4>--}}
+{{--      </div>--}}
 
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">@lang('heading.total')</h4>
-        <h4 class="t-value t-price">$1600.00</h4>
+        <h4 class="t-value t-price">{{ $invoice->total }} {{ $invoice->currency }}</h4>
       </div>
 
     </div>
@@ -195,17 +181,17 @@
       <h4 class="t-title" style="color: #3869BA; font-size: 18px; margin-bottom: 16px">عنوان التوصيل </h4>
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">اسم المستلم</h4>
-        <h4 class="t-value">احلام محمد</h4>
+        <h4 class="t-value">{{ $address->name }}</h4>
       </div>
 
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">رقم الهاتف</h4>
-        <h4 class="t-value">773773773</h4>
+        <h4 class="t-value">{{ $address->phone }}</h4>
       </div>
 
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">وصف العنوان</h4>
-        <h4 class="t-value">وصف</h4>
+        <h4 class="t-value">{{ $address->desc }}</h4>
       </div>
 
     </div>
