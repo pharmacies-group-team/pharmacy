@@ -17,7 +17,17 @@ class NeighborhoodController extends Controller
 
     public function store(Request $request)
     {
-        //
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|min:2|max:30|string',
+        'directorate_id' => 'required','directorate_id' => 'required',
+      ]);
+      Neighborhood::create([
+        'name' => $request->input('name'),
+        'directorate_id' => $request->input('directorate_id'),
+      ]);
+
+      return response(['added successfully', $validator->errors()]);
+    //  return redirect()->back()->with('status', 'added successfully');
     }
 
     public function show($id)

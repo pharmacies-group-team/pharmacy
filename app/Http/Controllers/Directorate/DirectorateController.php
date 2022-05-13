@@ -19,7 +19,6 @@ class DirectorateController extends Controller
     public function store(Request $request)
     {
       $validator = Validator::make($request->all(), [
-        // min:2 becouse some cities in Yemen can be two litter like Ab
         'name' => 'required|min:2|max:30|string',
         'city_id' => 'required','city_id' => 'required',
       ]);
