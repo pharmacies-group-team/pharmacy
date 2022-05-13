@@ -2,51 +2,23 @@
 
 use App\Enum\RoleEnum;
 
-use App\Http\Controllers\Auth\ChangePasswordController;
-use App\Http\Controllers\clint\PayController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\web;
-use App\Http\Controllers\admin;
-use App\Http\Controllers\client;
-use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use Barryvdh\Debugbar\Facades\Debugbar;
-
-// disable Debug
-// Debugbar::disable();
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-Route::get('/privacy', [web\PrivacyController::class, 'index']) ->name('privacy');
-
-Route::controller(web\HomeController::class)->group(function () {
-  Route::get('/', 'index')->name('home');
-  Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
-});
+use App\Http\Controllers\web;
+use App\Http\Controllers\admin;
+use App\Http\Controllers\client;
+use App\Http\Controllers\pharmacy;
 
 /*
 |--------------------------------------------------------------------------
 | General Routes
 |--------------------------------------------------------------------------
 */
+
 Route::middleware(['auth', 'verified'])
   ->name('setting.')
   ->group(function () {
@@ -55,6 +27,23 @@ Route::middleware(['auth', 'verified'])
     Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
       ->name('update.avatar');
   });
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::controller(web\HomeController::class)->group(function () {
+  Route::get('/', 'index')->name('home');
+  Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
+  Route::get('/privacy', 'showPrivacy')->name('privacy');
+  Route::get('/contact-us', 'showContactUs')->name('contact-us');
+  Route::get('/about-us', 'showAboutUs')->name('about-us');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,15 +56,18 @@ Route::controller(NotificationController::class)->group(function () {
   Route::post('/read/notification', 'read')->name('notification.read');
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Pharmacy Routes
 |--------------------------------------------------------------------------
 */
+
 Route::controller(RegisterPharmacyController::class)->group(function () {
   Route::get('/register/pharmacy', 'index')->name('register.pharmacy');
   Route::post('/register/pharmacy', 'store')->name('register.pharmacy.store');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,8 +78,6 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 Route::prefix('/pharmacy')
   ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
-    // Route::resource('/', pharmacy\PharmacyController::class);
-    // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
     Route::controller(pharmacy\DashboardController::class)->group(function () {
       // profile
@@ -116,6 +106,8 @@ Route::prefix('/pharmacy')
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
   });
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -128,7 +120,6 @@ Route::prefix('/admin')
   ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
-
 
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
@@ -178,6 +169,8 @@ Route::prefix('/admin')
       ->name('account-settings');
   });
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Client Routes
@@ -192,7 +185,6 @@ Route::prefix('/client')
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-      //      Route::get('/profile', 'getProfile')->name('profile'); // X
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
