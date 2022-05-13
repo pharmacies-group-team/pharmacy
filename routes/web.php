@@ -228,6 +228,7 @@ Route::prefix('/client')
     Route::get('/cities/{id}','show');
     Route::post('/cities','store');
     Route::put('/cities/{id}','update');
+    Route::delete('/cities/{id}','destroy');
   });
 
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);

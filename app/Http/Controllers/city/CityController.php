@@ -56,10 +56,13 @@ class CityController extends Controller
         ]);
         return redirect()->back()->with('status', 'edit successfully');
      // return response(['edit successfully', $validator->errors()]);
+      }
+
+      public function destroy($id)
+    {
+      return City::where('id', $id)->delete() ? "deleted" : 'not deleted';
+      //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
     }
 
-    public function destroy()
-    {
-     
-    }
-}
+  }
+

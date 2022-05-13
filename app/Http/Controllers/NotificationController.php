@@ -11,8 +11,8 @@ class NotificationController extends Controller
     public function getAll()
     {
       $notifications = auth()->user()->notifications;
-
       return view('0-testing.all-notification', compact('notifications'));
+
     }
 
     public function read(Request $request)
