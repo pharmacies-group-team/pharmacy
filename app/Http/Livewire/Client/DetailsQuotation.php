@@ -9,6 +9,7 @@ use App\Enum\SettingEnum;
 use App\Models\Invoice;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
+use App\Services\NotificationService;
 use App\Models\{User, Address};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -80,6 +81,9 @@ class DetailsQuotation extends Component
 
       $invoice->update(['is_active' => 1]);
       $this->quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
+
+      // send and save notification in DB
+      NotificationService::userPay($this->quotation->order);
 
       return redirect()->route('client.success')
         ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
