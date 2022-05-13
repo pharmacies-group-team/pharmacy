@@ -21,12 +21,12 @@ return [
   "product-price" => "price",
 
 
-  "invoice-profile" => "Activity timeline"
+  "invoice-profile" => "Activity timeline",
 
+  "about-us" => "عن صيدلية أونلاين",
+  "privacy" => "سياسة الخصوصية",
+  "contact-us" => "تواصل معنا",
 
-  // "" => "",
-  // "" => "",
-  // "" => "",
   // "" => "",
 
 ];

@@ -12,12 +12,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="people-circle-sharp"></ion-icon>
         </div>
 
         <span>الصيدليات</span>
@@ -28,12 +23,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="people-sharp"></ion-icon>
         </div>
 
         <span>الزبائن</span>
@@ -57,12 +47,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.ads.index') active @endif" href="{{ route('admin.ads.index') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="barcode-sharp"></ion-icon>
         </div>
 
         <span>إدارة الإعلانات</span>
@@ -73,12 +58,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.site') active @endif" href="{{ route('admin.site') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="create-sharp"></ion-icon>
         </div>
 
         <span>أدارة بيانات الموقع</span>
@@ -90,12 +70,7 @@
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.payments.index') active @endif"
         href="{{ route('admin.payments.index') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="logo-paypal"></ion-icon>
         </div>
 
         <span>إدارة طرق الدفع</span>
@@ -107,12 +82,7 @@
       <a class="list-item-link @if (Route::currentRouteName() === '') active @endif"
         href="{{ route('admin.payments.index') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="business-sharp"></ion-icon>
         </div>
 
         <span>إدارة المدن</span>
@@ -124,12 +94,7 @@
       <a class="list-item-link @if (Route::currentRouteName() === '') active @endif"
         href="{{ route('admin.payments.index') }}">
         <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
+          <ion-icon name="locate-sharp"></ion-icon>
         </div>
 
         <span>إدارة المناطق</span>
@@ -140,8 +105,9 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.account-settings') active @endif"
         href="{{ route('admin.account-settings') }}">
-
-        <x-icon icon="setting" />
+        <div class="list-item-icon">
+          <ion-icon name="settings-sharp"></ion-icon>
+        </div>
 
         <span>أعدادات الحساب</span>
       </a>
