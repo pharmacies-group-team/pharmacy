@@ -19,69 +19,35 @@ class CityController extends Controller
         //
         $cityies = City::all();
         return response($cityies);
+        // return view('cities', compact('cityies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // add
     public function store(Request $request)
     {
-
+      $validator = Validator::make($request->all(), [
+        // min:2 becouse some cities in Yemen can be two litter like Ab
+        'name' => 'required|min:2|max:30|string',
+      ]);
+      City::create([
+        'name' => $request->input('name'),
+      ]);
+    
+      return response(['added successfully', $validator->errors()]);
+    //  return redirect()->back()->with('status', 'added successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show()
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update()
     {
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
       return City::where('id', $id)->delete() ? "deleted" : 'not deleted';
