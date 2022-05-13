@@ -42,6 +42,22 @@ class NotificationService
       self::sendOrderNotification($receiver, $data);
   }
 
+  public static function newQuotation($order)
+  {
+    $sender   = User::find($order->pharmacy_id)->pharmacy;
+    $receiver = User::find($order->user_id);
+
+    $data  = [
+      'sender'   => $sender,
+      'receiver' => $receiver->id,
+      'link'     => SettingEnum::DOMAIN.'client/quotation/details/'.$order->quotation->id,
+      'message'  => 'تم إرسال عرض سعر يُمكنك الإطلاع عليها'
+    ];
+
+    // send and save notification in DB
+    self::sendOrderNotification($receiver, $data);
+  }
+
   private static function sendOrderNotification($receiver, $data)
   {
     Notification::send($receiver, new NewOrderNotification($data));

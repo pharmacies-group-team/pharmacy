@@ -8,6 +8,7 @@ use App\Models\QuotationDetails;
 use App\Models\User;
 use App\Notifications\PharmacyOrderNotification;
 use App\Notifications\UserOrderNotification;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
@@ -49,7 +50,6 @@ class CreateQuotation extends Component
             'quantity'      => $this->quantity[$key],
             'price'         => $this->price[$key],
             'total'         => $this->price[$key] * $this->quantity[$key],
-            'currency'      => "﷼",
             'quotation_id'  => $quotation->id
           ]
         );
@@ -66,15 +66,7 @@ class CreateQuotation extends Component
     $this->inputs = [];
 
     // send and save notification in DB
-    $user  = User::find($this->order->user_id);
-    $data  = [
-      'pharmacy' => Auth::user(),
-      'order'    => $this->order,
-      'message'  => 'تم إرسال عرض سعر يُمكنك الإطلاع عليها'
-    ];
-
-    Notification::send($user, new UserOrderNotification($data));
-
+    NotificationService::newQuotation($this->order);
 
     session()->flash('message', 'لقد تم إرسال عرض السعر');
 
