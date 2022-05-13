@@ -56,7 +56,7 @@
           @endif
 
           {{-- pharmacy phone --}}
-          @if(isset($pharmacy->contacts))
+          @if(isset($pharmacy->contacts->phone))
             <h3 class="t-label" style="color: #717171 ;font-size: 14px">
               <x-icon icon='phone' />
               {{ $pharmacy->contacts->first()->phone }}
