@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Notification;
 
 class NotificationService
 {
+  //********* when user create order *********//
   public static function newOrder($pharmacy_id)
   {
     $sender    = Auth::user();
@@ -26,6 +27,7 @@ class NotificationService
     self::sendOrderNotification($receiver, $data);
   }
 
+  //********* when pharmacy refusal order *********//
   public static function refusalOrder($order)
   {
       $sender   = User::find($order->pharmacy_id)->pharmacy;
@@ -42,6 +44,7 @@ class NotificationService
       self::sendOrderNotification($receiver, $data);
   }
 
+  //********* when pharmacy create quotation for user *********//
   public static function newQuotation($order)
   {
     $sender   = User::find($order->pharmacy_id)->pharmacy;
@@ -58,6 +61,7 @@ class NotificationService
     self::sendOrderNotification($receiver, $data);
   }
 
+  //********* save notification in db and send to receiver *********//
   private static function sendOrderNotification($receiver, $data)
   {
     Notification::send($receiver, new NewOrderNotification($data));
