@@ -224,6 +224,7 @@ Route::prefix('/client')
   // Hamzah routes of cities and dir and nigh
   Route::controller(city\CityController::class)->group(function(){
     Route::get('/cities','index')->name('city');
+    Route::get('/cities/{id}','show');
     Route::post('/cities','store');
   });
 
