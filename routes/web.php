@@ -12,6 +12,7 @@ use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 
@@ -91,7 +92,11 @@ Route::prefix('/pharmacy')
       // profile
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
-      Route::get('/messages', 'messages')->name('messages');
+      // Route::get('/messages', 'messages')->name('messages');
+      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
+      Route::get('/message/{id}',[MessageController::class, 'getMessage'])->name('message');
+      Route::post('message', [MessageController::class, 'sendMessage']);
+
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
       Route::get('/invoice-profile', 'getInvoiceProfile')->name('invoice-profile');
@@ -194,6 +199,9 @@ Route::prefix('/client')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
+      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
+      Route::get('/message/{id}',[MessageController::class, 'getMessage'])->name('message');
+      Route::post('message', [MessageController::class, 'sendMessage']);
     });
 
     // order
