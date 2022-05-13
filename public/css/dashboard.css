@@ -1371,6 +1371,248 @@ textarea.form-control{
   margin-bottom: 1rem;
 }
 
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+
+.animate__animated {
+  -webkit-animation-duration: var(--animate-duration);
+          animation-duration: var(--animate-duration);
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+.animate__animated.animate__infinite {
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.animate__animated.animate__repeat-1 {
+  -webkit-animation-iteration-count: var(--animate-repeat);
+          animation-iteration-count: var(--animate-repeat);
+}
+
+.animate__animated.animate__repeat-2 {
+  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 2);
+          animation-iteration-count: calc(var(--animate-repeat) * 2);
+}
+
+.animate__animated.animate__repeat-3 {
+  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 3);
+          animation-iteration-count: calc(var(--animate-repeat) * 3);
+}
+
+.animate__animated.animate__delay-1s {
+  -webkit-animation-delay: var(--animate-delay);
+          animation-delay: var(--animate-delay);
+}
+
+.animate__animated.animate__delay-2s {
+  -webkit-animation-delay: calc(var(--animate-delay) * 2);
+          animation-delay: calc(var(--animate-delay) * 2);
+}
+
+.animate__animated.animate__delay-3s {
+  -webkit-animation-delay: calc(var(--animate-delay) * 3);
+          animation-delay: calc(var(--animate-delay) * 3);
+}
+
+.animate__animated.animate__delay-4s {
+  -webkit-animation-delay: calc(var(--animate-delay) * 4);
+          animation-delay: calc(var(--animate-delay) * 4);
+}
+
+.animate__animated.animate__delay-5s {
+  -webkit-animation-delay: calc(var(--animate-delay) * 5);
+          animation-delay: calc(var(--animate-delay) * 5);
+}
+
+.animate__animated.animate__faster {
+  -webkit-animation-duration: calc(var(--animate-duration) / 2);
+          animation-duration: calc(var(--animate-duration) / 2);
+}
+
+.animate__animated.animate__fast {
+  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);
+          animation-duration: calc(var(--animate-duration) * 0.8);
+}
+
+.animate__animated.animate__slow {
+  -webkit-animation-duration: calc(var(--animate-duration) * 2);
+          animation-duration: calc(var(--animate-duration) * 2);
+}
+
+.animate__animated.animate__slower {
+  -webkit-animation-duration: calc(var(--animate-duration) * 3);
+          animation-duration: calc(var(--animate-duration) * 3);
+}
+
+.animate__bounce {
+  -webkit-animation-name: bounce;
+          animation-name: bounce;
+  transform-origin: center bottom;
+}
+
+@-webkit-keyframes bounce {
+  from, 20%, 53%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%, 43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -30px, 0) scaleY(1.1);
+  }
+
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -15px, 0) scaleY(1.05);
+  }
+
+  80% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0) scaleY(0.95);
+  }
+
+  90% {
+    transform: translate3d(0, -4px, 0) scaleY(1.02);
+  }
+}
+
+@keyframes bounce {
+  from, 20%, 53%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%, 43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -30px, 0) scaleY(1.1);
+  }
+
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -15px, 0) scaleY(1.05);
+  }
+
+  80% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0) scaleY(0.95);
+  }
+
+  90% {
+    transform: translate3d(0, -4px, 0) scaleY(1.02);
+  }
+}
+
+body{
+  font-family: Cairo, sans-serif;
+}
+
+svg {
+  width: 100%;
+}
+
+ion-icon{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+::-webkit-scrollbar{
+  height: 0.25rem;
+  width: 0.25rem;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb{
+  border-radius: 1.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
+}
+
+.divided{
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  --tw-border-opacity: 1;
+  border-color: rgb(197 217 254 / var(--tw-border-opacity));
+}
+
+.icon{
+  cursor: pointer;
+}
+
+.container{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.container .container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container .container {
+    max-width: 1536px;
+  }
+}
+
+.text-base{
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.text-large{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.text-danger{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .page-invoice-profile{
   margin-top: 2rem;
 }
@@ -1505,99 +1747,141 @@ textarea.form-control{
   overflow: hidden;
 }
 
-body{
-  font-family: Cairo, sans-serif;
-}
-
-svg {
-  width: 100%;
-}
-
-::-webkit-scrollbar{
-  height: 0.25rem;
-  width: 0.25rem;
-}
-
-/* Handle */
-
-::-webkit-scrollbar-thumb{
-  border-radius: 1.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
-}
-
-.divided{
+.manage-website .section{
   margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-  --tw-border-opacity: 1;
-  border-color: rgb(197 217 254 / var(--tw-border-opacity));
+  max-width: 48rem;
+  padding: 2rem;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.icon{
-  cursor: pointer;
+.pharmacy-profile{
+  margin-left: 2.25rem;
+  margin-right: 2.25rem;
+  margin-top: 4rem;
+  border-radius: 0.5rem;
+  padding: 2.5rem;
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.container{
+.pharmacy-profile .pharmacy-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px){
+  .pharmacy-profile .pharmacy-info{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.pharmacy-profile .profile-form{
+  order: 1;
+  flex: 1 1 0%;
+}
+
+.pharmacy-profile .profile-form .address-selects{
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.pharmacy-profile .profile-form .address-selects select{
+  margin-bottom: 1rem;
+  flex: 1 1 0%;
+}
+
+.pharmacy-profile .upload-image{
   margin-left: auto;
   margin-right: auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  max-width: 12rem;
+  flex: 1 1 auto;
+  text-align: center;
 }
 
-.container .container {
+@media (min-width: 1024px){
+  .pharmacy-profile .upload-image{
+    order: 2;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.pharmacy-profile .upload-image .avatar{
+  border-radius: 0.25rem;
+  border-width: 8px;
+  --tw-border-opacity: 1;
+  border-color: rgb(221 233 255 / var(--tw-border-opacity));
+}
+
+.pharmacy-profile .upload-image .update-btn{
+  --tw-translate-y: -1.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+}
+
+.pharmacy-profile .upload-image .update-btn svg{
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: #4E7DCB;
+}
+
+.pharmacy-profile .contact-us-header{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pharmacy-profile .contact-us .item{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pharmacy-profile .contact-us .item .item__column{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pharmacy-profile .social{
+  max-width: 36rem;
+}
+
+.pharmacy-profile .social .item{
+  position: relative;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pharmacy-profile .social .item .icon{
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.pharmacy-profile .social .item input{
   width: 100%;
+  padding-right: 3rem;
+  direction: ltr;
 }
 
-@media (min-width: 640px) {
-  .container .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container .container {
-    max-width: 1536px;
-  }
-}
-
-.text-base{
-  font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(78 125 203 / var(--tw-text-opacity));
-}
-
-.text-large{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(78 125 203 / var(--tw-text-opacity));
-}
-
-.text-danger{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
+.pharmacy-profile .social .btn, .pharmacy-profile .social .btn-rounded{
+  margin-top: 1.5rem;
 }
 
 .page-invoice{
@@ -1821,143 +2105,6 @@ svg {
 
 .page-quotation-details .t-form{
   margin-top: 1rem;
-}
-
-.manage-website .section{
-  margin-top: 2.5rem;
-  max-width: 48rem;
-  padding: 2rem;
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.pharmacy-profile{
-  margin-left: 2.25rem;
-  margin-right: 2.25rem;
-  margin-top: 4rem;
-  border-radius: 0.5rem;
-  padding: 2.5rem;
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.pharmacy-profile .pharmacy-info{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-}
-
-@media (min-width: 1024px){
-  .pharmacy-profile .pharmacy-info{
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-
-.pharmacy-profile .profile-form{
-  order: 1;
-  flex: 1 1 0%;
-}
-
-.pharmacy-profile .profile-form .address-selects{
-  display: flex;
-  justify-content: space-between;
-  gap: 1.25rem;
-}
-
-.pharmacy-profile .profile-form .address-selects select{
-  margin-bottom: 1rem;
-  flex: 1 1 0%;
-}
-
-.pharmacy-profile .upload-image{
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 12rem;
-  flex: 1 1 auto;
-  text-align: center;
-}
-
-@media (min-width: 1024px){
-  .pharmacy-profile .upload-image{
-    order: 2;
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-}
-
-.pharmacy-profile .upload-image .avatar{
-  border-radius: 0.25rem;
-  border-width: 8px;
-  --tw-border-opacity: 1;
-  border-color: rgb(221 233 255 / var(--tw-border-opacity));
-}
-
-.pharmacy-profile .upload-image .update-btn{
-  --tw-translate-y: -1.5rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-}
-
-.pharmacy-profile .upload-image .update-btn svg{
-  height: 1.5rem;
-  width: 1.5rem;
-  fill: #4E7DCB;
-}
-
-.pharmacy-profile .contact-us-header{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.pharmacy-profile .contact-us .item{
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.pharmacy-profile .contact-us .item .item__column{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.pharmacy-profile .social{
-  max-width: 36rem;
-}
-
-.pharmacy-profile .social .item{
-  position: relative;
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.pharmacy-profile .social .item .icon{
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.pharmacy-profile .social .item input{
-  width: 100%;
-  padding-right: 3rem;
-  direction: ltr;
-}
-
-.pharmacy-profile .social .btn, .pharmacy-profile .social .btn-rounded{
-  margin-top: 1.5rem;
 }
 
 .page-pharmacy-orders .t-profile{
