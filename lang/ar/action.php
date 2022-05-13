@@ -7,6 +7,7 @@ return [
   "send-message" => "إرسال رسالة",
   "create-quote" => "إنشاء عرض سعر",
   "order-details" => "تفاصيل الطلب",
-  "add" => "إضافة"
+  "add" => "إضافة",
+  "show-invoice" => "عرض الفاتورة"
   // "" => ""
 ];

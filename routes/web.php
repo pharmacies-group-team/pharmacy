@@ -204,10 +204,9 @@ Route::prefix('/client')
 
     // payment
     Route::controller(client\PaymentController::class)->group(function () {
-      //  TODO IT MIGHT BE DELETED
-      //      Route::post('/pay',  'payment')->name('payment');
-      Route::get('/success',  'success')->name('success');
+      Route::get('/success/{data}',  'success')->name('success');
       Route::get('/cancel', 'cancel')->name('cancel');
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
   });
 

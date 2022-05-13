@@ -10,6 +10,7 @@ use App\Models\OrderDetails;
 use App\Models\User;
 use App\Notifications\OrderNotification;
 use App\Notifications\PharmacyOrderNotification;
+use App\Services\NotificationService;
 use App\Traits\UploadsTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,17 +46,7 @@ class OrderController extends Controller
       ]
     );
 
-    $pharmacy = User::find($request->input('pharmacy_id'));
-    $data     = [
-      'user' => $pharmacy,
-      'link' => '/home',
-      'message' => 'order created'
-    ];
-
-    // send and save notification in DB
-    Notification::send($pharmacy, new OrderNotification($data));
-
-    event(new NewOrderNotification($data));
+    NotificationService::newOrder($request->input('pharmacy_id'));
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
