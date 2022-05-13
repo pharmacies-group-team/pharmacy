@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         //
@@ -57,7 +53,7 @@ class CityController extends Controller
         return redirect()->back()->with('status', 'edit successfully');
      // return response(['edit successfully', $validator->errors()]);
       }
-      
+
       public function destroy($id)
     {
       return City::where('id', $id)->delete() ? "deleted" : 'not deleted';

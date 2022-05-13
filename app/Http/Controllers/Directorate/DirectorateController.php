@@ -13,6 +13,7 @@ class DirectorateController extends Controller
         //
         $directorates = Directorate::get();
         return response($directorates);
+        // return view('directorates', compact('directorates'));
     }
 
     public function store(Request $request)
@@ -20,9 +21,11 @@ class DirectorateController extends Controller
 
     }
 
-    public function show()
+    public function show($id)
     {
-
+      $directorates = Directorate::where('id', $id)->get();
+      return response($directorates);
+      
     }
 
     public function edit()
