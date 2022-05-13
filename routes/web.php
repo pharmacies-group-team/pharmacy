@@ -3,26 +3,24 @@
 use App\Enum\RoleEnum;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\clint\PayController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\web;
+use App\Http\Controllers\web\AboutController;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
+use App\Http\Controllers\city;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\admin\AdController;
-use App\Http\Controllers\advertisement\advertisementController;
-use App\Http\Controllers\advertisement\AdvertisementController as AdvertisementAdvertisementController;
-
-use App\Http\Controllers\pharmacy\PharmacyController;
 use Illuminate\Support\Facades\Route;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 
 // TODO
 // disable Debug
-Debugbar::disable();
+// Debugbar::disable();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,22 +33,15 @@ Debugbar::disable();
 */
 
 /*
-|--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
-
-// Route::get('/profile', function () {
-//   return view('client.profile');
-// });
-
-
+Route::get('/about-us', [AboutController::class, 'index']) ->name('about');
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
-  Route::get('/pharmacies', 'showPharmacies')->name('pharmacies');
-  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('pharmacy.profile')->middleware('verified');
-
-
+  Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
+  Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
+//--------------------------------------------------------------------------
 });
 
 /*
@@ -58,28 +49,14 @@ Route::controller(web\HomeController::class)->group(function () {
 | General Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
-  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-Auth::routes();
+Route::middleware(['auth', 'verified'])
+  ->name('setting.')
+  ->group(function () {
+    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// change-password 
-Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
-
-Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
-
-
-// pharmacies
-Route::resource('/pharmacies', PharmacyController::class);
-
-  Route::controller(SettingController::class)->group(function () {
-
-    Route::post('/update/logo', 'updateLogo')->name('update.logo')->middleware('role:' . RoleEnum::PHARMACY);
-    Route::get('/setting', 'index')->name('index');
-    Route::post('/setting', 'updateAccount')->name('update.account');
-    Route::post('/update/avatar', 'updateAvatar')->name('update.avatar');
+    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
+      ->name('update.avatar');
   });
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -110,7 +87,7 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 
 // TODO only for debugging
 Route::prefix('/pharmacy')
-  // ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
     // Route::resource('/', pharmacy\PharmacyController::class);
     // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
@@ -123,34 +100,30 @@ Route::prefix('/pharmacy')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
     });
 
-
-    Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
-
-    /*------------------------------ orders ------------------------------*/
-//     Route::get('/orders', [pharmacy\OrderController::class, 'index'])
-//   ->name('orders');
-//   });
     Route::controller(pharmacy\OrderController::class)
       ->prefix('/orders')->name('orders.')->group(function () {
         Route::get('/', 'getAll')->name('index');
+        Route::get('/{id}', 'getOrder')->name('single');
         Route::get('/refusal/{id}', 'orderRefusal')->name('refusal');
       });
 
-
     Route::controller(pharmacy\QuotationController::class)
-      ->prefix('/quotation')->name('quotation.')->group(function (){
+      ->prefix('/quotation')->name('quotation.')->group(function () {
 
         Route::get('/', 'getAll')->name('index');
         Route::get('/{id}', 'createQuotation')->name('create');
-
+        Route::get('/details/{id}', 'getQuotationDetails')->name('details');
       });
 
+    Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
+      ->name('update.logo');
   });
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
 */
+
 Route::prefix('/admin')
   ->name('admin.')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
@@ -160,12 +133,15 @@ Route::prefix('/admin')
 
     // admin profile
     Route::get('profile', [admin\AdminProfileController::class, 'index'])
-      ->name('profile');
+      ->name('profile'); //X
 
     Route::put('profile', [admin\AdminProfileController::class, 'updateProfile'])
-      ->name('update-profile');
+      ->name('update-profile'); //X
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
+
+    /*------------------------------ payments ------------------------------*/
+    Route::resource('/payments', admin\PaymentController::class);
 
     /*------------------------------ website content ------------------------------*/
     Route::prefix('site')->controller(admin\SiteController::class)
@@ -193,8 +169,8 @@ Route::prefix('/admin')
     });
 
     /*------------------------------ orders ------------------------------*/
-    Route::get('/orders', [admin\OrderController::class, 'index'])
-      ->name('admin.orders'); // TODO
+    // Route::get('/orders', [admin\OrderController::class, 'index'])
+    //   ->name('admin.orders'); // TODO
 
     // pharmacies
     Route::controller(admin\PharmacyController::class)->group(function () {
@@ -204,6 +180,9 @@ Route::prefix('/admin')
       Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
         ->name('pharmacies.toggle');
     });
+
+    Route::view('/account-settings', 'admin.account-settings')
+      ->name('account-settings');
   });
 
 /*
@@ -211,33 +190,48 @@ Route::prefix('/admin')
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('/clients')->name('clients.')->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])->group(function () {
-  Route::get('/', [client\ClientProfileController::class, 'index'])
-    ->name('profile');
+// TODO only for debugging
+Route::prefix('/client')
+  ->name('client.')
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  ->group(function () {
 
-  Route::post('/', [client\ClientProfileController::class, 'updateProfile'])
-    ->name('update-profile');
+    // dashboard
+    Route::controller(client\DashboardController::class)->group(function () {
+      Route::get('/', 'index')->name('index');
+//      Route::get('/profile', 'getProfile')->name('profile'); // X
+      Route::get('/account-settings', 'accountSettings')->name('account-settings');
+      Route::get('/address', 'address')->name('address');
+    });
 
-  Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
+    Route::controller(client\OrderController::class)
+      ->prefix('/orders')
+      ->name('orders.')->group(function () {
+        Route::get('/', 'getAll')->name('index');
+        Route::post('/', 'storeOrder')->name('store');
+        Route::get('/{id}', 'showOrder')->name('show');
+      });
 
+    Route::get('/quotation/details/{id}', [client\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
 
-  Route::resource('/addresses', client\AddressController ::class);
-
-//   Route::get('/orders', [client\OrderController::class, 'index'])->name('orders');
-
-
-
-  Route::controller(client\OrderController::class)
-    ->prefix('/orders')->name('order.')->group(function (){
-
-    Route::get('/', 'getAll')->name('index');
-    Route::post('/', 'storeOrder')->name('store');
-    Route::get('/{id}', 'showOrder')->name('show');
-
+    Route::controller(client\PayController::class)->group(function (){
+      Route::post('/pay',  'payment')->name('payment');
+      Route::get('/success',  'success')->name('success');
+      Route::get('/cancel', 'cancel')->name('cancel');
+    });
   });
-});
 
-// TESTING
-Route::view('/clients/order', '0-testing.create-order');
+  // Hamzah routes of cities and dir and nigh
+  Route::controller(city\CityController::class)->group(function(){
+    Route::get('/cities','index')->name('city');
+  });
+
+  // Route::controller(web\HomeController::class)->group(function () {
+  //   Route::get('/', 'index')->name('home');
+  //   Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
+  //   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
+  // //--------------------------------------------------------------------------
+  // });
+
 
 Auth::routes(['verify' => true]);

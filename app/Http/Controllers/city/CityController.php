@@ -17,7 +17,7 @@ class CityController extends Controller
     public function index()
     {
         //
-        $cityies = City::get();
+        $cityies = City::all();
         return response($cityies);
     }
 
@@ -39,14 +39,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-          'name' => 'required',
-        ]);
-        City::create([
-          'name' => $request->input('name'),
-        ]);
 
-        return response(['added successfully', $validator->errors()]);
     }
 
     /**
@@ -55,10 +48,9 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $cityies = City::where('id', $id)->get();
-        return response($cityies);
+
     }
 
     /**
@@ -67,7 +59,7 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
         //
     }
@@ -79,18 +71,9 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-      $validator = Validator::make($request->all(), [
-        'name' => 'required',
-      ]);
 
-      City::where('id', $id)
-        ->update([
-          'name' => $request->input('name')
-        ]);
-
-      return response(['edit successfully', $validator->errors()]);
     }
 
     /**

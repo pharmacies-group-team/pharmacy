@@ -85,7 +85,6 @@ class AdController extends Controller
     $imageName = Ad::find($id)->image;
 
     $this->deleteImage($imageName);
-
     return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
   }
 }
