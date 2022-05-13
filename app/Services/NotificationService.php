@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enum\SettingEnum;
 use App\Events\NewOrderNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => 'pharmacy.orders.index',
+      'link'     => SettingEnum::DOMAIN.'pharmacy/orders',
       'message'  => 'أرسل لك طلب جديد، يمكنك الإطلاع عليه.',
     ];
 
@@ -33,7 +34,7 @@ class NotificationService
       $data     = [
         'sender'   => $sender,
         'receiver' => $receiver->id,
-        'link'     => 'client.orders.index',
+        'link'     => SettingEnum::DOMAIN.'client/orders',
         'message'  => 'عذراً لا يتوفر لدينا طلبك..',
       ];
 
