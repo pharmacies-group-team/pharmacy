@@ -11,6 +11,7 @@ use App\Http\Controllers\web\AboutController;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\city;
+use App\Http\Controllers\directorate;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
@@ -229,6 +230,14 @@ Route::prefix('/client')
     Route::post('/cities','store');
     Route::put('/cities/{id}','update');
     Route::delete('/cities/{id}','destroy');
+  });
+// Directorate
+  Route::controller(directorate\DirectorateController::class)->group(function(){
+    Route::get('/directorates','index')->name('directorates');
+    Route::get('/directorates/{id}','show');
+    Route::post('/directorates','store');
+    Route::put('/directorates/{id}','update');
+    Route::delete('/directorates/{id}','destroy');
   });
 
 //Auth::routes(['verify' => true]);
