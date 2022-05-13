@@ -29,7 +29,11 @@
 
   @livewireScripts()
   <script src="{{ asset('js/alpine.min.js') }}"></script>
-  <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  {{-- ionicons --}}
+  <script def type="module" src="{{ asset('js/icons/ionicons.esm.js') }}"></script>
+  <script def nomodule src="{{ asset('js/icons/ionicons.js') }}"></script>
+
 </body>
 
 </html>
