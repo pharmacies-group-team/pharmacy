@@ -37,20 +37,29 @@ class CityController extends Controller
     //  return redirect()->back()->with('status', 'added successfully');
     }
 
-
+    // one city
     public function show($id)
     {
       $cityies = City::where('id', $id)->get();
       return response($cityies);
     }
-
-    public function update()
+    // update
+    public function update(Request $request, $id)
     {
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|min:2|max:30|string',
+      ]);
 
+      City::where('id', $id)
+        ->update([
+          'name' => $request->input('name')
+        ]);
+        return redirect()->back()->with('status', 'edit successfully');
+     // return response(['edit successfully', $validator->errors()]);
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-      return City::where('id', $id)->delete() ? "deleted" : 'not deleted';
+     
     }
 }

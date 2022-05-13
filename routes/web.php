@@ -222,18 +222,12 @@ Route::prefix('/client')
   });
 
   // Hamzah routes of cities and dir and nigh
+  // Cities
   Route::controller(city\CityController::class)->group(function(){
     Route::get('/cities','index')->name('city');
     Route::get('/cities/{id}','show');
     Route::post('/cities','store');
+    Route::put('/cities/{id}','update');
   });
-
-  // Route::controller(web\HomeController::class)->group(function () {
-  //   Route::get('/', 'index')->name('home');
-  //   Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
-  //   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
-  // //--------------------------------------------------------------------------
-  // });
-
 
 Auth::routes(['verify' => true]);
