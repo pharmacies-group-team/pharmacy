@@ -21,7 +21,7 @@ class DirectorateController extends Controller
       $validator = Validator::make($request->all(), [
         // min:2 becouse some cities in Yemen can be two litter like Ab
         'name' => 'required|min:2|max:30|string',
-        'city_id' => 'required',
+        'city_id' => 'required','city_id' => 'required',
       ]);
       Directorate::create([
         'name' => $request->input('name'),
@@ -39,11 +39,26 @@ class DirectorateController extends Controller
 
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+          'name' => 'required|min:2|max:30|string',
+          'city_id' => 'required',
+        ]);
 
-    }
+        Directorate::where('id', $id)
+          ->update([
+            'name' => $request->input('name'),
+            'city_id' => $request->input('city_id')
+          ]);
+          return redirect()->back()->with('status', 'edit successfully');
+       // return response(['edit successfully', $validator->errors()]);
+        }
+
+
+
+
 
     public function destroy($id)
     {

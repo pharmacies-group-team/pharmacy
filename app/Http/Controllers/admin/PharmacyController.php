@@ -27,7 +27,6 @@ class PharmacyController extends Controller
   {
     $pharmacy_profile= Pharmacy::role(RoleEnum::PHARMACY)->first();
 
-   
     return view('admin.pharmacy_profile', compact('pharmacy_contacts', 'pharmacies'));
   }
 
