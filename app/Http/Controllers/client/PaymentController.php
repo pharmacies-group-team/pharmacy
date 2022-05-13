@@ -21,7 +21,7 @@ class PaymentController extends Controller
       $data = base64_decode($data);
 
       //  TODO (STATIC DATA)
-      $invoiceID = 'ec3OaLia8P';
+      $invoiceID = 'ODJrDrF0BE';
 
       $invoice  = Invoice::firstWhere('invoice_id', $invoiceID);
       $order    = Order::find($invoice->order->id);
@@ -47,7 +47,7 @@ class PaymentController extends Controller
     //********* Show Invoice *********//
     public function getInvoice($invoiceID)
     {
-      $invoice  = Invoice::firstWhere('invoice_id', $invoiceID);
+      $invoice  = Invoice::where('invoice_id', $invoiceID)->orWhere('id', $invoiceID)->first();
       $order    = Order::find($invoice->order->id);
 
       if ($invoice && $order)
