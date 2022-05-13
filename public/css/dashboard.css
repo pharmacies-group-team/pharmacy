@@ -1354,9 +1354,14 @@ textarea.form-control{
 }
 
 .sidebar .icon{
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-  width: 1.25rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  width: 1.5rem;
+}
+
+.sidebar .icon ion-icon{
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .sidebar .icon svg, .sidebar .icon path{
