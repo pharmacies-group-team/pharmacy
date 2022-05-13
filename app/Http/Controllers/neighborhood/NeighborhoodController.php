@@ -19,7 +19,7 @@ class NeighborhoodController extends Controller
     {
       $validator = Validator::make($request->all(), [
         'name' => 'required|min:2|max:30|string',
-        'directorate_id' => 'required','directorate_id' => 'required',
+        'directorate_id' => 'required'
       ]);
       Neighborhood::create([
         'name' => $request->input('name'),
@@ -35,9 +35,20 @@ class NeighborhoodController extends Controller
       $neighborhoods = Neighborhood::where('id', $id)->get();
       return response($neighborhoods);
     }
+
     public function update(Request $request, $id)
     {
-        //
+         $validator = Validator::make($request->all(), [
+          'name' => 'required|min:2|max:30|string',
+          'directorate_id' => 'required',
+        ]);
+        Neighborhood::where('id', $id)
+          ->update([
+            'name' => $request->input('name'),
+            'directorate_id' => $request->input('directorate_id')
+          ]);
+        //  return redirect()->back()->with('status', 'edit successfully');
+        return response(['edit successfully', $validator->errors()]);
     }
     public function destroy($id)
     {
