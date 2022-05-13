@@ -1,7 +1,7 @@
 @php use App\Enum\PharmacyEnum; @endphp
 
 <li class="t-item">
-  <a href="{{ route($notification->data['link']) }}">
+  <a href="{{ url($notification->data['link']) }}">
     <header class="t-header">
       <img src="@if (isset($notification->data['sender']['logo']))
       {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $notification->data['sender']['logo']) }}

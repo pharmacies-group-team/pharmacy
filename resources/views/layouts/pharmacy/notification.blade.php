@@ -1,7 +1,7 @@
 @php use App\Enum\UserEnum; @endphp
 
 <li class="t-item">
-  <a href="{{ route($notification->data['link']) }}">
+  <a href="{{ url($notification->data['link']) }}">
     <header class="t-header">
       <img src="@if (isset($notification->data['sender']['avatar']))
       {{ asset(UserEnum::USER_AVATAR_PATH . $notification->data['sender']['avatar']) }}
