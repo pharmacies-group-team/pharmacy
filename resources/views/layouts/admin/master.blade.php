@@ -14,9 +14,6 @@
 </head>
 
 <body>
-  {{-- load alpinejs before any html element #fix modal light show/hide issues --}}
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
-
   <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
     @include('layouts.admin.sidebar')
@@ -25,12 +22,14 @@
       {{-- navbar --}}
       @include('layouts.shared.navbar')
 
+
       @yield('content')
     </div>
   </div>
 
   @livewireScripts()
-
+  <script src="{{ asset('js/alpine.min.js') }}"></script>
+  <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
