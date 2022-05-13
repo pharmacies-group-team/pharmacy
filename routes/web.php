@@ -119,6 +119,9 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
+    /*------------------------------ ads ------------------------------*/
+    Route::get('/users', [admin\UserController::class, 'getAllUsers'])->name('users');
+
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
     /*------------------------------ ads ------------------------------*/
