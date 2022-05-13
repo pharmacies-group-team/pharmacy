@@ -22,7 +22,8 @@ class NeighborhoodController extends Controller
 
     public function show($id)
     {
-        //
+      $neighborhoods = Neighborhood::where('id', $id)->get();
+      return response($neighborhoods);
     }
     public function update(Request $request, $id)
     {
