@@ -11,12 +11,12 @@ php artisan make:controller city/NameController --resource
 ## directorate
 
 ```bash
-php artisan make:controller Directorate/NameController --resource
+php artisan make:controller directorate/NameController --resource
 ```
 ## neighborhood
 
 ```bash
-php artisan make:controller Neighborhood/NameController --resource
+php artisan make:controller neighborhood/NameController --resource
 ```
 ## admin
 

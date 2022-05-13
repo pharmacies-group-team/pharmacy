@@ -12,6 +12,7 @@ use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
 use App\Http\Controllers\city;
 use App\Http\Controllers\directorate;
+use App\Http\Controllers\Neighborhood;
 use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
@@ -222,7 +223,7 @@ Route::prefix('/client')
     });
   });
 
-  // Hamzah routes of cities and dir and nigh
+  // Routes of cities and dir and nigh
   // Cities
   Route::controller(city\CityController::class)->group(function(){
     Route::get('/cities','index')->name('city');
@@ -238,6 +239,14 @@ Route::prefix('/client')
     Route::post('/directorates','store');
     Route::put('/directorates/{id}','update');
     Route::delete('/directorates/{id}','destroy');
+  });
+// Neighborhood
+  Route::controller(neighborhood\NeighborhoodController::class)->group(function(){
+    Route::get('/neighborhoods','index')->name('directorates');
+    Route::get('/neighborhoods/{id}','show');
+    Route::post('/neighborhoods','store');
+    Route::put('/neighborhoods/{id}','update');
+    Route::delete('/neighborhoods/{id}','destroy');
   });
 
 //Auth::routes(['verify' => true]);
