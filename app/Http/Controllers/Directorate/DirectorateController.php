@@ -46,7 +46,6 @@ class DirectorateController extends Controller
           'name' => 'required|min:2|max:30|string',
           'city_id' => 'required',
         ]);
-
         Directorate::where('id', $id)
           ->update([
             'name' => $request->input('name'),
@@ -63,5 +62,7 @@ class DirectorateController extends Controller
     public function destroy($id)
     {
       //
+      return Directorate::where('id', $id)->delete() ? "deleted" : 'not deleted';
+      //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
     }
 }
