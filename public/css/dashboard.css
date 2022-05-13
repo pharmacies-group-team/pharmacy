@@ -1526,6 +1526,11 @@ ion-icon{
   line-height: 1.75rem;
 }
 
+.icon{
+  display: flex;
+  align-items: center;
+}
+
 ::-webkit-scrollbar{
   height: 0.25rem;
   width: 0.25rem;
