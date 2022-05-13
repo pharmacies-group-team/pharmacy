@@ -11,6 +11,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\QuotationDetails;
 use App\Models\User;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -21,7 +22,7 @@ class PaymentController extends Controller
       $data = base64_decode($data);
 
       //  TODO (STATIC DATA)
-      $invoiceID = 'ec3OaLia8P';
+      $invoiceID = 'ODJrDrF0BE';
 
       $invoice  = Invoice::firstWhere('invoice_id', $invoiceID);
       $order    = Order::find($invoice->order->id);
@@ -32,6 +33,9 @@ class PaymentController extends Controller
         $order->update(['status' => OrderEnum::PAID_ORDER]);
 
         $this->processWallet($invoice, $order);
+
+        // send and save notification in DB
+        NotificationService::userPay($invoice->order);
       }
 
 //      return response($products);
@@ -39,15 +43,15 @@ class PaymentController extends Controller
     }
 
     //********* Cancel Payment *********//
-      public function cancel()
-      {
-        return 'cancel';
-      }
+    public function cancel()
+    {
+      return 'cancel';
+    }
 
     //********* Show Invoice *********//
     public function getInvoice($invoiceID)
     {
-      $invoice  = Invoice::firstWhere('invoice_id', $invoiceID);
+      $invoice  = Invoice::where('invoice_id', $invoiceID)->orWhere('id', $invoiceID)->first();
       $order    = Order::find($invoice->order->id);
 
       if ($invoice && $order)

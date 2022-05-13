@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Client;
 use App\Enum\OrderEnum;
 use App\Enum\PaymentEnum;
 use App\Enum\RoleEnum;
+use App\Enum\SettingEnum;
 use App\Models\Invoice;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
+use App\Services\NotificationService;
 use App\Models\{User, Address};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -80,6 +82,9 @@ class DetailsQuotation extends Component
       $invoice->update(['is_active' => 1]);
       $this->quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
 
+      // send and save notification in DB
+      NotificationService::userPay($this->quotation->order);
+
       return redirect()->route('client.success')
         ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
     }
@@ -150,8 +155,8 @@ class DetailsQuotation extends Component
           'products'        => $products,
           'currency'        => 'YER',
           'total_amount'    => (string) $this->quotation->total,
-          'success_url'     => 'http://127.0.0.1:8000/client/success',
-          'cancel_url'      => 'http://127.0.0.1:8000/client/cancel',
+          'success_url'     => SettingEnum::DOMAIN.'client/success',
+          'cancel_url'      => SettingEnum::DOMAIN.'client/cancel',
           'metadata'        => $this->quotation->order->user
         ];
     }
