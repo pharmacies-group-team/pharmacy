@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterPharmacyController extends Controller
 {
-  use RegistersUsers;
+//  use RegistersUsers;
 
   public function index()
   {
@@ -36,9 +36,10 @@ class RegisterPharmacyController extends Controller
     );
     event(new Registered($user = User::create(
       [
-        'name'     => $request['name'],
-        'email'    => $request['email'],
-        'password' => Hash::make($request['password']),
+        'name'      => $request['name'],
+        'email'     => $request['email'],
+        'password'  => Hash::make($request['password']),
+        'is_active' => 0
       ]
     )->assignRole($request['roles'])));
 
@@ -56,8 +57,8 @@ class RegisterPharmacyController extends Controller
       ]
     );
 
-    $this->guard()->login($user);
+//    $this->guard()->login($user);
 
-    return redirect()->route('home');
+    return view('auth.verify');
   }
 }
