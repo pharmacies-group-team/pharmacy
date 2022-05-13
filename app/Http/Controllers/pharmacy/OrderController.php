@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
 use App\Notifications\UserOrderNotification;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
@@ -24,24 +25,12 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if ($order) {
-            $order->update(['status' => OrderEnum::REFUSAL_ORDER]);
-
-
-          $pharmacy = Auth::user()->pharmacy;
-          $user     = User::find($order->user_id);
-
-          $data     = [
-            'sender'   => $pharmacy,
-            'receiver' => $user->id,
-            'link'     => 'client.orders.index',
-            'message'  => 'عذراً لا يتوفر لدينا طلبك..',
-          ];
+          $order->update(['status' => OrderEnum::REFUSAL_ORDER]);
 
           // send and save notification in DB
-          Notification::send($user, new NewOrderNotification($data));
+          NotificationService::refusalOrder($order);
 
           return back()->with('status', 'لقد تم رفض الطلب');
-
         }
 
         return back()->with('status', 'هُناك خطأ، يُرجى التأكد من صحة رقم الطلب');
