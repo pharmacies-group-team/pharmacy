@@ -48,9 +48,21 @@
                     </a>
                   </td>
 
-                  <td>{{ $pharmacy->neighborhood->directorate->city->name }}</td>
+                  <td>
+                    @if (isset($pharmacy->neighborhood->directorate->city->name))
+                      {{ $pharmacy->neighborhood->directorate->city->name }}
+                    @else
+                      -
+                    @endif
+                  </td>
 
-                  <td>{{ $pharmacy->neighborhood->directorate->name }}</td>
+                  <td>
+                    @if (isset($pharmacy->neighborhood->directorate->name))
+                      {{ $pharmacy->neighborhood->directorate->name }}
+                    @else
+                      -
+                    @endif
+                  </td>
 
                   <td>{{ $pharmacy->user->email }}</td>
 

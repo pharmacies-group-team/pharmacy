@@ -1296,7 +1296,7 @@ textarea.form-control{
   font-family: Cairo, sans-serif;
   min-height: 100vh;
   --tw-bg-opacity: 1;
-  background-color: rgb(78 125 203 / var(--tw-bg-opacity));
+  background-color: rgb(56 105 186 / var(--tw-bg-opacity));
   padding-left: 1rem;
   padding-right: 1rem;
   --tw-text-opacity: 1;
@@ -1354,9 +1354,14 @@ textarea.form-control{
 }
 
 .sidebar .icon{
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-  width: 1.25rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  width: 1.5rem;
+}
+
+.sidebar .icon ion-icon{
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .sidebar .icon svg, .sidebar .icon path{
@@ -1524,6 +1529,11 @@ svg {
 ion-icon{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.icon{
+  display: flex;
+  align-items: center;
 }
 
 ::-webkit-scrollbar{

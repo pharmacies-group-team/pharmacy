@@ -12,14 +12,9 @@
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
   @livewireStyles()
-
-
-
 </head>
 
 <body>
-
-
   <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
     @include('layouts.client.sidebar')
@@ -41,10 +36,9 @@
 
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
-  {{--  <script src="{{ asset('js/pusher/pharamcy.js') }}"></script>--}}
+  {{-- <script src="{{ asset('js/pusher/pharamcy.js') }}"></script> --}}
 
   <script>
-
     // Enable pusher logging - don't include this in production
     // Pusher.logToConsole = true;
     var pusher = new Pusher('da19676fc51825fbbeba', {
@@ -72,19 +66,18 @@
     var channel = pusher.subscribe('new-order-notification');
 
     // Bind a function to a Event (the full Laravel class)
-    channel.bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, function (data) {
+    channel.bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, function(data) {
 
-      if ({{Auth::id()}} === data.receiver)
-      {
+      if ({{ Auth::id() }} === data.receiver) {
         let avatar = data.sender.avatar === null ? 'default_user.png' : data.sender.avatar;
         el('.js-dropdown-menu').innerHTML +=
           `<li class="t-item">
-        <a href="`+ data.link +`">
+        <a href="` + data.link + `">
           <header class="t-header">
-            <img src="/uploads/user/`+ avatar+`" alt="user avatar" class="t-avatar" width="40">
-            <h4 class="t-name">`+data.sender.name+`</h4>
+            <img src="/uploads/user/` + avatar + `" alt="user avatar" class="t-avatar" width="40">
+            <h4 class="t-name">` + data.sender.name + `</h4>
           </header>
-          <p class="t-desc">`+ data.message +`</p>
+          <p class="t-desc">` + data.message + `</p>
         </a>
     </li>`;
 
@@ -96,9 +89,12 @@
       }
 
     });
-
-
   </script>
+
+  {{-- ionicons --}}
+  <script def type="module" src="{{ asset('js/icons/ionicons.esm.js') }}"></script>
+  <script def nomodule src="{{ asset('js/icons/ionicons.js') }}"></script>
+
 </body>
 
 </html>

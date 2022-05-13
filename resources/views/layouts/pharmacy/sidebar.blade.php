@@ -12,7 +12,9 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.index') active @endif" href="{{ route('pharmacy.index') }}">
 
-        <x-icon icon="home" />
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/dashboard.svg') }}'></ion-icon>
+        </div>
 
         <span>لوحة التحكم</span>
       </a>
@@ -23,7 +25,9 @@
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.messages') active @endif"
         href="{{ route('pharmacy.messages') }}">
 
-        <x-icon icon="message" />
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
+        </div>
 
         <span>الرسائل </span>
       </a>
@@ -34,7 +38,9 @@
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.orders.index') active @endif"
         href="{{ route('pharmacy.orders.index') }}">
 
-        <x-icon icon="order" />
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/orders.svg') }}'></ion-icon>
+        </div>
 
         <span>إدارة الطلبات</span>
       </a>
@@ -44,7 +50,9 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
 
-        <x-icon icon="profile" />
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
+        </div>
 
         <span>بروفايل الصيدلية</span>
       </a>
@@ -55,7 +63,9 @@
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
         href="{{ route('pharmacy.account-settings') }}">
 
-        <x-icon icon="setting" />
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
+        </div>
 
         <span>أعدادات الحساب</span>
       </a>
@@ -65,8 +75,10 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.invoice-profile') active @endif"
         href="{{ route('pharmacy.invoice-profile') }}">
-        {{-- TODO --}}
-        <x-icon icon="order" />
+
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
+        </div>
 
         <span>@lang('heading.invoice-profile')</span>
       </a>

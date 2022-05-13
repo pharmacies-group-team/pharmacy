@@ -7,7 +7,6 @@
       {{-- Logo --}}
       <div class="col-3">
         <a class="navbar-brand h4 text-decoration-none m-0" href="{{ route('home') }}">
-          {{-- <img src="{{ asset('images/logo.svg') }}"> --}}
           <h1 class="text-primary-darker fs-3 fw-bold">PHARMACY <span
               class="fs-6 fw-normal text-primary-base">online</span></h1>
         </a>

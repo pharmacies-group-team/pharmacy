@@ -56,7 +56,7 @@ class SiteController extends Controller
     ]);
 
 
-    $imageName = $this->storeImage($request->file('icon'), 'images/services');
+    $imageName = $this->storeImage($request->file('icon'), 'uploads/services');
 
     if ($imageName) {
 
@@ -82,7 +82,7 @@ class SiteController extends Controller
       "icon" => 'nullable|image|mimes:png,jpg'
     ]);
 
-    $imageName = $this->storeImage($request->file('icon'), 'images/services');
+    $imageName = $this->storeImage($request->file('icon'), 'uploads/services');
 
     if ($imageName) {
       $result = Service::where('id', $id)->update([
@@ -90,15 +90,14 @@ class SiteController extends Controller
         "desc" => $request->input('desc'),
         "icon" => $imageName
       ]);
-    }
-    else{
+    } else {
       $result = Service::where('id', $id)->update([
         "name" => $request->input('name'),
         "desc" => $request->input('desc'),
       ]);
     }
 
-    return redirect()->back()->with('status',  'تمت العملية بنجاح.' );
+    return redirect()->back()->with('status',  'تمت العملية بنجاح.');
   }
 
   public function deleteService(Request $request, $id)
@@ -106,7 +105,6 @@ class SiteController extends Controller
     $result = Service::where('id', $id)->delete();
 
     return redirect()->back()->with('status', $result ? 'تمت العملية بنجاح.' : 'failed');
-
   }
 
   // update contact us

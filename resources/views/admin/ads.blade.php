@@ -32,7 +32,7 @@
                 تاريخ البدء
               </th>
               <th class="sorting" tabindex="0" aria-controls="datatables-multi" rowspan="1" colspan="1"
-                  style="width: 55px" aria-label="Office: activate to sort column ascending">
+                style="width: 55px" aria-label="Office: activate to sort column ascending">
                 تاريخ الإنتهاء
               </th>
               {{-- <th class="sorting" tabindex="0" aria-controls="datatables-multi"
@@ -50,7 +50,7 @@
             @foreach ($ads as $ad)
               <tr>
                 <td>
-                  <img src="{{ asset(\App\Enum\AdEnum::AD_PATH.$ad->image) }}" style="margin: auto;" />
+                  <img src="{{ asset(\App\Enum\AdEnum::AD_PATH . $ad->image) }}" style="margin: auto;" />
                   <input type="hidden" name="image" value="{{ $ad->id }}" />
                 </td>
 
@@ -209,8 +209,8 @@
           <div class="form-group">
             <label>را'بط
               الموقع</label>
-            <input type="text" name="link" :value="ad.link"
-              class="form-control @error('link') is-invalid @enderror" placeholder="ادخل رابط الموقع" />
+            <input type="text" name="link" :value="ad.link" class="form-control @error('link') is-invalid @enderror"
+              placeholder="ادخل رابط الموقع" />
             @error('link')
               <span class="invalid-feedback">{{ $message }}</span>
             @enderror
@@ -258,11 +258,9 @@
           <p class="text-danger">
             هل انت متاكد من حذف الاعلان ؟
           </p>
-{{--TODO--}}
+
           <div>
-{{--            <img :src="'{{ url('images/ads') }}/'--}}
-{{--            ad.image" width="200" height="150" alt="ad image"--}}
-{{--              style="display: block; margin: 1rem auto;">--}}
+
             <div x-text="ad.title"></div>
           </div>
 
