@@ -119,7 +119,7 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
-    /*------------------------------ ads ------------------------------*/
+    /*------------------------------ Users ------------------------------*/
     Route::get('/users', [admin\UserController::class, 'getAllUsers'])->name('users');
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
@@ -200,6 +200,7 @@ Route::prefix('/client')
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
+        Route::post('/confirmation','confirmation')->name('confirmation');
       });
 
     // quotation

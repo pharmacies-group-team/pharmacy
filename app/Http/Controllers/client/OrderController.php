@@ -50,4 +50,14 @@ class OrderController extends Controller
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
+
+  public function confirmation(Request $request)
+  {
+    dd($request);
+    Order::find($request->input('order_id'))->update(['status' => OrderEnum::DELIVERED_ORDER]);
+
+    // Notification (TODO)
+
+    return redirect()->back()->with('success', 'تم تم تأكيد وصول الطلب بنجاح.');
+  }
 }

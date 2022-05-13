@@ -3,13 +3,17 @@
 
 {{--  {{ dd($success) }}--}}
 
-  <main class="page-invoice" style="width: 95%; margin: auto; padding-top: 40px">
+  <main class="page-invoice" x-data="{ confirmationModal: false }" style="width: 95%; margin: auto; padding-top: 40px">
 
     <div>
       {{-- header --}}
       <header class="t-header">
-        <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
+       <div class="section-header">
+         <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
 
+         <button class="btn" @click="id = {{ $order->id }};confirmationModal = true">تأكيد وصول الطلب</button>
+
+       </div>
         {{-- invoice info --}}
         <div class="t-invoice-info" style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
           {{-- date --}}
@@ -196,6 +200,21 @@
 
     </div>
 
+    {{-- confirmation modal --}}
+    <x-modal title="تأكيد وصول الطلب" open="confirmationModal">
+      <form :action="'/client/orders/confirmation'" x-ref='confirmation' method="post" style="text-align: center; height: 120px; display: flex; align-items: center; justify-content: center">
+        @csrf
+        @method('POST')
+        <input hidden name="order_id" :value="id">
+        <h1 class="text-base" style="font-size: 18px ">
+          هل تم إيصال الطلب إليك ؟
+        </h1>
+        <x-slot:footer>
+          <button class="btn" @click="$refs.confirmation.submit()">نعم
+          </button>
+        </x-slot:footer>
+      </form>
+    </x-modal>
 
   </main>
 
