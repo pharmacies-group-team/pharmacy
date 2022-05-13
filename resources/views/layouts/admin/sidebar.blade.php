@@ -26,7 +26,7 @@
           <ion-icon name="people-sharp"></ion-icon>
         </div>
 
-        <span>الزبائن</span>
+        <span>العملاء</span>
       </a>
     </li>
 
