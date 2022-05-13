@@ -2,6 +2,7 @@
 
 use App\Enum\RoleEnum;
 
+use App\Http\Controllers\Auth\LoginCustomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
@@ -19,11 +20,10 @@ use App\Http\Controllers\pharmacy;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'verified'])
-  ->name('setting.')
-  ->group(function () {
-    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
 
+Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
+    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
     Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
       ->name('update.avatar');
   });
