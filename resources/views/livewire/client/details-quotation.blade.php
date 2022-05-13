@@ -62,7 +62,7 @@
               <td> {{ $details->price }} {{ $details->currency }} </td>
 
               {{-- total --}}
-              <td> {{ $details->total }} {{ $details->currency }}</td>
+              <td> {{ $details->price * $details->quantity }} {{ $details->currency }}</td>
 
               {{-- action --}}
               @if($active === 0)
