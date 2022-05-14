@@ -1,6 +1,6 @@
 @if (isset($type))
   <div
-    x-data='{animationClasses: `animate__bounce animate__animated animate__repeat-3`, hidden:() => setTimeout(() => $refs.alertErrorMessage.parentNode.removeChild($refs.alertErrorMessage), 5000)}'>
+    x-data='{animationClasses: `animate__bounce animate__animated animate__repeat-2`, hidden:() => setTimeout(() => $refs.alertErrorMessage.parentNode.removeChild($refs.alertErrorMessage), 5000)}'>
     {{-- alert message --}}
     @if ($type === 'message' && session()->has('message'))
       <div class="alert-box" :class="animationClasses" x-init=" hidden()" x-ref="alertErrorMessage">
