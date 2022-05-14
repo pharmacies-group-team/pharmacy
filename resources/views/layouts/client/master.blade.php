@@ -59,7 +59,7 @@
     var notificationsCountElem = notificationsToggle.find('span[data-count]');
     var notificationsCount = parseInt(notificationsCountElem.data('count'));
 
-    if (notificationsCount <= 0) dropdownNotifications.hide();
+    // if (notificationsCount <= 0) dropdownNotifications.hide();
 
 
     // Subscribe to the channel we specified in our Laravel Event

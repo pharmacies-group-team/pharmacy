@@ -82,7 +82,7 @@
     var notificationsCountElem = notificationsToggle.find('span[data-count]');
     var notificationsCount = parseInt(notificationsCountElem.data('count'));
 
-    if (notificationsCount <= 0) dropdownNotifications.hide();
+    // if (notificationsCount <= 0) dropdownNotifications.hide();
 
 
     // Subscribe to the channel we specified in our Laravel Event
@@ -98,6 +98,7 @@
         <a href="` + data.link + `">
           <header class="t-header">
             <img src="/uploads/user/` + avatar + `" alt="user avatar" class="t-avatar" width="40">
+
             <h4 class="t-name">` + data.sender.name + `</h4>
           </header>
           <p class="t-desc">` + data.message + `</p>
