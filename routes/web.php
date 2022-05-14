@@ -120,7 +120,10 @@ Route::prefix('/admin')
   ->group(function () {
 
     /*------------------------------ Users ------------------------------*/
-    Route::get('/users', [admin\UserController::class, 'getAllUsers'])->name('users');
+    Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function (){
+      Route::get('/', 'getAllUsers')->name('index');
+      Route::get('/profile/{id}', 'userProfile')->name('profile');
+    });
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 

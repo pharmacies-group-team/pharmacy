@@ -22,11 +22,14 @@
             {{-- email --}}
             <th>الايميل</th>
 
+            {{-- email --}}
+            <th>رقم الهاتف</th>
+
             {{-- roles --}}
             <th>الصلاحية</th>
 
             {{-- statue --}}
-            <th>الحالة</th>
+            <th>حالة الحساب</th>
 
             {{-- actions --}}
             <th></th>
@@ -37,9 +40,10 @@
           @if ($users)
             @foreach ($users as $user)
               <tr>
-                <td>{{ $user->name }} </td>
+                <td><a href="{{ route('admin.users.profile', $user->id) }}">{{ $user->name }}</a> </td>
 
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->phone }}</td>
                 <td> <span class="badge bg-primary">
                     @if($user->hasRole(\App\Enum\RoleEnum::PHARMACY)) صيدلي
                     @elseif($user->hasRole(\App\Enum\RoleEnum::CLIENT)) عميل
