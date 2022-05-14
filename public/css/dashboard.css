@@ -965,22 +965,30 @@ textarea.form-control{
   align-items: center;
 }
 
+.t-notification-counter{
+  position: absolute;
+  top: -0.5rem;
+  left: 0.75rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .t-notification .t-notification-icon{
   position: relative;
   height: 1.25rem;
   width: 1.25rem;
-}
-
-.t-notification .t-notification-icon.active::before {
-  content: "";
-  position: absolute;
-  top: 0px;
-  left: 0.75rem;
-  height: 0.5rem;
-  width: 0.5rem;
-  border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
 }
 
 .t-notification-content{
