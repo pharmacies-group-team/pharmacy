@@ -52,7 +52,7 @@
                     <div style="display: flex; justify-content: center;gap: 12px;align-items: center;">
 
                       <img class="t-profile"
-                        src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
+                        src="{{ asset(\App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar) }}"
                         alt="profile avatar">
 
                       <span class="text-base">

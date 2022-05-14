@@ -8,14 +8,12 @@
 
   <main x-data="{ addOrderModal: false, pharmacy: {} }">
     <section class="profile__bg"
-      style="background-image: url(@if (isset($pharmacy->logo)) {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}) @else {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}) @endif">
+      style="background-image: url({{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }})">
       <div class="container-fluid d-flex justify-content-start align-items-end position-relative" style="height: inherit;">
         <div class="profile__avatar d-flex justify-content-end align-items-start gap-4">
           <figure class="position-relative">
-            <img class="rounded-3"
-              src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}
-                    @else{{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-              alt="">
+
+            <img class="rounded-3" src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}" alt="">
 
             @if (Auth::id() === $pharmacy->user->id)
               <a data-bs-toggle="modal" data-bs-target="#editImg"
