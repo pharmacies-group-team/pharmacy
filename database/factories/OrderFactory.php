@@ -43,7 +43,7 @@ class OrderFactory extends Factory
 
         QuotationDetails::create(
           [
-            'product_name' => $this->faker->name,
+            'product_name' => 'إس دي- شرائط قياس سكر',
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 2,
             'price'        => 3000,
@@ -52,8 +52,8 @@ class OrderFactory extends Factory
           ]);
         QuotationDetails::create(
           [
-            'product_name' => $this->faker->name,
-            'product_unit' => QuotationEnum::TYPE_CARTONS,
+            'product_name' => 'جونسون|زيت',
+            'product_unit' => QuotationEnum::TYPE_BOTTLE,
             'quantity'     => 2,
             'price'        => 2000,
             'total'        => 4000,
@@ -61,7 +61,7 @@ class OrderFactory extends Factory
           ]);
         QuotationDetails::create(
           [
-            'product_name' => $this->faker->name,
+            'product_name' => 'نيفيا كريم',
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 1,
             'price'        => 1000,
@@ -70,7 +70,7 @@ class OrderFactory extends Factory
           ]);
         QuotationDetails::create(
           [
-            'product_name' => $this->faker->name,
+            'product_name' => 'واقي شمس',
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 3,
             'price'        => 3000,
@@ -79,7 +79,7 @@ class OrderFactory extends Factory
           ]);
         QuotationDetails::create(
           [
-            'product_name' => $this->faker->name,
+            'product_name' => 'بندول إكسترا',
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 2,
             'price'        => 4000,
