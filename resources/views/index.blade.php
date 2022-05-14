@@ -66,11 +66,8 @@ $count = 0;
                 style="min-height: 272px;height: 272px;">
                 <div class="d-flex flex-column justify-content-center align-items-center p-4"
                   style="min-height: 220px;height: 220px;">
-                  <img
-                    src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}
-                          @else
-                            {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-                    width="50%" class="rounded-circle img-fluid" alt="">
+                  <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}" width="50%"
+                    class="rounded-circle img-fluid" alt="">
                   <a href="{{ route('show.pharmacy.profile', $pharmacy->id) }}"
                     class="fs-5 fw-bold text-primary-dark mt-4">
                     {{ $pharmacy->name }}
