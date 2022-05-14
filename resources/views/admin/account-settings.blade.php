@@ -13,7 +13,7 @@
       <livewire:account />
 
       {{-- avatar --}}
-      <x-image :image="asset($user->avatar ? UserEnum::USER_AVATAR_PATH . $user->avatar : UserEnum::USER_AVATAR_DEFAULT)" :uploadTo="route('setting.update.avatar')" name="avatar" />
+      <x-image :image="asset(UserEnum::USER_AVATAR_PATH . $user->avatar)" :uploadTo="route('setting.update.avatar')" name="avatar" />
 
     </div>
 
