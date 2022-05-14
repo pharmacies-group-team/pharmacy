@@ -14,7 +14,9 @@
   <div style=" width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 30px;height: 300px; background-image: url('https://i.ibb.co/Bzv2hnJ/message.png'); background-repeat: no-repeat; background-position: left; background-size: 30%">
       <div>
         <h1 style="color: #3869BA; font-size: 30px"> مرحباً بك
-          <span style="color: #588FF4">{{ Auth::user()->name }} </span>
+          <span style="color: #588FF4">
+            @if(isset(Auth::user()->name)) {{ Auth::user()->name }} @endif
+          </span>
           في صيدلية أونلاين</h1>
         <p style="margin-bottom: 20px"> نحن سعداء بإنظمامك لنا تبقى خطوة
           لاكمال عملية التسجيل يرجى الضغط على الرابط التالي لتفعيل حسابك </p>
