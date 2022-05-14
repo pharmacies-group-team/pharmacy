@@ -99,8 +99,8 @@ Route::prefix('/pharmacy')
       ->prefix('/quotation')->name('quotation.')->group(function () {
 
         Route::get('/', 'getAll')->name('index');
-        Route::get('/{id}', 'createQuotation')->name('create');
         Route::get('/details/{id}', 'getQuotationDetails')->name('details');
+        Route::get('/{id}', 'createQuotation')->name('create');
       });
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
@@ -120,6 +120,7 @@ Route::prefix('/admin')
   ->group(function () {
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
+    Route::get('/account-settings', [admin\AdminController::class, 'showAccountSettings'])->name('account-settings');
 
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
@@ -131,6 +132,7 @@ Route::prefix('/admin')
     Route::prefix('site')->controller(admin\SiteController::class)
       ->group(function () {
         Route::get('/', 'index')->name('site');
+
         Route::put('/about-us', 'updateAboutUs')
           ->name('updateAboutUs');
 
@@ -164,9 +166,6 @@ Route::prefix('/admin')
       Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
         ->name('pharmacies.toggle');
     });
-
-    Route::view('/account-settings', 'admin.account-settings')
-      ->name('account-settings');
   });
 
 

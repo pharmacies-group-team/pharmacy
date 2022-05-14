@@ -990,7 +990,7 @@ textarea.form-control{
   display: none;
   min-width: 10rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
   border-radius: 0.25rem;
   transform: translate(0px, 40px);
 }
@@ -998,7 +998,7 @@ textarea.form-control{
 .t-notification-content .t-item{
   border-bottom-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  border-color: rgb(221 233 255 / var(--tw-border-opacity));
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.5rem;
