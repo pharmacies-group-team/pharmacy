@@ -2,6 +2,7 @@
 
 use App\Enum\RoleEnum;
 
+use App\Http\Controllers\Auth\LoginCustomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
@@ -19,11 +20,10 @@ use App\Http\Controllers\pharmacy;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'verified'])
-  ->name('setting.')
-  ->group(function () {
-    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
 
+Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
+    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
     Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
       ->name('update.avatar');
   });
@@ -119,6 +119,9 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
+    /*------------------------------ Users ------------------------------*/
+    Route::get('/users', [admin\UserController::class, 'getAllUsers'])->name('users');
+
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
 
     /*------------------------------ ads ------------------------------*/
@@ -197,6 +200,7 @@ Route::prefix('/client')
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
+        Route::post('/confirmation','confirmation')->name('confirmation');
       });
 
     // quotation

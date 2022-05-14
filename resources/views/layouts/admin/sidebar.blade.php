@@ -26,7 +26,7 @@
           <ion-icon src='{{ asset('images/icons/users.svg') }}'></ion-icon>
         </div>
 
-        <span>الزبائن</span>
+        <span>العملاء</span>
       </a>
     </li>
 

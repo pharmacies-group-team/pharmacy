@@ -9,6 +9,7 @@ use App\Models\Neighborhood;
 use App\Models\Pharmacy;
 use App\Models\PharmacyContact;
 use App\Models\User;
+use App\Services\NotificationAdminService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -16,13 +17,13 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterPharmacyController extends Controller
 {
-  use RegistersUsers;
-
+  //********* page pharmacy register *********//
   public function index()
   {
     return view('auth.register_pharmacy');
   }
 
+  //********* If the user wants to register as a pharmacist  *********//
   public function store(Request $request)
   {
     $request->validate(
@@ -36,9 +37,10 @@ class RegisterPharmacyController extends Controller
     );
     event(new Registered($user = User::create(
       [
-        'name'     => $request['name'],
-        'email'    => $request['email'],
-        'password' => Hash::make($request['password']),
+        'name'      => $request['name'],
+        'email'     => $request['email'],
+        'password'  => Hash::make($request['password']),
+        'is_active' => 0
       ]
     )->assignRole($request['roles'])));
 
@@ -56,8 +58,9 @@ class RegisterPharmacyController extends Controller
       ]
     );
 
-    $this->guard()->login($user);
+    // send and save notification in DB
+    NotificationAdminService::newPharmacy($user);
 
-    return redirect()->route('home');
+    return view('auth.verify');
   }
 }

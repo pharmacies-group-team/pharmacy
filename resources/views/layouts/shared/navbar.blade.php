@@ -47,6 +47,8 @@ $user = User::find(Auth::id());
                 @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
                   @include('layouts.client.notification')
 
+                @elseif($notification->type == 'App\Events\AdminNotification')
+                  @include('layouts.admin.notification')
                 @endif
 
               @endif
