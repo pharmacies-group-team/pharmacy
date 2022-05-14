@@ -48,11 +48,8 @@ use App\Enum\PharmacyEnum;
                 <td>
                   <div class="user-table">
 
-                    <img
-                      src="@if (isset($order->pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->logo) }}
-                    @else
-                    {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-                      alt="profile avatar">
+                    <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->logo) }}
+                       " alt="profile avatar">
 
                     <a href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}" style="color: #3869BA">
                       {{ $order->pharmacy->name }}
