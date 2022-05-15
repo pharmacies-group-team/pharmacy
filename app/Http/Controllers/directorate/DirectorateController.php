@@ -53,6 +53,7 @@ class DirectorateController extends Controller
 
     public function destroy($id)
     {
-        //
+      return Directorate::where('id', $id)->delete() ? "deleted" : 'not deleted';
+      //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
     }
 }
