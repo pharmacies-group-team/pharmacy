@@ -10,6 +10,7 @@ use App\Models\OrderDetails;
 use App\Models\User;
 use App\Notifications\OrderNotification;
 use App\Notifications\PharmacyOrderNotification;
+use App\Services\NotificationAdminService;
 use App\Services\NotificationService;
 use App\Traits\UploadsTrait;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +22,7 @@ use function PHPUnit\Framework\returnArgument;
 
 class OrderController extends Controller
 {
+  //********* git all order for client *********//
   public function getAll()
   {
     $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->get();
@@ -28,7 +30,7 @@ class OrderController extends Controller
     return view('client.orders', compact('orders'));
   }
 
-
+  //********* create new order by client *********//
   public function storeOrder(Request $request): RedirectResponse
   {
     // validator
@@ -46,18 +48,22 @@ class OrderController extends Controller
       ]
     );
 
+    // send and save notification in DB
     NotificationService::newOrder($request->input('pharmacy_id'));
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
 
+  //********* Confirm the arrival of the request *********//
   public function confirmation(Request $request)
   {
-    dd($request);
-    Order::find($request->input('order_id'))->update(['status' => OrderEnum::DELIVERED_ORDER]);
+    $order = Order::find($request->order_id);
+    $order->update(['status' => OrderEnum::DELIVERED_ORDER]);
 
-    // Notification (TODO)
+    // send and save notification in DB
+    NotificationAdminService::deliveredOrder($order);
+    NotificationService::deliveredOrder($order);
 
-    return redirect()->back()->with('success', 'تم تم تأكيد وصول الطلب بنجاح.');
+    return redirect()->back()->with('status', 'تم تأكيد وصول الطلب بنجاح.');
   }
 }
