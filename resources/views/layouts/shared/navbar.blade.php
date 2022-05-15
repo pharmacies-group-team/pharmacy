@@ -16,6 +16,15 @@ $user = User::find(Auth::id());
 
     {{-- nav end --}}
     <div class="nav-end">
+
+      {{-- wallet --}}
+      <div class="wallet">
+        <div class="wallet-box">
+          <span>YER {{ \Illuminate\Support\Facades\Auth::user()->balance }}</span>
+          <x-icon icon='wallet' />
+        </div>
+      </div>
+
       {{-- notification --}}
       <div class="t-notification" x-data="{ open: false }" @click="open = true" @click.away="open = false">
         {{-- icon --}}
@@ -72,6 +81,7 @@ $user = User::find(Auth::id());
           </form>
         </div>
       @endif
+
     </div>
   </nav>
 </header>
