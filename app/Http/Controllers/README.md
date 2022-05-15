@@ -10,6 +10,22 @@ php artisan make:controller pharmacy/NameController --resource
 php artisan make:controller admin/NameController --resource
 ```
 
+## city
+
+```bash
+php artisan make:controller city/NameController --resource
+```
+## directorate
+
+```bash
+php artisan make:controller directorate/NameController --resource 
+```
+## neighborhood 
+
+```bash
+php artisan make:controller neighborhood/NameController --resource
+```
+
 ## client
 
 ```bash
