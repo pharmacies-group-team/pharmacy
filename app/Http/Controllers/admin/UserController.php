@@ -13,4 +13,10 @@ class UserController extends Controller
       $users = User::all();
       return view('admin.users', compact('users'));
     }
+
+    public function userProfile($id)
+    {
+      $user = User::find($id);
+      return view('admin.user-profile', compact('user'));
+    }
 }
