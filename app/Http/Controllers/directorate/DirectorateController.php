@@ -32,7 +32,8 @@ class DirectorateController extends Controller
 
     public function show($id)
     {
-
+      $directorates = Directorate::where('id', $id)->get();
+      return response($directorates);
     }
 
     public function update(Request $request, $id)
