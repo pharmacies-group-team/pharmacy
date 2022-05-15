@@ -56,8 +56,8 @@
 
       <div class="user-area dropdown float-right">
         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="user-avatar rounded-circle"
-            src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
+
+          <img class="user-avatar rounded-circle" src="{{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }}"
             alt="User Avatar">
         </a>
 

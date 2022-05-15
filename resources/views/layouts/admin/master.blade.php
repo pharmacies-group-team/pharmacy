@@ -29,6 +29,27 @@
   </div>
 
   @livewireScripts()
+  <script>
+    function imageViewer() {
+      return {
+        imageUrl: '',
+
+        fileChosen(event) {
+          this.fileToDataUrl(event, src => this.imageUrl = src)
+        },
+
+        fileToDataUrl(event, callback) {
+          if (!event.target.files.length) return
+
+          let file = event.target.files[0],
+            reader = new FileReader()
+
+          reader.readAsDataURL(file)
+          reader.onload = e => callback(e.target.result)
+        },
+      }
+    }
+  </script>
   <script src="{{ asset('js/alpine.min.js') }}"></script>
 
   {{-- ionicons --}}
@@ -62,7 +83,7 @@
     var notificationsCountElem = notificationsToggle.find('span[data-count]');
     var notificationsCount = parseInt(notificationsCountElem.data('count'));
 
-    if (notificationsCount <= 0) dropdownNotifications.hide();
+    // if (notificationsCount <= 0) dropdownNotifications.hide();
 
 
     // Subscribe to the channel we specified in our Laravel Event
@@ -78,6 +99,7 @@
         <a href="` + data.link + `">
           <header class="t-header">
             <img src="/uploads/user/` + avatar + `" alt="user avatar" class="t-avatar" width="40">
+
             <h4 class="t-name">` + data.sender.name + `</h4>
           </header>
           <p class="t-desc">` + data.message + `</p>

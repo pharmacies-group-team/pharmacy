@@ -19,28 +19,23 @@ class LoginCustomController extends Controller
 
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
-      if (Auth::user()->is_active === 1)
-      {
+      if (Auth::user()->is_active === 1) {
         if (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN))
           return redirect()->route('admin.users.index');
-        elseif (Auth::user()->hasRole(RoleEnum::PHARMACY))
-        {
+
+        elseif (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
           if (Auth::user()->email_verified_at == null)
             return view('auth.verify');
           return redirect()->route('pharmacy.profile');
-        }
-        else {
+        } else {
           if (Auth::user()->email_verified_at == null)
             return view('auth.verify');
           return redirect()->route('home');
         }
-      }
-      elseif(Auth::user()->hasRole(RoleEnum::PHARMACY))
-      {
+      } elseif (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
         Auth::logout();
         return view('message.pharmacy-not-active');
-      }
-      else{
+      } else {
         Auth::logout();
         return view('message.user-not-active');
       }

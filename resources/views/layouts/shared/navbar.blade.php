@@ -22,8 +22,9 @@ $user = User::find(Auth::id());
         <div class="t-notification-icon dropdown-notifications-js">
           <a style="position: relative" data-toggle="dropdown">
             <x-icon icon="notification" />
-            <span class="notif-count" style="position: absolute;top: 0px;background: #e87e00; border-radius: 50%; width: 10px;height: 10px;"
-                  data-count="{{ auth()->user()->unreadNotifications()->count() }}">
+
+            <span class="notif-count t-notification-counter"
+              data-count="{{ auth()->user()->unreadNotifications()->count() }}">
               {{ auth()->user()->unreadNotifications()->count() }}
             </span>
           </a>
@@ -39,18 +40,14 @@ $user = User::find(Auth::id());
           </li>
           @if (isset(Auth::user()->unreadNotifications))
             @foreach (Auth::user()->unreadNotifications as $notification)
-              @if($notification->type == 'App\Events\NewOrderNotification')
-
-                @if(Auth::user()->hasRole(RoleEnum::PHARMACY))
-                  @include('layouts.pharmacy.notification')
-
+              @if ($notification->type == 'App\Events\NewOrderNotification')
+                @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
+                  <x-pharmacy.notification :notification="$notification" />
                 @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
-                  @include('layouts.client.notification')
-
+                  <x-client.notification :notification="$notification" />
                 @elseif($notification->type == 'App\Events\AdminNotification')
-                  @include('layouts.admin.notification')
+                  <x-admin.notification :notification="$notification" />
                 @endif
-
               @endif
             @endforeach
           @endif
@@ -66,8 +63,7 @@ $user = User::find(Auth::id());
       @if (isset($user))
         <div class="nav-avatar t-dropdown" x-data="{ dropdown: false }" @mouseover="dropdown = true"
           @mouseover.away="dropdown = false">
-          <img
-            src="@if (isset($user->avatar)) {{ asset(UserEnum::USER_AVATAR_PATH . $user->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif">
+          <img src="{{ asset(UserEnum::USER_AVATAR_PATH . $user->avatar) }}">
 
           <form class="t-dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
             @csrf
