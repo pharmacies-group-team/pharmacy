@@ -104,7 +104,7 @@
     </div>
     <div style="display: flex; gap: 10px; justify-content: end">
       <button @click="payModal = true" class="btn">دفع الفاتورة</button>
-      <button @click="cancelModal = true" class="btn btn-danger">إلغاء الطلب</button>
+      <button @click="cancelModal = true" class="btn btn-danger">@lang('action.cancel-order')</button>
     </div>
   @endif
   <div>
