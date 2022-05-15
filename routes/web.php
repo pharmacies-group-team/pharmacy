@@ -204,6 +204,7 @@ Route::prefix('/client')
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
         Route::post('/confirmation', 'confirmation')->name('confirmation');
+        Route::get('/cancel/{id}', 'cancelOrder')->name('cancel');
       });
 
     // quotation

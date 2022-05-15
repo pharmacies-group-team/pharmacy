@@ -8,6 +8,7 @@ return [
   "create-quote" => "إنشاء عرض سعر",
   "order-details" => "التفاصيل ",
   "add" => "إضافة",
-  "show-invoice" => "عرض الفاتورة"
+  "show-invoice" => "عرض الفاتورة",
+  "cancel-order" => "إلغاء الطلب"
   // "" => ""
 ];

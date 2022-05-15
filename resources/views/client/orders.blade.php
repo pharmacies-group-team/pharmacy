@@ -92,6 +92,10 @@ use App\Enum\PharmacyEnum;
                     <div class="badge badge-danger">
                       تم رفض الطلب
                     </div>
+                  @elseif($order->status === OrderEnum::CANCELED_ORDER)
+                    <div class="badge badge-danger">
+                      {{ OrderEnum::CANCELED_ORDER }}
+                    </div>
                   @endif
                 </td>
 
@@ -100,10 +104,15 @@ use App\Enum\PharmacyEnum;
                   <x-order-details :order="$order">
                     @slot('footer')
                       <x-client.order-details-footer :order="$order" />
-                      @if ($order->status === \App\Enum\OrderEnum::PAID_ORDER)
+                      @if ($order->status === OrderEnum::PAID_ORDER)
                         <a href="{{ route('client.invoice', $order->invoice->id) }}" class="btn">
                           <x-icon icon="order" />
                           @lang('action.show-invoice')
+                        </a>
+                      @elseif($order->status === OrderEnum::NEW_ORDER || $order->status === OrderEnum::UNPAID_ORDER)
+                        <a href="{{ route('client.orders.cancel', $order->id) }}" class="btn">
+                          <x-icon icon="order" />
+                          @lang('action.cancel-order')
                         </a>
                       @endif
                     @endslot

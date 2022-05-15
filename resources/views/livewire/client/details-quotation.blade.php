@@ -1,5 +1,5 @@
 {{-- TODO --}}
-<div x-data="{ addModal: false, payModal: false, deleteModal: false }">
+<div x-data="{ addModal: false, payModal: false, deleteModal: false, cancelModal: false }">
   <x-alert type="message" />
 
   <div class="section-header">
@@ -102,7 +102,10 @@
         إضافة عنوان جديد
       </button>
     </div>
-    <button @click="payModal = true" class="btn btn-full">دفع الفاتورة</button>
+    <div style="display: flex; gap: 10px; justify-content: end">
+      <button @click="payModal = true" class="btn">دفع الفاتورة</button>
+      <button @click="cancelModal = true" class="btn btn-danger">@lang('action.cancel-order')</button>
+    </div>
   @endif
   <div>
     {{-- Add Address Mofal --}}
@@ -185,6 +188,18 @@
         <x-slot:footer>
           <button class="btn btn-danger" wire:click="delete(id)" @click="deleteModal = false">حذف
           </button>
+        </x-slot:footer>
+      </form>
+    </x-modal>
+
+    {{-- Cancel modal --}}
+    <x-modal title="إلغاء الطلب" open="cancelModal">
+      <form style="display: flex; justify-content: center; align-items: center; height: 112px">
+        <h1 style="font-size: 20px">
+          هل انت متاكد من إلغاء الطلب ؟
+        </h1>
+        <x-slot:footer>
+          <button class="btn btn-danger" wire:click="cancelOrder()" @click="cancelModal = false">نعم</button>
         </x-slot:footer>
       </form>
     </x-modal>

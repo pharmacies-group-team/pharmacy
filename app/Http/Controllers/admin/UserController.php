@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-  public function getAllUsers()
-  {
-    $users = User::all();
-    return view('admin.users', compact('users'));
-  }
+    public function getAllUsers()
+    {
+      return view('admin.users');
+    }
 
   public function userProfile($id)
   {

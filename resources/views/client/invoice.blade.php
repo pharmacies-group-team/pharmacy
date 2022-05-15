@@ -1,7 +1,8 @@
 @extends('layouts/client/master')
+@php use App\Enum\OrderEnum; @endphp
 @section('content')
 
-{{--  {{ dd($success) }}--}}
+<x-alert type="status" />
 
   <main class="page-invoice" x-data="{ confirmationModal: false }" style="width: 95%; margin: auto; padding-top: 40px">
 
@@ -11,7 +12,11 @@
        <div class="section-header">
          <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
 
-         <button class="btn" @click="id = {{ $order->id }};confirmationModal = true">تأكيد وصول الطلب</button>
+         @if($order->status === OrderEnum::DELIVERED_ORDER)
+           <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب</h4>
+         @elseif($order->status === OrderEnum::PAID_ORDER)
+           <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
+         @endif
 
        </div>
         {{-- invoice info --}}
@@ -202,16 +207,15 @@
 
     {{-- confirmation modal --}}
     <x-modal title="تأكيد وصول الطلب" open="confirmationModal">
-      <form :action="'/client/orders/confirmation'" x-ref='confirmation' method="post" style="text-align: center; height: 120px; display: flex; align-items: center; justify-content: center">
+      <form action="{{ route('client.orders.confirmation') }}" x-ref="confirmation" method="post" style="text-align: center; height: 120px; display: flex; align-items: center; justify-content: center">
         @csrf
         @method('POST')
-        <input hidden name="order_id" :value="id">
+        <input hidden name="order_id" value="{{ $order->id }}">
         <h1 class="text-base" style="font-size: 18px ">
           هل تم إيصال الطلب إليك ؟
         </h1>
         <x-slot:footer>
-          <button class="btn" @click="$refs.confirmation.submit()">نعم
-          </button>
+          <button class="btn" type="submit" @click="$refs.confirmation.submit()">نعم</button>
         </x-slot:footer>
       </form>
     </x-modal>
