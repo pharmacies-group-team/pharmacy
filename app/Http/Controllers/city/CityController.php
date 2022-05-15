@@ -19,6 +19,7 @@ class CityController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
           // min:2 becouse some cities in Yemen can be two litter like Ab
           'name' => 'required|min:2|max:30|string',
@@ -26,13 +27,15 @@ class CityController extends Controller
         City::create([
           'name' => $request->input('name'),
         ]);
+
         return response(['added successfully', $validator->errors()]);
       //  return redirect()->back()->with('status', 'added successfully');
     }
 
     public function show($id)
     {
-        //
+      $cityies = City::where('id', $id)->get();
+      return response($cityies);
     }
 
     public function update(Request $request, $id)
