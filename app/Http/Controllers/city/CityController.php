@@ -54,6 +54,7 @@ class CityController extends Controller
 
     public function destroy($id)
     {
-        //
+      return City::where('id', $id)->delete() ? "deleted" : 'not deleted';
+      //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
     }
 }
