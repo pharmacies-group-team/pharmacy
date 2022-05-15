@@ -1,4 +1,5 @@
 @extends('layouts/client/master')
+@php use App\Enum\OrderEnum; @endphp
 @section('content')
 
 <x-alert type="status" />
@@ -11,9 +12,9 @@
        <div class="section-header">
          <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
 
-         @if($order->status === \App\Enum\OrderEnum::DELIVERED_ORDER)
-           <button class="btn">تم تأكيد وصول الطلب</button>
-         @elseif($order->status === \App\Enum\OrderEnum::PAID_ORDER)
+         @if($order->status === OrderEnum::DELIVERED_ORDER)
+           <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب</h4>
+         @elseif($order->status === OrderEnum::PAID_ORDER)
            <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
          @endif
 
