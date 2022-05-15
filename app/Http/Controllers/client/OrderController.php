@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\client;
 
-
 use App\Enum\OrderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-
+use App\Models\OrderDetails;
 use App\Models\User;
 use App\Notifications\PharmacyOrderNotification;
 use App\Traits\UploadsTrait;
@@ -15,84 +14,46 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
-//	id	order	image	status	periodic	re_order_date	user_id	pharmacy_id	deleted_at	created_at	updated_at	
+use function PHPUnit\Framework\returnArgument;
+
 class OrderController extends Controller
 {
-  
-    use UploadsTrait;
-  
-   public function index()
+  public function getAll()
   {
-    $user_id = Auth::user()->id;
+    $orders = Auth::user()->userOrders()->get();
 
-    $orders=Order::select('id','periodic','re_order_date','status','pharmacy_id','user_id','created_at')->where('user_id', $user_id)->with(['orderDetails'])->get();
-
-    return response($orders);
+    return view('client.orders', compact('orders'));
   }
 
-    public function getAll()
-    {
-      $orders = Auth::user()->userOrders()->get();
-      return response($orders);
-    }
-
-    public function showOrder($id)
-    {
-      $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
-      return response($order);
-    }
-
-    public function storeOrder(Request $request): RedirectResponse
-    {
-        // validator
-        Validator::validate($request->all(), Order::roles(), Order::messages());
-
-        // upload image
-        $image = $this->storeImage($request->image,OrderEnum::ORDER_IMAGE_PATH);
-
-        $order = Order::create(
-        [
-          'user_id'     => Auth::id(),
-          'pharmacy_id' => $request->input('pharmacy_id'),
-          'image'       => $image,
-          'order'       => $request->input('order'),
-        ]);
-
-       $client = User::find($request->input('pharmacy_id'));
-        $data     = ['client' => Auth::user(), 'order' => $order];
-
-        // send and save notification in DB
-
-        Notification::send($pharmacy, new PharmacyOrderNotification($data));
-
-        Notification::send($client, new UserOrderNotification($data));
-
-        return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
-    }
-
-  public function show($id)
+  public function showOrder($id)
   {
-   $client = Order::with(['user', 'pharmacy', 'addresse'])->where('id', $id)->get();
-
-    return response($client);
+    $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
+    return view('client.details-order', compact('order'));
   }
-    //Data to display:
 
-// user name.
+  public function storeOrder(Request $request): RedirectResponse
+  {
+    // validator
+    Validator::validate($request->all(), Order::roles(), Order::messages());
 
-// user avatar
+    // upload image
+    $image = $this->storeImage($request->image, OrderEnum::ORDER_IMAGE_PATH);
 
-// date of order (created_at)
+    $order = Order::create(
+      [
+        'user_id'     => Auth::id(),
+        'pharmacy_id' => $request->input('pharmacy_id'),
+        'image'       => $image,
+        'order'       => $request->input('order'),
+      ]
+    );
 
-// pharmacy name
+    $pharmacy = User::find($request->input('pharmacy_id'));
+    $data     = ['client' => Auth::user(), 'order' => $order];
 
-// pharmacy id
+    // send and save notification in DB
+    Notification::send($pharmacy, new PharmacyOrderNotification($data));
 
-// address (delivery location for user)
-
-// order
-
-// image
-
-// status order
+    return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
+  }
 }

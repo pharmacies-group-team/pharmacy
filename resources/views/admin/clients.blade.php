@@ -2,7 +2,7 @@
 @section('content')
 
   <main class="users container">
-    @include('includes.alerts')
+    <x-alert type="status" />
 
     <div class="section-header">
       <h1 class="text-large">لوحة تحكم <strong>الزبائن</strong></h1>

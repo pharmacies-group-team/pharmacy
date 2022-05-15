@@ -27,12 +27,6 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreignId('neighborhood_id');
-            $table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
-            $table->string('name')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address_type')->nullable();
-
             $table->softDeletes();
             $table->timestamps();
         });

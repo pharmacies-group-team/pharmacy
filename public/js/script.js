@@ -23,7 +23,7 @@ $(function () {
   if ($(".owl-2").length > 0) {
     $(".owl-2").owlCarousel({
       center: false,
-      items: 1,
+      items: 5,
       loop: true,
       stagePadding: 0,
       margin: 20,
@@ -52,9 +52,28 @@ $(function () {
         1000: {
           margin: 20,
           nav: true,
-          items: 4,
+          items: 5,
         },
       },
+    });
+  }
+});
+
+// ads carousel
+$(function () {
+  if ($(".owl-ads").length > 0) {
+    $(".owl-ads").owlCarousel({
+      center: false,
+      items: 1,
+      loop: true,
+      stagePadding: 0,
+      margin: 20,
+      rtl: true,
+      smartSpeed: 2000,
+      autoplay: true,
+      nav: true,
+      dots: true,
+      pauseOnHover: false,
     });
   }
 });

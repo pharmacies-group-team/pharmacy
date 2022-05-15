@@ -20,4 +20,32 @@ class QuotationDetails extends Model
     {
       return $this->belongsTo(Quotation::class);
     }
+
+    /**
+     * validation
+     */
+    public static function roles()
+    {
+      return
+        [
+          'product_name.*' => 'required',
+          'quantity.*'     => 'required|numeric',
+          'price.*'        => 'required|numeric',
+          'currency.*'     => 'required'
+        ];
+    }
+
+    /**
+     * messages
+     */
+    public static function messages()
+    {
+      return
+        [
+          'product_name.*.required' => 'يجب إدخال اسم المُنتج.',
+          'quantity.*.required'     => 'يجب إدخال الكمية.',
+          'price.*.required'        => 'يجب إدخال سعر المُنتج.',
+          'currency.*.required'     => 'يجب إدخال العملة.',
+        ];
+    }
 }

@@ -2,7 +2,7 @@
 @section('content')
 
   <main class="manage-website container">
-    @include('includes.alerts')
+    <x-alert type="status" />
 
     {{-- about us --}}
     <div class="section">
@@ -112,7 +112,8 @@
         <div class="form-group">
           <label for="mainTitle">حساب الفيسبوك</label>
           <input class="form-control @error('facebook') is-invalid @enderror" name="facebook"
-            value="{{ $social->facebook }}" type="url" id="mainTitle" placeholder="ادخل حساب الفيسبوك " />
+            value="@if (isset($social->facebook)) {{ $social->facebook }} @endif" type="url" id="mainTitle"
+            placeholder="ادخل حساب الفيسبوك " />
 
           @error('facebook')
             <span class="error invalid-feedback">
@@ -124,7 +125,8 @@
         <div class="form-group">
           <label for="inputLastName">حساب التويتر</label>
           <input type="url" name="twitter" class="form-control @error('twitter') is-invalid @enderror"
-            value="{{ $social->twitter }}" id="inputLastName" placeholder="ادخل حساب التويتر" />
+            value="@if (isset($social->twitter)) {{ $social->twitter }} @endif" id="inputLastName"
+            placeholder="ادخل حساب التويتر" />
           @error('twitter')
             <span class="error invalid-feedback">{{ $message }}</span>
           @enderror
@@ -134,7 +136,8 @@
         <div class="form-group">
           <label for="mainTitle">حساب الواتس اب</label>
           <input class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp"
-            value="{{ $social->whatsapp }}" type="url" id="mainTitle" placeholder="ادخل حساب الواتس اب " />
+            value="@if (isset($social->whatsapp)) {{ $social->whatsapp }} @endif" type="url" id="mainTitle"
+            placeholder="ادخل حساب الواتس اب " />
           @error('whatsapp')
             <span class="error invalid-feedback">{{ $message }}</span>
           @enderror
@@ -145,7 +148,8 @@
           <label for="inputLastName">حساب الانستقرام</label>
 
           <input type="url" name="instagram" class="form-control @error('instagram') is-invalid @enderror"
-            value="{{ $social->instagram }}" id="inputLastName" placeholder="ادخل حساب الانستقرام" />
+            value="@if (isset($social->instagram)) {{ $social->instagram }} @endif" id="inputLastName"
+            placeholder="ادخل حساب الانستقرام" />
           @error('instagram')
             <span class="error invalid-feedback">{{ $message }}</span>
           @enderror

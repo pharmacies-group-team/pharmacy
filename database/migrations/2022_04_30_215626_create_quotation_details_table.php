@@ -17,9 +17,9 @@ return new class extends Migration
           $table->id();
           $table->string('product_name');
           $table->string('product_unit');
-          $table->string('quantity');
-          $table->double('price');
-          $table->double('total');
+          $table->integer('quantity');
+          $table->integer('price');
+          $table->integer('total');
           $table->string('currency');
 
           $table->foreignId('quotation_id');

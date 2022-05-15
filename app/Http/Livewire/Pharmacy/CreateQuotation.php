@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pharmacy;
 
+use App\Enum\OrderEnum;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
 use App\Models\User;
@@ -24,27 +25,25 @@ class CreateQuotation extends Component
         return view('livewire.pharmacy.create-quotation');
     }
 
-    protected $rules = [
-      'product_name.0' => 'required',
-      'product_unit.0' => 'required',
-      'quantity.0'     => 'required|numeric',
-      'price.0'        => 'required|numeric',
-      'currency.0'     => 'currency',
-      'product_name.*' => 'required',
-      'product_unit.*' => 'required',
-      'quantity.*'     => 'required|numeric',
-      'price.*'        => 'required|numeric',
-      'currency.*'     => 'currency'
-    ];
+    public function updated($propertyName)
+    {
+      $this->validateOnly($propertyName,QuotationDetails::roles(), QuotationDetails::messages());
+    }
+
 
     public function storeQuotation()
     {
-        $this->validate($this->rules);
-        $quotation = Quotation::updateOrCreate(['order_id' => $this->order->id]);
+        $this->validate(QuotationDetails::roles(), QuotationDetails::messages());
 
-        foreach ($this->product_name as $key => $value) {
+        if ($this->product_name != null){
+
+          $quotation = Quotation::updateOrCreate(['order_id' => $this->order->id]);
+
+          $total = 0;
+
+          foreach ($this->product_name as $key => $value) {
             QuotationDetails::create(
-            [
+              [
                 'product_name'  => $this->product_name[$key],
                 'product_unit'  => $this->product_unit[$key],
                 'quantity'      => $this->quantity[$key],
@@ -52,7 +51,16 @@ class CreateQuotation extends Component
                 'total'         => $this->price[$key] * $this->quantity[$key],
                 'currency'      => $this->currency[$key],
                 'quotation_id'  => $quotation->id
-            ]);
+              ]);
+
+            $total +=  $this->price[$key] * $this->quantity[$key];
+          }
+
+          $quotation->update(['total' => $total]);
+          $this->order->update(['status' => OrderEnum::UNPAID_ORDER]);
+        }
+        else{
+          session()->flash('message', 'يرجى إدخال منتج واحد على الأقل.');
         }
 
         $this->inputs = [];
@@ -69,13 +77,14 @@ class CreateQuotation extends Component
 
         $this->resetInputFields();
 
-        session()->flash('status', 'لقد تم إرسال عرض السعر');
+//        session()->flash('message', 'لقد تم إرسال عرض السعر');
+
+        return redirect()->route('pharmacy.quotation.details', $quotation->id);
 
     }
 
     public function add($i)
     {
-//        $this->total[$i] = $this->price[$i] * $this->quantity[$i];
         $i = $i + 1;
         $this->i = $i;
         array_push($this->inputs ,$i);
@@ -96,4 +105,3 @@ class CreateQuotation extends Component
         $this->price        = '';
     }
 }
-

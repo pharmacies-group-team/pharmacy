@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('pharmacy_contacts', function (Blueprint $table) {
             $table->id();
             $table->string('phone');
-            $table->string('email')->nullable();
 
             $table->foreignId('pharmacy_id');
             $table->foreign('pharmacy_id')->references('id')->on('pharmacies')->onDelete('cascade');
