@@ -92,6 +92,10 @@ use App\Enum\PharmacyEnum;
                     <div class="badge badge-danger">
                       تم رفض الطلب
                     </div>
+                  @elseif($order->status === OrderEnum::CANCELED_ORDER)
+                    <div class="badge badge-danger">
+                      {{ OrderEnum::CANCELED_ORDER }}
+                    </div>
                   @endif
                 </td>
 
