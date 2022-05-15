@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enum\RoleEnum;
 use App\Enum\SettingEnum;
 use App\Events\NewOrderNotification;
 use App\Models\User;
@@ -72,6 +73,23 @@ class NotificationService
       'receiver' => $receiver->id,
       'link'     => SettingEnum::DOMAIN.'pharmacy/orders',
       'message'  => 'قام بدفع الفاتورة المُرسله إلية، يمكنك ايصال طلبه.',
+    ];
+
+    // send and save notification in DB
+    self::sendOrderNotification($receiver, $data);
+  }
+
+  //********* when user confirmation delivered order *********//
+  public static function deliveredOrder($order)
+  {
+    $sender   = User::find($order->user->id);
+    $receiver = User::find($order->pharmacy_id)->pharmacy;
+
+    $data     = [
+      'sender'   => $sender,
+      'receiver' => $receiver->id,
+      'link'     => SettingEnum::DOMAIN.'client/invoice/'.$order->invoice->id, // TODO
+      'message'  => 'لقد تم إيصال الطلب من قبل '.$sender->name,
     ];
 
     // send and save notification in DB
