@@ -19,7 +19,7 @@
       <div class="address-selects">
         {{-- city --}}
         <select wire:model="cityID" id="pharmacy-address" class="form-control">
-          <option selected disabled>حدد اسم المدينة</option>
+          <option  >حدد اسم المدينة</option>
           @foreach ($cities as $city)
             <option value="{{ $city->id }}">{{ $city->name }}</option>
           @endforeach
@@ -27,7 +27,7 @@
 
         {{-- directorates --}}
         <select wire:model="directorateID" id="pharmacy-address" class="form-control">
-          <option selected disabled>حدد اسم المديرية</option>
+          <option selected >حدد اسم المديرية</option>
           @foreach ($directorates as $directorate)
             <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
           @endforeach
@@ -35,9 +35,13 @@
 
         {{-- neighborhoods --}}
         <select wire:model="neighborhoodID" id="pharmacy-address" class="form-control">
-          <option selected disabled>حدد اسم الحي</option>
+          @if(isset($neighborhoodID))
+            <option selected value="{{ $pharmacy->neighborhood->name}}">{{ $pharmacy->neighborhood->name}}</option>
+          @else
+            <option selected >حدد اسم الحي</option>
+          @endif
           @foreach ($neighborhoods as $neighborhood)
-            <option>{{ $neighborhood->name }}</option>
+            <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
           @endforeach
         </select>
       </div>

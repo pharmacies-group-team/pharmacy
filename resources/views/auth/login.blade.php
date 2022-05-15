@@ -12,7 +12,7 @@
 
           </div>
           <div class="col-lg-6 col-md-6 col-12 p-5">
-            <form method="POST" action="{{ route('login') }}" class="row g-3 needs-validation" novalidate>
+            <form method="POST" action="{{ route('login.custom') }}" class="row g-3 needs-validation" novalidate>
               @csrf
               <div class="col-12">
                 <h1 class="text-primary-base fw-bold fs-3">تسجيل الدخول</h1>

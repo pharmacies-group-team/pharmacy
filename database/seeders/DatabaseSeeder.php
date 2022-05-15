@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             PermissionSeeder::class,
+            CitySeeder::class,
             UserSeeder::class,
             WebInfoSeeder::class,
-            CitySeeder::class,
             PharmacySeeder::class,
             AdSeeder::class,
             OrderSeeder::class

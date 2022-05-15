@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use Bavix\Wallet\Interfaces\Customer;
+use Bavix\Wallet\Interfaces\Wallet;
+use Bavix\Wallet\Traits\CanPay;
+use Bavix\Wallet\Traits\HasWallet;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,9 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, Wallet
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasWallet;
 
     /**
      * The attributes that are mass assignable.
@@ -109,11 +113,12 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * validation
      */
-    public static function role()
+    public static function roleUser()
     {
       return [
         'name'  => ['required', 'string', 'max:255', 'min:5'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::id()],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::id() ],
+          'phone' => 'required|regex:/^([0-9]*)$/|not_regex:/[a-z]/|min:8|max:9|starts_with:77,73,71,70,0',
       ];
     }
 
@@ -136,7 +141,14 @@ class User extends Authenticatable implements MustVerifyEmail
           'email.email'       => 'يرجى التأكد من صحة البريد الإلكتروني',
           'email.unique'      => 'البريد الإلكتروني مُستخدم من قبل.',
           'email.string'      => 'يجب ان يكون البريد الإلكتروني نصاً.',
+
           'max'               => 'يجب ألا يزيد هذا الحقل عن 255 حرف.',
+          'phone.required'    => 'يجب إدخال رقم الهاتف.',
+          'phone.not_regex'   => 'لا يمكنك ادخال حروف او رموز.',
+          'phone.regex'       => 'لا يمكنك ادخال حروف او رموز.',
+          'phone.min'         => 'يجب ألا يقل عن 8 أرقام.',
+          'phone.max'         => 'يجب أن لا يزيد عن 9 أرقام.',
+          'phone.starts_with' => 'يمكنك إدخال (77,73,71,70,0) في البداية.',
         ];
     }
 

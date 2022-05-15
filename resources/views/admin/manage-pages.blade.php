@@ -1,4 +1,4 @@
-@extends('layouts/dashboard/dashboard-master')
+@extends('layouts/admin/master')
 @section('content')
 
   <main class="manage-website container">
@@ -189,7 +189,7 @@
             @foreach ($services as $service)
               <tr>
                 <td>
-                  <img :src="'{{ asset('images/services') }}/{{ $service->icon }}'" name=" image"
+                  <img src="{{ asset('uploads/services/' . $service->icon) }}" name=" image"
                     class="@error('icon') is-invalid @enderror" />
                   @error('icon')
                     <span class="error invalid-feedback">{{ $message }}</span>
@@ -307,13 +307,6 @@
             <p class="text-danger">
               هل انت متاكد من حذف الخدمة ؟
             </p>
-
-            <div>
-              <img :src="'{{ url('images/services') }}/'
-              service.icon" width="200" height="150"
-                alt="ad image" style="display: block; margin: 1rem auto;">
-              <div x-text="service.name"></div>
-            </div>
 
             <x-slot:footer>
               <button class="btn btn-danger" @click="$refs.deleteForm.submit()">حذف

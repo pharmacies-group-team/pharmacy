@@ -41,7 +41,12 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         // validator
-        Validator::validate($request->all(), Payment::roles(), Payment::messages());
+        Validator::validate($request->all(),
+          [
+            'image'       => 'image|mimes:jpeg,jpg,png,svg|max:2048',
+            'name'        => 'required|min:5|max:100|string',
+            'bank_name'   => 'required|min:5|max:100|string',
+          ], Payment::messages());
 
         $imageOldName = Payment::find($id)->image;
 

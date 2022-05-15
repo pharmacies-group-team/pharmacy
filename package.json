@@ -20,6 +20,9 @@
   },
   "dependencies": {
     "browser-sync": "^2.27.9",
-    "browser-sync-webpack-plugin": "^2.3.0"
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "laravel-echo": "^1.11.7",
+    "pusher-js": "^7.1.0-beta",
+    "webpack": "^5.0.0"
   }
 }

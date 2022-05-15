@@ -12,8 +12,8 @@ class PharmacyController extends Controller
 {
   public function index()
   {
-    $users = User::role(RoleEnum::PHARMACY)->orderBy('id', 'DESC')->get();
-
+    $users = Pharmacy::all();
+    
     return view('admin.pharmacies-users', compact('users'));
   }
 
@@ -21,7 +21,7 @@ class PharmacyController extends Controller
   {
     $result = User::where('id', $id)->update(['is_active' => !User::find($id)->is_active]);
 
-    return redirect()->back()->with('status', $result ? ' change pharmacy statue successfully' : 'failed');
+    return redirect()->back()->with('status', $result ? 'تمت العملية بنجاح.' : 'failed');
   }
   public function showPharmacyProfile()
   {

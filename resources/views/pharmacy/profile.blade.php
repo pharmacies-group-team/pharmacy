@@ -15,11 +15,7 @@
 
       {{-- avatar --}}
       @if (isset($pharmacy))
-        <x-image :image="asset(
-            isset($pharmacy->logo)
-                ? PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo
-                : PharmacyEnum::PHARMACY_LOGO_DEFAULT,
-        )" :uploadTo="route('pharmacy.update.logo')" name="logo" />
+        <x-image :image="asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo)" :uploadTo="route('pharmacy.update.logo')" name="logo" />
       @endif
 
     </div>

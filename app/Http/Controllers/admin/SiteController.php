@@ -56,7 +56,7 @@ class SiteController extends Controller
     ]);
 
 
-    $imageName = $this->storeImage($request->file('icon'), 'images/services');
+    $imageName = $this->storeImage($request->file('icon'), 'uploads/services');
 
     if ($imageName) {
 
@@ -70,7 +70,7 @@ class SiteController extends Controller
       $result = false;
     }
 
-    return redirect()->back()->with('status', 'added' . $result ? 'successfully' : 'failed');
+    return redirect()->back()->with('status', $result ? 'تمت العملية بنجاح.' : 'failed');
   }
 
   // update services
@@ -82,7 +82,7 @@ class SiteController extends Controller
       "icon" => 'nullable|image|mimes:png,jpg'
     ]);
 
-    $imageName = $this->storeImage($request->file('icon'), 'images/services');
+    $imageName = $this->storeImage($request->file('icon'), 'uploads/services');
 
     if ($imageName) {
       $result = Service::where('id', $id)->update([
@@ -90,16 +90,21 @@ class SiteController extends Controller
         "desc" => $request->input('desc'),
         "icon" => $imageName
       ]);
+    } else {
+      $result = Service::where('id', $id)->update([
+        "name" => $request->input('name'),
+        "desc" => $request->input('desc'),
+      ]);
     }
 
-    return redirect()->back()->with('status', 'updated' . $result ? 'successfully' : 'failed');
+    return redirect()->back()->with('status',  'تمت العملية بنجاح.');
   }
 
   public function deleteService(Request $request, $id)
   {
     $result = Service::where('id', $id)->delete();
 
-    return redirect()->back()->with('statues', 'delete done');
+    return redirect()->back()->with('status', $result ? 'تمت العملية بنجاح.' : 'failed');
   }
 
   // update contact us
@@ -107,7 +112,7 @@ class SiteController extends Controller
   {
     $request->validate([
       "phone" => 'required|min:9|numeric',
-      "email" => 'required|min:5|email',
+      "email" => 'required|min:5|email'
     ]);
 
     $result = ContactUs::first()->update([
@@ -135,6 +140,6 @@ class SiteController extends Controller
       "twitter"     => $request->input('twitter'),
       "instagram"   => $request->input('instagram'),
     ]);
-    return redirect()->back()->with('status', 'social media updated');
+    return redirect()->back()->with('status', $result ? 'تمت العملية بنجاح.' : 'failed');
   }
 }

@@ -28,12 +28,12 @@ class Account extends Component
 
     public function updated($propertyName)
     {
-      $this->validateOnly($propertyName, User::role(), User::messages());
+      $this->validateOnly($propertyName, User::roleUser(), User::messages());
     }
 
     public function store()
     {
-      $this->validate( User::role(), User::messages());
+      $this->validate( User::roleUser(), User::messages());
 
       $this->user->update(
         [

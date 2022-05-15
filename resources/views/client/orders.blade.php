@@ -48,11 +48,8 @@ use App\Enum\PharmacyEnum;
                 <td>
                   <div class="user-table">
 
-                    <img
-                      src="@if (isset($order->pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->logo) }}
-                    @else
-                    {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-                      alt="profile avatar">
+                    <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->logo) }}
+                       " alt="profile avatar">
 
                     <a href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}" style="color: #3869BA">
                       {{ $order->pharmacy->name }}
@@ -70,7 +67,7 @@ use App\Enum\PharmacyEnum;
                 <td>
                   @if ($order->status === OrderEnum::NEW_ORDER)
                     <div class="badge badge-info">
-                      قيد الموافقه عليه
+                      في إنتظار الرد
                     </div>
                   @elseif($order->status === OrderEnum::UNPAID_ORDER)
                     <div class="badge bg-light text-dark">
@@ -78,7 +75,7 @@ use App\Enum\PharmacyEnum;
                     </div>
                   @elseif($order->status === OrderEnum::PAID_ORDER)
                     <div class="badge bg-success">
-                      {{ OrderEnum::PAID_ORDER }}
+                      <a href="{{ route('client.invoice', $order->invoice->id) }}">تم الدفع</a>
                     </div>
                   @elseif($order->status === OrderEnum::DELIVERY_ORDER)
                     <div class="badge badge-danger">
@@ -97,9 +94,17 @@ use App\Enum\PharmacyEnum;
 
                 {{-- action --}}
                 <td>
-                  <div class="badge badge-info">
-                    <a href="{{ route('client.orders.show', $order->id) }}">تفاصيل الطلب</a>
-                  </div>
+                  <x-order-details :order="$order">
+                    @slot('footer')
+                      <x-client.order-details-footer :order="$order" />
+                      @if ($order->status === \App\Enum\OrderEnum::PAID_ORDER)
+                        <a href="{{ route('client.invoice', $order->invoice->id) }}" class="btn">
+                          <x-icon icon="order" />
+                          @lang('action.show-invoice')
+                        </a>
+                      @endif
+                    @endslot
+                  </x-order-details>
                 </td>
               </tr>
             @endforeach

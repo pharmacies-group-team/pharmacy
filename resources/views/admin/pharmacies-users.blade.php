@@ -1,6 +1,7 @@
-@extends('layouts/dashboard/dashboard-master')
+@extends('layouts/admin/master')
 @section('content')
 
+  @php use App\Enum\PharmacyEnum; @endphp
 
   <main class="users">
     <x-alert type="status" />
@@ -17,6 +18,12 @@
             <tr>
               {{-- name --}}
               <th> الاسم</th>
+
+              {{-- city --}}
+              <th> المدينة</th>
+
+              {{-- de --}}
+              <th> المديرية</th>
 
               {{-- email --}}
               <th>الايميل</th>
@@ -36,17 +43,35 @@
               @foreach ($users as $pharmacy)
                 <tr>
                   <td>
-                    {{ $pharmacy->name }}
-
+                    <a href="{{ route('show.pharmacy.profile', $pharmacy->id) }}" style="color: #3869BA">
+                      {{ $pharmacy->name }}
+                    </a>
                   </td>
-                  <td>{{ $pharmacy->email }}</td>
+
+                  <td>
+                    @if (isset($pharmacy->neighborhood->directorate->city->name))
+                      {{ $pharmacy->neighborhood->directorate->city->name }}
+                    @else
+                      -
+                    @endif
+                  </td>
+
+                  <td>
+                    @if (isset($pharmacy->neighborhood->directorate->name))
+                      {{ $pharmacy->neighborhood->directorate->name }}
+                    @else
+                      -
+                    @endif
+                  </td>
+
+                  <td>{{ $pharmacy->user->email }}</td>
 
                   <td>
                     <span class="badge badge-primary">صيدلية</span>
                   </td>
 
                   <td>
-                    @if ($pharmacy->is_active)
+                    @if ($pharmacy->user->is_active)
                       <div class="badge badge-success">
                         مفعل
                       </div>
@@ -58,10 +83,10 @@
                   </td>
 
                   <td>
-                    <form method="post" action='{{ route('admin.pharmacies.toggle', ['id' => $pharmacy->id]) }}'>
+                    <form method="post" action='{{ route('admin.pharmacies.toggle', ['id' => $pharmacy->user->id]) }}'>
                       @csrf
-                      <button type="submit" class="btn {{ $pharmacy->is_active ? 'btn-danger' : 'btn-primary' }}">
-                        @if ($pharmacy->is_active)
+                      <button type="submit" class="btn {{ $pharmacy->user->is_active ? 'btn-danger' : 'btn-primary' }}">
+                        @if ($pharmacy->user->is_active)
                           تعطيل
                         @else
                           تفعيل

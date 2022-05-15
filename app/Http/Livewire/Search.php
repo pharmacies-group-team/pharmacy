@@ -20,8 +20,6 @@ class Search extends Component
     public $directorates, $directorateID;
     public $neighborhoods, $neighborhoodID;
 
-    public $neighborhoodPharmacies;
-
     public $currentPage = 1;
 
     public function mount()
@@ -46,17 +44,17 @@ class Search extends Component
     {
         // Search By Neighborhood
         if ($this->neighborhoodID != '') {
-          return Pharmacy::where('neighborhood_id', $this->neighborhoodID)->paginate(12);
+          return Pharmacy::where('neighborhood_id', $this->neighborhoodID)
+            ->where('name', 'like', '%'.$this->search.'%')->paginate(12);
         }
 
         // Search By Directorate
         elseif ($this->directorateID != '') {
-          return Pharmacy::where('neighborhood_id', function ($query) {
-                            $query->select('id')-> from('directorates')->
-                            where('id', $this->directorateID);})
-                ->paginate(12);
+          return Pharmacy::whereIn('neighborhood_id', function ($query) {
+                            $query->select('id')-> from('neighborhoods')->
+                              where('directorate_id', $this->directorateID);})
+            ->where('name', 'like', '%'.$this->search.'%')->paginate(12);
         }
-
 
         // Search By City
         elseif ($this->cityID != '') {
@@ -64,12 +62,15 @@ class Search extends Component
                             $query->select('id')->from('directorates')->where('city_id', function ($query){
                               $query->select('id')-> from('cities')-> where('id', $this->cityID);
                             });})
-                ->paginate(12);
+                ->where('name', 'like', '%'.$this->search.'%')->paginate(12);
         }
 
         // Search By Name Pharmacy
-        else
+        elseif($this->search != '')
           return Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
+
+        else
+          return Pharmacy::with(['user'])->paginate(12);
     }
 
     public function updatedcityID()

@@ -24,6 +24,7 @@ class Information extends Component
         $this->name    = $this->pharmacy->name;
         $this->address = $this->pharmacy->address;
         $this->about   = $this->pharmacy->about;
+        $this->neighborhoodID = $this->pharmacy->neighborhood_id;
 
         $this->cities  = City::orderby('name')->get();
 
@@ -55,9 +56,10 @@ class Information extends Component
 
         $pharmacy->update(
           [
-            'name' => $this->name,
-            'about' => $this->about,
-            'address' => $this->address,
+            'name'            => $this->name,
+            'about'           => $this->about,
+            'address'         => $this->address,
+            'neighborhood_id' => $this->neighborhoodID
           ]);
 
         session()->flash('message', 'تم تحديث بياناتك بنجاح.');

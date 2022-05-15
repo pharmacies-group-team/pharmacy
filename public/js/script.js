@@ -4,19 +4,19 @@ const banner = document.querySelector(".banner");
 const header_height = header.offsetHeight;
 
 // TODO fixed Nav
-// window.addEventListener("scroll", function () {
-//   scrolls = window.scrollY;
+window.addEventListener("scroll", function () {
+  scrolls = window.scrollY;
 
-//   if (scrolls >= header_height) {
-//     $("nav.top-header").addClass("bg-blur");
-//     $("li.nav-item a").removeClass("text-light").addClass("text-black");
-//     $(".dropdown-toggle").removeClass("text-white").addClass("text-black");
-//   } else {
-//     $("nav.top-header").removeClass("bg-blur");
-//     $("li.nav-item a").removeClass("text-black").addClass("text-light");
-//     $(".dropdown-toggle").removeClass("text-black").addClass("text-white");
-//   }
-// });
+  if (scrolls >= header_height) {
+    $("nav.top-header").addClass("bg-blur");
+    $("li.nav-item a").removeClass("text-light").addClass("text-black");
+    $(".dropdown-toggle").removeClass("text-white").addClass("text-black");
+  } else {
+    $("nav.top-header").removeClass("bg-blur");
+    $("li.nav-item a").removeClass("text-black").addClass("text-light");
+    $(".dropdown-toggle").removeClass("text-black").addClass("text-white");
+  }
+});
 
 // pharmacies carousel
 $(function () {
@@ -28,7 +28,7 @@ $(function () {
       stagePadding: 0,
       margin: 20,
       rtl: true,
-      smartSpeed: 2000,
+      smartSpeed: 4000,
       autoplay: true,
       nav: true,
       dots: true,
@@ -69,7 +69,7 @@ $(function () {
       stagePadding: 0,
       margin: 20,
       rtl: true,
-      smartSpeed: 2000,
+      smartSpeed: 4000,
       autoplay: true,
       nav: true,
       dots: true,

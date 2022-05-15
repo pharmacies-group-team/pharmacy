@@ -28,12 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
-          return (new MailMessage)
-            ->greeting('مرحباً بك في صيدلية أونلاين!')
-            ->subject('التحقق من عنوان البريد الإلكتروني')
-            ->line('انقر فوق الزر أدناه للتحقق من عنوان بريدك الإلكتروني.')
-            ->action('التحقق من عنوان البريد الإلكتروني', $url)
-            ->line('شكرا لك على استخدام صيدلية أونلاين.');
+          return (new MailMessage)->view('auth.message-verify',compact('url'));
         });
     }
 }

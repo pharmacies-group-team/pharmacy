@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\client;
 
 use App\Enum\OrderEnum;
+use App\Events\NewOrderNotification;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
+use App\Notifications\OrderNotification;
 use App\Notifications\PharmacyOrderNotification;
+use App\Services\NotificationService;
 use App\Traits\UploadsTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,16 +23,11 @@ class OrderController extends Controller
 {
   public function getAll()
   {
-    $orders = Auth::user()->userOrders()->get();
+    $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->get();
 
     return view('client.orders', compact('orders'));
   }
 
-  public function showOrder($id)
-  {
-    $order = Order::where('user_id', Auth::id())->where('id', $id)->first();
-    return view('client.details-order', compact('order'));
-  }
 
   public function storeOrder(Request $request): RedirectResponse
   {
@@ -48,12 +46,18 @@ class OrderController extends Controller
       ]
     );
 
-    $pharmacy = User::find($request->input('pharmacy_id'));
-    $data     = ['client' => Auth::user(), 'order' => $order];
-
-    // send and save notification in DB
-    Notification::send($pharmacy, new PharmacyOrderNotification($data));
+    NotificationService::newOrder($request->input('pharmacy_id'));
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
+  }
+
+  public function confirmation(Request $request)
+  {
+    dd($request);
+    Order::find($request->input('order_id'))->update(['status' => OrderEnum::DELIVERED_ORDER]);
+
+    // Notification (TODO)
+
+    return redirect()->back()->with('success', 'تم تم تأكيد وصول الطلب بنجاح.');
   }
 }

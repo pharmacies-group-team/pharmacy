@@ -19,8 +19,8 @@ return new class extends Migration
           $table->string('product_unit');
           $table->integer('quantity');
           $table->integer('price');
-          $table->integer('total');
-          $table->string('currency');
+          $table->double('total');
+          $table->string('currency')->default('ريال يمني');
 
           $table->foreignId('quotation_id');
           $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');

@@ -3,7 +3,7 @@
 @section('title') Pharmacies @stop
 
 @section('content')
-
+  <x-alert type="success" />
   <main class="pharmacies" x-data="{ addOrderModal: false, pharmacy: {} }">
     <div class="pharmacies-bg"></div>
 
@@ -53,7 +53,7 @@
 
           {{-- TODO fixed need to test :) --}}
           {{-- pharmacy id --}}
-          <input type="hidden" name="pharmacy_id" :value="pharmacy.id">
+          <input type="hidden" name="pharmacy_id" :value="pharmacy.user.id">
 
           {{-- file --}}
           <input type="file" accept="image/*" name="image" x-ref="inputFileOrder" @change="fileChosen">
@@ -91,28 +91,3 @@
   </main>
 
 @stop
-
-@section('alpine-script')
-
-  <script>
-    function imageViewer() {
-      return {
-        imageUrl: '',
-
-        fileChosen(event) {
-          this.fileToDataUrl(event, src => this.imageUrl = src)
-        },
-
-        fileToDataUrl(event, callback) {
-          if (!event.target.files.length) return
-
-          let file = event.target.files[0],
-            reader = new FileReader()
-
-          reader.readAsDataURL(file)
-          reader.onload = e => callback(e.target.result)
-        },
-      }
-    }
-  </script>
-@endsection

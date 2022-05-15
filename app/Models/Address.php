@@ -29,7 +29,8 @@ class Address extends Model
       return [
         'phone'        => 'required|regex:/^([0-9]*)$/|not_regex:/[a-z]/|min:8|max:9|starts_with:77,73,71,70,0',
         'name'         => 'required|max:100|string',
-        'type_address' => 'required'
+        'type_address' => 'required',
+        'desc'         => 'required'
       ];
     }
 
@@ -49,7 +50,8 @@ class Address extends Model
           'name.required'         => 'يجب إدخال الاسم.',
           'name.max'              => 'يجب ألا يكون الاسم أكبر من 100 حرف.',
           'name.string'           => 'يجب ان يكون الاسم نصاً.',
-          'type_address.required' => 'يجب تحديد نوع العنوان.'
+          'type_address.required' => 'يجب تحديد نوع العنوان.',
+          'desc.required'         => 'يجب إدخال الوصف.',
         ];
     }
 

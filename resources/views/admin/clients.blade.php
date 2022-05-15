@@ -1,11 +1,11 @@
-@extends('layouts/dashboard/dashboard-master')
+@extends('layouts/admin/master')
 @section('content')
 
+  <x-alert type="status" />
   <main class="users container">
-    <x-alert type="status" />
 
     <div class="section-header">
-      <h1 class="text-large">لوحة تحكم <strong>الزبائن</strong></h1>
+      <h1 class="text-large">لوحة تحكم <strong>العملاء</strong></h1>
     </div>
 
     <div class="table-wrapper">
@@ -36,7 +36,7 @@
                 <td>{{ $client->name }} </td>
 
                 <td>{{ $client->email }}</td>
-                <td> <span class="badge bg-primary">الزبائن</span></td>
+                <td> <span class="badge bg-primary"></span>عميل</td>
 
                 {{-- status --}}
                 <td>
