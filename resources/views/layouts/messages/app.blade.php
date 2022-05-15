@@ -201,7 +201,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -246,7 +246,7 @@
             var status = $('#id').val();
             var channel = pusher.subscribe('notify-channel');
             channel.bind('App\\Events\\Notify', function(data) {
-                //  alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
                 if (my_id == data.from) {
                     $('#' + data.to).click();
                 } else if (my_id == data.to) {
@@ -266,27 +266,48 @@
                 }
             });
 
+            $.ajax({
+                type: "get",
+                url: "users", // need to create this route
+                data: "",
+                cache: false,
+                success: function(data) {
+                    $('#users').html(data);
 
-            $('.user').click(function() {
-                $('.user').removeClass('active');
-                $(this).addClass('active');
-                $(this).find('.pending').remove();
 
-                receiver_id = $(this).attr('id');
-                // alert("receiver_id");
-                $.ajax({
+                    $('.user').click(function() {
+                        $('.user').removeClass('active');
+                        $(this).addClass('active');
+                        $(this).find('.pending').remove();
 
-                    type: "get",
-                    url: "message/" + receiver_id, // need to create this route
-                    data: "",
-                    cache: false,
-                    success: function(data) {
-                        $('#messages').html(data);
-                        scrollToBottomFunc();
-                        //alert("receiver_id");
-                    }
-                });
+                        receiver_id = $(this).attr('id');
+                        // alert("receiver_id");
+                        $.ajax({
+
+                            type: "get",
+                            url: "message/" + receiver_id, // need to create this route
+                            data: "",
+                            cache: false,
+                            success: function(data) {
+                                $('#messages').html(data);
+                                scrollToBottomFunc();
+                                //alert("receiver_id");
+                            }
+                        });
+                    });
+
+                }
             });
+
+
+            // TODO Naif not good need help here please :)
+            setTimeout(() => {
+
+                $('.js-users').on('click', () => console.log('hi ussr'))
+            }, 2000);
+
+
+
 
             $(document).on('keyup', '.input-text input', function(e) {
                 var message = $(this).val();

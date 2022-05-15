@@ -1,7 +1,6 @@
 <?php
 
 use App\Enum\RoleEnum;
-
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
@@ -96,6 +95,8 @@ Route::prefix('/pharmacy')
       Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
       Route::get('/message/{id}',[MessageController::class, 'getMessage'])->name('message');
       Route::post('message', [MessageController::class, 'sendMessage']);
+      Route::get('/users',[MessageController::class, 'getUsers'])->name('message');
+
 
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
@@ -200,8 +201,11 @@ Route::prefix('/client')
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
       Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
+      Route::get('/users',[MessageController::class, 'getUsers'])->name('message');
+
       Route::get('/message/{id}',[MessageController::class, 'getMessage'])->name('message');
       Route::post('message', [MessageController::class, 'sendMessage']);
+
     });
 
     // order

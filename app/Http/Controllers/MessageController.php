@@ -24,25 +24,8 @@ class MessageController extends Controller
     {
     // select all Users + count how many message are unread from the selected user
 
-        $users = DB::select("select DISTINCT u.id, u.name, u.email from users as u inner JOIN messages as m ON u.id IN(m.from,m.to)
-        where u.id<>" . Auth::id() . " and( m.from= " . Auth::id() . " or m.to="
-        . Auth::id() . ") group by u.id, u.name, u.email;");
 
-       $notifications = DB::select("select m.to,m.from,sum(is_read =0 )
-       as unread from users as u inner JOIN messages as m ON u.id = m.to
-       where (m.to=" . Auth::id() . " ) group by m.to,m.from;");
-
-
-         foreach ($users as $user ) {
-          foreach($notifications as $notification){
-              if ( $notification->from ==$user->id){
-              $user->unread = $notification->unread;}
-            else{
-             $user->unread=0;
-            }
-            }
-         }
-        return view('messages.messages', ['users' => $users]);
+        return view('messages.messages');
     }
     // get all Messages
     public function getMessage($user_id)
@@ -60,6 +43,30 @@ class MessageController extends Controller
     })->get();
 
     return view('messages.index', ['messages' => $messages]);
+    }
+
+    // get all users
+    public function getUsers(){
+      $users = DB::select("select DISTINCT u.id, u.name, u.email from users as u inner JOIN messages as m ON u.id IN(m.from,m.to)
+      where u.id<>" . Auth::id() . " and( m.from= " . Auth::id() . " or m.to="
+      . Auth::id() . ") group by u.id, u.name, u.email;");
+
+     $notifications = DB::select("select m.to,m.from,sum(is_read =0 )
+     as unread from users as u inner JOIN messages as m ON u.id = m.to
+     where (m.to=" . Auth::id() . " ) group by m.to,m.from;");
+
+
+       foreach ($users as $user ) {
+        foreach($notifications as $notification){
+            if ( $notification->from ==$user->id){
+            $user->unread = $notification->unread;}
+          else{
+           $user->unread=0;
+          }
+          }
+       }
+      return view('messages.users', ['users' => $users]);
+
     }
 
 
@@ -80,11 +87,11 @@ class MessageController extends Controller
         return $this->sendRequest($from, $message, $to);
     }
     public function sendRequest($from, $message, $to){
-        $users = DB::select("SELECT * FROM messages WHERE messages.to = " . Auth::id() . " ");
-        if(isset($users)){
-            foreach ($users as $p) {
-                $Data = $p->to;
-            }}
+        // $users = DB::select("SELECT * FROM messages WHERE messages.to = " . Auth::id() . " ");
+        // if(isset($users)){
+        //     foreach ($users as $p) {
+        //         $Data = $p->to;
+        //     }}
         $options = array(
             'cluster' => env('PUSHER_APP_CLUSTER'),
             'encrypted' => true
@@ -96,11 +103,30 @@ class MessageController extends Controller
                 $options
             );
 
+            $users = DB::select("select DISTINCT u.id, u.name, u.email from users as u inner JOIN messages as m ON u.id IN(m.from,m.to)
+            where u.id<>" . Auth::id() . " and( m.from= " . Auth::id() . " or m.to="
+            . Auth::id() . ") group by u.id, u.name, u.email;");
+
+           $notifications = DB::select("select m.to,m.from,sum(is_read =0 )
+           as unread from users as u inner JOIN messages as m ON u.id = m.to
+           where (m.to=" . Auth::id() . " ) group by m.to,m.from;");
+
+
+             foreach ($users as $user ) {
+              foreach($notifications as $notification){
+                  if ( $notification->from ==$user->id){
+                  $user->unread = $notification->unread;}
+                else{
+                 $user->unread=0;
+                }
+                }
+             }
+
 
 
 
         // notification
-        $data = ['from' => $from, 'to' => $to];
+        $data = ['from' => $from, 'to' => $to,'users'=>$users];
         $notify = 'notify-channel';
         $pusher->trigger($notify, 'App\\Events\\Notify', $data);
     }
