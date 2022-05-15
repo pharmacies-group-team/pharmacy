@@ -10,7 +10,8 @@ use App\Models\Invoice;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
 use App\Services\NotificationService;
-use App\Models\{User, Address};
+use App\Services\OrderServices;
+use App\Models\{Order, User, Address};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -187,6 +188,12 @@ class DetailsQuotation extends Component
 
       $this->resetInputFields();
       session()->flash('message', 'تم إضافة عنوان جديد.');
+    }
+
+    //********* Cancel Order *********//
+    public function cancelOrder()
+    {
+      OrderServices::cancelOrder($this->quotation->order->id);
     }
 
     public function resetInputFields()
