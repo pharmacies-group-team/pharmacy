@@ -28,6 +28,23 @@ class NotificationService
     self::sendOrderNotification($receiver, $data);
   }
 
+  //********* when user cancel order *********//
+  public static function cancelOrder($order)
+  {
+    $sender    = User::find($order->user_id);
+    $receiver  = User::find($order->pharmacy_id);
+
+    $data     = [
+      'sender'   => $sender,
+      'receiver' => $receiver->id,
+      'link'     => SettingEnum::DOMAIN.'pharmacy/orders',
+      'message'  => 'قام بإلغاء الطلب.',
+    ];
+
+    // send and save notification in DB
+    self::sendOrderNotification($receiver, $data);
+  }
+
   //********* when pharmacy refusal order *********//
   public static function refusalOrder($order)
   {
