@@ -40,7 +40,16 @@ class CityController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|min:2|max:30|string',
+      ]);
+
+      City::where('id', $id)
+        ->update([
+          'name' => $request->input('name')
+        ]);
+       // return redirect()->back()->with('status', 'edit successfully');
+        return response(['edit successfully', $validator->errors()]);
     }
 
     public function destroy($id)
