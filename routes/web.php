@@ -105,6 +105,14 @@ Route::prefix('/pharmacy')
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
+
+    // chat 
+    Route::controller(pharmacy\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 
