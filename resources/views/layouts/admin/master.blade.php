@@ -8,6 +8,7 @@
   <title>صيدلية اون لاين</title>
 
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
   @livewireStyles()
 
