@@ -12,6 +12,7 @@ use App\Notifications\OrderNotification;
 use App\Notifications\PharmacyOrderNotification;
 use App\Services\NotificationAdminService;
 use App\Services\NotificationService;
+use App\Services\OrderServices;
 use App\Traits\UploadsTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -65,5 +66,10 @@ class OrderController extends Controller
     NotificationService::deliveredOrder($order);
 
     return redirect()->back()->with('status', 'تم تأكيد وصول الطلب بنجاح.');
+  }
+
+  public function cancelOrder($id)
+  {
+    return OrderServices::cancelOrder($id);
   }
 }
