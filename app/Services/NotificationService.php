@@ -83,7 +83,7 @@ class NotificationService
   public static function deliveredOrder($order)
   {
     $sender   = User::find($order->user->id);
-    $receiver = User::find($order->pharmacy_id)->pharmacy;
+    $receiver = User::find($order->pharmacy_id);
 
     $data     = [
       'sender'   => $sender,
