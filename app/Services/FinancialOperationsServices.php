@@ -10,7 +10,7 @@ use App\Models\QuotationDetails;
 class FinancialOperationsServices
 {
   //********* Get Invoice *********//
-  public static function getInvoice($invoiceID)
+  public static function getInvoice($invoiceID, $destination)
   {
     $invoice  = Invoice::where('invoice_id', $invoiceID)->orWhere('id', $invoiceID)->first();
     $order    = Order::find($invoice->order->id);
@@ -25,7 +25,7 @@ class FinancialOperationsServices
     }
     else return 'false';
 
-    return view('client.invoice',
+    return view($destination.'.invoice',
       compact('invoice', 'order', 'pharmacy', 'user', 'products', 'address'));
   }
 

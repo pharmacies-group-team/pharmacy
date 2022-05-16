@@ -52,7 +52,7 @@ class PaymentController extends Controller
     //********* Show Invoice *********//
     public function getInvoice($invoiceID)
     {
-      return FinancialOperationsServices::getInvoice($invoiceID);
+      return FinancialOperationsServices::getInvoice($invoiceID, 'client');
     }
 
     //********* Process Payment from the wallet *********//
