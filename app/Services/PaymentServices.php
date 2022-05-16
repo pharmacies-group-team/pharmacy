@@ -93,8 +93,8 @@ class PaymentServices
         ]);
 
       // Second Step: Send a notification to the pharmacy and admin
-//      NotificationService::transferAmountToPharmacy($invoice->order);
-//      NotificationAdminService::transferAmountToPharmacy($invoice->order);
+      NotificationService::transferAmountToPharmacy($invoice->order);
+      NotificationAdminService::transferAmountToPharmacy($invoice->order);
     }
 
     //********* The data sent for API payment *********//
