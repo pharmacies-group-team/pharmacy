@@ -79,7 +79,7 @@
                       </div>
                     @elseif($order->status === OrderEnum::PAID_ORDER)
                       <div class="badge bg-success">
-                        تم الدفع
+                        <a href="{{ route('pharmacy.invoice', $order->invoice->id) }}">تم الدفع</a>
                       </div>
                     @elseif($order->status === OrderEnum::DELIVERY_ORDER)
                       <div class="badge badge-danger">
