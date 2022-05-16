@@ -20,19 +20,6 @@
       </a>
     </li>
 
-    {{-- message --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.messages') active @endif"
-        href="{{ route('pharmacy.messages') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
-        </div>
-
-        <span>الرسائل </span>
-      </a>
-    </li>
-
     {{-- orders --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.orders.index') active @endif"
