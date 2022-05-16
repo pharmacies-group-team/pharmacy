@@ -4,6 +4,7 @@ namespace App\Http\Controllers\pharmacy;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pharmacy;
+use App\Services\FinancialOperationsServices;
 use Bavix\Wallet\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,4 +45,10 @@ class DashboardController extends Controller
           return view('pharmacy.invoice-profile',
             compact('user', 'transactions', 'amount_confirmed','amount_not_confirmed', 'invoice_confirmed', 'invoice_not_confirmed'));
       }
+
+    //********* Show Invoice *********//
+    public function getInvoice($invoiceID)
+    {
+      return FinancialOperationsServices::getInvoice($invoiceID, 'pharmacy');
+    }
 }

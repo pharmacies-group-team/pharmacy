@@ -84,7 +84,7 @@ Route::prefix('/pharmacy')
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
       Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
-
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
 
     Route::controller(pharmacy\OrderController::class)
