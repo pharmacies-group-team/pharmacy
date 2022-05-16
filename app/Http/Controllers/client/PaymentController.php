@@ -11,6 +11,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\QuotationDetails;
 use App\Models\User;
+use App\Services\FinancialOperationsServices;
 use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,21 +52,7 @@ class PaymentController extends Controller
     //********* Show Invoice *********//
     public function getInvoice($invoiceID)
     {
-      $invoice  = Invoice::where('invoice_id', $invoiceID)->orWhere('id', $invoiceID)->first();
-      $order    = Order::find($invoice->order->id);
-
-      if ($invoice && $order)
-      {
-        $address  = Address::firstWhere('id', $invoice->address_id);
-        $products = QuotationDetails::Where('quotation_id', $order->quotation->id)->get();
-        $user     = $order->user;
-        $pharmacy = $order->pharmacy->pharmacy;
-
-      }
-      else return 'false';
-
-      return view('client.invoice',
-        compact('invoice', 'order', 'pharmacy', 'user', 'products', 'address'));
+      return FinancialOperationsServices::getInvoice($invoiceID);
     }
 
     //********* Process Payment from the wallet *********//
