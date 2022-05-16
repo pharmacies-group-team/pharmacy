@@ -125,6 +125,9 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
+    Route::get('/financial-operations', [admin\DashboardController::class, 'getFinancialOperations'])
+      ->name('financial.operations');
+
     /*------------------------------ Users ------------------------------*/
     Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
       Route::get('/', 'getAllUsers')->name('index');
