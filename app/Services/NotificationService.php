@@ -120,8 +120,8 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'client/invoice/'.$order->invoice->id, // TODO
-      'message'  => 'لقد تم دفع الفاتورة من قِبل '.$sender->name,
+      'link'     => SettingEnum::DOMAIN.'pharmacy/invoice/'.$order->invoice->id,
+      'message'  => 'تم الايداع الى حسابك من قبل '.$sender->name,
     ];
 
     // send and save notification in DB
