@@ -11,7 +11,8 @@
 
     {{-- users --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif" href="{{ route('admin.users.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif"
+        href="{{ route('admin.users.index') }}">
         <div class='icon'>
           <ion-icon src='{{ asset('images/icons/users.svg') }}'></ion-icon>
         </div>

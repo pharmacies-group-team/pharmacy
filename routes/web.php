@@ -103,6 +103,14 @@ Route::prefix('/pharmacy')
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
+
+    // chat
+    Route::controller(pharmacy\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 
@@ -118,7 +126,7 @@ Route::prefix('/admin')
   ->group(function () {
 
     /*------------------------------ Users ------------------------------*/
-    Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function (){
+    Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
       Route::get('/', 'getAllUsers')->name('index');
       Route::get('/profile/{id}', 'userProfile')->name('profile');
       Route::get('/list', 'getUsers')->name('list');
@@ -201,7 +209,7 @@ Route::prefix('/client')
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
-        Route::post('/confirmation','confirmation')->name('confirmation');
+        Route::post('/confirmation', 'confirmation')->name('confirmation');
         Route::get('/cancel/{id}', 'cancelOrder')->name('cancel');
       });
 
@@ -214,6 +222,14 @@ Route::prefix('/client')
       Route::get('/cancel', 'cancel')->name('cancel');
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
+
+    // chat
+    Route::controller(client\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 

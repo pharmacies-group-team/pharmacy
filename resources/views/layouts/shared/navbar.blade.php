@@ -1,11 +1,14 @@
 @php
-use App\Enum\UserEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 use App\Enum\RoleEnum;
+use App\Enum\UserEnum;
+use App\Enum\PharmacyEnum;
 
 $user = User::find(Auth::id());
 @endphp
+
 
 <header>
   <nav class="nav">
@@ -42,28 +45,31 @@ $user = User::find(Auth::id());
         {{-- content --}}
         <ul class="t-notification-content js-dropdown-menu" :class="open ? 'is-open' : ''" style="width: 300px">
           {{-- notification item --}}
-          <li class="t-item">
-            <a>
-              <p class="t-desc">الإشعارات</p>
-            </a>
+          <li class="t-header">
+            <h5 class="t-title">الإشعارات</h5>
           </li>
           @if (isset(Auth::user()->unreadNotifications))
             @foreach (Auth::user()->unreadNotifications as $notification)
               @if ($notification->type == 'App\Events\NewOrderNotification')
+                @if (Auth::user()->hasRole(RoleEnum::CLIENT))
+                  {{-- pharmacy notification --}}
+                  <x-notification :notification="$notification" />
+                @endif
+
+                {{-- client notification --}}
                 @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
-                  <x-pharmacy.notification :notification="$notification" />
-                @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
-                  <x-client.notification :notification="$notification" />
-                @elseif($notification->type == 'App\Events\AdminNotification')
-                  <x-admin.notification :notification="$notification" />
+                  <x-notification :notification="$notification" />
+                @endif
+
+                {{-- admin notification --}}
+                @if ($notification->type == 'App\Events\AdminNotification')
+                  <x-notification :notification="$notification" />
                 @endif
               @endif
             @endforeach
           @endif
-          <li class="t-item">
-            <a>
-              <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
-            </a>
+          <li class="t-notification-footer">
+            <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
           </li>
         </ul>
       </div>

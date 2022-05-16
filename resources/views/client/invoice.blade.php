@@ -1,26 +1,28 @@
-@extends('layouts/client/master')
+@extends('layouts.client/master')
 @php use App\Enum\OrderEnum; @endphp
 @section('content')
 
-<x-alert type="status" />
+  <x-alert type="status" />
 
   <main class="page-invoice" x-data="{ confirmationModal: false }" style="width: 95%; margin: auto; padding-top: 40px">
 
     <div>
       {{-- header --}}
       <header class="t-header">
-       <div class="section-header">
-         <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
+        <div class="section-header">
+          <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
 
-         @if($order->status === OrderEnum::DELIVERED_ORDER)
-           <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب</h4>
-         @elseif($order->status === OrderEnum::PAID_ORDER)
-           <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
-         @endif
+          @if ($order->status === OrderEnum::DELIVERED_ORDER)
+            <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب
+            </h4>
+          @elseif($order->status === OrderEnum::PAID_ORDER)
+            <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
+          @endif
 
-       </div>
+        </div>
         {{-- invoice info --}}
-        <div class="t-invoice-info" style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+        <div class="t-invoice-info"
+          style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
           {{-- date --}}
           <div class="t-item">
             <span class="t-item-key" style="margin-left: 8px; color: #3869BA">@lang('heading.date')</span>
@@ -36,7 +38,8 @@
       </header>
 
       {{-- invoice desc --}}
-      <div class="t-invoice-desc" style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+      <div class="t-invoice-desc"
+        style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
         {{-- invoice from --}}
         <div class="t-item">
           <h4 class="t-title">@lang('heading.invoice-from')</h4>
@@ -49,7 +52,7 @@
           </h3>
 
           {{-- pharmacy address --}}
-          @if(isset($pharmacy->neighborhood_id))
+          @if (isset($pharmacy->neighborhood_id))
             <h3 class="t-label" style="color: #717171; font-size: 14px">
               <x-icon icon='location' />
               @if (isset($pharmacy->neighborhood->directorate->city))
@@ -65,7 +68,7 @@
           @endif
 
           {{-- pharmacy phone --}}
-          @if(isset($pharmacy->contacts->phone))
+          @if (isset($pharmacy->contacts->phone))
             <h3 class="t-label" style="color: #717171 ;font-size: 14px">
               <x-icon icon='phone' />
               {{ $pharmacy->contacts->first()->phone }}
@@ -73,7 +76,7 @@
           @endif
 
           {{-- pharmacy email --}}
-          @if(isset($order->pharmacy->email))
+          @if (isset($order->pharmacy->email))
             <h3 class="t-label" style="color: #717171;font-size: 14px">
               <x-icon icon='email' />
               {{ $order->pharmacy->email }}
@@ -93,13 +96,13 @@
           </h3>
 
           {{-- client address --}}
-{{--          <h3 class="t-label" style="color: #717171">--}}
-{{--            <x-icon icon='location' />--}}
-{{--            client address--}}
-{{--          </h3>--}}
+          {{-- <h3 class="t-label" style="color: #717171"> --}}
+          {{-- <x-icon icon='location' /> --}}
+          {{-- client address --}}
+          {{-- </h3> --}}
 
           {{-- client phone --}}
-          @if(isset($user->phone))
+          @if (isset($user->phone))
             <h3 class="t-label" style="color: #717171;font-size: 14px">
               <x-icon icon='phone' />
               {{ $user->phone }}
@@ -140,7 +143,7 @@
         </thead>
 
         <tbody>
-          @foreach($products as $product)
+          @foreach ($products as $product)
             <tr>
               {{-- name --}}
               <td>{{ $product->product_name }}</td>
@@ -165,16 +168,17 @@
     <hr class="divided">
 
     {{-- invoice total --}}
-    <div class="t-total" style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
-{{--      <div class="t-item">--}}
-{{--        <h4 class="t-key" style="color: #3869BA">@lang('heading.subtotal')</h4>--}}
-{{--        <h4 class="t-value">2000.00</h4>--}}
-{{--      </div>--}}
+    <div class="t-total"
+      style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+      {{-- <div class="t-item"> --}}
+      {{-- <h4 class="t-key" style="color: #3869BA">@lang('heading.subtotal')</h4> --}}
+      {{-- <h4 class="t-value">2000.00</h4> --}}
+      {{-- </div> --}}
 
-{{--      <div class="t-item">--}}
-{{--        <h4 class="t-key" style="color: #3869BA">@lang('heading.taxes')</h4>--}}
-{{--        <h4 class="t-value">10%</h4>--}}
-{{--      </div>--}}
+      {{-- <div class="t-item"> --}}
+      {{-- <h4 class="t-key" style="color: #3869BA">@lang('heading.taxes')</h4> --}}
+      {{-- <h4 class="t-value">10%</h4> --}}
+      {{-- </div> --}}
 
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">@lang('heading.total')</h4>
@@ -186,7 +190,8 @@
     <hr class="divided">
 
     {{-- address --}}
-    <div class="t-total" style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+    <div class="t-total"
+      style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
       <h4 class="t-title" style="color: #3869BA; font-size: 18px; margin-bottom: 16px">عنوان التوصيل </h4>
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">اسم المستلم</h4>
@@ -207,7 +212,8 @@
 
     {{-- confirmation modal --}}
     <x-modal title="تأكيد وصول الطلب" open="confirmationModal">
-      <form action="{{ route('client.orders.confirmation') }}" x-ref="confirmation" method="post" style="text-align: center; height: 120px; display: flex; align-items: center; justify-content: center">
+      <form action="{{ route('client.orders.confirmation') }}" x-ref="confirmation" method="post"
+        style="text-align: center; height: 120px; display: flex; align-items: center; justify-content: center">
         @csrf
         @method('POST')
         <input hidden name="order_id" value="{{ $order->id }}">
