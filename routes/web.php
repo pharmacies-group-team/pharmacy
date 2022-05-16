@@ -199,7 +199,7 @@ Route::prefix('/client')
       Route::get('/', 'index')->name('index');
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
-      Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
     });
 
     // order
