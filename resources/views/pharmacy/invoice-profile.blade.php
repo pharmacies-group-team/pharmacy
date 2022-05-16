@@ -5,32 +5,55 @@
   <main class="page-invoice-profile container">
 
     {{-- bg --}}
-    <div class="t-bg"></div>
+{{--    <div class="t-bg"></div>--}}
 
     {{-- user --}}
-    <header class="t-header">
-      {{-- avatar --}}
-      <div class="t-avatar">
-        <img src="{{ asset('uploads/user/' . $user->avatar) }}" alt="user avatar">
+{{--    <header class="t-header">--}}
+{{--      --}}{{-- avatar --}}
+{{--      <div class="t-avatar">--}}
+{{--        <img src="{{ asset('uploads/user/' . $user->avatar) }}" alt="user avatar">--}}
+{{--      </div>--}}
+
+{{--      --}}{{-- user info --}}
+{{--      <div class="t-user-desc">--}}
+{{--        --}}{{-- user name --}}
+{{--        <h3 class="t-user-name">--}}
+{{--          <x-icon icon='home' />--}}
+
+{{--          <span> {{ $user->name }} </span>--}}
+{{--        </h3>--}}
+
+{{--        --}}{{-- item date --}}
+{{--        <div class="t-item">--}}
+{{--          <x-icon icon='home' />--}}
+
+{{--          <span>{{ $user->created_at }}</span>--}}
+{{--        </div>--}}
+{{--      </div>--}}
+{{--    </header>--}}
+
+    <div class="t-content">
+      <div class="t-log-data">
+          <div style="display: flex; align-items: center; justify-content: space-evenly">
+            <div style="display:flex; justify-content: center; align-items: center; gap: 6px">
+              <span>رصيدك الحالي:</span>
+              <span>{{ $amount_not_confirmed }}</span>
+            </div>
+            <div style="display:flex; justify-content: center; align-items: center; gap: 6px">
+              <span>الرصيد القابل للسحب:</span>
+              <span>{{ $amount_confirmed }}</span>
+            </div>
+            <div style="display:flex; justify-content: center; align-items: center; gap: 6px">
+              <span> الفواتير المؤكدة:</span>
+              <span>{{ $invoice_confirmed }}</span>
+            </div>
+            <div style="display:flex; justify-content: center; align-items: center; gap: 6px">
+              <span> الفواتير الغير مؤكدة:</span>
+              <span>{{ $invoice_not_confirmed }}</span>
+            </div>
+          </div>
       </div>
-
-      {{-- user info --}}
-      <div class="t-user-desc">
-        {{-- user name --}}
-        <h3 class="t-user-name">
-          <x-icon icon='home' />
-
-          <span> {{ $user->name }} </span>
-        </h3>
-
-        {{-- item date --}}
-        <div class="t-item">
-          <x-icon icon='home' />
-
-          <span>{{ $user->created_at }}</span>
-        </div>
-      </div>
-    </header>
+    </div>
 
     {{-- content --}}
     <div class="t-content">
@@ -38,48 +61,43 @@
       <div class="t-log-data">
         <header>
           <x-icon icon="home" />
-
-          <h3 class="t-heading">Activity timeline</h3>
+          <h3 class="t-heading">@lang('heading.invoice-profile')</h3>
         </header>
 
         <div class="t-list">
-          {{-- item --}}
-          <div class="t-item">
-            {{-- header --}}
-            <div class="t-item-header">
-              {{-- title --}}
-              <h4>Client meeting</h4>
+          @if(isset($transactions))
+            @foreach($transactions as $transaction)
+              {{-- item --}}
+              <div class="t-item">
+                {{-- header --}}
+                <div class="t-item-header">
+                  {{-- title --}}
+                  <h4 style="display:flex; align-items: center;">
+                    <a href="{{ $transaction->meta['invoice_id'] }}">رقم العملية: {{ $transaction->uuid }}</a>
+                    <span style="margin: 20px; font-size: 14px; font-weight: normal; background: #B13232; opacity: 0.7;color: #fff2f2; padding:0  16px; border-radius: 20px">غير مؤكدة</span>
+                  </h4>
+                  {{-- date --}}
+                  <span class="t-date">
+                    <span>تاريخ</span> {{ $transaction->created_at->format('Y-m-d') }}
+                    <span> بتوقيت </span>{{ $transaction->created_at->format('h:m:s A') }}
+                  </span>
+                </div>
 
-              {{-- date --}}
-              <span class="t-date">Today</span>
-            </div>
+                {{-- desc --}}
+                <div class="t-desc">
+                  <p>
+                    <span>{{ $transaction->meta['state_1'] }}</span>
+                    <span>( {{ $transaction->meta['depositor'] }} )</span>
+                    <span>{{ $transaction->meta['state_2'] }}</span>
+                    <span>( {{ $transaction->meta['recipient'] }} )</span>
+                  </p>
+                  <span> المبلغ: {{ $transaction->amount }}</span>
 
-            {{-- desc --}}
-            <p class="t-desc">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veniam maiores numquam dolores corrupti
-              voluptates quidem repellat, eos suscipit molestias soluta magnam adipisci, facere possimus laboriosam odio
-              cupiditate odit perferendis.
-            </p>
-          </div>
-
-          {{-- item --}}
-          <div class="t-item">
-            {{-- header --}}
-            <div class="t-item-header">
-              {{-- title --}}
-              <h4>Client meeting</h4>
-
-              {{-- date --}}
-              <span class="t-date">Today</span>
-            </div>
-
-            {{-- desc --}}
-            <p class="t-desc">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veniam maiores numquam dolores corrupti
-              voluptates quidem repellat, eos suscipit molestias soluta magnam adipisci, facere possimus laboriosam odio
-              cupiditate odit perferendis.
-            </p>
-          </div>
+                </div>
+                <a class="btn">عرض الفاتورة</a>
+              </div>
+            @endforeach
+          @endif
         </div>
 
 
