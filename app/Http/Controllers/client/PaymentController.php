@@ -13,6 +13,7 @@ use App\Models\QuotationDetails;
 use App\Models\User;
 use App\Services\FinancialOperationsServices;
 use App\Services\NotificationService;
+use App\Services\PaymentServices;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -23,7 +24,7 @@ class PaymentController extends Controller
       $data = base64_decode($data);
 
       //  TODO (STATIC DATA)
-      $invoiceID = 'ODJrDrF0BE';
+      $invoiceID = '2a1bwrepFq';
 
       $invoice  = Invoice::firstWhere('invoice_id', $invoiceID);
       $order    = Order::find($invoice->order->id);
@@ -33,13 +34,12 @@ class PaymentController extends Controller
         $invoice->update(['is_active' => 1]);
         $order->update(['status' => OrderEnum::PAID_ORDER]);
 
-        $this->processWallet($invoice, $order);
+        PaymentServices::processWallet($invoice->total, $invoice);
 
         // send and save notification in DB
         NotificationService::userPay($invoice->order);
       }
 
-//      return response($products);
       return $this->getInvoice($invoiceID);
     }
 
@@ -53,41 +53,5 @@ class PaymentController extends Controller
     public function getInvoice($invoiceID)
     {
       return FinancialOperationsServices::getInvoice($invoiceID, 'client');
-    }
-
-    //********* Process Payment from the wallet *********//
-    public function processWallet($invoice, $order)
-    {
-      $user     = $order->user;
-      $pharmacy = $order->pharmacy;
-      $admin    = User::role(RoleEnum::SUPER_ADMIN)->first();
-
-      $adminRatio = ( PaymentEnum::RATIO / 100 ) * $invoice->total;
-      $residual   = $invoice->total - $adminRatio;
-
-      $user->withdraw(0,
-        [
-          'invoice_id' => $invoice->id,
-          'depositor'  => $user->id,
-          'recipient'  => $pharmacy->id,
-          'state'      => ' تحويل من حساب ( '.$user->name.') إلى حساب ( . ' . $pharmacy->name . '('
-        ]);
-
-      $pharmacy->deposit($residual,
-        [
-          'invoice_id' => $invoice->id,
-          'depositor'  => Auth::id(),
-          'recipient'  => $pharmacy->id,
-          'state'      => ' إيداع إلى حساب ( '.$pharmacy->name.') من حساب ( . ' . $user->name . '('
-        ]);
-
-      $admin->deposit($adminRatio,
-        [
-          'invoice_id' => $invoice->id,
-          'depositor'  => $user->id,
-          'recipient'  => $admin->id,
-          'state'      => ' إيداع إلى حساب ( '.$admin->name.') من حساب ( . ' . $user->name . '('
-        ]);
-
     }
 }

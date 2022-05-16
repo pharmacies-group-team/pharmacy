@@ -20,7 +20,7 @@ class PaymentServices
     public static function paymentFromWallet($amount, $quotation, $addressID): RedirectResponse
     {
       $invoice = self::createInvoice($quotation, $addressID);
-      self::processWallet($amount, $invoice, $quotation);
+      self::processWallet($amount, $invoice);
 
       $invoice->update(['is_active' => 1]);
       $quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
@@ -53,9 +53,9 @@ class PaymentServices
     }
 
     //********* Process Payment from the wallet *********//
-    public static function processWallet($amount, $invoice, $quotation)
+    public static function processWallet($amount, $invoice)
     {
-      $pharmacy = User::find($quotation->order->pharmacy_id);
+      $pharmacy = User::find($invoice->order->pharmacy_id);
       $admin    = User::role(RoleEnum::SUPER_ADMIN)->first();
       $user     = Auth::user();
 
@@ -63,7 +63,7 @@ class PaymentServices
       $residual   = $amount - $adminRatio;
 
       // The first step: withdraw amount from the user
-      Auth::user()->withdraw($amount,
+      Auth::user()->forceWithdraw($amount,
         [
           'invoice_id' => $invoice->id,
           'state_1'    => 'تم السحب من حساب ',

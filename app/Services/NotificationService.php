@@ -86,7 +86,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/orders',
+      'link'     => SettingEnum::DOMAIN.'pharmacy/invoice/'.$order->invoice->id,
       'message'  => 'قام بدفع الفاتورة المُرسله إلية، يمكنك ايصال طلبه.',
     ];
 

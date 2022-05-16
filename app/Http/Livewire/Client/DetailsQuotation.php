@@ -3,18 +3,13 @@
 namespace App\Http\Livewire\Client;
 
 use App\Enum\OrderEnum;
-use App\Enum\PaymentEnum;
-use App\Enum\RoleEnum;
-use App\Enum\SettingEnum;
 use App\Models\Invoice;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
-use App\Services\NotificationService;
 use App\Services\OrderServices;
 use App\Services\PaymentServices;
-use App\Models\{Order, User, Address};
+use App\Models\{Address};
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class DetailsQuotation extends Component
@@ -88,7 +83,7 @@ class DetailsQuotation extends Component
         ]
       );
 
-      $this->resetInputFields();
+      $this->reset();
       session()->flash('message', 'تم إضافة عنوان جديد.');
     }
 
@@ -96,13 +91,5 @@ class DetailsQuotation extends Component
     public function cancelOrder()
     {
       OrderServices::cancelOrder($this->quotation->order->id);
-    }
-
-    public function resetInputFields()
-    {
-      $this->name         = '';
-      $this->phone        = '';
-      $this->type_address = '';
-      $this->desc         = '';
     }
 }
