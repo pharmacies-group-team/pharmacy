@@ -1347,8 +1347,6 @@ textarea.form-control{
 .dashboard{
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
-  overflow-x: hidden;
 }
 
 .dashboard .sidebar{
@@ -1359,7 +1357,9 @@ textarea.form-control{
 }
 
 .dashboard-content{
+  max-height: 100vh;
   flex: 1 1 0%;
+  overflow-x: hidden;
   padding-bottom: 3.5rem;
 }
 
@@ -1431,6 +1431,7 @@ body{
   max-width: 15rem;
   white-space: nowrap;
   font-family: Cairo, sans-serif;
+  max-height: 100vh;
   min-height: 100vh;
   --tw-bg-opacity: 1;
   background-color: rgb(56 105 186 / var(--tw-bg-opacity));
