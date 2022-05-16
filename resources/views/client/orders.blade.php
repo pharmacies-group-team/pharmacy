@@ -50,12 +50,11 @@ use App\Enum\PharmacyEnum;
                 <td style="display: flex; justify-content: start">
                   <div class="user-table" d='{{ $order->image }}'>
 
-                    {{-- TODO PharmacyEnum::PHARMACY_LOGO_PATH replace with pharmacy logo --}}
-                    <img src="{{ asset('uploads/user/' . $order->pharmacy->avatar) }}" alt="profile avatar" width="30"
+                    <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->pharmacy->logo) }}" alt="profile avatar" width="30"
                       style="max-width: 30px; width: 100%" height="30">
 
-                    <a href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}" style="color: #3869BA">
-                      {{ $order->pharmacy->name }}
+                    <a href="{{ route('show.pharmacy.profile', $order->pharmacy->pharmacy->id) }}" style="color: #3869BA">
+                      {{ $order->pharmacy->pharmacy->name }}
                     </a>
                   </div>
                 </td>

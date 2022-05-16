@@ -52,7 +52,7 @@ class NotificationService
       $data     = [
         'sender'   => $sender,
         'receiver' => $receiver->id,
-        'link'     => SettingEnum::DOMAIN.'client/orders',
+        'link'     => SettingEnum::DOMAIN.'client/orders', // TODO
         'message'  => 'عذراً لا يتوفر لدينا طلبك..',
       ];
 
