@@ -100,8 +100,6 @@
       if ({{ Auth::id() }} === data.receiver) {
         el('.js-dropdown-menu').innerHTML += renderNotificationItem(data);
 
-        // console.log(data, notifyCount);
-
         // console.log(data);
         addOneToNotifyCount();
       }
