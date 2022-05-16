@@ -13,4 +13,10 @@ class DashboardController extends Controller
   {
     return FinancialOperationsServices::getFinancialOperations('admin');
   }
+
+  //********* Show Invoice *********//
+  public function getInvoice($invoiceID)
+  {
+    return FinancialOperationsServices::getInvoice($invoiceID, 'admin');
+  }
 }

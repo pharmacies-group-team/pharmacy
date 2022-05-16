@@ -53,7 +53,7 @@
                   <span> المبلغ: {{ $transaction->amount }}</span>
 
                 </div>
-                <a href="{{ route('client.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
               </div>
             @endforeach
           @endif

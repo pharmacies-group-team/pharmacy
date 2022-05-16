@@ -125,8 +125,10 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
-    Route::get('/financial-operations', [admin\DashboardController::class, 'getFinancialOperations'])
-      ->name('financial.operations');
+    Route::controller(admin\DashboardController::class)->group(function () {
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+    });
 
     /*------------------------------ Users ------------------------------*/
     Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
