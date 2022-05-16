@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\neighborhood;
-use App\Models\Neighborhood;
+namespace App\Http\Controllers\pharmacylocation;
+use App\Models\Directorate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-class NeighborhoodController extends Controller
+class DirectorateController extends Controller
 {
 
     public function index()
     {
-      $neighborhoods = Neighborhood::get();
-      return response($neighborhoods);
-      // return view('neighborhoods', compact('neighborhoods'));
+      $directorates = Directorate::get();
+      return response($directorates);
+    // return view('directorates', compact('directorates'));
     }
 
     public function store(Request $request)
     {
       $validator = Validator::make($request->all(), [
         'name' => 'required|min:2|max:30|string',
-        'directorate_id' => 'required'
+        'city_id' => 'required','city_id' => 'required',
       ]);
-      Neighborhood::create([
+      Directorate::create([
         'name' => $request->input('name'),
-        'directorate_id' => $request->input('directorate_id'),
+        'city_id' => $request->input('city_id'),
       ]);
 
       return response(['added successfully', $validator->errors()]);
@@ -32,28 +32,28 @@ class NeighborhoodController extends Controller
 
     public function show($id)
     {
-      $neighborhoods = Neighborhood::where('id', $id)->get();
-      return response($neighborhoods);
+      $directorates = Directorate::where('id', $id)->get();
+      return response($directorates);
     }
 
     public function update(Request $request, $id)
     {
       $validator = Validator::make($request->all(), [
         'name' => 'required|min:2|max:30|string',
-        'directorate_id' => 'required',
+        'city_id' => 'required',
       ]);
-      Neighborhood::where('id', $id)
+      Directorate::where('id', $id)
         ->update([
           'name' => $request->input('name'),
-          'directorate_id' => $request->input('directorate_id')
+          'city_id' => $request->input('city_id')
         ]);
-      //  return redirect()->back()->with('status', 'edit successfully');
-      return response(['edit successfully', $validator->errors()]);
+       // return redirect()->back()->with('status', 'edit successfully');
+        return response(['edit successfully', $validator->errors()]);
     }
 
     public function destroy($id)
     {
-      return Neighborhood::where('id', $id)->delete() ? "deleted" : 'not deleted';
+      return Directorate::where('id', $id)->delete() ? "deleted" : 'not deleted';
       //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
     }
 }

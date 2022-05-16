@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\city;
+namespace App\Http\Controllers\pharmacylocation;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -37,3 +37,4 @@ class DashboardController extends Controller
         return view('pharmacy.invoice-profile', compact('user'));
     }
 }
+
