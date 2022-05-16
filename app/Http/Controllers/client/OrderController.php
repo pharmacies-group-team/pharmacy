@@ -50,7 +50,7 @@ class OrderController extends Controller
     );
 
     // send and save notification in DB
-    NotificationService::newOrder($request->input('pharmacy_id'));
+    NotificationService::newOrder($order);
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }

@@ -2,25 +2,23 @@
 
 namespace App\Services;
 
-use App\Enum\RoleEnum;
 use App\Enum\SettingEnum;
 use App\Events\NewOrderNotification;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
 class NotificationService
 {
   //********* when user create order *********//
-  public static function newOrder($pharmacy_id)
+  public static function newOrder($order)
   {
-    $sender    = Auth::user();
-    $receiver  = User::find($pharmacy_id);
+    $sender    = User::find($order->user_id);
+    $receiver  = User::find($order->pharmacy_id);
 
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/orders',
+      'link'     => SettingEnum::DOMAIN.'pharmacy/orders', // TODO
       'message'  => 'أرسل لك طلب جديد، يمكنك الإطلاع عليه.',
     ];
 
