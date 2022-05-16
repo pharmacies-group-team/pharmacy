@@ -2,6 +2,7 @@
 @section('content')
   <x-alert type="status" />
 
+  {{-- TODO STYLE PAGE (NAIF) 😅 --}}
   <main class="page-invoice-profile container">
 
     <div class="t-content">

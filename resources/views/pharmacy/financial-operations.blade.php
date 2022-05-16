@@ -2,36 +2,8 @@
 @section('content')
   <x-alert type="status" />
 
+  {{-- TODO STYLE PAGE (NAIF) 😅 --}}
   <main class="page-invoice-profile container">
-
-    {{-- bg --}}
-{{--    <div class="t-bg"></div>--}}
-
-    {{-- user --}}
-{{--    <header class="t-header">--}}
-{{--      --}}{{-- avatar --}}
-{{--      <div class="t-avatar">--}}
-{{--        <img src="{{ asset('uploads/user/' . $user->avatar) }}" alt="user avatar">--}}
-{{--      </div>--}}
-
-{{--      --}}{{-- user info --}}
-{{--      <div class="t-user-desc">--}}
-{{--        --}}{{-- user name --}}
-{{--        <h3 class="t-user-name">--}}
-{{--          <x-icon icon='home' />--}}
-
-{{--          <span> {{ $user->name }} </span>--}}
-{{--        </h3>--}}
-
-{{--        --}}{{-- item date --}}
-{{--        <div class="t-item">--}}
-{{--          <x-icon icon='home' />--}}
-
-{{--          <span>{{ $user->created_at }}</span>--}}
-{{--        </div>--}}
-{{--      </div>--}}
-{{--    </header>--}}
-
     <div class="t-content">
       <div class="t-log-data">
           <div style="display: flex; align-items: center; justify-content: space-evenly">
