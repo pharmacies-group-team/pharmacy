@@ -57,33 +57,44 @@ class PaymentServices
     {
       $pharmacy = User::find($quotation->order->pharmacy_id);
       $admin    = User::role(RoleEnum::SUPER_ADMIN)->first();
+      $user     = Auth::user();
 
       $adminRatio = ( PaymentEnum::RATIO / 100 ) * $amount;
       $residual   = $amount - $adminRatio;
 
+      // The first step: withdraw amount from the user
       Auth::user()->withdraw($amount,
         [
           'invoice_id' => $invoice->id,
-          'depositor'  => Auth::id(),
-          'recipient'  => $pharmacy->id,
-          'state'      => ' تحويل من حساب ( '.Auth::user()->name.') إلى حساب ( . ' . $pharmacy->name . '('
+          'state_1'    => 'تم السحب من حساب ',
+          'depositor'  => $user->name,
+          'state_2'    => ' الى حساب ',
+          'recipient'  => $pharmacy->name,
         ]);
 
-      $admin->deposit($adminRatio,
-        [
-          'invoice_id' => $invoice->id,
-          'depositor'  => Auth::id(),
-          'recipient'  => $admin->id,
-          'state'      => ' إيداع إلى حساب ( '.$admin->name.') من حساب ( . ' . Auth::user()->name . '('
-        ]);
-
+      // The second step: withdraw amount from the pharmacy
       $pharmacy->deposit($residual,
         [
           'invoice_id' => $invoice->id,
-          'user_id'    => Auth::id(),
-          'pharmacy'   => $quotation->order->pharmacy_id,
-          'state'      => ' إيداع إلى حساب ( '.$pharmacy->name.') من حساب ( . ' . Auth::user()->name . '('
+          'state_1'    => 'تم الايداع من حساب ',
+          'depositor'  => $user->name,
+          'state_2'    => ' الى حساب ',
+          'recipient'  => $pharmacy->name,
+        ], false);
+
+      // The third step: deduct the percentage  and deposit it to the admin
+      $admin->deposit($adminRatio,
+        [
+          'invoice_id' => $invoice->id,
+          'state_1'    => 'تم إيداع نسبة من فاتورة بيع ',
+          'depositor'  => $pharmacy->name,
+          'state_2'    => ' الى حسابك ',
+          'recipient'  => $admin->name,
         ]);
+
+      // Second Step: Send a notification to the pharmacy and admin
+//      NotificationService::transferAmountToPharmacy($invoice->order);
+//      NotificationAdminService::transferAmountToPharmacy($invoice->order);
     }
 
     //********* The data sent for API payment *********//
