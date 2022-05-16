@@ -32,7 +32,7 @@ class DashboardController extends Controller
         return view('pharmacy.account-settings', compact('user'));
     }
 
-    public function getInvoiceProfile()
+    public function getFinancialOperations()
       {
           $user                  = Auth::user();
           $transactions          = Transaction::where('payable_id', $user->id)->get();
