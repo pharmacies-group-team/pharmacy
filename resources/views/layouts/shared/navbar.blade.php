@@ -45,41 +45,31 @@ $user = User::find(Auth::id());
         {{-- content --}}
         <ul class="t-notification-content js-dropdown-menu" :class="open ? 'is-open' : ''" style="width: 300px">
           {{-- notification item --}}
-          <li class="t-item">
-            <a>
-              <p class="t-desc">الإشعارات</p>
-            </a>
+          <li class="t-header">
+            <h5 class="t-title">الإشعارات</h5>
           </li>
           @if (isset(Auth::user()->unreadNotifications))
             @foreach (Auth::user()->unreadNotifications as $notification)
               @if ($notification->type == 'App\Events\NewOrderNotification')
-                {{-- pharmacy logo --}}
-                @if (isset($notification->data['sender']['logo']))
-                  @if (Auth::user()->hasRole(RoleEnum::CLIENT))
-                    {{-- pharmacy notification --}}
-                    <x-notification :link="url($notification->data['link'])" :image="asset(PharmacyEnum::PHARMACY_LOGO_PATH . $notification->data['sender']['logo'])" :name="$notification->data['sender']['name']" :message="$notification->data['message']" />
-                  @endif
+                @if (Auth::user()->hasRole(RoleEnum::CLIENT))
+                  {{-- pharmacy notification --}}
+                  <x-notification :notification="$notification" />
                 @endif
 
-                {{-- user avatar --}}
-                @if (isset($notification->data['sender']['avatar']))
-                  {{-- client notification --}}
-                  @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
-                    <x-notification :link="url($notification->data['link'])" :image="asset(UserEnum::USER_AVATAR_PATH . $notification->data['sender']['avatar'])" :name="$notification->data['sender']['name']" :message="$notification->data['message']" />
-                  @endif
+                {{-- client notification --}}
+                @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
+                  <x-notification :notification="$notification" />
+                @endif
 
-                  {{-- admin notification --}}
-                  @if ($notification->type == 'App\Events\AdminNotification')
-                    <x-notification :link="url($notification->data['link'])" :image="asset(UserEnum::USER_AVATAR_PATH . $notification->data['sender']['avatar'])" :name="$notification->data['sender']['name']" :message="$notification->data['message']" />
-                  @endif
+                {{-- admin notification --}}
+                @if ($notification->type == 'App\Events\AdminNotification')
+                  <x-notification :notification="$notification" />
                 @endif
               @endif
             @endforeach
           @endif
-          <li class="t-item">
-            <a>
-              <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
-            </a>
+          <li class="t-notification-footer">
+            <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
           </li>
         </ul>
       </div>

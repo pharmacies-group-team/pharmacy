@@ -1,15 +1,37 @@
-@php use App\Enum\PharmacyEnum; @endphp
+@php
+use App\Enum\PharmacyEnum;
+use App\Enum\UserEnum;
 
-@if (isset($link) && isset($image) && isset($name) && isset($message))
-  <li class="t-item">
-    <a href="{{ $link }}">
-      <header class="t-header">
+if (isset($notification)) {
+    $message = $notification->data['message'];
+    $link = $notification->data['link'];
+    $name = $notification->data['sender']['name'];
+    $isRead = $notification['read_at'] != null;
+}
+
+@endphp
+
+@if (isset($notification))
+  <li class='t-item'>
+    <a href="{{ url($link) }}">
+      <header class="t-item-header">
         {{-- avatar --}}
-        <img src="{{ $image }}" alt="user avatar" class="t-avatar" width="40px">
+        <div @class(['is-not-read' => !$isRead, 't-avatar'])>
+          {{-- admin and client --}}
+          @if (isset($notification->data['sender']['avatar']))
+            <img src="{{ asset(UserEnum::USER_AVATAR_PATH . $notification->data['sender']['avatar']) }}"
+              alt="user avatar" class="t-avatar" width="40px">
+          @endif
 
-        {{--  --}}
+          {{-- pharmacy --}}
+          @if (isset($notification->data['sender']['logo']))
+            <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $notification->data['sender']['logo']) }}"
+              alt="user avatar" class="t-avatar" width="40px">
+          @endif
+        </div>
+
+        {{-- user info --}}
         <div>
-
           <div class="t-user">
             <h4 class="t-name">{{ $name }}</h4>
 
@@ -27,9 +49,6 @@
   <div class="t-param-error">
 
     <strong>x-notification</strong>
-    <span>link</span>
-    <span>image</span>
-    <span>name</span>
-    <span>message</span>
+    <span>notification</span>
   </div>
 @endif

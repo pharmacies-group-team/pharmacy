@@ -1020,6 +1020,21 @@ textarea.form-control{
 }
 
 .t-notification-content .t-header{
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(221 233 255 / var(--tw-border-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.t-notification-content .t-header .t-title{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.t-notification-content .t-item-header{
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1044,12 +1059,28 @@ textarea.form-control{
 }
 
 .t-notification-content .t-avatar{
+  position: relative;
+}
+
+.t-notification-content .t-avatar img{
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
   height: 2rem;
   width: 2rem;
   border-radius: 9999px;
+}
+
+.t-notification-content .t-avatar.is-not-read::after{
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(78 125 203 / var(--tw-bg-opacity));
+  content: "";
 }
 
 .t-notification-content .t-desc{
@@ -1059,6 +1090,30 @@ textarea.form-control{
 
 .t-notification .is-open{
   display: block;
+}
+
+.t-notification-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.t-notification-footer a{
+  width: 100%;
+  border-radius: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(221 233 255 / var(--tw-ring-opacity));
 }
 
 .or{
