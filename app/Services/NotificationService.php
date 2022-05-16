@@ -113,6 +113,24 @@ class NotificationService
     self::sendOrderNotification($receiver, $data);
   }
 
+  //********* when user transfer amount to pharmacy *********//
+  public static function transferAmountToPharmacy($order)
+  {
+    $sender   = User::find($order->user->id);
+    $receiver = User::find($order->pharmacy_id);
+
+    $data     = [
+      'sender'   => $sender,
+      'receiver' => $receiver->id,
+      'link'     => SettingEnum::DOMAIN.'client/invoice/'.$order->invoice->id, // TODO
+      'message'  => 'لقد تم دفع الفاتورة من قِبل '.$sender->name,
+    ];
+
+    // send and save notification in DB
+    self::sendOrderNotification($receiver, $data);
+  }
+
+
   //********* save notification in db and send to receiver *********//
   private static function sendOrderNotification($receiver, $data)
   {
