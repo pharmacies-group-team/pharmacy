@@ -21,10 +21,10 @@
       <span class="t-status-mark">!</span>
 
       <h2 class="t-status-heading">
-        لقد تم الرد على طلبك يمكنك الإطلاع على عرض السعر
+        لقد تم الرد على طلبك يمكنك الإطلاع على
 
-        <a class="t-status-pharmacy" href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}">
-          {{ $order->pharmacy->name }}
+        <a class="t-status-pharmacy" href="{{ route('client.quotation.details', $order->quotation->id) }}">
+          عرض السعر
         </a>
       </h2>
     </div>

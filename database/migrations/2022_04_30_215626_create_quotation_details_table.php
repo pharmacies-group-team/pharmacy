@@ -20,7 +20,7 @@ return new class extends Migration
           $table->integer('quantity');
           $table->integer('price');
           $table->double('total');
-          $table->string('currency')->default('YER');
+          $table->string('currency')->default('ريال يمني');
 
           $table->foreignId('quotation_id');
           $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');

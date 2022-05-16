@@ -65,9 +65,8 @@
               اكتب هنا اسم الدواء أو المنتج الذي تريد طلبه من الصيدلية
             </p>
 
-            <textarea class="form-control" name="order" rows="5" placeholder="مثال: علبة بنادول و بامبرز مقاس 4">
-              {{ old('order') }}
-            </textarea>
+            <textarea class="form-control" name="order" rows="5"
+              placeholder="مثال: علبة بنادول و بامبرز مقاس 4">{{ old('order') }}</textarea>
             @error('order')
               <span class="text-danger" role="alert">
                 {{ $message }}

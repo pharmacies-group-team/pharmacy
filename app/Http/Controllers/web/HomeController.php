@@ -17,7 +17,7 @@ class HomeController extends Controller
     $social     = SocialMedia::first();
     $pharmacies = Pharmacy::all();
     $ads        = Ad::where('start_at', '<=', Carbon::now()->format('Y-m-d'))
-                    ->where('end_at', '>=', Carbon::now()->format('Y-m-d'))->get();
+      ->where('end_at', '>=', Carbon::now()->format('Y-m-d'))->get();
 
     return view('index', compact(
       'aboutUs',
@@ -39,5 +39,20 @@ class HomeController extends Controller
     $pharmacy = Pharmacy::find($id);
 
     return view('web.profile', compact('pharmacy'));
+  }
+
+  public function showPrivacy()
+  {
+    return view('web.privacy');
+  }
+
+  public function showContactUs()
+  {
+    return view('web.contact-us');
+  }
+
+  public function showAboutUs()
+  {
+    return view('web.about-us');
   }
 }

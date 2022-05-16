@@ -5,10 +5,14 @@ namespace App\Http\Livewire\Client;
 use App\Enum\OrderEnum;
 use App\Enum\PaymentEnum;
 use App\Enum\RoleEnum;
+use App\Enum\SettingEnum;
 use App\Models\Invoice;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
-use App\Models\{User, Address};
+use App\Services\NotificationService;
+use App\Services\OrderServices;
+use App\Services\PaymentServices;
+use App\Models\{Order, User, Address};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -60,104 +64,15 @@ class DetailsQuotation extends Component
       else {
         $amount = $this->quotation->total;
 
-        if (Auth::user()->balance >= $amount)
-          $this->paymentFromWallet($amount);
+        if (Auth::user()->balance >= $amount && $this->quotation->order->status === OrderEnum::UNPAID_ORDER)
+            return PaymentServices::paymentFromWallet($amount, $this->quotation, $this->addressID);
 
-        else return $this->paymentFromAPI();
+        elseif ($this->quotation->order->status === OrderEnum::UNPAID_ORDER)
+          return PaymentServices::paymentFromAPI($this->quotation, $this->quotationID, $this->addressID);
+
+        else
+          session()->flash('message', 'يبدو أن هناك خطأ.');
       }
-    }
-
-    //********* Payment from the wallet *********//
-    public function paymentFromWallet($amount)
-    {
-      $invoice = $this->createInvoice();
-      $this->processWallet($amount, $invoice);
-
-      $invoice->update(['is_active' => 1]);
-      $this->quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
-
-      return redirect()->route('client.success')
-        ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
-    }
-
-    //********* Payment from the API *********//
-    public function paymentFromAPI()
-    {
-      $response = Http::withHeaders(
-        [
-          'content-Type' => 'application/x-www-form-urlencoded',
-          'private-key'  => PaymentEnum::PRIVATE_KEY,
-          'public-key'   => PaymentEnum::PUBLIC_KEY,
-        ])
-        ->post(PaymentEnum::WASL_API, $this->data());
-
-      if ($response->status() == '200') {
-        $this->createInvoice($response);
-        return redirect($response['invoice']['next_url']);
-      }
-    }
-
-    //********* Process Payment from the wallet *********//
-    public function processWallet($amount, $invoice)
-    {
-      $pharmacy = User::find($this->quotation->order->pharmacy_id);
-      $admin    = User::role(RoleEnum::SUPER_ADMIN)->first();
-
-      $adminRatio = ( PaymentEnum::RATIO / 100 ) * $amount;
-      $residual   = $amount - $adminRatio;
-
-      Auth::user()->withdraw($amount,
-      [
-        'invoice_id' => $invoice->id,
-        'depositor'  => Auth::id(),
-        'recipient'  => $pharmacy->id,
-        'state'      => ' تحويل من حساب ( '.Auth::user()->name.') إلى حساب ( . ' . $pharmacy->name . '('
-      ]);
-
-      $admin->deposit($adminRatio,
-      [
-        'invoice_id' => $invoice->id,
-        'depositor'  => Auth::id(),
-        'recipient'  => $admin->id,
-        'state'      => ' إيداع إلى حساب ( '.$admin->name.') من حساب ( . ' . Auth::user()->name . '('
-      ]);
-
-      $pharmacy->deposit($residual,
-      [
-        'invoice_id' => $invoice->id,
-        'user_id'    => Auth::id(),
-        'pharmacy'   => $this->quotation->order->pharmacy_id,
-        'state'      => ' إيداع إلى حساب ( '.$pharmacy->name.') من حساب ( . ' . Auth::user()->name . '('
-      ]);
-    }
-
-    //********* The data sent for API payment *********//
-    public function data()
-    {
-      $products = QuotationDetails::where('quotation_id', $this->quotationID)
-        ->select('id', 'product_name', 'quantity', 'price As unit_amount')->get();
-
-      return
-        [
-          'order_reference' => (string) $this->quotation->order->id,
-          'products'        => $products,
-          'currency'        => 'YER',
-          'total_amount'    => (string) $this->quotation->total,
-          'success_url'     => 'http://127.0.0.1:8000/client/success',
-          'cancel_url'      => 'http://127.0.0.1:8000/client/cancel',
-          'metadata'        => $this->quotation->order->user
-        ];
-    }
-
-    //********* Create Invoice *********//
-    public function createInvoice($response = null)
-    {
-      return Invoice::updateOrCreate(['order_id'   => $this->quotation->order->id],
-        [
-          'total'      => $this->quotation->total,
-          'invoice_id' => $response != null ? $response['invoice']['invoice_referance'] : '',
-          'address_id' => $this->addressID
-        ]);
     }
 
     //********* Create Address *********//
@@ -175,6 +90,12 @@ class DetailsQuotation extends Component
 
       $this->resetInputFields();
       session()->flash('message', 'تم إضافة عنوان جديد.');
+    }
+
+    //********* Cancel Order *********//
+    public function cancelOrder()
+    {
+      OrderServices::cancelOrder($this->quotation->order->id);
     }
 
     public function resetInputFields()

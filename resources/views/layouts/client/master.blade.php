@@ -12,14 +12,9 @@
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
   @livewireStyles()
-
-
-
 </head>
 
 <body>
-
-
   <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
     @include('layouts.client.sidebar')
@@ -34,8 +29,8 @@
 
   @livewireScripts()
 
-  @yield('alpine-script')
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
+  @include('layouts.shared.scripts')
+
 </body>
 
 </html>

@@ -10,9 +10,8 @@
         <div class="t-order-details-user">
           {{-- avatar --}}
           <div>
-            <img
-              src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
-              alt="user avatar" class="t-order-image">
+            <img src="{{ asset(\App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar) }}" alt="user avatar"
+              class="t-order-image">
           </div>
 
           <div>
