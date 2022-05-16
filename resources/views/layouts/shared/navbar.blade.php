@@ -20,7 +20,7 @@ $user = User::find(Auth::id());
       {{-- wallet --}}
       <div class="wallet">
         <div class="wallet-box">
-          <span>YER {{ \Illuminate\Support\Facades\Auth::user()->balance }}</span>
+          <span>YER {{ Auth::user()->balance }}</span>
           <x-icon icon='wallet' />
         </div>
       </div>

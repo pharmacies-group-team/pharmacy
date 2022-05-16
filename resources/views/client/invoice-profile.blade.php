@@ -49,7 +49,7 @@
         <header>
           <x-icon icon="home" />
 
-          <h3 class="t-heading">Activity timeline</h3>
+          <h3 class="t-heading">@lang('invoice-profile')</h3>
         </header>
 
         <div class="t-list">
