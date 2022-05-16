@@ -33,18 +33,11 @@ class DashboardController extends Controller
         return view('pharmacy.account-settings', compact('user'));
     }
 
+    //********* get all financial operations *********//
     public function getFinancialOperations()
-      {
-          $user                  = Auth::user();
-          $transactions          = Transaction::where('payable_id', $user->id)->get();
-          $amount_confirmed      = Transaction::where('payable_id', $user->id)->where('confirmed', 1)->sum('amount');
-          $amount_not_confirmed  = Transaction::where('payable_id', $user->id)->where('confirmed', 0)->sum('amount');
-          $invoice_confirmed     = Transaction::where('payable_id', $user->id)->where('confirmed', 1)->count('amount');
-          $invoice_not_confirmed = Transaction::where('payable_id', $user->id)->where('confirmed', 0)->count('amount');
-
-          return view('pharmacy.invoice-profile',
-            compact('user', 'transactions', 'amount_confirmed','amount_not_confirmed', 'invoice_confirmed', 'invoice_not_confirmed'));
-      }
+    {
+       return FinancialOperationsServices::getFinancialOperations('pharmacy');
+    }
 
     //********* Show Invoice *********//
     public function getInvoice($invoiceID)
