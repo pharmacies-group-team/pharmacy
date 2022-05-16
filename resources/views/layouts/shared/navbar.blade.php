@@ -35,7 +35,7 @@ $user = User::find(Auth::id());
           <a style="position: relative" data-toggle="dropdown">
             <x-icon icon="notification" />
 
-            <span class="notif-count t-notification-counter"
+            <span class="js-notify-count t-notification-counter"
               data-count="{{ auth()->user()->unreadNotifications()->count() }}">
               {{ auth()->user()->unreadNotifications()->count() }}
             </span>
@@ -43,35 +43,40 @@ $user = User::find(Auth::id());
         </div>
 
         {{-- content --}}
-        <ul class="t-notification-content js-dropdown-menu" :class="open ? 'is-open' : ''" style="width: 300px">
-          {{-- notification item --}}
-          <li class="t-header">
+        {{-- notification item --}}
+        <div class="t-notification-content-wrapper" :class="open ? 'is-open' : ''">
+          <div class="t-notification-header">
             <h5 class="t-title">الإشعارات</h5>
-          </li>
-          @if (isset(Auth::user()->unreadNotifications))
-            @foreach (Auth::user()->unreadNotifications as $notification)
-              @if ($notification->type == 'App\Events\NewOrderNotification')
-                @if (Auth::user()->hasRole(RoleEnum::CLIENT))
-                  {{-- pharmacy notification --}}
-                  <x-notification :notification="$notification" />
-                @endif
+          </div>
 
-                {{-- client notification --}}
-                @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
-                  <x-notification :notification="$notification" />
-                @endif
+          <ul class="t-notification-content js-dropdown-menu">
 
-                {{-- admin notification --}}
-                @if ($notification->type == 'App\Events\AdminNotification')
-                  <x-notification :notification="$notification" />
+            @if (isset(Auth::user()->unreadNotifications))
+              @foreach (Auth::user()->unreadNotifications as $notification)
+                @if ($notification->type == 'App\Events\NewOrderNotification')
+                  @if (Auth::user()->hasRole(RoleEnum::CLIENT))
+                    {{-- pharmacy notification --}}
+                    <x-notification :notification="$notification" />
+                  @endif
+
+                  {{-- client notification --}}
+                  @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
+                    <x-notification :notification="$notification" />
+                  @endif
+
+                  {{-- admin notification --}}
+                  @if ($notification->type == 'App\Events\AdminNotification')
+                    <x-notification :notification="$notification" />
+                  @endif
                 @endif
-              @endif
-            @endforeach
-          @endif
-          <li class="t-notification-footer">
+              @endforeach
+            @endif
+          </ul>
+
+          <div class="t-notification-footer">
             <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
 
       {{-- user avatar --}}
