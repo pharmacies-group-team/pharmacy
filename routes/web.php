@@ -12,6 +12,8 @@ use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
+use Illuminate\Support\Facades\DB;
+
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 
@@ -33,6 +35,12 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+Route::get('/chat', function () {
+  $users = DB::select("select DISTINCT u.id, u.name, u.email from users as u inner JOIN messages as m ON u.id IN(m.from,m.to)
+  where u.id<>" . Auth::id() . " and( m.from= " . Auth::id() . " or m.to=" . Auth::id() . ") group by u.id, u.name, u.email;");
+  return $users;
+});
 
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
@@ -92,10 +100,10 @@ Route::prefix('/pharmacy')
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
       // Route::get('/messages', 'messages')->name('messages');
-      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
-      Route::get('/message/{id}',[MessageController::class, 'getMessage'])->name('message');
+      Route::get('/messages',  [MessageController::class, 'index']);
+      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
       Route::post('message', [MessageController::class, 'sendMessage']);
-      Route::get('/users',[MessageController::class, 'getUsers'])->name('message');
+      Route::get('/message-users', [MessageController::class, 'getUsers']);
 
 
       Route::get('/account-settings', 'accountSettings')
@@ -200,12 +208,11 @@ Route::prefix('/client')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
-      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
-      Route::get('/users',[MessageController::class, 'getUsers'])->name('message');
+      Route::get('/messages',  [MessageController::class, 'index']);
+      Route::get('/message-users', [MessageController::class, 'getUsers']);
 
-      Route::get('/message/{id}',[MessageController::class, 'getMessage'])->name('message');
+      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
       Route::post('message', [MessageController::class, 'sendMessage']);
-
     });
 
     // order
@@ -223,7 +230,7 @@ Route::prefix('/client')
     // payment
     Route::controller(client\PaymentController::class)->group(function () {
       //  TODO IT MIGHT BE DELETED
-//      Route::post('/pay',  'payment')->name('payment');
+      //      Route::post('/pay',  'payment')->name('payment');
       Route::get('/success',  'success')->name('success');
       Route::get('/cancel', 'cancel')->name('cancel');
     });

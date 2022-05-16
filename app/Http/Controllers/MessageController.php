@@ -54,6 +54,7 @@ class MessageController extends Controller
       where u.id<>" . Auth::id() . " and( m.from= " . Auth::id() . " or m.to="
       . Auth::id() . ") group by u.id, u.name, u.email;");
 
+
     $notifications = DB::select("select m.to,m.from,sum(is_read =0 )
      as unread from users as u inner JOIN messages as m ON u.id = m.to
      where (m.to=" . Auth::id() . " ) group by m.to,m.from;");
