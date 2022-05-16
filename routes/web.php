@@ -23,11 +23,8 @@ use App\Http\Controllers\pharmacy;
 Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
 
 Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
-    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
-      ->name('update.avatar');
-  });
-
+    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])->name('update.avatar');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +83,7 @@ Route::prefix('/pharmacy')
       Route::get('/messages', 'messages')->name('messages');
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
-      Route::get('/financial-operations', 'getFinancialOperations')->name('invoice-profile');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
 
     });
 
