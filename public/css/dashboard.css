@@ -2446,7 +2446,7 @@ ion-icon{
 }
 
 .page-invoice-profile .t-content .t-item .t-desc{
-  margin-top: 2rem;
+  margin-top: 0.75rem;
   max-height: 100px;
   overflow: hidden;
 }
