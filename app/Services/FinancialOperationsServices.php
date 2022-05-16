@@ -41,7 +41,7 @@ class FinancialOperationsServices
     $invoice_confirmed     = Transaction::where('payable_id', $user->id)->where('confirmed', 1)->count('amount');
     $invoice_not_confirmed = Transaction::where('payable_id', $user->id)->where('confirmed', 0)->count('amount');
 
-    return view($destination.'.invoice-profile',
+    return view($destination.'.financial-operations',
       compact('user', 'transactions', 'amount_confirmed','amount_not_confirmed', 'invoice_confirmed', 'invoice_not_confirmed'));
   }
 
