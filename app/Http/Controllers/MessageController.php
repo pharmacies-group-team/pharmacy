@@ -43,6 +43,7 @@ class MessageController extends Controller
 
 
     //gg
+    //g
     return view('messages.index', ['messages' => $messages]);
   }
 
