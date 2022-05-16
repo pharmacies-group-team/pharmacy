@@ -1,11 +1,14 @@
 @php
-use App\Enum\UserEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 use App\Enum\RoleEnum;
+use App\Enum\UserEnum;
+use App\Enum\PharmacyEnum;
 
 $user = User::find(Auth::id());
 @endphp
+
 
 <header>
   <nav class="nav">
@@ -50,12 +53,25 @@ $user = User::find(Auth::id());
           @if (isset(Auth::user()->unreadNotifications))
             @foreach (Auth::user()->unreadNotifications as $notification)
               @if ($notification->type == 'App\Events\NewOrderNotification')
-                @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
-                  <x-pharmacy.notification :notification="$notification" />
-                @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
-                  <x-client.notification :notification="$notification" />
-                @elseif($notification->type == 'App\Events\AdminNotification')
-                  <x-admin.notification :notification="$notification" />
+                {{-- pharmacy logo --}}
+                @if (isset($notification->data['sender']['logo']))
+                  @if (Auth::user()->hasRole(RoleEnum::CLIENT))
+                    {{-- pharmacy notification --}}
+                    <x-notification :link="url($notification->data['link'])" :image="asset(PharmacyEnum::PHARMACY_LOGO_PATH . $notification->data['sender']['logo'])" :name="$notification->data['sender']['name']" :message="$notification->data['message']" />
+                  @endif
+                @endif
+
+                {{-- user avatar --}}
+                @if (isset($notification->data['sender']['avatar']))
+                  {{-- client notification --}}
+                  @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
+                    <x-notification :link="url($notification->data['link'])" :image="asset(UserEnum::USER_AVATAR_PATH . $notification->data['sender']['avatar'])" :name="$notification->data['sender']['name']" :message="$notification->data['message']" />
+                  @endif
+
+                  {{-- admin notification --}}
+                  @if ($notification->type == 'App\Events\AdminNotification')
+                    <x-notification :link="url($notification->data['link'])" :image="asset(UserEnum::USER_AVATAR_PATH . $notification->data['sender']['avatar'])" :name="$notification->data['sender']['name']" :message="$notification->data['message']" />
+                  @endif
                 @endif
               @endif
             @endforeach
