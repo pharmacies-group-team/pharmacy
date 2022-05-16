@@ -18,6 +18,11 @@
       },
     }
   }
+
+  /**
+   * @returns {HTMLElement}
+   */
+  let el = $el => document.querySelector($el);
 </script>
 @yield('alpine-script')
 
@@ -29,11 +34,39 @@
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="{{ asset('js/pusher.min.js') }}"></script>
 
-{{-- <script src="{{ asset('js/pusher/pharamcy.js') }}"></script> --}}
 
+{{-- admin notification --}}
 <script>
+  const renderNotificationItem = (data) => {
+    return `
+<li class="t-item">
+  <a href="${data.link}">
+    <header class="t-item-header">
+      <div class="${data.read_at === null ? 'is-not-read' : ''} t-avatar">
+        <img
+          src="/uploads/user/${data.sender.avatar}"
+          alt="user avatar"
+          class="t-avatar"
+          width="40px"
+        />
+      </div>
+
+      <div>
+        <div class="t-user">
+          <h4 class="t-name">${data.sender.name}</h4>
+
+          <span class="t-date">3M</span>
+        </div>
+
+        <p class="t-desc">${data.message}</p>
+      </div>
+    </header>
+  </a>
+</li>`
+  }
+
   // Enable pusher logging - don't include this in production
   // Pusher.logToConsole = true;
   var pusher = new Pusher('da19676fc51825fbbeba', {
@@ -41,158 +74,36 @@
     encrypted: true
   });
 
-  /**
-   * @returns {HTMLElement}
-   */
-  let el = $el => document.querySelector($el);
+
+  let notifyCount = el('.js-notify-count');
+  const addOneToNotifyCount = () => {
+    notifyCount.textContent = parseInt(notifyCount.textContent.trim()) + 1
+  }
 
 
-
-  var dropdownNotifications = $('.dropdown-notifications-js');
-
-  var notificationsToggle = dropdownNotifications.find('a[data-toggle]');
-  var notificationsCountElem = notificationsToggle.find('span[data-count]');
-  var notificationsCount = parseInt(notificationsCountElem.data('count'));
-
-  // if (notificationsCount <= 0) dropdownNotifications.hide();
-
-
-  // Subscribe to the channel we specified in our Laravel Event
-  var channel = pusher.subscribe('new-admin-notification');
-
-  // Bind a function to a Event (the full Laravel class)
-  channel.bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, function(data) {
-
-    if ({{ Auth::id() }} === data.receiver) {
-      let avatar = data.sender.avatar === null ? 'default_user.png' : data.sender.avatar;
-      el('.js-dropdown-menu').innerHTML +=
-        `<li class="t-item">
-      <a href="` + data.link + `">
-        <header class="t-header">
-          <img src="/uploads/user/` + avatar + `" alt="user avatar" class="t-avatar" width="40">
-
-          <h4 class="t-name">` + data.sender.name + `</h4>
-        </header>
-        <p class="t-desc">` + data.message + `</p>
-      </a>
-  </li>`;
-
-      notificationsCount += 1;
-      notificationsCountElem.attr('data-count', notificationsCount);
-      dropdownNotifications.find('.notif-count').text(notificationsCount);
-      dropdownNotifications.show();
-      notificationsCount -= 1;
-    }
-
-  });
-</script>
-
-
-{{-- client --}}
-{{-- <script>
-  // Enable pusher logging - don't include this in production
-  // Pusher.logToConsole = true;
-  var pusher = new Pusher('da19676fc51825fbbeba', {
-    cluster: 'mt1',
-    encrypted: true
-  });
-
-  /**
-   * @returns {HTMLElement}
-   */
-  let el = $el => document.querySelector($el);
-
-
-
-  var dropdownNotifications = $('.dropdown-notifications-js');
-
-  var notificationsToggle = dropdownNotifications.find('a[data-toggle]');
-  var notificationsCountElem = notificationsToggle.find('span[data-count]');
-  var notificationsCount = parseInt(notificationsCountElem.data('count'));
-
-  // if (notificationsCount <= 0) dropdownNotifications.hide();
-
-
-  // Subscribe to the channel we specified in our Laravel Event
-  var channel = pusher.subscribe('new-order-notification');
-
-  // Bind a function to a Event (the full Laravel class)
-  channel.bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, function(data) {
-
-    if ({{ Auth::id() }} === data.receiver) {
-      let avatar = data.sender.avatar === null ? 'default_user.png' : data.sender.avatar;
-      el('.js-dropdown-menu').innerHTML +=
-        `<li class="t-item">
-      <a href="` + data.link + `">
-        <header class="t-header">
-          <img src="/uploads/user/` + avatar + `" alt="user avatar" class="t-avatar" width="40">
-          <h4 class="t-name">` + data.sender.name + `</h4>
-        </header>
-        <p class="t-desc">` + data.message + `</p>
-      </a>
-  </li>`;
-
-      notificationsCount += 1;
-      notificationsCountElem.attr('data-count', notificationsCount);
-      dropdownNotifications.find('.notif-count').text(notificationsCount);
-      dropdownNotifications.show();
-      notificationsCount -= 1;
-    }
-
-  });
-</script> --}}
-
-
-{{-- pharmacy --}}
-{{-- <script>
-    // Enable pusher logging - don't include this in production
-    // Pusher.logToConsole = true;
-    var pusher = new Pusher('da19676fc51825fbbeba', {
-      cluster: 'mt1',
-      encrypted: true
-    });
-
-    /**
-     * @returns {HTMLElement}
-     */
-    let el = $el => document.querySelector($el);
-
-
-
-    var dropdownNotifications = $('.dropdown-notifications-js');
-
-    var notificationsToggle = dropdownNotifications.find('a[data-toggle]');
-    var notificationsCountElem = notificationsToggle.find('span[data-count]');
-    var notificationsCount = parseInt(notificationsCountElem.data('count'));
-
-    // if (notificationsCount <= 0) dropdownNotifications.hide();
-
-
-    // Subscribe to the channel we specified in our Laravel Event
-    var channel = pusher.subscribe('new-order-notification');
-
-    // Bind a function to a Event (the full Laravel class)
-    channel.bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, function(data) {
-
+  // admin channel
+  pusher
+    .subscribe('new-admin-notification')
+    .bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, (data) => {
       if ({{ Auth::id() }} === data.receiver) {
-        let avatar = data.sender.avatar === null ? 'default_user.png' : data.sender.avatar;
-        el('.js-dropdown-menu').innerHTML +=
-          `<li class="t-item">
-        <a href="` + data.link + `">
-          <header class="t-header">
-            <img src="/uploads/user/` + avatar + `" alt="user avatar" class="t-avatar" width="40">
-            <h4 class="t-name">` + data.sender.name + `</h4>
-          </header>
-          <p class="t-desc">` + data.message + `</p>
-        </a>
-    </li>`;
+        el('.js-dropdown-menu').innerHTML += renderNotificationItem(data);
 
-        notificationsCount += 1;
-        notificationsCountElem.attr('data-count', notificationsCount);
-        dropdownNotifications.find('.notif-count').text(notificationsCount);
-        dropdownNotifications.show();
-        notificationsCount -= 1;
+        // console.log(data);
+        addOneToNotifyCount()
       }
-
     });
-  </script> --}}
+
+  // order channel
+  pusher
+    .subscribe('new-order-notification')
+    .bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, (data) => {
+      if ({{ Auth::id() }} === data.receiver) {
+        el('.js-dropdown-menu').innerHTML += renderNotificationItem(data);
+
+        // console.log(data, notifyCount);
+
+        // console.log(data);
+        addOneToNotifyCount();
+      }
+    });
+</script>

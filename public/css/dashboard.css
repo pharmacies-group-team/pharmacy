@@ -994,7 +994,7 @@ textarea.form-control{
   width: 1.25rem;
 }
 
-.t-notification-content{
+.t-notification-content-wrapper{
   position: absolute;
   top: 0px;
   left: 0px;
@@ -1002,11 +1002,56 @@ textarea.form-control{
   min-width: 10rem;
   --tw-bg-opacity: 1;
   background-color: rgb(247 249 254 / var(--tw-bg-opacity));
+  width: 300px;
   border-radius: 0.25rem;
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   transform: translate(0px, 40px);
+}
+
+.t-notification-content-wrapper .t-notification-header{
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(221 233 255 / var(--tw-border-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.t-notification-content-wrapper .t-notification-header .t-title{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.t-notification-content-wrapper .t-notification-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.t-notification-content-wrapper .t-notification-footer a{
+  width: 100%;
+  border-radius: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(221 233 255 / var(--tw-ring-opacity));
+}
+
+.t-notification-content{
+  max-height: 15rem;
+  overflow-y: scroll;
 }
 
 .t-notification-content .t-item{
@@ -1017,21 +1062,6 @@ textarea.form-control{
   padding-right: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.t-notification-content .t-header{
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(221 233 255 / var(--tw-border-opacity));
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.t-notification-content .t-header .t-title{
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .t-notification-content .t-item-header{
@@ -1086,34 +1116,14 @@ textarea.form-control{
 .t-notification-content .t-desc{
   margin-top: 0.5rem;
   white-space: normal;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(88 143 244 / var(--tw-text-opacity));
 }
 
 .t-notification .is-open{
   display: block;
-}
-
-.t-notification-footer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-}
-
-.t-notification-footer a{
-  width: 100%;
-  border-radius: 0.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  text-align: center;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(221 233 255 / var(--tw-ring-opacity));
 }
 
 .or{
