@@ -8,6 +8,7 @@ use App\Enum\RoleEnum;
 use App\Enum\SettingEnum;
 use App\Models\Invoice;
 use App\Models\QuotationDetails;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +74,7 @@ class PaymentServices
         ]);
 
       // The second step: withdraw amount from the pharmacy
-      $pharmacy->deposit($residual,
+      $transaction = $pharmacy->deposit($residual,
         [
           'invoice_id' => $invoice->id,
           'state_1'    => 'تم الايداع من حساب ',
@@ -81,6 +82,8 @@ class PaymentServices
           'state_2'    => ' الى حساب ',
           'recipient'  => $pharmacy->name,
         ], false);
+
+      Transaction::find($transaction->id)->update(['order_id' => $invoice->order->id]);
 
       // The third step: deduct the percentage  and deposit it to the admin
       $admin->deposit($adminRatio,
