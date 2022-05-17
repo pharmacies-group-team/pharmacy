@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable();
 
             $table->string('address')->nullable();
+             $table->string('Commercial_record');
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
 
