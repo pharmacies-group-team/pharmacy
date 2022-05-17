@@ -10,7 +10,7 @@
           <div style="display: flex; align-items: center; justify-content: space-evenly">
             <div style="display:flex; justify-content: center; align-items: center; gap: 6px">
               <span>رصيدك الحالي:</span>
-              <span>{{ $amount_confirmed }}</span>
+              <span>{{ Auth::user()->balance }}</span>
             </div>
           </div>
       </div>
