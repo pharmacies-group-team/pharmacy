@@ -24,10 +24,10 @@ class PaymentController extends Controller
       $data = base64_decode($data);
 
       //  TODO (STATIC DATA)
-      $invoiceID = '2a1bwrepFq';
+      $order_id = 2;
 
-      $invoice  = Invoice::firstWhere('invoice_id', $invoiceID);
-      $order    = Order::find($invoice->order->id);
+      $order    = Order::find($order_id);
+      $invoice  = $order->invoice;
 
       if ($order->status == OrderEnum::UNPAID_ORDER)
       {
@@ -40,7 +40,7 @@ class PaymentController extends Controller
         NotificationService::userPay($invoice->order);
       }
 
-      return $this->getInvoice($invoiceID);
+      return $this->getInvoice($order_id);
     }
 
     //********* Cancel Payment *********//
@@ -50,8 +50,8 @@ class PaymentController extends Controller
     }
 
     //********* Show Invoice *********//
-    public function getInvoice($invoiceID)
+    public function getInvoice($orderID)
     {
-      return FinancialOperationsServices::getInvoice($invoiceID, 'client');
+      return FinancialOperationsServices::getInvoice($orderID, 'client');
     }
 }
