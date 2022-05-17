@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class FinancialOperationsServices
 {
   //********* Get Invoice *********//
-  public static function getInvoice($invoiceID, $destination)
+  public static function getInvoice($orderID, $destination)
   {
-    $invoice  = Invoice::where('invoice_id', $invoiceID)->orWhere('id', $invoiceID)->first();
+    $invoice  = Invoice::where('order_id', $orderID)->first();
     $order    = Order::find($invoice->order->id);
 
     if ($invoice && $order)
