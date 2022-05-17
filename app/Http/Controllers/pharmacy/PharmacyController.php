@@ -33,7 +33,8 @@ class PharmacyController extends Controller
       'name'            => 'required|min:5|max:100|string',
       'logo'            => 'required|image|mimes:png,jpg',
       'user_id'         => 'required|numeric|max:12',
-      'neighborhood_id' => 'required|numeric|max:12'
+      'neighborhood_id' => 'required|numeric|max:12',
+      'Commercial_record'  => 'required|image|mimes:png,jpg'
     ]);
 
     Pharmacy::create([
@@ -41,6 +42,7 @@ class PharmacyController extends Controller
       'logo'            => $request->input('logo'),
       'user_id'         => $request->input('user_id'),
       'neighborhood_id' => $request->input('neighborhood_id'),
+      'Commercial_record'  =>$request->input('Commercial_record'),
     ]);
 
     return response(['added successfully', $validator->errors()]);
