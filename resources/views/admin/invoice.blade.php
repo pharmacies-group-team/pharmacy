@@ -195,29 +195,12 @@
         <h4 class="t-value">{{ $address->phone }}</h4>
       </div>
 
-      <div class="t-item">
+      <div class="t-item" style="max-width: 100%;">
         <h4 class="t-key" style="color: #3869BA">وصف العنوان</h4>
         <h4 class="t-value">{{ $address->desc }}</h4>
       </div>
 
     </div>
-
-    {{-- confirmation modal --}}
-    <x-modal title="تأكيد وصول الطلب" open="confirmationModal">
-      <form action="{{ route('client.orders.confirmation') }}" x-ref="confirmation" method="post"
-        style="text-align: center; height: 120px; display: flex; align-items: center; justify-content: center">
-        @csrf
-        @method('POST')
-        <input hidden name="order_id" value="{{ $order->id }}">
-        <h1 class="text-base" style="font-size: 18px ">
-          هل تم إيصال الطلب إليك ؟
-        </h1>
-        <x-slot:footer>
-          <button class="btn" type="submit" @click="$refs.confirmation.submit()">نعم</button>
-        </x-slot:footer>
-      </form>
-    </x-modal>
-
   </main>
 
 @stop

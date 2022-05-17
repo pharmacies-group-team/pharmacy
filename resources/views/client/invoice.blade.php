@@ -203,7 +203,7 @@
         <h4 class="t-value">{{ $address->phone }}</h4>
       </div>
 
-      <div class="t-item">
+      <div class="t-item" style="max-width: 100%;">
         <h4 class="t-key" style="color: #3869BA">وصف العنوان</h4>
         <h4 class="t-value">{{ $address->desc }}</h4>
       </div>
