@@ -3,9 +3,8 @@
 @section('content')
   <section class="mt-5">
     <div class="container-lg p-lg-0 px-5">
-      <div class="card card-blur w-75 m-auto" style="background-image: url({{ asset('images/login.svg') }});
-          background-repeat: no-repeat;
-          background-position:  right; height: 350px;">
+      <div class="card card-blur w-75 m-auto"
+        style="background-image: url({{ asset('images/login.svg') }}); background-repeat: no-repeat;background-position:  right; height: 350px;">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
 
