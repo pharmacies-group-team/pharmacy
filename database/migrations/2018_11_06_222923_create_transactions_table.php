@@ -14,6 +14,7 @@ return new class() extends Migration {
             $table->bigIncrements('id');
             $table->morphs('payable');
             $table->unsignedBigInteger('wallet_id');
+            $table->unsignedBigInteger('order_id')->nullable();
             $table->enum('type', ['deposit', 'withdraw'])->index();
             $table->decimal('amount', 64, 0);
             $table->boolean('confirmed');
