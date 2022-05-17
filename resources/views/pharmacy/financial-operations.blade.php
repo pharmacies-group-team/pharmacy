@@ -66,7 +66,7 @@
                   <span> المبلغ: {{ $transaction->amount }}</span>
 
                 </div>
-                <a class="btn">عرض الفاتورة</a>
+                <a href="{{ route('pharmacy.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
               </div>
             @endforeach
           @endif
