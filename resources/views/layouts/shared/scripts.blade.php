@@ -28,6 +28,13 @@
 
 <script src="{{ asset('js/alpine.min.js') }}"></script>
 
+<script src="{{ asset('js/axios.min.js') }}"></script>
+<script>
+  // axios setup for csrf token
+  axios.defaults.headers.post['X-CSRF-TOKEN'] = el('meta[name="csrf-token"]').content;
+</script>
+
+
 {{-- ionicons --}}
 <script def type="module" src="{{ asset('js/icons/ionicons.esm.js') }}"></script>
 <script def nomodule src="{{ asset('js/icons/ionicons.js') }}"></script>
