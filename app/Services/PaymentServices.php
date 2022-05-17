@@ -10,6 +10,7 @@ use App\Models\Invoice;
 use App\Models\QuotationDetails;
 use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -18,19 +19,29 @@ class PaymentServices
 {
 
     //********* Payment from the wallet *********//
-    public static function paymentFromWallet($amount, $quotation, $addressID): RedirectResponse
+    public static function paymentFromWallet($amount, $quotation, $addressID)
     {
-      $invoice = self::createInvoice($quotation, $addressID);
-      self::processWallet($amount, $invoice);
+      try {
 
-      $invoice->update(['is_active' => 1]);
-      $quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
+        $invoice = self::createInvoice($quotation, $addressID);
 
-      // send and save notification in DB
-      NotificationService::userPay($quotation->order);
+        // send and save notification in DB
+        NotificationService::userPay($quotation->order);
 
-      return redirect()->route('client.success')
-        ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
+        self::processWallet($amount, $invoice);
+
+        $invoice->update(['is_active' => 1]);
+        $quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
+
+        return redirect()->route('client.success', $quotation->order->id)
+          ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
+      }
+      catch (ConnectionException $e) {
+        return redirect()->back()->with(['message' => 'لقد استغرقت العمليه اطول من الوقت المحدد لها يرجى إعادة المحاولة']);
+      }
+      catch (\Exception $th){
+        return redirect()->back()->with(['message' => 'فشلت عملية الدفع، تأكد من إتصال النت..']);
+      }
     }
 
     //********* Payment from the API *********//
@@ -96,6 +107,7 @@ class PaymentServices
         ]);
 
       // Second Step: Send a notification to the pharmacy and admin
+      NotificationService::transferAmountFromUser($invoice->order);
       NotificationService::transferAmountToPharmacy($invoice->order);
       NotificationAdminService::transferAmountToPharmacy($invoice->order);
     }
