@@ -8,8 +8,12 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MessageController;
 
+// shared Controllers
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ChatController;
+
+// standard Controllers
 use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
@@ -57,6 +61,25 @@ Route::controller(NotificationController::class)->group(function () {
   Route::post('/read/notification', 'read')->name('notification.read');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Notifications Routes
+|--------------------------------------------------------------------------
+*/
+
+// chat
+Route::controller(ChatController::class)
+  ->prefix('chat')
+  // TODO enable auth
+  // ->middleware(['auth'])
+  ->name('chat.')
+  ->group(function () {
+
+    Route::get('/users',  'getUsers')->name('getUsers');
+    Route::get('/messages/{id}', 'getUserMessages')->name('userMessages');
+
+    Route::post('/messages/send',  'sendMessage');
+  });
 
 /*
 |--------------------------------------------------------------------------
@@ -84,16 +107,10 @@ Route::prefix('/pharmacy')
       // profile
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
-      // Route::get('/messages', 'messages')->name('messages');
-      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
-      Route::get('/message/{id}', [MessageController::class, 'getMessage'])->name('message');
-      Route::post('message', [MessageController::class, 'sendMessage']);
-      Route::get('/users', [MessageController::class, 'getUsers'])->name('message');
-
-
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
       Route::get('/invoice-profile', 'getInvoiceProfile')->name('invoice-profile');
+      Route::get('/chat', 'showChat')->name('chat');
     });
 
     Route::controller(pharmacy\OrderController::class)
@@ -112,14 +129,6 @@ Route::prefix('/pharmacy')
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
-
-    // chat 
-    Route::controller(pharmacy\ChatController::class)
-      ->prefix('chat')
-      ->name('chat.')
-      ->group(function () {
-        Route::get('/', 'showChat')->name('index');
-      });
   });
 
 
@@ -209,11 +218,9 @@ Route::prefix('/client')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
-      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
-      Route::get('/users', [MessageController::class, 'getUsers'])->name('message');
 
-      Route::get('/message/{id}', [MessageController::class, 'getMessage'])->name('message');
-      Route::post('message', [MessageController::class, 'sendMessage']);
+      // chat
+      Route::get('/chat', 'showChat')->name('chat');
     });
 
     // order
@@ -236,14 +243,6 @@ Route::prefix('/client')
       Route::get('/cancel', 'cancel')->name('cancel');
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
-
-    // chat 
-    Route::controller(client\ChatController::class)
-      ->prefix('chat')
-      ->name('chat.')
-      ->group(function () {
-        Route::get('/', 'showChat')->name('index');
-      });
   });
 
 
