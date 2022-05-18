@@ -63,6 +63,7 @@
                   <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
                 </div>
               </div>
+              <hr class="divided">
             @endforeach
           @endif
         </div>

@@ -1,12 +1,12 @@
 @extends('layouts.admin.master')
 @section('content')
   <x-alert type="status" />
-  
+
   {{-- TODO STYLE PAGE (NAIF) 😅 --}}
-  <main class="page-invoice-profile container">
+  <main class="page-invoice-profile container" style="padding-top: 0">
 
     {{-- bg --}}
-    <div class="t-bg"></div>
+    <div class="t-bg" style="min-height: 14rem;"></div>
 
     {{-- user --}}
     <header class="t-header">
@@ -33,8 +33,97 @@
       </div>
     </header>
 
+    @if($user->hasRole(\App\Enum\RoleEnum::PHARMACY))
+      <div style="display: flex; align-items: center; gap: 12px ">
+
+        <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #ecf2ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+          <x-icon icon='wallet' />
+          <span style="color: rgb(78 125 203)">الرصيد الحالي:</span>
+          <span style="color: #3869BA">{{ $amount_not_confirmed }}</span>
+        </div>
+
+        <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #ecf2ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+          <x-icon icon='wallet' />
+          <span style="color: rgb(78 125 203)">الرصيد القابل للسحب:</span>
+          <span style="color: #3869BA">{{ $amount_confirmed }}</span>
+        </div>
+
+        <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #ecf2ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+          {{--        <x-icon icon='wallet' />--}}
+          <span style="color: rgb(78 125 203)"> الفواتير المؤكدة:</span>
+          <span style="color: #3869BA">{{ $invoice_confirmed }}</span>
+        </div>
+
+        <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #ecf2ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+          {{--        <x-icon icon='wallet' />--}}
+          <span style="color: rgb(78 125 203)"> الفواتير الغير مؤكدة:</span>
+          <span style="color: #3869BA">{{ $invoice_not_confirmed }}</span>
+        </div>
+
+        <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #3869ba;
+                  color: #d5e4ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+          {{--        <x-icon icon='wallet' />--}}
+          <span> تصدير PDF</span>
+        </div>
+
+
+
+      </div>
+
+    @else
+      <div style="display: flex; align-items: center; ">
+        <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #ecf2ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+          <x-icon icon='wallet' />
+          <span>الرصيد الحالي:</span>
+          <span>{{ $amount_confirmed }}</span>
+        </div>
+      </div>
+    @endif
+
     {{-- content --}}
-    <div class="t-content">
+    <div class="t-content" style="background: white">
       {{-- log data --}}
       <div class="t-log-data">
         <header>
@@ -71,8 +160,11 @@
                   <span> المبلغ: {{ $transaction->amount }}</span>
 
                 </div>
-                <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                <div style="display:flex; justify-content: end">
+                  <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                </div>
               </div>
+              <hr class="divided">
             @endforeach
           @endif
         </div>
