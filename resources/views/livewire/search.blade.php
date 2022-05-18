@@ -1,45 +1,45 @@
 @php
-  use App\Enum\PharmacyEnum;
+use App\Enum\PharmacyEnum;
 @endphp
 <div>
   {{-- page header --}}
   <section class="container">
     <form class="pharmacies-header">
-      {{--address--}}
+      {{-- address --}}
       <div class="header-select">
-        {{--cities--}}
+        {{-- cities --}}
         <select wire:model="cityID" class="form-control" name="city">
           <option> المدينة</option>
-        @foreach($cities as $city)
-          <option value="{{ $city->id }}">{{ $city->name }}</option>
-        @endforeach
+          @foreach ($cities as $city)
+            <option value="{{ $city->id }}">{{ $city->name }}</option>
+          @endforeach
         </select>
 
 
-        {{--directorates--}}
+        {{-- directorates --}}
         <select wire:model="directorateID" class="form-control" name="directorate">
           <option> المديرية</option>
-        @foreach($directorates as $directorate)
-          <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
-        @endforeach
+          @foreach ($directorates as $directorate)
+            <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
+          @endforeach
         </select>
 
 
-        {{--neighborhood--}}
+        {{-- neighborhood --}}
         <select wire:model="neighborhoodID" class="form-control" name="neighborhood">
           <option>الحي </option>
-          @foreach($neighborhoods as $neighborhood)
-          <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
-        @endforeach
+          @foreach ($neighborhoods as $neighborhood)
+            <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
+          @endforeach
         </select>
 
       </div>
 
-      {{--search--}}
+      {{-- search --}}
       <div class="header-input">
         <div class="search-group">
-          {{--search input--}}
-          <input wire:model="search" type="text" class="form-control"  placeholder="بحث">
+          {{-- search input --}}
+          <input wire:model="search" type="text" class="form-control" placeholder="بحث">
 
           <button>
             <x-icon icon="search" />
@@ -55,9 +55,8 @@
       <article class="item">
         <a class="item-header" href="{{ route('show.pharmacy.profile', $pharmacy->id) }}">
           {{-- logo --}}
-          <img
-            src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }} @else {{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-            width="50%" class="item-logo" alt="pharmacy logo">
+          <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}" width="50%"
+            class="item-logo" alt="pharmacy logo">
 
           {{-- content --}}
           <div>
@@ -70,9 +69,9 @@
                 <x-icon icon='location' />
 
                 <div>
-                      <span>
-                        {{ $pharmacy->neighborhood->name }} /
-                      </span>
+                  <span>
+                    {{ $pharmacy->neighborhood->name }} /
+                  </span>
                   <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
                 </div>
               </div>

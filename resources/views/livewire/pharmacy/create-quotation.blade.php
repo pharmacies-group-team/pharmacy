@@ -36,7 +36,7 @@
       <div class="t-form-group">
         <label class="text-base">الكمية </label>
 
-        <input type="number" wire:model="quantity.0" class="form-control">
+        <input type="number" wire:model="quantity.0" min="1" class="form-control">
         @error('quantity.0')
           <span>{{ $message }}</span>
         @enderror
@@ -102,10 +102,15 @@
           @enderror
         </div>
 
-        <div class="t-btn-remove-item">
-          <button wire:click.prevent="remove({{ $key }})">
-            <x-icon icon="remove" />
-          </button>
+        <div class="t-form-group">
+          {{-- TODO fixed later --}}
+          <label class="text-base"></label>
+
+          <div class="t-btn-remove-item" style="min-height: 64%;">
+            <button wire:click.prevent="remove({{ $key }})">
+              <x-icon icon="remove" />
+            </button>
+          </div>
         </div>
 
 

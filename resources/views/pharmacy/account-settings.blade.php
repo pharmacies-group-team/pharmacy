@@ -1,4 +1,4 @@
-@extends('layouts/pharmacy/master')
+@extends('layouts.pharmacy/master')
 
 @php use \App\Enum\UserEnum;  @endphp
 
@@ -15,9 +15,7 @@
 
       {{-- avatar --}}
       @if (isset($user))
-        <x-image :image="asset(
-            isset($user->avatar) ? UserEnum::USER_AVATAR_PATH . $user->avatar : UserEnum::USER_AVATAR_DEFAULT,
-        )" :uploadTo="route('setting.update.avatar')" name="avatar" />
+        <x-image :image="asset(UserEnum::USER_AVATAR_PATH . $user->avatar)" :uploadTo="route('setting.update.avatar')" name="avatar" />
       @endif
     </div>
 

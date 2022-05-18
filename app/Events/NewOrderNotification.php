@@ -6,11 +6,13 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Queue\SerializesModels;
+use Pusher\Pusher;
 
-class NewOrderNotification implements ShouldBroadcast
+class NewOrderNotification extends Notification implements ShouldBroadcast
 {
-    public $user, $message, $link;
+    public $sender, $receiver, $message, $link;
 
     use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
@@ -21,9 +23,15 @@ class NewOrderNotification implements ShouldBroadcast
      */
     public function __construct($data = [])
     {
-        $this->user    = $data['user'];
-        $this->message = $data['message'];
-        $this->link    = $data['link'];
+        $this->sender   = $data['sender'];
+        $this->receiver = $data['receiver'];
+        $this->message  = $data['message'];
+        $this->link     = $data['link'];
+    }
+
+    public function via($notifiable)
+    {
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -33,11 +41,37 @@ class NewOrderNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-      return ['new-notification'];
+      return ['new-order-notification'];
     }
 
     public function broadcastAs()
     {
       return 'NewOrderNotification';
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+      return [
+        'sender'    => $this->sender,
+        'receiver'  => $this->receiver,
+        'link'      => $this->link,
+        'message'   => $this->message
+      ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+      return [
+        'sender'    => $this->sender,
+        'receiver'  => $this->receiver,
+        'link'      => $this->link,
+        'message'   => $this->message
+      ];
     }
 }

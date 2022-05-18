@@ -118,7 +118,7 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet
       return [
         'name'  => ['required', 'string', 'max:255', 'min:5'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::id() ],
-          'phone' => 'required|regex:/^([0-9]*)$/|not_regex:/[a-z]/|min:8|max:9|starts_with:77,73,71,70,0',
+        'phone' => 'required|regex:/^([0-9]*)$/|not_regex:/[a-z]/|min:8|max:9|starts_with:77,73,71,70,0',
       ];
     }
 

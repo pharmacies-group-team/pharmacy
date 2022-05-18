@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>صيدلية اون لاين</title>
 
@@ -12,14 +16,9 @@
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
   @livewireStyles()
-
-
-
 </head>
 
 <body>
-
-
   <div class="dashboard" x-data="{ isSidebarOpen: window.innerWidth >= 786 ? true : false }">
     {{-- sidebar --}}
     @include('layouts.client.sidebar')
@@ -34,8 +33,10 @@
 
   @livewireScripts()
 
-  @yield('alpine-script')
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
+  @include('layouts.shared.scripts')
+
+  @yield('script')
+
 </body>
 
 </html>

@@ -16,13 +16,17 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->double('total');
-            $table->string('currency')->default('YER');
+            $table->string('currency')->default('ريال يمني');
             $table->boolean('is_active')->default(0);
 
             $table->string('invoice_id');
 
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+
+            $table->foreignId('address_id');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
 
             $table->foreignId('payment_user_id')->nullable();
             $table->foreign('payment_user_id')->references('id')->on('payment_users')->onDelete('cascade');

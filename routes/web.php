@@ -1,13 +1,10 @@
 <?php
 
 use App\Enum\RoleEnum;
-use App\Http\Controllers\Auth\ChangePasswordController;
+
+use App\Http\Controllers\Auth\LoginCustomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\web;
-use App\Http\Controllers\admin;
-use App\Http\Controllers\client;
-use App\Http\Controllers\pharmacy;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,20 +12,25 @@ use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\DB;
 
 
-use Barryvdh\Debugbar\Facades\Debugbar;
+use App\Http\Controllers\web;
+use App\Http\Controllers\admin;
+use App\Http\Controllers\client;
+use App\Http\Controllers\pharmacy;
 
-// disable Debug
-// Debugbar::disable();
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| General Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
+
+Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
+
+Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
+  //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+  Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
+    ->name('update.avatar');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,21 +48,11 @@ Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
+  Route::get('/privacy', 'showPrivacy')->name('privacy');
+  Route::get('/contact-us', 'showContactUs')->name('contact-us');
+  Route::get('/about-us', 'showAboutUs')->name('about-us');
 });
 
-/*
-|--------------------------------------------------------------------------
-| General Routes
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'verified'])
-  ->name('setting.')
-  ->group(function () {
-    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-
-    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
-      ->name('update.avatar');
-  });
 
 /*
 |--------------------------------------------------------------------------
@@ -73,15 +65,18 @@ Route::controller(NotificationController::class)->group(function () {
   Route::post('/read/notification', 'read')->name('notification.read');
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Pharmacy Routes
 |--------------------------------------------------------------------------
 */
+
 Route::controller(RegisterPharmacyController::class)->group(function () {
   Route::get('/register/pharmacy', 'index')->name('register.pharmacy');
   Route::post('/register/pharmacy', 'store')->name('register.pharmacy.store');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -92,18 +87,16 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 Route::prefix('/pharmacy')
   ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
   ->name('pharmacy.')->group(function () {
-    // Route::resource('/', pharmacy\PharmacyController::class);
-    // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
     Route::controller(pharmacy\DashboardController::class)->group(function () {
       // profile
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
       // Route::get('/messages', 'messages')->name('messages');
-      Route::get('/messages',  [MessageController::class, 'index']);
-      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
+      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
+      Route::get('/message/{id}', [MessageController::class, 'getMessage'])->name('message');
       Route::post('message', [MessageController::class, 'sendMessage']);
-      Route::get('/message-users', [MessageController::class, 'getUsers']);
+      Route::get('/users', [MessageController::class, 'getUsers'])->name('message');
 
 
       Route::get('/account-settings', 'accountSettings')
@@ -121,13 +114,23 @@ Route::prefix('/pharmacy')
       ->prefix('/quotation')->name('quotation.')->group(function () {
 
         Route::get('/', 'getAll')->name('index');
-        Route::get('/{id}', 'createQuotation')->name('create');
         Route::get('/details/{id}', 'getQuotationDetails')->name('details');
+        Route::get('/{id}', 'createQuotation')->name('create');
       });
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
+
+    // chat
+    Route::controller(pharmacy\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -139,8 +142,15 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
-    Route::get('/', [admin\AdminController::class, 'index'])->name('index');
+    /*------------------------------ Users ------------------------------*/
+    Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
+      Route::get('/', 'getAllUsers')->name('index');
+      Route::get('/profile/{id}', 'userProfile')->name('profile');
+      Route::get('/list', 'getUsers')->name('list');
+    });
 
+    Route::get('/', [admin\AdminController::class, 'index'])->name('index');
+    Route::get('/account-settings', [admin\AdminController::class, 'showAccountSettings'])->name('account-settings');
 
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
@@ -152,6 +162,7 @@ Route::prefix('/admin')
     Route::prefix('site')->controller(admin\SiteController::class)
       ->group(function () {
         Route::get('/', 'index')->name('site');
+
         Route::put('/about-us', 'updateAboutUs')
           ->name('updateAboutUs');
 
@@ -185,10 +196,9 @@ Route::prefix('/admin')
       Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
         ->name('pharmacies.toggle');
     });
-
-    Route::view('/account-settings', 'admin.account-settings')
-      ->name('account-settings');
   });
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -204,14 +214,13 @@ Route::prefix('/client')
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-      //      Route::get('/profile', 'getProfile')->name('profile'); // X
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
-      Route::get('/messages',  [MessageController::class, 'index']);
-      Route::get('/message-users', [MessageController::class, 'getUsers']);
+      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
+      Route::get('/users', [MessageController::class, 'getUsers'])->name('message');
 
-      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
+      Route::get('/message/{id}', [MessageController::class, 'getMessage'])->name('message');
       Route::post('message', [MessageController::class, 'sendMessage']);
     });
 
@@ -222,6 +231,8 @@ Route::prefix('/client')
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
+        Route::post('/confirmation', 'confirmation')->name('confirmation');
+        Route::get('/cancel/{id}', 'cancelOrder')->name('cancel');
       });
 
     // quotation
@@ -229,11 +240,18 @@ Route::prefix('/client')
 
     // payment
     Route::controller(client\PaymentController::class)->group(function () {
-      //  TODO IT MIGHT BE DELETED
-      //      Route::post('/pay',  'payment')->name('payment');
-      Route::get('/success',  'success')->name('success');
+      Route::get('/success/{data}',  'success')->name('success');
       Route::get('/cancel', 'cancel')->name('cancel');
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
+
+    // chat
+    Route::controller(client\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 

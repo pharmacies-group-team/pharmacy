@@ -6,7 +6,9 @@ return [
   "not-found" => "غير متواجد",
   "send-message" => "إرسال رسالة",
   "create-quote" => "إنشاء عرض سعر",
-  "order-details" => "تفاصيل الطلب",
-  "add" => "إضافة"
+  "order-details" => "التفاصيل ",
+  "add" => "إضافة",
+  "show-invoice" => "عرض الفاتورة",
+  "cancel-order" => "إلغاء الطلب"
   // "" => ""
 ];

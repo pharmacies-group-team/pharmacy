@@ -12,5 +12,6 @@ class OrderEnum
     const PAID_ORDER         = 'PAID'; // تم الدفع ولكن لم يتم تاكيد وصول الطلب
     const DELIVERY_ORDER     = 'DELIVERY'; // قيد التوصيل
     const DELIVERED_ORDER    = 'DELIVERED'; // تم التوصيل
-    const REFUSAL_ORDER      = 'REFUSAL'; // تم رفض الطلب
+    const REFUSAL_ORDER      = 'REFUSAL'; // تم رفض الطلب من قبل الصيدلي
+    const CANCELED_ORDER     = 'CANCELED'; // تم رفض الطلب من قبل العميل
 }

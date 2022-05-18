@@ -35,9 +35,13 @@
 
         {{-- neighborhoods --}}
         <select wire:model="neighborhoodID" id="pharmacy-address" class="form-control">
-          <option selected >حدد اسم الحي</option>
+          @if(isset($neighborhoodID))
+            <option selected value="{{ $pharmacy->neighborhood->name}}">{{ $pharmacy->neighborhood->name}}</option>
+          @else
+            <option selected >حدد اسم الحي</option>
+          @endif
           @foreach ($neighborhoods as $neighborhood)
-            <option>{{ $neighborhood->name }}</option>
+            <option value="{{ $neighborhood->id }}">{{ $neighborhood->name }}</option>
           @endforeach
         </select>
       </div>

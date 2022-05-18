@@ -7,7 +7,6 @@
       {{-- Logo --}}
       <div class="col-3">
         <a class="navbar-brand h4 text-decoration-none m-0" href="{{ route('home') }}">
-          {{-- <img src="{{ asset('images/logo.svg') }}"> --}}
           <h1 class="text-primary-darker fs-3 fw-bold">PHARMACY <span
               class="fs-6 fw-normal text-primary-base">online</span></h1>
         </a>
@@ -61,10 +60,9 @@
               <div
                 class="nav-link dropdown-toggle text-primary-darker w-100 d-flex align-items-center justify-content-end cursor-pointer gap-2"
                 id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
-                <img
-                  src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
-                  width="30" height="20" class="img-fluid rounded-circle border-1 border-secondary border shadow-sm"
-                  alt="user avatar">
+
+                <img src="{{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }}" width="30" height="20"
+                  class="img-fluid rounded-circle border-1 border-secondary border shadow-sm" alt="user avatar">
 
                 <span class="me-2" style="cursor: pointer">{{ Auth::user()->name }}</span>
               </div>
