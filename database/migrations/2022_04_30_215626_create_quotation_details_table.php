@@ -14,19 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quotation_details', function (Blueprint $table) {
-          $table->id();
-          $table->string('product_name');
-          $table->string('product_unit');
-          $table->integer('quantity');
-          $table->integer('price');
-          $table->double('total');
-          $table->string('currency')->default('ريال يمني');
+            $table->id();
+            $table->string('product_name');
+            $table->string('product_unit');
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->double('total');
+            $table->string('currency')->default('ريال يمني');
 
-          $table->foreignId('quotation_id');
-          $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');
+            $table->foreignId('quotation_id');
+            $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');
 
-          $table->softDeletes();
-          $table->timestamps();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
