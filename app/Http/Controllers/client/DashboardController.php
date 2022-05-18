@@ -33,4 +33,10 @@ class DashboardController extends Controller
 
         return view('client.invoice-profile', compact('user'));
     }
+
+    // chat page 
+    public function showChat()
+    {
+        return view('client.chat');
+    }
 }

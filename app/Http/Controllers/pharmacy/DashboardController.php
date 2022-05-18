@@ -20,11 +20,6 @@ class DashboardController extends Controller
         return view('pharmacy.profile', compact('pharmacy'));
     }
 
-    public function messages()
-    {
-        return view('pharmacy.messages');
-    }
-
     public function accountSettings()
     {
         $user = Auth::user();
@@ -35,5 +30,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         return view('pharmacy.invoice-profile', compact('user'));
+    }
+
+    // chat page 
+    public function showChat()
+    {
+        return view('pharmacy.chat');
     }
 }
