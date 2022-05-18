@@ -5,6 +5,7 @@ use App\Enum\RoleEnum;
 use App\Http\Controllers\Auth\LoginCustomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('log
 Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
     Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])->name('update.avatar');
 });
+
+Route::get('generate-invoice-pdf/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice-pdf');
 
 /*
 |--------------------------------------------------------------------------
