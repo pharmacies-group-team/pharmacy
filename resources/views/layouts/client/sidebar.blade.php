@@ -60,8 +60,7 @@
 
     {{-- chat --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.chat.index') active @endif"
-        href="{{ route('client.chat.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.chat') active @endif" href="{{ route('client.chat') }}">
         <div class="icon">
           <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
         </div>
