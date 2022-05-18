@@ -5,19 +5,24 @@
   {{-- TODO STYLE PAGE (NAIF) 😅 --}}
   <main class="page-invoice-profile container">
 
-    <div class="t-content">
-      <div class="t-log-data">
-          <div style="display: flex; align-items: center; justify-content: space-evenly">
-            <div style="display:flex; justify-content: center; align-items: center; gap: 6px">
-              <span>رصيدك الحالي:</span>
-              <span>{{ Auth::user()->balance }}</span>
-            </div>
-          </div>
+    <div style="display: flex; align-items: center; justify-content:end ">
+      <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #ecf2ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+        <x-icon icon='wallet' />
+        <span>رصيدك الحالي:</span>
+        <span>{{ Auth::user()->balance }}</span>
       </div>
+
     </div>
 
     {{-- content --}}
-    <div class="t-content">
+    <div class="t-content" style="background: white">
       {{-- log data --}}
       <div class="t-log-data">
         <header>
@@ -54,8 +59,11 @@
                   <span> المبلغ: {{ $transaction->amount }}</span>
 
                 </div>
-                <a href="{{ route('client.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                <div style="display:flex; justify-content: end">
+                  <a href="{{ route('client.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                </div>
               </div>
+              <hr class="divided">
             @endforeach
           @endif
         </div>
