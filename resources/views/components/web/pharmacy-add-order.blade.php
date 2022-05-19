@@ -6,9 +6,17 @@
     <span class="pharmacy-sub-title">
       طلب دواء من صيدلية:
     </span>
-
     <h3 class="pharmacy-title"> {{ $pharmacyName }}</h3>
   </div>
+
+  @guest
+    <div style="margin: 12px 0">
+      <span style="color: #a82f2f">يجب تسجيل الدخول أولًا </span> /
+      <a style="margin: 8px" href="{{ route('login') }}">
+        تسجيل الدخول
+      </a>
+    </div>
+  @endguest
 
   <div x-data="imageViewer" class="image-file-upload">
     {{-- add image --}}
