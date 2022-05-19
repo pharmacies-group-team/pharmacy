@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 use function PHPUnit\Framework\returnArgument;
 
 class OrderController extends Controller
@@ -34,25 +35,32 @@ class OrderController extends Controller
   }
 
   //********* create new order by client *********//
-  public function storeOrder(Request $request): RedirectResponse
+  public function storeOrder(Request $request)
   {
-    // validator
-    Validator::validate($request->all(), Order::roles(), Order::messages());
+    try {
+      ##### validator #####
+      Validator::validate($request->all(), Order::roles(), Order::messages());
 
-    // upload image
-    $image = $this->storeImage($request->image, OrderEnum::ORDER_IMAGE_PATH);
+      ##### upload image #####
+      $image = $this->storeImage($request->image, OrderEnum::ORDER_IMAGE_PATH);
 
-    $order = Order::create(
-      [
-        'user_id'     => Auth::id(),
-        'pharmacy_id' => $request->input('pharmacy_id'),
-        'image'       => $image,
-        'order'       => $request->input('order'),
-      ]
-    );
+      $order = Order::create(
+        [
+          'user_id'     => Auth::id(),
+          'pharmacy_id' => $request->input('pharmacy_id'),
+          'image'       => $image,
+          'order'       => $request->input('order'),
+        ]
+      );
 
-    // send and save notification in DB
-    NotificationService::newOrder($order);
+      ##### send and save notification in DB #####
+      NotificationService::newOrder($order);
+    }
+    catch (Throwable $e) {
+      report($e);
+
+      return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
+    }
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
@@ -69,7 +77,7 @@ class OrderController extends Controller
       Transaction::where('order_id', $order->id)
         ->where('payable_id', $pharmacy->id)->update(['confirmed' => 1]);
 
-      // send and save notification in DB
+      ##### send and save notification in DB #####
       NotificationAdminService::deliveredOrder($order);
       NotificationService::deliveredOrder($order);
 
