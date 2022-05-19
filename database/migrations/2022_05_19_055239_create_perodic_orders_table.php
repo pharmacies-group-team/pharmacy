@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 return new class extends Migration
 {
@@ -17,7 +18,7 @@ return new class extends Migration
       $table->id();
       $table->foreignId('order_id');
       $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-      $table->date('next_order_date');
+      $table->date('next_order_date')->nullable();
       $table->date('start_date');
       $table->string('perodic_date_type');
       $table->boolean('is_active');
