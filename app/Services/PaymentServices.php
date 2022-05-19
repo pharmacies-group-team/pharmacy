@@ -78,6 +78,7 @@ class PaymentServices
       Auth::user()->forceWithdraw($amount,
         [
           'invoice_id' => $invoice->id,
+          'order_id'   => $invoice->order->id,
           'state_1'    => 'تم السحب من حساب ',
           'depositor'  => $user->name,
           'state_2'    => ' الى حساب ',
@@ -88,6 +89,7 @@ class PaymentServices
       $transaction = $pharmacy->deposit($residual,
         [
           'invoice_id' => $invoice->id,
+          'order_id'   => $invoice->order->id,
           'state_1'    => 'تم الايداع من حساب ',
           'depositor'  => $user->name,
           'state_2'    => ' الى حساب ',
@@ -100,6 +102,7 @@ class PaymentServices
       $admin->deposit($adminRatio,
         [
           'invoice_id' => $invoice->id,
+          'order_id'   => $invoice->order->id,
           'state_1'    => 'تم إيداع نسبة من فاتورة بيع ',
           'depositor'  => $pharmacy->name,
           'state_2'    => ' الى حسابك ',

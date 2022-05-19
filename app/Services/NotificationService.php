@@ -137,7 +137,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/invoice/'.$order->invoice->id,
+      'link'     => SettingEnum::DOMAIN.'client/invoice/'.$order->invoice->id,
       'message'  => 'تم السحب من حسابك الى حساب '.$sender->name,
     ];
 
