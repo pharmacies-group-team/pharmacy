@@ -17,7 +17,10 @@ return new class extends Migration
       $table->id();
       $table->foreignId('order_id');
       $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-      $table->date('next_order');
+      $table->date('next_order_date');
+      $table->date('start_date');
+      $table->string('perodic_date_type');
+      $table->boolean('is_active');
       $table->timestamps();
     });
   }
