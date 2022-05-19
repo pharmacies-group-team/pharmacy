@@ -83,7 +83,7 @@ use App\Enum\PharmacyEnum;
         <div x-data="{ addOrderModal: false }">
           <button class="btn btn-full item-link" @click="addOrderModal = true">أطلب
             دوائك</button>
-          <x-web.pharmacy-add-order :pharmacyName="$pharmacy->name" :pharmacyID="$pharmacy->id" />
+          <x-web.pharmacy-add-order :pharmacyName="$pharmacy->name" :pharmacyID="$pharmacy->user->id" />
         </div>
       </article>
     @endforeach
