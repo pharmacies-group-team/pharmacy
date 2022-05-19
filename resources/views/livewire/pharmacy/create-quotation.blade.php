@@ -1,10 +1,14 @@
 {{-- TODO --}}
-<div>
+<div class="t-card">
   <x-alert type="message" />
 
-  <x-pharmacy.quotation-order-details :order="$order" />
-
   {{-- form --}}
+  <header>
+    <h2 class="t-header">
+      @lang('action.create-quote')
+    </h2>
+  </header>
+
   <form>
     {{-- <input hidden name="order" value="{{ $order }}"> --}}
     <div class="t-order-item" x-data="{ quantity: '', price: '', total: 0 }">
@@ -152,5 +156,6 @@
     </div>
 
   </form>
+
 
 </div>
