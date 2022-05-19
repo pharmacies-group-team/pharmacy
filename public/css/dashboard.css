@@ -506,6 +506,32 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.wallet{
+  margin-left: 1.25rem;
+}
+
+.wallet-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(185 209 254 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.wallet-box span{
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
 .alert-box{
   position: fixed;
   bottom: 2rem;
@@ -1328,32 +1354,6 @@ textarea.form-control{
   line-height: 1.25rem;
 }
 
-.wallet{
-  margin-left: 1.25rem;
-}
-
-.wallet-box{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.375rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(185 209 254 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-.wallet-box span{
-  --tw-text-opacity: 1;
-  color: rgb(78 125 203 / var(--tw-text-opacity));
-}
-
 .dashboard{
   display: flex;
   justify-content: space-between;
@@ -1377,6 +1377,7 @@ textarea.form-control{
   min-height: 100%;
   padding-right: 2.5rem;
   padding-top: 2.5rem;
+  width: 96%;
 }
 
 .dashboard .t-card{
@@ -2159,6 +2160,10 @@ ion-icon{
   content: " check your code again 😅";
 }
 
+.t-mt-8{
+  margin-top: 2rem;
+}
+
 .text-base{
   font-weight: 500;
   --tw-text-opacity: 1;
@@ -2554,79 +2559,6 @@ ion-icon{
   border-color: rgb(115 164 255 / var(--tw-border-opacity));
 }
 
-.page-create-quotation{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2rem;
-  width: 91.666667%;
-  border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
-  padding: 2rem;
-}
-
-.page-create-quotation .t-form-group{
-  display: flex;
-  flex-direction: column;
-}
-
-.page-create-quotation .t-form-group label{
-  margin-bottom: 1rem;
-  display: inline-block;
-}
-
-.page-create-quotation .t-order-item{
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-@media (min-width: 1024px){
-  .page-create-quotation .t-order-item{
-    flex-direction: row;
-    gap: 1.25rem;
-  }
-}
-
-.page-create-quotation .t-form-btn-action{
-  width: 82%;
-}
-
-.page-create-quotation .t-btn-add-new{
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.page-create-quotation .t-btn-add-new::before {
-  content: "";
-  height: 2px;
-  width: 100%;
-  --tw-bg-opacity: 1;
-  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
-}
-
-.page-create-quotation .t-btn-remove-item{
-  display: flex;
-  width: 2.5rem;
-  align-items: flex-end;
-}
-
-.page-create-quotation .t-btn-remove-item .icon{
-  width: 1.5rem;
-}
-
-.page-create-quotation .t-form-btn{
-  display: flex;
-  justify-content: center;
-}
-
-.page-create-quotation .divided{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .page-pharmacy-profile .t-bg{
   height: 20rem;
   --tw-bg-opacity: 1;
@@ -2854,4 +2786,95 @@ ion-icon{
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
+}
+
+.page-create-quotation{
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
+}
+
+.page-create-quotation .t-header{
+  padding-bottom: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(56 105 186 / var(--tw-text-opacity));
+}
+
+.page-create-quotation .t-order-details{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.page-create-quotation .t-order-details .t-user-info{
+  margin-top: 1rem;
+}
+
+.page-create-quotation .t-order-details .t-order-image{
+  max-width: 20rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.page-create-quotation .t-form-group{
+  display: flex;
+  flex-direction: column;
+}
+
+.page-create-quotation .t-form-group label{
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.page-create-quotation .t-order-item{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px){
+  .page-create-quotation .t-order-item{
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+}
+
+.page-create-quotation .t-form-btn-action{
+  width: 82%;
+}
+
+.page-create-quotation .t-btn-add-new{
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.page-create-quotation .t-btn-add-new::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
+}
+
+.page-create-quotation .t-btn-remove-item{
+  display: flex;
+  width: 2.5rem;
+  align-items: flex-end;
+}
+
+.page-create-quotation .t-btn-remove-item .icon{
+  width: 1.5rem;
+}
+
+.page-create-quotation .t-form-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.page-create-quotation .divided{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
