@@ -4,8 +4,8 @@
     "dev": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
-    "build": "pnpm production",
-    "production": " mix --production"
+    "build": "npm production",
+    "production": "mix --production"
   },
   "devDependencies": {
     "@popperjs/core": "^2.10.2",
