@@ -572,37 +572,49 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
   font-weight: 700;
 }
 
 .badge-primary{
+  border-color: rgb(31 41 55 / 0.3);
   --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
-  color: rgb(219 234 254 / var(--tw-text-opacity));
-}
-
-.badge-info{
-  --tw-bg-opacity: 1;
-  background-color: rgb(14 165 233 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(224 242 254 / var(--tw-text-opacity));
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .badge-success{
+  border-color: rgb(13 100 75 / 0.3);
   --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+  background-color: rgb(209 250 229 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
-  color: rgb(220 252 231 / var(--tw-text-opacity));
+  color: rgb(13 100 75 / var(--tw-text-opacity));
+}
+
+.badge-info{
+  border-color: rgb(40 73 179 / 0.3);
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(40 73 179 / var(--tw-text-opacity));
+}
+
+.badge-warning{
+  border-color: rgb(146 64 14 / 0.3);
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 243 199 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(146 64 14 / var(--tw-text-opacity));
 }
 
 .badge-danger{
+  border-color: rgb(153 27 27 / 0.3);
   --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
-  color: rgb(254 226 226 / var(--tw-text-opacity));
+  color: rgb(153 27 27 / var(--tw-text-opacity));
 }
 
 .btn, .btn-rounded{
@@ -1332,13 +1344,15 @@ textarea.form-control{
 
 .table tbody td{
   white-space: nowrap;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding: 1rem;
   text-align: center;
 }
 
 .table tbody tr:nth-of-type(odd) td{
   --tw-bg-opacity: 1;
-  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
 }
 
 .table tbody td.table-action button:first-of-type{
