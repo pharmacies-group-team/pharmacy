@@ -154,3 +154,30 @@ use Illuminate\Support\Facades\Auth;
     el('.js-user-item').classList.add('is-active')
   })
 </script>
+
+{{-- chat form --}}
+<script>
+  const sendMessage = ({
+    to,
+    message
+  }) => {
+    axios
+      .post("{{ route('chat.sendMessage') }}", {
+        from: '{{ Auth::id() }}',
+        to,
+        message
+      })
+      .then(res => el('.t-chat-messages-list').innerHTML += renderUserMessages(res.data))
+  }
+
+
+  el('.js-chat-form')
+    .addEventListener('submit', event => {
+      event.preventDefault();
+
+      sendMessage({
+        to: 3,
+        message: el('.js-chat-input').value
+      })
+    });
+</script>
