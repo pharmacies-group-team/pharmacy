@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('product_unit');
             $table->integer('quantity');
             $table->integer('price');
-            $table->double('total');
             $table->string('currency')->default('ريال يمني');
 
             $table->foreignId('quotation_id');
