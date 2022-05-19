@@ -253,3 +253,8 @@ Route::prefix('/client')
 
 
 Auth::routes(['verify' => true]);
+
+// only for document dev components
+Route::get('/test/badge', function () {
+  return view('web.dev-docs.index');
+});
