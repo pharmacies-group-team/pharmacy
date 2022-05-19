@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
   let getHours = (time) => new Date(time).getHours();
 
   let messageTimeFormat = (time) => {
-    return `${getMinutes(time)}: ${getHours(time)}`;
+    return `${Math.ceil(getHours(time)/2)}:${getMinutes(time)}`;
   }
 
   let renderUserMessages = (message) => {
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
         class="t-message ${ message.from == '{{ Auth::id() }}' ?  't-message-left' : '' }" >
 
         <div class="t-message-avatar">
-          <img src="/uploads/user/${message.to_user.avatar}" alt="user avatar" width="50px" height="50px">
+          <img src="/uploads/user/${message.from_user.avatar}" alt="user avatar" width="50px" height="50px">
         </div>
 
         <div class="t-content">
@@ -37,9 +37,11 @@ use Illuminate\Support\Facades\Auth;
     axios
       .get(`/chat/messages/${userID}`)
       .then(res => {
+        console.table(res.data);
+
         let messages = res.data.map(message => renderUserMessages(message))
 
-        el('.t-chat-messages-list').innerHTML = messages.join(' ');
+        let element = el('.t-chat-messages-list').innerHTML = messages.join(' ');
       })
   }
 </script>
@@ -51,8 +53,11 @@ use Illuminate\Support\Facades\Auth;
       .forEach(userElement => {
         userElement
           .addEventListener('click', (event) => {
-            console.log(userElement)
             getUserMessages(userElement.getAttribute('data-user-id'))
+
+            // add active class
+            removeActiveClass();
+            userElement.classList.add('is-active')
           })
 
         console.log('{{ Auth::id() }}')
@@ -62,6 +67,11 @@ use Illuminate\Support\Facades\Auth;
 
 {{-- render users item --}}
 <script>
+  // remove active class from user item
+  const removeActiveClass = () => {
+    els('.js-user-item').forEach(item => item.classList.remove('is-active'));
+  }
+
   const calcTime = (time) => {
     let dateDifference = new Date() - new Date(time);
 
@@ -95,7 +105,7 @@ use Illuminate\Support\Facades\Auth;
       return '';
     }
     return `
-      <div class="t-item is-active js-user-item" data-user-id="${user.id}">
+      <div class="t-item js-user-item" data-user-id="${user.id}">
           <div class="t-item-avatar">
             <img src="/uploads/user/${user.avatar}" alt="user avatar" width="40px" height="40px">
 
@@ -125,10 +135,15 @@ use Illuminate\Support\Facades\Auth;
   // get users
   axios.get('{{ route('chat.getUsers') }}').then((res) => {
 
-    res.data.forEach(user => {
-      el('.js-users').innerHTML += renderUser(user);
-    });
+    let users = res.data.map(user => renderUser(user));
+
+    el('.js-users').innerHTML = users.join('');
 
     usersClickEvent();
+
+
+    // render first user message
+    el('.js-user-item').click()
+    el('.js-user-item').classList.add('is-active')
   })
 </script>
