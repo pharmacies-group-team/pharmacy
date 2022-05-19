@@ -5,7 +5,7 @@
   {{-- form --}}
   <form>
     {{-- <input hidden name="order" value="{{ $order }}"> --}}
-    <div class="t-order-item">
+    <div class="t-order-item" x-data="{quantity: 1, price: '', total: 0}">
 
       {{-- name --}}
       <div class="t-form-group">
@@ -18,7 +18,7 @@
       </div>
 
       {{-- type --}}
-      <div class="t-form-group">
+      <div class="t-form-group" >
         <label class="text-base">الوحده </label>
 
         <select wire:model="product_unit.0" class="form-control">
@@ -36,7 +36,7 @@
       <div class="t-form-group">
         <label class="text-base">الكمية </label>
 
-        <input type="number" wire:model="quantity.0" min="1" class="form-control">
+        <input x-model="quantity" type="number" wire:model="quantity.0" min="1" max="30" class="form-control">
         @error('quantity.0')
           <span>{{ $message }}</span>
         @enderror
@@ -44,13 +44,20 @@
 
       {{-- price --}}
       <div class="t-form-group">
-        <label class="text-base">سعر المنتج </label>
 
-        <input type="text" wire:model="price.0" class="form-control">
+        <label class="text-base">سعر المنتج </label>
+        <input x-model="price" type="text" wire:model="price.0" class="form-control">
         @error('price.0')
           <span>{{ $message }}</span>
         @enderror
       </div>
+
+{{--      totla --}}
+      <div x-effect="total = price * quantity">
+
+        <span x-text="total"></span>
+      </div>
+      <label class="text-base">سعر المنتج </label>
     </div>
 
 
