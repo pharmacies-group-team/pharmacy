@@ -2,6 +2,8 @@
 <div>
   <x-alert type="message" />
 
+  <x-pharmacy.quotation-order-details :order="$order" />
+
   {{-- form --}}
   <form>
     {{-- <input hidden name="order" value="{{ $order }}"> --}}
