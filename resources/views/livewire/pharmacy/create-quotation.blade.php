@@ -5,7 +5,7 @@
   {{-- form --}}
   <form>
     {{-- <input hidden name="order" value="{{ $order }}"> --}}
-    <div class="t-order-item" x-data="{quantity: 1, price: '', total: 0}">
+    <div class="t-order-item" x-data="{ quantity: '', price: '', total: 0 }">
 
       {{-- name --}}
       <div class="t-form-group">
@@ -18,7 +18,7 @@
       </div>
 
       {{-- type --}}
-      <div class="t-form-group" >
+      <div class="t-form-group">
         <label class="text-base">الوحده </label>
 
         <select wire:model="product_unit.0" class="form-control">
@@ -46,18 +46,18 @@
       <div class="t-form-group">
 
         <label class="text-base">سعر المنتج </label>
-        <input x-model="price" type="text" wire:model="price.0" class="form-control">
+        <input x-model="price" type="number" min="1" max="50000" wire:model="price.0" class="form-control">
         @error('price.0')
           <span>{{ $message }}</span>
         @enderror
       </div>
 
-{{--      totla --}}
-      <div x-effect="total = price * quantity">
+      {{-- total --}}
+      <div class="t-form-group" x-effect="total = (+price) * (+quantity)">
+        <label class="text-base">@lang('heading.total') :</label>
 
-        <span x-text="total"></span>
+        <input readonly :value="total" class='form-control' style="max-width: 100px" />
       </div>
-      <label class="text-base">سعر المنتج </label>
     </div>
 
 
@@ -65,7 +65,7 @@
     @foreach ($inputs as $key => $value)
       <hr class="divided">
 
-      <div class="t-order-item">
+      <div class="t-order-item" x-data="{ quantity: '', price: '', total: 0 }">
         <div class="t-form-group">
           <label class="text-base">اسم المنتج </label>
 
@@ -93,7 +93,8 @@
         <div class="t-form-group">
           <label class="text-base">الكمية </label>
 
-          <input type="number" wire:model="quantity.{{ $value }}" class="form-control">
+          <input x-model="quantity" type="number" wire:model="quantity.{{ $value }}" min="1" max="30"
+            class="form-control">
           @error('quantity' . $value)
             <span>{{ $message }}</span>
           @enderror
@@ -102,11 +103,18 @@
         <div class="t-form-group">
           <label class="text-base">سعر المنتج </label>
 
-          <input type="text" wire:model="price.{{ $value }}" class="form-control"
-            placeholder="بالريال اليمني">
+          <input x-model="price" type="number" wire:model="price.{{ $value }}" min="1" max="50000"
+            class="form-control">
           @error('price' . $value)
             <span>{{ $message }}</span>
           @enderror
+        </div>
+
+        {{-- total --}}
+        <div class="t-form-group" x-effect="total = (+price) * (+quantity)">
+          <label class="text-base">@lang('heading.total') :</label>
+
+          <input readonly :value="total" class='form-control' style="max-width: 100px" />
         </div>
 
         <div class="t-form-group">
