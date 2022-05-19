@@ -93,10 +93,10 @@ Route::prefix('/pharmacy')
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
       // Route::get('/messages', 'messages')->name('messages');
-      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
-      Route::get('/message/{id}', [MessageController::class, 'getMessage'])->name('message');
+      Route::get('/messages',  [MessageController::class, 'index']);
+      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
       Route::post('message', [MessageController::class, 'sendMessage']);
-      Route::get('/users', [MessageController::class, 'getUsers'])->name('message');
+      Route::get('/users', [MessageController::class, 'getUsers']);
 
 
       Route::get('/account-settings', 'accountSettings')
@@ -217,11 +217,12 @@ Route::prefix('/client')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
-      Route::get('/messages',  [MessageController::class, 'index'])->name('messages');
-      Route::get('/users', [MessageController::class, 'getUsers'])->name('message');
+      Route::get('/messages',  [MessageController::class, 'index']);
+      Route::get('/users', [MessageController::class, 'getUsers']);
 
-      Route::get('/message/{id}', [MessageController::class, 'getMessage'])->name('message');
+      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
       Route::post('message', [MessageController::class, 'sendMessage']);
+      Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
     });
 
     // order
