@@ -33,4 +33,10 @@ class DashboardController extends Controller
     {
       return FinancialOperationsServices::getFinancialOperations('client');
     }
+
+    // chat page 
+    public function showChat()
+    {
+        return view('client.chat');
+    }
 }

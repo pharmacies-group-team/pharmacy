@@ -111,7 +111,7 @@
                           </a>
                         @endif
 
-                        <a href="#" class="btn">
+                        <a href="{{ route('pharmacy.messages') }}" class="btn">
                           <x-icon icon="message" />
                           @lang('action.send-message')
                         </a>

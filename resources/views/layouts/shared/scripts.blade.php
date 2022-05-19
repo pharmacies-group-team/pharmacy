@@ -23,10 +23,22 @@
    * @returns {HTMLElement}
    */
   let el = $el => document.querySelector($el);
+
+  /**
+   * @returns {HTMLElement}
+   */
+  let els = $el => document.querySelectorAll($el);
 </script>
 @yield('alpine-script')
 
 <script src="{{ asset('js/alpine.min.js') }}"></script>
+
+<script src="{{ asset('js/axios.min.js') }}"></script>
+<script>
+  // axios setup for csrf token
+  axios.defaults.headers.post['X-CSRF-TOKEN'] = el('meta[name="csrf-token"]').content;
+</script>
+
 
 {{-- ionicons --}}
 <script def type="module" src="{{ asset('js/icons/ionicons.esm.js') }}"></script>
