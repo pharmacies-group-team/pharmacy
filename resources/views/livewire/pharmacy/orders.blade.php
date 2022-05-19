@@ -4,6 +4,15 @@
   <div class="container">
     <section class="section-header">
       <h2 class="text-large">أدارة الطلبات</h2>
+      <select wire:model="status" class="form-control" name="city">
+        <option value=""> الكل</option>
+        <option value="{{ \App\Enum\OrderEnum::NEW_ORDER }}">طلبات جديده</option>
+        <option value="{{ \App\Enum\OrderEnum::UNPAID_ORDER }}">طلبات قيد الدفع</option>
+        <option value="{{ \App\Enum\OrderEnum::PAID_ORDER }}">طلبات تم الدفع</option>
+        <option value="{{ \App\Enum\OrderEnum::DELIVERED_ORDER }}">طلبات تم توصيلها</option>
+        <option value="{{ \App\Enum\OrderEnum::REFUSAL_ORDER }}">طلبات غير متواجده</option>
+        <option value="{{ \App\Enum\OrderEnum::CANCELED_ORDER }}">طلبات تم إلغاءها</option>
+      </select>
     </section>
 
     <div class="table-wrapper">

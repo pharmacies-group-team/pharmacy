@@ -52,7 +52,7 @@
       <div class="t-form-group">
 
         <label class="text-base">سعر المنتج </label>
-        <input x-model="price" type="number" min="1" max="50000" wire:model="price.0" class="form-control">
+        <input x-model="price" type="text" min="1" max="50000" wire:model="price.0" class="form-control">
         @error('price.0')
           <span>{{ $message }}</span>
         @enderror
@@ -109,7 +109,7 @@
         <div class="t-form-group">
           <label class="text-base">سعر المنتج </label>
 
-          <input x-model="price" type="number" wire:model="price.{{ $value }}" min="1" max="50000"
+          <input x-model="price" type="text" wire:model="price.{{ $value }}" min="1" max="50000"
             class="form-control">
           @error('price' . $value)
             <span>{{ $message }}</span>
