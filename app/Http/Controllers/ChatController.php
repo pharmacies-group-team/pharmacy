@@ -50,10 +50,16 @@ class ChatController extends Controller
     // Message::where(['from' => $from_user_id, 'to' => $to_user_id])->update(['is_read' => 1]);
 
     // Get all message from selected user
-    $messages = Message::with('fromUser')
-      ->where(['to' => $to_user_id, 'from' => $from_user_id]) // current user message
-      ->orWhere(['to' => $from_user_id, 'from' => $to_user_id]) // other user message
-      ->get();
+    $messages['from_messages'] = Message::with('fromUser')
+      ->where(['to' => $from_user_id, 'from' => $to_user_id]) // current user message
+      ->get() ?? [];
+
+    $messages['to_messages'] = Message::with('fromUser')
+      ->where(['to' => $to_user_id, 'from' => $from_user_id]) //  other user message
+      ->get() ?? [];
+
+    return response($messages);
+
 
     return response($messages);
   }
