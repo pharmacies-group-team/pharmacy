@@ -18,7 +18,7 @@ class ChatController extends Controller
     $from = Auth::id() ?? $request->query('from');
 
     $usersMessageToList = DB::table('messages')
-      ->where('to', $from)
+      ->where('from', $from)
       ->select('to')->groupBy('to')->get();
 
 
@@ -47,12 +47,12 @@ class ChatController extends Controller
     $from_user_id = Auth::id() ?? $request->query('from');
 
     // Make read all unread message sent
-    Message::where(['from' => $from_user_id, 'to' => $to_user_id])->update(['is_read' => 1]);
+    // Message::where(['from' => $from_user_id, 'to' => $to_user_id])->update(['is_read' => 1]);
 
     // Get all message from selected user
-    $messages = Message::with('toUser')
-      ->where('to', $to_user_id)
-      ->orWhere('from', $from_user_id)
+    $messages = Message::with('fromUser')
+      ->where(['to' => $to_user_id, 'from' => $from_user_id]) // current user message
+      ->orWhere(['to' => $from_user_id, 'from' => $to_user_id]) // other user message
       ->get();
 
     return response($messages);
