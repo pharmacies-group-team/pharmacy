@@ -4,7 +4,9 @@
 return [
   "profile" => "بروفايل",
   "protection-and-privacy" => "الحماية والخصوصية",
-  "order-details" => "التفاصيل",
+
+  "order-details" => "تفاصيل الطلب",
+
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",
   "invoice_id" => "رقم فاتورة",
