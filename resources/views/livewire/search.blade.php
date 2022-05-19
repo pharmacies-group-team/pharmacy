@@ -70,9 +70,9 @@ use App\Enum\PharmacyEnum;
 
                 <div>
                   <span>
-                    {{ $pharmacy->neighborhood->name }} /
+                    {{ $pharmacy->neighborhood->directorate->name }} /
                   </span>
-                  <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
+                  <span>{{ $pharmacy->neighborhood->name }}</span>
                 </div>
               </div>
             @endif

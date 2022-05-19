@@ -21,10 +21,10 @@ class PaymentController extends Controller
     //********* Success Payment *********//
     public function success($data)
     {
-      $data = base64_decode($data);
+      $info=base64_decode($data);
+      $data=json_decode($info,true);
 
-      //  TODO (STATIC DATA)
-      $order_id = 2;
+      $order_id = $data['order_reference'];
 
       $order    = Order::find($order_id);
       $invoice  = $order->invoice;
@@ -46,7 +46,7 @@ class PaymentController extends Controller
     //********* Cancel Payment *********//
     public function cancel()
     {
-      return 'cancel';
+      return redirect()->route('client.orders.index');
     }
 
     //********* Show Invoice *********//

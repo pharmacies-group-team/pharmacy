@@ -3,9 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\City;
-use App\Models\Directorate;
-use App\Models\Neighborhood;
-use App\Models\Pharmacy;
+use App\Models\{Directorate, Neighborhood, Pharmacy};
 use Illuminate\Pagination\Paginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -37,18 +35,19 @@ class Search extends Component
 
     public function render()
     {
-        return view('livewire.search', ['pharmacies' => $this->fillter()]);
+        return view('livewire.search', ['pharmacies' => $this->filter()]);
     }
 
-    public function fillter()
+    //********* filter search pharmacies *********//
+    public function filter()
     {
-        // Search By Neighborhood
+        ##### Search By Neighborhood #####
         if ($this->neighborhoodID != '') {
           return Pharmacy::where('neighborhood_id', $this->neighborhoodID)
             ->where('name', 'like', '%'.$this->search.'%')->paginate(12);
         }
 
-        // Search By Directorate
+        ##### Search By Directorate #####
         elseif ($this->directorateID != '') {
           return Pharmacy::whereIn('neighborhood_id', function ($query) {
                             $query->select('id')-> from('neighborhoods')->
@@ -56,7 +55,7 @@ class Search extends Component
             ->where('name', 'like', '%'.$this->search.'%')->paginate(12);
         }
 
-        // Search By City
+        ##### Search By City #####
         elseif ($this->cityID != '') {
           return Pharmacy::whereIn('neighborhood_id', function ($query){
                             $query->select('id')->from('directorates')->where('city_id', function ($query){
@@ -65,7 +64,7 @@ class Search extends Component
                 ->where('name', 'like', '%'.$this->search.'%')->paginate(12);
         }
 
-        // Search By Name Pharmacy
+        ##### Search By Name Pharmacy #####
         elseif($this->search != '')
           return Pharmacy::where('name', 'like', '%'.$this->search.'%')->paginate(12);
 
@@ -73,17 +72,22 @@ class Search extends Component
           return Pharmacy::with(['user'])->paginate(12);
     }
 
+    //********* when update city id *********//
     public function updatedcityID()
     {
+      $this->directorateID = '';
+      $this->neighborhoodID = '';
       $this->directorates = Directorate::where('city_id', $this->cityID)->orderby('name')->get();
     }
 
+   //********* when update directorate id *********//
     public function updateddirectorateID()
     {
+      $this->neighborhoodID = '';
       $this->neighborhoods = Neighborhood::where('directorate_id', $this->directorateID)->orderby('name')->get();
     }
 
-    // Resetting Pagination After Filtering Data
+  //********* Resetting Pagination After Filtering Data *********//
     public function updatedSearch()
     {
         $this->resetPage();
