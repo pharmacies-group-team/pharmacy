@@ -103,27 +103,34 @@
 
                 {{-- action --}}
                 <td>
-                  <x-order-details :order="$order">
-                    @slot('footer')
-                      @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
-                        <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
-                          <x-icon icon="order" />
-                          @lang('action.create-quote')
-                        </a>
-                      @endif
+                  <x-table-dropdown>
 
-                      <a href="{{ route('pharmacy.chat') }}" class="btn">
-                        <x-icon icon="message" />
-                        @lang('action.send-message')
-                      </a>
+                    <x-order-details :order="$order">
+                      @slot('footer')
+                        @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                          <a href="{{ route('pharmacy.quotation.create', $order->id) }}" class="btn">
+                            <x-icon icon="order" />
+                            @lang('action.create-quote')
+                          </a>
+                        @endif
 
-                      @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
-                        <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
-                          @lang('action.not-found')
+                        <a href="{{ route('pharmacy.chat') }}" class="btn">
+                          <x-icon icon="message" />
+                          @lang('action.send-message')
                         </a>
-                      @endif
-                    @endslot
-                  </x-order-details>
+
+                        @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                          <a href="{{ route('pharmacy.orders.refusal', $order->id) }}" class="btn btn-danger">
+                            @lang('action.not-found')
+                          </a>
+                        @endif
+                      @endslot
+                    </x-order-details>
+
+                    <div>2</div>
+                    <div>4</div>
+
+                  </x-table-dropdown>
                 </td>
               </tr>
             @endforeach
