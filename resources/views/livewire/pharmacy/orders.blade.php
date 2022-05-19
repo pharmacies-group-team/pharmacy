@@ -2,7 +2,7 @@
 
 <div>
   <div class="container">
-    <section class="section-header">
+    <section class="section-header t-card">
       <h2 class="text-large">أدارة الطلبات</h2>
       <select wire:model="status" class="form-control" name="city">
         <option value=""> الكل</option>

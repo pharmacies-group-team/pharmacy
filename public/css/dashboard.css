@@ -1344,6 +1344,8 @@ textarea.form-control{
 
 .table tbody td{
   white-space: nowrap;
+  border-bottom-width: 1px;
+  border-color: rgb(150 187 255 / 0.4);
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding: 1rem;
