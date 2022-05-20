@@ -2,7 +2,7 @@
 
 
 return [
-  "profile" => "بروفايل",
+  "profile" => "الملف الشخصي",
   "protection-and-privacy" => "الحماية والخصوصية",
 
   "order-details" => "تفاصيل الطلب",
@@ -14,7 +14,7 @@ return [
   "invoice-to" => "المستلم",
   "taxes" => "الضرائب",
   "subtotal" => "المجموع الفرعي",
-  "total" => "الاجمالي",
+  "total" => "الإجمالي",
   "date" => "تاريخ",
 
   "product-name" => "اسم المنتج",
