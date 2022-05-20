@@ -4,7 +4,7 @@
   <div class="container">
     <section class="section-header t-card">
       <h2 class="text-large">إدارة الطلبات</h2>
-      <select wire:model="status" class="form-control" name="city">
+      <select wire:model="status" class="form-control">
         <option value=""> عرض الكل</option>
         <option value="{{ \App\Enum\OrderEnum::NEW_ORDER }}">طلبات جديده</option><hr>
         <option value="{{ \App\Enum\OrderEnum::UNPAID_ORDER }}">طلبات قيد الدفع</option>
