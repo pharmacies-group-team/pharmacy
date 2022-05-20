@@ -20,11 +20,14 @@ class ChartController extends Controller
     foreach ($pharmacies->keys() as $month_number) {
       $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
     }
+    $i = 0;
+    foreach ($pharmacies as $key => $value) {
 
-    $chart['labels'] = $labels;
-    $chart['datasets'][1]['name']   = 'pharmacies';
-    $chart['datasets'][1]['values'] = $pharmacies->values()->toArray();
-
-    return response()->json($chart);
+      $new [] = [$labels[$i] => $value];
+      $i++;
+    }
+    $chart['datasets']['pharmacies']   = $new;
+    
+    return response()->json( $chart);
   }
 }
