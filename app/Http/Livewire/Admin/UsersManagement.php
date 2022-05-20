@@ -15,7 +15,7 @@ class UsersManagement extends Component
     public function render()
     {
         return view('livewire.admin.users-management',
-        ['users' => User::orderBy('created_at')->paginate(10)]);
+        ['users' => User::orderBy('created_at')->paginate(5)]);
     }
 
     public function updated($propertyName)
