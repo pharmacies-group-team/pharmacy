@@ -222,7 +222,10 @@ Route::prefix('/client')
 
       Route::get('/message/{id}', [MessageController::class, 'getMessage']);
       Route::post('message', [MessageController::class, 'sendMessage']);
-      Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
+      Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
+      Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
+      Route::get('/setCronJob',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
+      Route::post('/togglePerodicOrder/{id}',  [client\PerodicOrderController::class, 'togglePerodicOrder'])->name('togglePerodicOrder');
     });
 
     // order
