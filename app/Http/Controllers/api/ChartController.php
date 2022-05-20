@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
 {
-  public function pharmaciesChart(){
+  public function pharmaciesChart()
+  {
     $pharmacies = User::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
       ->role(RoleEnum::PHARMACY)
       ->whereYear('created_at', date('Y'))
@@ -31,7 +32,8 @@ class ChartController extends Controller
     return response()->json( $chart);
   }
 
-  public function clientsChart(){
+  public function clientsChart()
+  {
     $clients = User::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
       ->role(RoleEnum::CLIENT)
       ->whereYear('created_at', date('Y'))
@@ -51,9 +53,31 @@ class ChartController extends Controller
     return response()->json( $chart);
   }
 
-  public function ordersChart(){
+  public function ordersChart()
+  {
     $orders = Order::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
       ->whereYear('created_at', date('Y'))
+      ->groupBy(DB::raw('Month(created_at)'))
+      ->pluck('count', 'month');
+
+    foreach ($orders->keys() as $month_number) {
+      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
+    }
+    $i = 0;
+    foreach ($orders as $key => $value) {
+
+      $new [] = [$labels[$i] => $value];
+      $i++;
+    }
+    $chart['datasets']['orders']   = $new;
+    return response()->json( $chart);
+  }
+
+  public function ordersPharmacyChart($id)
+  {
+    $orders = Order::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
+      ->whereYear('created_at', date('Y'))
+      ->where('pharmacy_id', $id)
       ->groupBy(DB::raw('Month(created_at)'))
       ->pluck('count', 'month');
 
