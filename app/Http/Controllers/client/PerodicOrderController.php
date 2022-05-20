@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\client;
 
-use App\Http\Controllers\Controller\OrderController;
+use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
-use App\Services\NotificationService;
 
 use App\Models\PerodicOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\Models\Order;
 
-use App\Enum\PerodicOrderEnum;
 
 
 class PerodicOrderController extends Controller
@@ -30,6 +26,10 @@ class PerodicOrderController extends Controller
   // add new perodic task
   public function addTask(Request $request)
   {
+
+    // validator
+    Validator::validate($request->all(), PerodicOrder::roles(), PerodicOrder::messages());
+
     $data = $request->all();
     $perodic_order = new PerodicOrder();
     $perodic_order->user_id = Auth::id();
@@ -43,10 +43,14 @@ class PerodicOrderController extends Controller
     // }
     $perodic_order->next_order_date = $data['start_date'];
     $perodic_order->is_active = 1;
-    $perodic_order->save();
-    return back()->with('status', 'تم اضافه الطلب الدوري بنجاح');
+    // $perodic_order->save();
+    if ($perodic_order->save()) {
+      $result = true;
+    } else {
+      $result = false;
+    }
+    return back()->with('status', $result ? 'تم اضافه الطلب الدوري بنجاح' : 'failed');
   }
-
 
 
   // activate and deactivate perodic orders
@@ -57,3 +61,5 @@ class PerodicOrderController extends Controller
     return redirect()->back()->with('status', $perodic_order ? 'تمت العملية بنجاح.' : 'failed');
   }
 }
+
+// $order->update(['status' => OrderEnum::DELIVERED_ORDER]);

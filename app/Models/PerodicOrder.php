@@ -31,4 +31,26 @@ class PerodicOrder extends Model
   {
     return $this->belongsTo(Order::class, 'order_id');
   }
+
+
+  /**
+   * validation
+   */
+
+  public static function roles()
+  {
+    return
+      [
+        'perodic_date_type'    => 'required|min:5|max:100|string',
+        'start_date' => 'required|date|after_or_equal:today'
+      ];
+  }
+
+  public static function messages()
+  {
+    return [
+      'start_date.after_or_equal' => 'يجب أن يكون تاريخاً لاحقاً أو مطابقاً لتاريخ اليوم ',
+      'start_date.required' => 'لايمكنك ترك الحقل فارغ',
+    ];
+  }
 }
