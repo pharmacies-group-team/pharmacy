@@ -29,12 +29,12 @@ class ClientTest extends TestCase
             ->assertStatus(302);
     }
 
-    public function test_client_invoiceProfile_page()
-    {
-        $this
-            ->get('/client/invoice-profile')
-            ->assertStatus(302);
-    }
+//    public function test_client_invoiceProfile_page()
+//    {
+//        $this
+//            ->get('/client/invoice-profile')
+//            ->assertStatus(302);
+//    }
 
     // orders
     public function test_client_orders_page()

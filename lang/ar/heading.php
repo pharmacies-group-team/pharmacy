@@ -2,9 +2,16 @@
 
 
 return [
-  "profile" => "بروفايل",
+  "profile" => "الملف الشخصي",
   "protection-and-privacy" => "الحماية والخصوصية",
+
   "order-details" => "تفاصيل الطلب",
+  "orders" => "orders",
+
+  "pharmacies" => "pharmacies",
+
+  "clients" => "clients",
+
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",
   "invoice_id" => "رقم فاتورة",
@@ -12,7 +19,7 @@ return [
   "invoice-to" => "المستلم",
   "taxes" => "الضرائب",
   "subtotal" => "المجموع الفرعي",
-  "total" => "الاجمالي",
+  "total" => "الإجمالي",
   "date" => "تاريخ",
 
   "product-name" => "اسم المنتج",
@@ -28,6 +35,8 @@ return [
   "about-us" => "عن صيدلية أونلاين",
   "privacy" => "سياسة الخصوصية",
   "contact-us" => "تواصل معنا",
+
+  "chat" => "الرسائل",
 
   // "" => "",
 

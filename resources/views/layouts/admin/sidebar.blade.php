@@ -11,7 +11,8 @@
 
     {{-- users --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif" href="{{ route('admin.users.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif"
+        href="{{ route('admin.users.index') }}">
         <div class='icon'>
           <ion-icon src='{{ asset('images/icons/users.svg') }}'></ion-icon>
         </div>
@@ -124,5 +125,18 @@
         <span>أعدادات الحساب</span>
       </a>
     </li>
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.financial.operations') active @endif"
+         href="{{ route('admin.financial.operations') }}">
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
+
   </ul>
 </nav>

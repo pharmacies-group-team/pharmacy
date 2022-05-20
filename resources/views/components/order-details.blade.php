@@ -1,6 +1,6 @@
 @if (isset($order))
   <div x-data="{ orderModal: false }">
-    <button @click="orderModal = true" class="badge badge-info">
+    <button @click="orderModal = true" class="badge">
       @lang('action.order-details')
     </button>
 

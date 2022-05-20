@@ -20,19 +20,6 @@
       </a>
     </li>
 
-    {{-- message --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.messages') active @endif"
-        href="{{ route('pharmacy.messages') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
-        </div>
-
-        <span>الرسائل </span>
-      </a>
-    </li>
-
     {{-- orders --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.orders.index') active @endif"
@@ -46,6 +33,30 @@
       </a>
     </li>
 
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
+         href="{{ route('pharmacy.financial.operations') }}">
+
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
+
+    {{-- chat --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.chat') </span>
+      </a>
+    </li>
+
     {{-- profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
@@ -54,7 +65,7 @@
           <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
         </div>
 
-        <span>بروفايل الصيدلية</span>
+        <span>الملف الشخصي </span>
       </a>
     </li>
 
@@ -67,21 +78,9 @@
           <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
         </div>
 
-        <span>أعدادات الحساب</span>
+        <span>إعدادات الحساب</span>
       </a>
     </li>
 
-    {{-- invoice profile --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.invoice-profile') active @endif"
-        href="{{ route('pharmacy.invoice-profile') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
-        </div>
-
-        <span>@lang('heading.invoice-profile')</span>
-      </a>
-    </li>
   </ul>
 </nav>

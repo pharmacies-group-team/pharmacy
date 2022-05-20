@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\FinancialOperationsServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -27,10 +28,15 @@ class DashboardController extends Controller
         return view('client.address');
     }
 
-    public function invoiceProfile()
+    //********* get all financial operations *********//
+    public function getFinancialOperations()
     {
-        $user = Auth::user();
+      return FinancialOperationsServices::getFinancialOperations('client');
+    }
 
-        return view('client.invoice-profile', compact('user'));
+    // chat page 
+    public function showChat()
+    {
+        return view('client.chat');
     }
 }

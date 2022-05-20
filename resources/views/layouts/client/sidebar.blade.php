@@ -8,30 +8,6 @@
 
   {{-- sidebar links --}}
   <ul class="list">
-    {{-- index --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.index') active @endif" href="{{ route('client.index') }}">
-
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/dashboard.svg') }}'></ion-icon>
-        </div>
-
-        <span>لوحة التحكم</span>
-      </a>
-    </li>
-
-    {{-- profile --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
-        href="{{ route('client.account-settings') }}">
-
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
-        </div>
-
-        <span>بروفايل </span>
-      </a>
-    </li>
 
     {{-- orders --}}
     <li>
@@ -47,6 +23,29 @@
       </a>
     </li>
 
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.financial.operations') active @endif"
+         href="{{ route('client.financial.operations') }}">
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
+
+    {{-- chat --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.chat') active @endif" href="{{ route('client.chat') }}">
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.chat') </span>
+      </a>
+    </li>
+
     {{-- addresses --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
@@ -58,16 +57,16 @@
       </a>
     </li>
 
-
-    {{-- invoice profile --}}
+    {{-- profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.invoice-profile') active @endif"
-        href="{{ route('client.invoice-profile') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
+         href="{{ route('client.account-settings') }}">
+
         <div class="icon">
-          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
+          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
         </div>
 
-        <span>@lang('heading.invoice-profile')</span>
+        <span>إعدادات الحساب </span>
       </a>
     </li>
 

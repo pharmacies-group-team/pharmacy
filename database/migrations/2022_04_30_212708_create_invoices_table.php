@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
 
-            $table->foreignId('address_id')->unique();
+            $table->foreignId('address_id');
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
 
             $table->foreignId('payment_user_id')->nullable();

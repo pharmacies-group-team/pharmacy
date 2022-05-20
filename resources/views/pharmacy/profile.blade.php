@@ -1,4 +1,4 @@
-@extends('layouts/pharmacy/master')
+@extends('layouts.pharmacy/master')
 
 @php use App\Enum\PharmacyEnum;  @endphp
 
