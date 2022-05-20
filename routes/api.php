@@ -21,6 +21,7 @@ Route::controller(ChartController::class)
     Route::get('/report/pharmacies', 'pharmaciesChart')->name('pharmacies');
     Route::get('/report/clients', 'clientsChart')->name('clients');
     Route::get('/report/orders', 'ordersChart')->name('orders');
+    Route::get('/report/orders/{id}', 'ordersPharmacyChart')->name('orders.pharmacy');
   });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
