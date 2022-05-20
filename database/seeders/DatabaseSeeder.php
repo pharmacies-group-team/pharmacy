@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
       WebInfoSeeder::class,
       PharmacySeeder::class,
       AdSeeder::class,
-      OrderSeeder::class
+      OrderSeeder::class,
+
+      // only enable this for testing char.js
+      // DevTestSeeder::class
     ]);
   }
 }
