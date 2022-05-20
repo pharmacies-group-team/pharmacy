@@ -12,9 +12,8 @@ class CityController extends Controller
 
     public function index()
     {
-          $cityies = City::all();
-          return response($cityies);
-         // return view('cities', compact('cityies'));
+      $cities = City::all();
+      return view('admin.cities', compact('cities'));
     }
 
     public function store(Request $request)
