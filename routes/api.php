@@ -19,7 +19,7 @@ Route::controller(ChartController::class)->group(function() {
   Route::get('/report/pharmacies/chart', 'pharmaciesChart')->name('pharmacies.chart');
   Route::get('/report/clients/chart', 'clientsChart')->name('clients.chart');
   Route::get('/report/orders/chart', 'ordersChart')->name('orders.chart');
-
+  Route::get('/report/orders/chart/{id}', 'ordersPharmacyChart')->name('orders.pharmacy.chart');
 
 });
 
