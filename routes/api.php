@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(ChartController::class)->group(function() {
-  Route::get('/report/pharmacies/chart', 'pharmaciesChart')->name('pharmacies.chart');
-  Route::get('/report/clients/chart', 'clientsChart')->name('clients.chart');
-  Route::get('/report/orders/chart', 'ordersChart')->name('orders.chart');
-
-
-});
+Route::controller(ChartController::class)
+  ->name('report')
+  ->group(function () {
+    Route::get('/report/pharmacies', 'pharmaciesChart')->name('pharmacies');
+    Route::get('/report/clients', 'clientsChart')->name('clients');
+    Route::get('/report/orders', 'ordersChart')->name('orders');
+  });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   return $request->user();
