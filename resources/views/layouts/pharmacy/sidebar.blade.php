@@ -41,7 +41,7 @@
           <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
         </div>
 
-        <span>بروفايل الصيدلية</span>
+        <span>الملف الشخصي </span>
       </a>
     </li>
 
@@ -54,7 +54,7 @@
           <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
         </div>
 
-        <span>أعدادات الحساب</span>
+        <span>إعدادات الحساب</span>
       </a>
     </li>
 
