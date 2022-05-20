@@ -19,16 +19,11 @@ class CityController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-          // min:2 becouse some cities in Yemen can be two litter like Ab
-          'name' => 'required|min:2|max:30|string',
-        ]);
-        City::create([
-          'name' => $request->input('name'),
-        ]);
+      $request->validate([ 'name' => 'required|min:2|max:30|string' ]);
 
-        return response(['added successfully', $validator->errors()]);
-      //  return redirect()->back()->with('status', 'added successfully');
+      City::create([ 'name' => $request->input('name') ]);
+
+      return redirect()->back()->with('status', 'تمت الإضافة بنجاح');
     }
 
     public function show($id)
