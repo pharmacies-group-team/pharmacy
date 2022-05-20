@@ -92,8 +92,8 @@
 
     {{-- City Method --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === '') active @endif"
-        href="{{ route('admin.payments.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.cities.index') active @endif"
+        href="{{ route('admin.cities.index') }}">
         <div class='icon'>
           <ion-icon src='{{ asset('images/icons/city.svg') }}'></ion-icon>
         </div>
