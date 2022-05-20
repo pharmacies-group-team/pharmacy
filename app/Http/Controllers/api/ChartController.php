@@ -67,8 +67,7 @@ class ChartController extends Controller
       $new[] = [$labels[$i] => $value];
       $i++;
     }
-    $chart['datasets'][$nameDS] = $new;
-    return $chart;
+    return $new;
   }
 
   private function generateMonth($result)
