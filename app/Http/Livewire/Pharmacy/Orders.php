@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class Orders extends Component
 {
     use WithPagination;
-    
+
     public $status;
 
     public function render()
@@ -32,7 +32,7 @@ class Orders extends Component
     }
 
     //********* Resetting Pagination After Filtering Data *********//
-    public function updatedSearch()
+    public function updatedStatus()
     {
       $this->resetPage();
     }
