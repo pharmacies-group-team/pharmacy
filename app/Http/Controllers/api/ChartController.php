@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
 {
+  //********* Report on the number of pharmacies registered on the site each month  *********//
   public function pharmaciesChart()
   {
     $pharmacies = User::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
@@ -19,19 +20,10 @@ class ChartController extends Controller
       ->groupBy(DB::raw('Month(created_at)'))
       ->pluck('count', 'month');
 
-    foreach ($pharmacies->keys() as $month_number) {
-      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
-    }
-    $i = 0;
-    foreach ($pharmacies as $key => $value) {
-
-      $new [] = [$labels[$i] => $value];
-      $i++;
-    }
-    $chart['datasets']['pharmacies']   = $new;
-    return response()->json( $chart);
+    return response()->json(  $this->generateJson($pharmacies, 'pharmacies'));
   }
 
+  //********* Report on the number of clients registered on the site each month  *********//
   public function clientsChart()
   {
     $clients = User::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
@@ -40,19 +32,10 @@ class ChartController extends Controller
       ->groupBy(DB::raw('Month(created_at)'))
       ->pluck('count', 'month');
 
-    foreach ($clients->keys() as $month_number) {
-      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
-    }
-    $i = 0;
-    foreach ($clients as $key => $value) {
-
-      $new [] = [$labels[$i] => $value];
-      $i++;
-    }
-    $chart['datasets']['clients']   = $new;
-    return response()->json( $chart);
+    return response()->json(  $this->generateJson($clients, 'client') );
   }
 
+  //********* Report on the number of orders each month  *********//
   public function ordersChart()
   {
     $orders = Order::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
@@ -60,19 +43,10 @@ class ChartController extends Controller
       ->groupBy(DB::raw('Month(created_at)'))
       ->pluck('count', 'month');
 
-    foreach ($orders->keys() as $month_number) {
-      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
-    }
-    $i = 0;
-    foreach ($orders as $key => $value) {
-
-      $new [] = [$labels[$i] => $value];
-      $i++;
-    }
-    $chart['datasets']['orders']   = $new;
-    return response()->json( $chart);
+    return response()->json(  $this->generateJson($orders, 'orders'));
   }
 
+  //********* Report on the number of requests to the pharmacy each month  *********//
   public function ordersPharmacyChart($id)
   {
     $orders = Order::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
@@ -81,16 +55,29 @@ class ChartController extends Controller
       ->groupBy(DB::raw('Month(created_at)'))
       ->pluck('count', 'month');
 
-    foreach ($orders->keys() as $month_number) {
-      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
-    }
-    $i = 0;
-    foreach ($orders as $key => $value) {
+    return response()->json( $this->generateJson($orders, 'orders'));
+  }
 
+  private function generateJson($result, $nameDS)
+  {
+    $i = 0;
+    $labels = $this->generateMonth($result);
+
+    foreach ($result as $key => $value) {
       $new [] = [$labels[$i] => $value];
       $i++;
     }
-    $chart['datasets']['orders']   = $new;
-    return response()->json( $chart);
+    $chart['datasets'][$nameDS] = $new;
+    return $chart;
   }
+
+  private function generateMonth($result)
+  {
+    foreach ($result->keys() as $month_number) {
+      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
+    }
+
+    return $labels;
+  }
+
 }
