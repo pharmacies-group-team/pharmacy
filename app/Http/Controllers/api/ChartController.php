@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Enum\RoleEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,6 +48,25 @@ class ChartController extends Controller
       $i++;
     }
     $chart['datasets']['clients']   = $new;
+    return response()->json( $chart);
+  }
+
+  public function ordersChart(){
+    $orders = Order::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
+      ->whereYear('created_at', date('Y'))
+      ->groupBy(DB::raw('Month(created_at)'))
+      ->pluck('count', 'month');
+
+    foreach ($orders->keys() as $month_number) {
+      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
+    }
+    $i = 0;
+    foreach ($orders as $key => $value) {
+
+      $new [] = [$labels[$i] => $value];
+      $i++;
+    }
+    $chart['datasets']['orders']   = $new;
     return response()->json( $chart);
   }
 }
