@@ -1,3 +1,5 @@
+{{-- utility function --}}
+
 <script>
   function imageViewer() {
     return {
@@ -29,6 +31,11 @@
    */
   let els = $el => document.querySelectorAll($el);
 </script>
+
+
+{{-- chart js --}}
+<script src="{{ asset('js/chart.js') }}"></script>
+
 @yield('alpine-script')
 
 <script src="{{ asset('js/alpine.min.js') }}"></script>
