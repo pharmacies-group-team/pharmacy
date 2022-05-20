@@ -39,10 +39,19 @@
 
               <td>{{ $city->created_at->format('Y-m-d') }}</td>
 
-              <td>
-                <x-table-dropdown>
+              <td class="table-action" x-data="{ editModal: false, deleteModal: false }">
+                {{-- edit --}}
+                <button @click="editModal = true">
+                  <x-icon icon='edit' />
+                </button>
+                <x-admin.edit-city :city='$city' />
 
-                </x-table-dropdown>
+
+                {{-- remove ads --}}
+                <button @click="deleteModal = true">
+                  <x-icon icon='remove' />
+                </button>
+                <x-admin.delete-city :city="$city" />
               </td>
 
 
@@ -56,12 +65,12 @@
 
     {{-- modals --}}
     <div>
-      {{-- add ads modal --}}
+      {{-- add city modal --}}
       <x-modal title="اضافة مدينة" open="addModal">
         <form action="{{ route('admin.cities.store') }}" method="post" enctype="multipart/form-data" x-ref="addForm">
           @csrf
 
-          {{-- add titles --}}
+          {{-- add name --}}
           <div class="form-group">
             <label for="ad-name-label">الاسم</label>
             <input id="ad-name-label" name="name" :value="city.name" type="text"

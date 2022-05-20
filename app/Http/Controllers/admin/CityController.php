@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
-
+    //********* get all cities *********//
     public function index()
     {
       $cities = City::all();
       return view('admin.cities', compact('cities'));
     }
 
+    //********* create new city *********//
     public function store(Request $request)
     {
-
       $request->validate([ 'name' => 'required|min:2|max:30|string' ]);
 
       City::create([ 'name' => $request->input('name') ]);
@@ -26,29 +26,19 @@ class CityController extends Controller
       return redirect()->back()->with('status', 'تمت الإضافة بنجاح');
     }
 
-    public function show($id)
-    {
-      $cityies = City::where('id', $id)->get();
-      return response($cityies);
-    }
-
+    //********* update city by id *********//
     public function update(Request $request, $id)
     {
-      $validator = Validator::make($request->all(), [
-        'name' => 'required|min:2|max:30|string',
-      ]);
+      $request->validate([ 'name' => 'required|min:2|max:30|string' ]);
 
-      City::where('id', $id)
-        ->update([
-          'name' => $request->input('name')
-        ]);
-       // return redirect()->back()->with('status', 'edit successfully');
-        return response(['edit successfully', $validator->errors()]);
+      City::find($id)->update([ 'name' => $request->input('name') ]);
+
+      return redirect()->back()->with('status', 'تمت التعديل بنجاح');
     }
 
+    //********* delete city by id *********//
     public function destroy($id)
     {
-      return City::where('id', $id)->delete() ? "deleted" : 'not deleted';
-      //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
+      return redirect()->back()->with('status', City::find($id)->delete() ? "تم الحذف بنجاح" : 'يبدو أن هناك مشكلة');
     }
 }
