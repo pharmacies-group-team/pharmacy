@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/report/pharmacies/chart', [ChartController::class, 'pharmaciesChart'])->name('pharmacies.chart');
+Route::controller(ChartController::class)->group(function() {
+  Route::get('/report/pharmacies/chart', 'pharmaciesChart')->name('pharmacies.chart');
+  Route::get('/report/clients/chart', 'clientsChart')->name('clients.chart');
+
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   return $request->user();
