@@ -1428,13 +1428,14 @@ textarea.form-control{
   max-height: 100vh;
   flex: 1 1 0%;
   overflow-x: hidden;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   padding-bottom: 3.5rem;
 }
 
 .dashboard-content main{
+  margin-top: 2.5rem;
   min-height: 100%;
-  padding-right: 2.5rem;
-  padding-top: 2.5rem;
 }
 
 .dashboard .t-card{
@@ -1462,6 +1463,8 @@ body{
 }
 
 .nav{
+  margin-left: -2.5rem;
+  margin-right: -2.5rem;
   padding-right: 2.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;

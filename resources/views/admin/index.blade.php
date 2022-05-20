@@ -3,17 +3,17 @@
   <main class="page-admin-report">
     <div class="t-chart">
 
-      <div class="t-chart-item">
+      <div class="t-chart-item t-card">
         <h3 class="t-chart-title">@lang('heading.orders')</h3>
         <canvas id="chart-orders" width="300" height="300"></canvas>
       </div>
 
-      <div class="t-chart-item">
+      <div class="t-chart-item t-card">
         <h3 class="t-chart-title">@lang('heading.pharmacies')</h3>
         <canvas id="chart-pharmacies" width="300" height="300"></canvas>
       </div>
 
-      <div class="t-chart-item">
+      <div class="t-chart-item t-card">
         <h3 class="t-chart-title">@lang('heading.clients')</h3>
         <canvas id="chart-clients" width="300" height="300"></canvas>
       </div>
