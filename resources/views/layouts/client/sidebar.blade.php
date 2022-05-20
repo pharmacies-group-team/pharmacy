@@ -62,7 +62,32 @@
                 <span> الطلبات الدورية</span>
             </a>
         </li>
+        <span>إدارة عناوين التوصيل </span>
+        </a>
+        </li>
 
+        {{-- chat --}}
+        <li>
+            <a class="list-item-link @if (Route::currentRouteName() === 'client.chat') active @endif"
+                href="{{ route('client.chat') }}">
+                <div class="icon">
+                    <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
+                </div>
+
+                <span>@lang('heading.chat') </span>
+            </a>
+        </li>
+
+
+        {{-- invoice profile --}}
+        <li>
+            <a class="list-item-link @if (Route::currentRouteName() === 'client.financial.operations') active @endif"
+                href="{{ route('client.financial.operations') }}">
+                <div class="icon">
+                    <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
+                </div>
+
+        </li>
         {{-- addresses --}}
         <li>
             <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif"

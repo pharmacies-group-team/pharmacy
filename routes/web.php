@@ -5,6 +5,7 @@ use App\Enum\RoleEnum;
 use App\Http\Controllers\Auth\LoginCustomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,10 @@ use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\DB;
 
 
+// shared Controllers
+use App\Http\Controllers\ChatController;
+
+// standard Controllers
 use App\Http\Controllers\web;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\client;
@@ -26,11 +31,10 @@ use App\Http\Controllers\pharmacy;
 Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
 
 Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
-  //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-  Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
-    ->name('update.avatar');
+  Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])->name('update.avatar');
 });
 
+Route::get('generate-invoice-pdf/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice-pdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +69,25 @@ Route::controller(NotificationController::class)->group(function () {
   Route::post('/read/notification', 'read')->name('notification.read');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Notifications Routes
+|--------------------------------------------------------------------------
+*/
+
+// chat
+Route::controller(ChatController::class)
+  ->prefix('chat')
+  // TODO enable auth
+  // ->middleware(['auth'])
+  ->name('chat.')
+  ->group(function () {
+
+    Route::get('/users',  'getUsers')->name('getUsers');
+    Route::get('/messages/{id}', 'getUserMessages')->name('userMessages');
+
+    Route::post('/messages/send',  'sendMessage')->name('sendMessage');
+  });
 
 /*
 |--------------------------------------------------------------------------
@@ -92,16 +115,11 @@ Route::prefix('/pharmacy')
       // profile
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
-      // Route::get('/messages', 'messages')->name('messages');
-      Route::get('/messages',  [MessageController::class, 'index']);
-      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
-      Route::post('message', [MessageController::class, 'sendMessage']);
-      Route::get('/users', [MessageController::class, 'getUsers']);
-
-
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
-      Route::get('/invoice-profile', 'getInvoiceProfile')->name('invoice-profile');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
+      Route::get('/chat', 'showChat')->name('chat');
     });
 
     Route::controller(pharmacy\OrderController::class)
@@ -141,6 +159,11 @@ Route::prefix('/admin')
   ->name('admin.')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
+
+    Route::controller(admin\DashboardController::class)->group(function () {
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+    });
 
     /*------------------------------ Users ------------------------------*/
     Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
@@ -217,14 +240,14 @@ Route::prefix('/client')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
-      Route::get('/messages',  [MessageController::class, 'index']);
-      Route::get('/users', [MessageController::class, 'getUsers']);
 
-      Route::get('/message/{id}', [MessageController::class, 'getMessage']);
-      Route::post('message', [MessageController::class, 'sendMessage']);
       Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
       Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
       Route::post('/togglePerodicOrder/{id}',  [client\PerodicOrderController::class, 'togglePerodicOrder'])->name('togglePerodicOrder');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+
+      // chat
+      Route::get('/chat', 'showChat')->name('chat');
     });
 
     // order
@@ -258,4 +281,10 @@ Route::prefix('/client')
   });
 
 
+
 Auth::routes(['verify' => true]);
+
+// only for document dev components
+Route::get('/dev', function () {
+  return view('web.dev-docs.index');
+});

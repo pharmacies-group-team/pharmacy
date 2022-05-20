@@ -46,10 +46,10 @@
           @if (isset($quotationDetails))
             @foreach ($quotationDetails as $details)
               <tr>
-                <td> {{ $details->product_name }} </td>
-
+                
                 <td>
                   <div>
+                    {{ $details->product_unit }}
                     @if ($details->product_unit === \App\Enum\QuotationEnum::TYPE_BOTTLE)
                       عبوه
                     @elseif($details->product_unit === \App\Enum\QuotationEnum::TYPE_CARTONS)
@@ -66,7 +66,7 @@
                 <td> {{ $details->price }} {{ $details->currency }} </td>
 
                 {{-- total --}}
-                <td> {{ $details->total }} </td>
+                <td> {{$details->price * $details->quantity }} {{ $details->currency }}</td>
 
               </tr>
             @endforeach
@@ -76,7 +76,7 @@
             <td>
               الأجمالي
             </td>
-            <td colspan="5"> {{ $quotation->total }} </td>
+            <td colspan="5"> {{ $quotation->total }} {{ $details->currency }}</td>
           </tr>
         </tbody>
       </table>

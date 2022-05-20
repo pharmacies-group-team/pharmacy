@@ -60,8 +60,7 @@
 
     {{-- chat --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat.index') active @endif"
-        href="{{ route('pharmacy.chat.index') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
         <div class="icon">
           <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
         </div>
@@ -72,8 +71,8 @@
 
     {{-- invoice profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.invoice-profile') active @endif"
-        href="{{ route('pharmacy.invoice-profile') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
+        href="{{ route('pharmacy.financial.operations') }}">
 
         <div class='icon'>
           <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>

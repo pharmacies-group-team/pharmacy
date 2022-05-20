@@ -11,18 +11,19 @@
       <header class="t-header">
         <div class="section-header">
           <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
-
-          @if ($order->status === OrderEnum::DELIVERED_ORDER)
-            <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب
-            </h4>
-          @elseif($order->status === OrderEnum::PAID_ORDER)
-            <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
-          @endif
-
+          <div style="display: flex; gap: 12px">
+            @if ($order->status === OrderEnum::DELIVERED_ORDER)
+              <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب
+              </h4>
+            @elseif($order->status === OrderEnum::PAID_ORDER)
+              <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
+            @endif
+            <a class="btn" href="{{ route('generate.invoice-pdf', $order->id) }}"> تصدير PDF</a>
+          </div>
         </div>
         {{-- invoice info --}}
         <div class="t-invoice-info"
-          style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+          style="justify-content: space-between; padding: 10px 30px; background: white; border-radius: 8px; border: 1px solid #DDE9FF">
           {{-- date --}}
           <div class="t-item">
             <span class="t-item-key" style="margin-left: 8px; color: #3869BA">@lang('heading.date')</span>
@@ -39,7 +40,7 @@
 
       {{-- invoice desc --}}
       <div class="t-invoice-desc"
-        style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+        style="justify-content: space-between; padding: 10px 30px; background: white; border-radius: 8px; border: 1px solid #DDE9FF">
         {{-- invoice from --}}
         <div class="t-item">
           <h4 class="t-title">@lang('heading.invoice-from')</h4>
@@ -122,7 +123,7 @@
 
     {{-- invoice table --}}
     <div class="table-wrapper">
-      <table>
+      <table style="background: white;">
         <thead>
           <tr>
             {{-- name --}}
@@ -169,16 +170,7 @@
 
     {{-- invoice total --}}
     <div class="t-total"
-      style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
-      {{-- <div class="t-item"> --}}
-      {{-- <h4 class="t-key" style="color: #3869BA">@lang('heading.subtotal')</h4> --}}
-      {{-- <h4 class="t-value">2000.00</h4> --}}
-      {{-- </div> --}}
-
-      {{-- <div class="t-item"> --}}
-      {{-- <h4 class="t-key" style="color: #3869BA">@lang('heading.taxes')</h4> --}}
-      {{-- <h4 class="t-value">10%</h4> --}}
-      {{-- </div> --}}
+      style="justify-content: space-between; padding: 10px 30px; background: white; border-radius: 8px; border: 1px solid #DDE9FF">
 
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">@lang('heading.total')</h4>
@@ -191,7 +183,7 @@
 
     {{-- address --}}
     <div class="t-total"
-      style="justify-content: space-between; padding: 10px 30px; background: #F7F9FE; border-radius: 8px; border: 1px solid #DDE9FF">
+      style="justify-content: space-between; padding: 10px 30px; background: white; border-radius: 8px; border: 1px solid #DDE9FF">
       <h4 class="t-title" style="color: #3869BA; font-size: 18px; margin-bottom: 16px">عنوان التوصيل </h4>
       <div class="t-item">
         <h4 class="t-key" style="color: #3869BA">اسم المستلم</h4>
@@ -203,7 +195,7 @@
         <h4 class="t-value">{{ $address->phone }}</h4>
       </div>
 
-      <div class="t-item">
+      <div class="t-item" style="max-width: 100%;">
         <h4 class="t-key" style="color: #3869BA">وصف العنوان</h4>
         <h4 class="t-value">{{ $address->desc }}</h4>
       </div>

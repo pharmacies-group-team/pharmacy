@@ -36,12 +36,12 @@ class PharmacyTest extends TestCase
             ->assertStatus(302);
     }
 
-    public function test_pharmacy_invoiceProfile_page()
-    {
-        $this
-            ->get('/pharmacy/invoice-profile')
-            ->assertStatus(302);
-    }
+//    public function test_pharmacy_invoiceProfile_page()
+//    {
+//        $this
+//            ->get('/pharmacy/invoice-profile')
+//            ->assertStatus(302);
+//    }
 
     public function test_pharmacy_orders_page()
     {

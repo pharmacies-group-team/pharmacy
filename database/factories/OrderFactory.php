@@ -47,7 +47,6 @@ class OrderFactory extends Factory
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 2,
             'price'        => 3000,
-            'total'        => 6000,
             'quotation_id' => $quotation->id
           ]);
         QuotationDetails::create(
@@ -56,7 +55,6 @@ class OrderFactory extends Factory
             'product_unit' => QuotationEnum::TYPE_BOTTLE,
             'quantity'     => 2,
             'price'        => 2000,
-            'total'        => 4000,
             'quotation_id' => $quotation->id
           ]);
         QuotationDetails::create(
@@ -65,7 +63,6 @@ class OrderFactory extends Factory
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 1,
             'price'        => 1000,
-            'total'        => 1000,
             'quotation_id' => $quotation->id
           ]);
         QuotationDetails::create(
@@ -74,7 +71,6 @@ class OrderFactory extends Factory
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 3,
             'price'        => 3000,
-            'total'        => 9000,
             'quotation_id' => $quotation->id
           ]);
         QuotationDetails::create(
@@ -83,7 +79,6 @@ class OrderFactory extends Factory
             'product_unit' => QuotationEnum::TYPE_CARTONS,
             'quantity'     => 2,
             'price'        => 4000,
-            'total'        => 8000,
             'quotation_id' => $quotation->id
           ]);
       });

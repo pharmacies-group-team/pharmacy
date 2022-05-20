@@ -48,6 +48,14 @@ use App\Enum\PharmacyEnum;
                         @foreach ($orders as $order)
                             {{-- @php
                           $e={"id":1,"order":"Voluptatum aut in sunt incidunt. Exercitationem non tempora animi sed unde nihil. Ipsam dolorem consectetur reiciendis corporis ea ipsam aperiam.","image":"default.jpg","status":"UNPAID","periodic":0,"re_order_date":null,"user_id":3,"pharmacy_id":2,"deleted_at":null,"created_at":"2022-05-19T07:43:52.000000Z","updated_at":"2022-05-19T07:43:52.000000Z","perodic_orders":{"id":1,"order_id":1,"user_id":3,"next_order_date":null,"start_date":"2022-05-21","perodic_date_type":"weekly","is_active":1,"created_at":null,"updated_at":null}}
+                    <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->pharmacy->logo) }}" alt="profile avatar" width="30"
+                      style="max-width: 30px; width: 100%" height="30">
+
+                    <a href="{{ route('show.pharmacy.profile', $order->pharmacy->pharmacy->id) }}" style="color: #3869BA">
+                      {{ $order->pharmacy->pharmacy->name }}
+                    </a>
+                  </div>
+                </td>
 
                         @endphp --}}
 

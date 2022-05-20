@@ -23,6 +23,11 @@
    * @returns {HTMLElement}
    */
   let el = $el => document.querySelector($el);
+
+  /**
+   * @returns {HTMLElement}
+   */
+  let els = $el => document.querySelectorAll($el);
 </script>
 @yield('alpine-script')
 

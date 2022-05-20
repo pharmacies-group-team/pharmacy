@@ -70,9 +70,9 @@ use App\Enum\PharmacyEnum;
 
                 <div>
                   <span>
-                    {{ $pharmacy->neighborhood->name }} /
+                    {{ $pharmacy->neighborhood->directorate->name }} /
                   </span>
-                  <span>{{ $pharmacy->neighborhood->directorate->name }}</span>
+                  <span>{{ $pharmacy->neighborhood->name }}</span>
                 </div>
               </div>
             @endif
@@ -80,8 +80,11 @@ use App\Enum\PharmacyEnum;
         </a>
 
         {{-- action --}}
-        <button class="btn btn-full item-link" @click="addOrderModal = true; pharmacy = {{ $pharmacy }}">أطلب
-          دوائك</button>
+        <div x-data="{ addOrderModal: false }">
+          <button class="btn btn-full item-link" @click="addOrderModal = true">أطلب
+            دوائك</button>
+          <x-web.pharmacy-add-order :pharmacyName="$pharmacy->name" :pharmacyID="$pharmacy->user->id" />
+        </div>
       </article>
     @endforeach
   </section>

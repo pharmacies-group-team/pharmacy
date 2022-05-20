@@ -45,6 +45,23 @@ class NotificationAdminService
       self::sendNotification($admin, $data);
     }
 
+    public static function transferAmountToPharmacy($order)
+    {
+      $sender   = User::find($order->user->id);
+      $admin    = User::role(RoleEnum::SUPER_ADMIN)->first();
+      $pharmacy = User::find($order->pharmacy_id)->pharmacy;
+
+      $data     = [
+        'sender'   => $sender,
+        'receiver' => $admin->id,
+        'link'     => SettingEnum::DOMAIN.'admin/invoice/'.$order->invoice->id,
+        'message'  => 'لقد تم دفع الفاتورة من قبل '.$sender->name . ' إلى صيدلية ' . $pharmacy->name
+      ];
+
+      // send and save notification in DB
+      self::sendNotification($admin, $data);
+    }
+
     //********* save notification in db and send to receiver *********//
     private static function sendNotification($receiver, $data)
     {

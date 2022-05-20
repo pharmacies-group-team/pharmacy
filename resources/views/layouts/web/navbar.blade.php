@@ -40,12 +40,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-primary-darker" href="#">
+              <a class="nav-link text-primary-darker" href="{{ route('about-us') }}">
                 عنَا
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-primary-darker" href="#">
+              <a class="nav-link text-primary-darker" href="{{ route('contact-us') }}">
                 تواصل معنا
               </a>
             </li>

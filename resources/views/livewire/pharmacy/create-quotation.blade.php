@@ -1,11 +1,17 @@
 {{-- TODO --}}
-<div>
+<div class="t-card">
   <x-alert type="message" />
 
   {{-- form --}}
+  <header>
+    <h2 class="t-header">
+      @lang('action.create-quote')
+    </h2>
+  </header>
+
   <form>
     {{-- <input hidden name="order" value="{{ $order }}"> --}}
-    <div class="t-order-item">
+    <div class="t-order-item" x-data="{ quantity: '', price: '', total: 0 }">
 
       {{-- name --}}
       <div class="t-form-group">
@@ -22,7 +28,7 @@
         <label class="text-base">الوحده </label>
 
         <select wire:model="product_unit.0" class="form-control">
-          <option selected>حدد الوحده</option>
+          <option selected disabled>حدد الوحده</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
@@ -36,7 +42,7 @@
       <div class="t-form-group">
         <label class="text-base">الكمية </label>
 
-        <input type="number" wire:model="quantity.0" min="1" class="form-control">
+        <input x-model="quantity" type="number" wire:model="quantity.0" min="1" max="30" class="form-control">
         @error('quantity.0')
           <span>{{ $message }}</span>
         @enderror
@@ -44,12 +50,19 @@
 
       {{-- price --}}
       <div class="t-form-group">
-        <label class="text-base">سعر المنتج </label>
 
-        <input type="text" wire:model="price.0" class="form-control">
+        <label class="text-base">سعر المنتج </label>
+        <input x-model="price" type="text" min="1" max="50000" wire:model="price.0" class="form-control">
         @error('price.0')
           <span>{{ $message }}</span>
         @enderror
+      </div>
+
+      {{-- total --}}
+      <div class="t-form-group" x-effect="total = (+price) * (+quantity)">
+        <label class="text-base">@lang('heading.total') :</label>
+
+        <input readonly :value="total" class='form-control' style="max-width: 100px" />
       </div>
     </div>
 
@@ -58,7 +71,7 @@
     @foreach ($inputs as $key => $value)
       <hr class="divided">
 
-      <div class="t-order-item">
+      <div class="t-order-item" x-data="{ quantity: '', price: '', total: 0 }">
         <div class="t-form-group">
           <label class="text-base">اسم المنتج </label>
 
@@ -69,11 +82,11 @@
         </div>
 
         <div class="t-form-group">
-          <label class="text-base">نوع الوحدة </label>
+          <label class="text-base"> الوحده </label>
 
           {{-- <input type="text" wire:model="product_unit.{{ $value }}" class="form-control"> --}}
           <select wire:model="product_unit.{{ $value }}" class="form-control">
-            <option selected>حدد الوحدة</option>
+            <option selected disabled>حدد الوحده</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
@@ -86,7 +99,8 @@
         <div class="t-form-group">
           <label class="text-base">الكمية </label>
 
-          <input type="number" wire:model="quantity.{{ $value }}" class="form-control">
+          <input x-model="quantity" type="number" wire:model="quantity.{{ $value }}" min="1" max="30"
+            class="form-control">
           @error('quantity' . $value)
             <span>{{ $message }}</span>
           @enderror
@@ -95,11 +109,18 @@
         <div class="t-form-group">
           <label class="text-base">سعر المنتج </label>
 
-          <input type="text" wire:model="price.{{ $value }}" class="form-control"
-            placeholder="بالريال اليمني">
+          <input x-model="price" type="text" wire:model="price.{{ $value }}" min="1" max="50000"
+            class="form-control">
           @error('price' . $value)
             <span>{{ $message }}</span>
           @enderror
+        </div>
+
+        {{-- total --}}
+        <div class="t-form-group" x-effect="total = (+price) * (+quantity)">
+          <label class="text-base">@lang('heading.total') :</label>
+
+          <input readonly :value="total" class='form-control' style="max-width: 100px" />
         </div>
 
         <div class="t-form-group">
@@ -135,5 +156,6 @@
     </div>
 
   </form>
+
 
 </div>

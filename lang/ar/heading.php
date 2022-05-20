@@ -2,9 +2,11 @@
 
 
 return [
-  "profile" => "بروفايل",
+  "profile" => "الملف الشخصي",
   "protection-and-privacy" => "الحماية والخصوصية",
-  "order-details" => "التفاصيل",
+
+  "order-details" => "تفاصيل الطلب",
+
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",
   "invoice_id" => "رقم فاتورة",
@@ -12,7 +14,7 @@ return [
   "invoice-to" => "المستلم",
   "taxes" => "الضرائب",
   "subtotal" => "المجموع الفرعي",
-  "total" => "الاجمالي",
+  "total" => "الإجمالي",
   "date" => "تاريخ",
 
   "product-name" => "اسم المنتج",

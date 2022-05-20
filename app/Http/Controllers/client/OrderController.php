@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\PerodicOrder;
 use App\Models\OrderDetails;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Notifications\OrderNotification;
 use App\Notifications\PharmacyOrderNotification;
@@ -15,11 +16,13 @@ use App\Services\NotificationAdminService;
 use App\Services\NotificationService;
 use App\Services\OrderServices;
 use App\Traits\UploadsTrait;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 use function PHPUnit\Framework\returnArgument;
 
 class OrderController extends Controller
@@ -38,25 +41,32 @@ class OrderController extends Controller
   }
 
   //********* create new order by client *********//
-  public function storeOrder(Request $request): RedirectResponse
+  public function storeOrder(Request $request)
   {
-    // validator
-    Validator::validate($request->all(), Order::roles(), Order::messages());
+    try {
+      ##### validator #####
+      Validator::validate($request->all(), Order::roles(), Order::messages());
 
-    // upload image
-    $image = $this->storeImage($request->image, OrderEnum::ORDER_IMAGE_PATH);
+      ##### upload image #####
+      $image = $this->storeImage($request->image, OrderEnum::ORDER_IMAGE_PATH);
 
-    $order = Order::create(
-      [
-        'user_id'     => Auth::id(),
-        'pharmacy_id' => $request->input('pharmacy_id'),
-        'image'       => $image,
-        'order'       => $request->input('order'),
-      ]
-    );
+      $order = Order::create(
+        [
+          'user_id'     => Auth::id(),
+          'pharmacy_id' => $request->input('pharmacy_id'),
+          'image'       => $image,
+          'order'       => $request->input('order'),
+        ]
+      );
 
-    // send and save notification in DB
-    NotificationService::newOrder($request->input('pharmacy_id'));
+      ##### send and save notification in DB #####
+      NotificationService::newOrder($order);
+    }
+    catch (Throwable $e) {
+      report($e);
+
+      return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
+    }
 
     return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح');
   }
@@ -64,14 +74,27 @@ class OrderController extends Controller
   //********* Confirm the arrival of the request *********//
   public function confirmation(Request $request)
   {
-    $order = Order::find($request->order_id);
-    $order->update(['status' => OrderEnum::DELIVERED_ORDER]);
+    try {
+      $order = Order::find($request->order_id);
+      $order->update(['status' => OrderEnum::DELIVERED_ORDER]);
 
-    // send and save notification in DB
-    NotificationAdminService::deliveredOrder($order);
-    NotificationService::deliveredOrder($order);
+      $pharmacy = User::find($order->pharmacy_id);
 
-    return redirect()->back()->with('status', 'تم تأكيد وصول الطلب بنجاح.');
+      Transaction::where('order_id', $order->id)
+        ->where('payable_id', $pharmacy->id)->update(['confirmed' => 1]);
+
+      ##### send and save notification in DB #####
+      NotificationAdminService::deliveredOrder($order);
+      NotificationService::deliveredOrder($order);
+
+      return redirect()->back()->with('status', 'تم تأكيد وصول الطلب بنجاح.');
+    }
+    catch (ConnectionException $e) {
+      return redirect()->back()->with(['message' => 'لقد استغرقت العمليه اطول من الوقت المحدد لها يرجى إعادة المحاولة']);
+    }
+    catch (\Exception $th){
+      return redirect()->back()->with(['message' => 'فشلت عملية التأكيد، تأكد من إتصال النت..']);
+    }
   }
 
   public function cancelOrder($id)

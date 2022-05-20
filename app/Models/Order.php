@@ -20,7 +20,7 @@ class Order extends Model
   /**
    * Get Order Invoice
    */
-  public function Invoice(): HasOne
+  public function invoice(): HasOne
   {
     return $this->hasOne(Invoice::class);
   }

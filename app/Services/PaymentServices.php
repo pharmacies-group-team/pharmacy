@@ -8,7 +8,9 @@ use App\Enum\RoleEnum;
 use App\Enum\SettingEnum;
 use App\Models\Invoice;
 use App\Models\QuotationDetails;
+use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -17,19 +19,29 @@ class PaymentServices
 {
 
     //********* Payment from the wallet *********//
-    public static function paymentFromWallet($amount, $quotation, $addressID): RedirectResponse
+    public static function paymentFromWallet($amount, $quotation, $addressID)
     {
-      $invoice = self::createInvoice($quotation, $addressID);
-      self::processWallet($amount, $invoice, $quotation);
+      try {
 
-      $invoice->update(['is_active' => 1]);
-      $quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
+        $invoice = self::createInvoice($quotation, $addressID);
 
-      // send and save notification in DB
-      NotificationService::userPay($quotation->order);
+        // send and save notification in DB
+        NotificationService::userPay($quotation->order);
 
-      return redirect()->route('client.success')
-        ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
+        self::processWallet($amount, $invoice);
+
+        $invoice->update(['is_active' => 1]);
+        $quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
+
+        return redirect()->route('client.success', $quotation->order->id)
+          ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
+      }
+      catch (ConnectionException $e) {
+        return redirect()->back()->with(['message' => 'لقد استغرقت العمليه اطول من الوقت المحدد لها يرجى إعادة المحاولة']);
+      }
+      catch (\Exception $th){
+        return redirect()->back()->with(['message' => 'فشلت عملية الدفع، تأكد من إتصال النت..']);
+      }
     }
 
     //********* Payment from the API *********//
@@ -53,37 +65,54 @@ class PaymentServices
     }
 
     //********* Process Payment from the wallet *********//
-    public static function processWallet($amount, $invoice, $quotation)
+    public static function processWallet($amount, $invoice)
     {
-      $pharmacy = User::find($quotation->order->pharmacy_id);
+      $pharmacy = User::find($invoice->order->pharmacy_id);
       $admin    = User::role(RoleEnum::SUPER_ADMIN)->first();
+      $user     = Auth::user();
 
       $adminRatio = ( PaymentEnum::RATIO / 100 ) * $amount;
       $residual   = $amount - $adminRatio;
 
-      Auth::user()->withdraw($amount,
+      // The first step: withdraw amount from the user
+      Auth::user()->forceWithdraw($amount,
         [
           'invoice_id' => $invoice->id,
-          'depositor'  => Auth::id(),
-          'recipient'  => $pharmacy->id,
-          'state'      => ' تحويل من حساب ( '.Auth::user()->name.') إلى حساب ( . ' . $pharmacy->name . '('
+          'order_id'   => $invoice->order->id,
+          'state_1'    => 'تم السحب من حساب ',
+          'depositor'  => $user->name,
+          'state_2'    => ' الى حساب ',
+          'recipient'  => $pharmacy->name,
         ]);
 
+      // The second step: withdraw amount from the pharmacy
+      $transaction = $pharmacy->deposit($residual,
+        [
+          'invoice_id' => $invoice->id,
+          'order_id'   => $invoice->order->id,
+          'state_1'    => 'تم الايداع من حساب ',
+          'depositor'  => $user->name,
+          'state_2'    => ' الى حساب ',
+          'recipient'  => $pharmacy->name,
+        ], false);
+
+      Transaction::find($transaction->id)->update(['order_id' => $invoice->order->id]);
+
+      // The third step: deduct the percentage  and deposit it to the admin
       $admin->deposit($adminRatio,
         [
           'invoice_id' => $invoice->id,
-          'depositor'  => Auth::id(),
-          'recipient'  => $admin->id,
-          'state'      => ' إيداع إلى حساب ( '.$admin->name.') من حساب ( . ' . Auth::user()->name . '('
+          'order_id'   => $invoice->order->id,
+          'state_1'    => 'تم إيداع نسبة من فاتورة بيع ',
+          'depositor'  => $pharmacy->name,
+          'state_2'    => ' الى حسابك ',
+          'recipient'  => $admin->name,
         ]);
 
-      $pharmacy->deposit($residual,
-        [
-          'invoice_id' => $invoice->id,
-          'user_id'    => Auth::id(),
-          'pharmacy'   => $quotation->order->pharmacy_id,
-          'state'      => ' إيداع إلى حساب ( '.$pharmacy->name.') من حساب ( . ' . Auth::user()->name . '('
-        ]);
+      // Second Step: Send a notification to the pharmacy and admin
+      NotificationService::transferAmountFromUser($invoice->order);
+      NotificationService::transferAmountToPharmacy($invoice->order);
+      NotificationAdminService::transferAmountToPharmacy($invoice->order);
     }
 
     //********* The data sent for API payment *********//
