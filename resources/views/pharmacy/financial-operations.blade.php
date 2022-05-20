@@ -59,20 +59,6 @@
         <span style="color: #3869BA">{{ $invoice_not_confirmed }}</span>
       </div>
 
-      <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #3869ba;
-                  color: #d5e4ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
-        {{--        <x-icon icon='wallet' />--}}
-        <span> تصدير PDF</span>
-      </div>
-
-
 
     </div>
 
@@ -94,8 +80,12 @@
                 <div class="t-item-header">
                   {{-- title --}}
                   <h4 style="display:flex; align-items: center;">
-                    <a href="{{ $transaction->meta['invoice_id'] }}">رقم العملية: {{ $transaction->uuid }}</a>
-                    <span style="margin: 20px; font-size: 14px; font-weight: normal; background: #B13232; opacity: 0.7;color: #fff2f2; padding:0  16px; border-radius: 20px">غير مؤكدة</span>
+                    <a href="{{ $transaction->meta['invoice_id'] }}" style="margin: 4px ">رقم العملية: {{ $transaction->uuid }}</a>
+                    @if ($transaction->confirmed === 0)
+                      <span class="badge badge-danger">غير مؤكدة</span>
+                    @else
+                      <span class="badge badge-success">مؤكدة</span>
+                    @endif
                   </h4>
                   {{-- date --}}
                   <span class="t-date">
@@ -112,7 +102,9 @@
                     <span>{{ $transaction->meta['state_2'] }}</span>
                     <span>( {{ $transaction->meta['recipient'] }} )</span>
                   </p>
-                  <span> المبلغ: {{ $transaction->amount }}</span>
+                  <div style="margin-top: 16px">
+                    <span> <b>المبلغ: </b> {{ $transaction->amount }}</span>
+                  </div>
 
                 </div>
                 <div style="display:flex; justify-content: end">
