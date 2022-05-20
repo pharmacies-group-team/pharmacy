@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // shared Controllers
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ChatController;
 
 // standard Controllers
@@ -78,7 +77,7 @@ Route::controller(ChatController::class)
     Route::get('/users',  'getUsers')->name('getUsers');
     Route::get('/messages/{id}', 'getUserMessages')->name('userMessages');
 
-    Route::post('/messages/send',  'sendMessage');
+    Route::post('/messages/send',  'sendMessage')->name('sendMessage');
   });
 
 /*

@@ -1,6 +1,6 @@
-<form class="t-chat-messages-form">
+<form class="t-chat-messages-form js-chat-form">
 
-  <input type="text" class="form-control">
+  <input type="text" class="form-control js-chat-input">
 
   <div class="t-chat-messages-form-actions">
     {{-- media --}}

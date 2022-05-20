@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
   let getHours = (time) => new Date(time).getHours();
 
   let messageTimeFormat = (time) => {
-    return `${Math.ceil(getHours(time)/2)}:${getMinutes(time)}`;
+    return `${Math.ceil(getHours(time)/2)}:${getMinutes(time) < 10 ? '0': ''}${getMinutes(time)}`;
   }
 
   let renderUserMessages = (message) => {
     return `
       <div
-        class="t-message ${ message.from == '{{ Auth::id() }}' ?  't-message-left' : '' }" >
+        class="t-message ${ message.from == '{{ Auth::id() }}' ?  '':'t-message-left' }" >
 
         <div class="t-message-avatar">
           <img src="/uploads/user/${message.from_user.avatar}" alt="user avatar" width="50px" height="50px">
@@ -37,9 +37,15 @@ use Illuminate\Support\Facades\Auth;
     axios
       .get(`/chat/messages/${userID}`)
       .then(res => {
-        console.table(res.data);
 
-        let messages = res.data.map(message => renderUserMessages(message))
+        // console.log(res.data);
+        let usersMessages = [...res.data.from_messages, ...res.data.to_messages]
+        // console.log(usersMessages);
+
+        // sort message by created_at
+        usersMessages = usersMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+
+        let messages = usersMessages.map(message => renderUserMessages(message))
 
         let element = el('.t-chat-messages-list').innerHTML = messages.join(' ');
       })
@@ -82,6 +88,7 @@ use Illuminate\Support\Facades\Auth;
     let days = hours * 24;
 
 
+    console.log(dateDiff(minutes), dateDiff(minutes) > 9 ? '' : '*', 'hi there');
     // day
     if (dateDiff(days) > 0) return `${dateDiff(days)}d`;
 
@@ -146,4 +153,31 @@ use Illuminate\Support\Facades\Auth;
     el('.js-user-item').click()
     el('.js-user-item').classList.add('is-active')
   })
+</script>
+
+{{-- chat form --}}
+<script>
+  const sendMessage = ({
+    to,
+    message
+  }) => {
+    axios
+      .post("{{ route('chat.sendMessage') }}", {
+        from: '{{ Auth::id() }}',
+        to,
+        message
+      })
+      .then(res => el('.t-chat-messages-list').innerHTML += renderUserMessages(res.data))
+  }
+
+
+  el('.js-chat-form')
+    .addEventListener('submit', event => {
+      event.preventDefault();
+
+      sendMessage({
+        to: 3,
+        message: el('.js-chat-input').value
+      })
+    });
 </script>

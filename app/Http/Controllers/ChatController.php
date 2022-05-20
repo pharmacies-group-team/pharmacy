@@ -47,13 +47,19 @@ class ChatController extends Controller
     $from_user_id = Auth::id() ?? $request->query('from');
 
     // Make read all unread message sent
-    // Message::where(['from' => $from_user_id, 'to' => $to_user_id])->update(['is_read' => 1]);
+    Message::where(['from' => $from_user_id, 'to' => $to_user_id])->update(['is_read' => 1]);
 
     // Get all message from selected user
-    $messages = Message::with('fromUser')
-      ->where(['to' => $to_user_id, 'from' => $from_user_id]) // current user message
-      ->orWhere(['to' => $from_user_id, 'from' => $to_user_id]) // other user message
-      ->get();
+    $messages['from_messages'] = Message::with('fromUser')
+      ->where(['to' => $from_user_id, 'from' => $to_user_id]) // current user message
+      ->get() ?? [];
+
+    $messages['to_messages'] = Message::with('fromUser')
+      ->where(['to' => $to_user_id, 'from' => $from_user_id]) //  other user message
+      ->get() ?? [];
+
+    return response($messages);
+
 
     return response($messages);
   }
@@ -64,14 +70,18 @@ class ChatController extends Controller
     // TODO
     $from = Auth::id() ?? $request->from;
     $to = $request->input('to');
-    $message = $request->input('message');
 
-    $res = Message::create([
-      "from" => $from,
+    Message::create([
+      "from" =>  $from,
       "to" => $to,
-      "message" => $message,
+      "message" => $request->input('message'),
     ]);
 
-    return response($res);
+    $message = Message::where(['from' => $from, 'to' => $to])
+      ->with('fromUser')
+      ->latest()
+      ->first();
+
+    return response($message);
   }
 }
