@@ -27,7 +27,26 @@ class ChartController extends Controller
       $i++;
     }
     $chart['datasets']['pharmacies']   = $new;
-    
+    return response()->json( $chart);
+  }
+
+  public function clientsChart(){
+    $clients = User::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
+      ->role(RoleEnum::CLIENT)
+      ->whereYear('created_at', date('Y'))
+      ->groupBy(DB::raw('Month(created_at)'))
+      ->pluck('count', 'month');
+
+    foreach ($clients->keys() as $month_number) {
+      $labels[] = date('F', mktime(0, 0, 0, $month_number, 1));
+    }
+    $i = 0;
+    foreach ($clients as $key => $value) {
+
+      $new [] = [$labels[$i] => $value];
+      $i++;
+    }
+    $chart['datasets']['clients']   = $new;
     return response()->json( $chart);
   }
 }
