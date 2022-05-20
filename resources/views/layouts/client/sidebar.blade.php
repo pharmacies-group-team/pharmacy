@@ -49,9 +49,10 @@
         </li>
 
         {{-- perodic orders --}}
+        {{-- TODO change icon --}}
         <li>
-            <a class="list-item-link @if (Route::currentRouteName() === 'client.setCronJob') active @endif"
-                href="{{ route('client.setCronJob') }}">
+            <a class="list-item-link @if (Route::currentRouteName() === 'client.showTasks') active @endif"
+                href="{{ route('client.showTasks') }}">
 
                 <div class="icon">
                     <ion-icon src='{{ asset('images/icons/orders.svg') }}'></ion-icon>
