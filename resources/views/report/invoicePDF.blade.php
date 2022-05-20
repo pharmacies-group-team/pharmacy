@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
   <title>Invoice</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
 
   <style>
     body { font-family: DejaVu Sans, sans-serif; }
@@ -12,25 +13,38 @@
 
 <body>
 <div class="invoice-print p-5">
+@php
 
+$pharmacy = $data['pharmacy'];
+$user     = $data['user'];
+$products = $data['products'];
+$invoice  = $data['invoice'];
+$address  = $data['address'];
+
+@endphp
   <div class="d-flex justify-content-between flex-row">
     <div class="mb-4">
       <div class="d-flex svg-illustration mb-3 gap-2">
-        <span class="app-brand-text demo text-body fw-bolder">Pharmacy Online</span>
+        <a class="navbar-brand text-decoration-none m-0">
+          <h1 class="text-primary-darker fs-4 fw-bold">PHARMACY <span
+              class="fs-6 fw-normal text-primary-base">online</span></h1>
+        </a>
       </div>
-      <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-      <p class="mb-1">San Diego County, CA 91905, USA</p>
-      <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
+      <p class="mb-1">{{ $data['contactUs']['phone'] }}</p>
+      <p class="mb-0">{{ $data['contactUs']['email'] }}</p>
     </div>
     <div>
-      <h4>Invoice #3492</h4>
       <div class="mb-2">
-        <span>Date Issues:</span>
-        <span class="fw-semibold">April 25, 2021</span>
+        <b>@lang('heading.invoice_id')</b>
+        <span class="fw-semibold">#{{ $invoice->id }}</span>
       </div>
       <div>
-        <span>Date Due:</span>
-        <span class="fw-semibold">May 25, 2021</span>
+        <b>@lang('heading.date')</b>
+        <span class="fw-semibold">{{ $invoice->created_at->format('Y/m/d') }}</span>
+      </div>
+      <div>
+        <b>@lang('heading.total')</b>
+        <span class="m-3">{{ $invoice->total }} {{ $invoice->currency }}</span>
       </div>
     </div>
   </div>
@@ -39,39 +53,61 @@
 
   <div class="row d-flex justify-content-between mb-4">
     <div class="col-sm-6 w-50">
-      <h6>Invoice To:</h6>
-      <p class="mb-1">Thomas shelby</p>
-      <p class="mb-1">Shelby Company Limited</p>
-      <p class="mb-1">Small Heath, B10 0HF, UK</p>
-      <p class="mb-1">718-986-6062</p>
-      <p class="mb-0">peakyFBlinders@gmail.com</p>
+      <h6>@lang('heading.invoice-from')</h6>
+      <p class="mb-1">{{ $pharmacy->name }}</p>
+      <p class="mb-1">
+      @if (isset($pharmacy->neighborhood_id))
+        <h3 class="t-label" style="color: #717171; font-size: 14px">
+          @if (isset($pharmacy->neighborhood->directorate->city))
+            <span>{{ $pharmacy->neighborhood->directorate->city->name }} - </span>
+          @endif
+          @if (isset($pharmacy->neighborhood->directorate))
+            <span>{{ $pharmacy->neighborhood->directorate->name }} - </span>
+          @endif
+          @if (isset($pharmacy->neighborhood))
+            <span>{{ $pharmacy->neighborhood->name }} </span>
+          @endif
+        </h3>
+        @endif
+      </p>
+      <p class="mb-1">
+        {{-- pharmacy phone --}}
+        @if (isset($pharmacy->contacts->phone))
+          <h3 class="t-label" style="color: #717171 ;font-size: 14px">
+            <x-icon icon='phone' />
+            {{ $pharmacy->contacts->first()->phone }}
+          </h3>
+          @endif
+      </p>
+      <p class="mb-1">
+          {{-- pharmacy email --}}
+          @if (isset($order->pharmacy->email))
+            <h3 class="t-label" style="color: #717171;font-size: 14px">
+              <x-icon icon='email' />
+              {{ $order->pharmacy->email }}
+            </h3>
+            @endif
+      </p>
     </div>
     <div class="col-sm-6 w-50">
-      <h6>Bill To:</h6>
-      <table>
-        <tbody>
-        <tr>
-          <td class="pe-3">Total Due:</td>
-          <td><strong>$12,110.55</strong></td>
-        </tr>
-        <tr>
-          <td class="pe-3">Bank name:</td>
-          <td>American Bank</td>
-        </tr>
-        <tr>
-          <td class="pe-3">Country:</td>
-          <td>United States</td>
-        </tr>
-        <tr>
-          <td class="pe-3">IBAN:</td>
-          <td>ETD95476213874685</td>
-        </tr>
-        <tr>
-          <td class="pe-3">SWIFT code:</td>
-          <td>BR91905</td>
-        </tr>
-        </tbody>
-      </table>
+      <h6>@lang('heading.invoice-to')</h6>
+      <div class="col-sm-6 w-50">
+        <p class="mb-1">{{ $user->name }}</p>
+        <p class="mb-1">
+          {{-- client phone --}}
+          @if (isset($user->phone))
+            <h3 class="t-label" style="color: #717171;font-size: 14px">
+              {{ $user->phone }}
+            </h3>
+            @endif
+        </p>
+        <p class="mb-1">
+          {{-- client email --}}
+          <h3 class="t-label" style="color: #717171;font-size: 14px">
+            {{ $user->email }}
+          </h3>
+        </p>
+      </div>
     </div>
   </div>
 
@@ -79,72 +115,72 @@
     <table class="table border-top m-0">
       <thead>
       <tr>
-        <th>Item</th>
-        <th>Description</th>
-        <th>Cost</th>
-        <th>Qty</th>
-        <th>Price</th>
+        {{-- name --}}
+        <th> @lang('heading.product-name')</th>
+
+        {{-- description --}}
+        <th> @lang('heading.product-description')</th>
+
+        {{-- cost --}}
+        <th> @lang('heading.product-cost')</th>
+
+        {{-- amount --}}
+        <th> @lang('heading.product-quantity')</th>
+
+        {{-- price --}}
+        <th> @lang('heading.product-price')</th>
       </tr>
       </thead>
+
       <tbody>
-      <tr>
-        <td>Vuexy Admin Template</td>
-        <td>HTML Admin Template</td>
-        <td>$32</td>
-        <td>1</td>
-        <td>$32.00</td>
-      </tr>
-      <tr>
-        <td>Frest Admin Template</td>
-        <td>Angular Admin Template</td>
-        <td>$22</td>
-        <td>1</td>
-        <td>$22.00</td>
-      </tr>
-      <tr>
-        <td>Apex Admin Template</td>
-        <td>HTML Admin Template</td>
-        <td>$17</td>
-        <td>2</td>
-        <td>$34.00</td>
-      </tr>
-      <tr>
-        <td>Robust Admin Template</td>
-        <td>React Admin Template</td>
-        <td>$66</td>
-        <td>1</td>
-        <td>$66.00</td>
-      </tr>
-      <tr>
-        <td colspan="3" class="align-top px-4 py-3">
-          <p class="mb-2">
-            <span class="me-1 fw-semibold">Salesperson:</span>
-            <span>Alfie Solomons</span>
-          </p>
-          <span>Thanks for your business</span>
-        </td>
-        <td class="text-end px-4 py-3">
-          <p class="mb-2">Subtotal:</p>
-          <p class="mb-2">Discount:</p>
-          <p class="mb-2">Tax:</p>
-          <p class="mb-0">Total:</p>
-        </td>
-        <td class="px-4 py-3">
-          <p class="fw-semibold mb-2">$154.25</p>
-          <p class="fw-semibold mb-2">$00.00</p>
-          <p class="fw-semibold mb-2">$50.00</p>
-          <p class="fw-semibold mb-0">$204.25</p>
-        </td>
-      </tr>
+      @foreach ($products as $product)
+        <tr>
+          {{-- name --}}
+          <td>{{ $product->product_name }}</td>
+
+          {{-- description --}}
+          <td> {{ $product->product_unit }} </td>
+
+          {{-- cost --}}
+          <td>{{ $product->price }}</td>
+
+          {{-- amount --}}
+          <td>{{ $product->quantity }}</td>
+
+          {{-- price --}}
+          <td>{{ $product->price * $product->quantity }}</td>
+        </tr>
+      @endforeach
       </tbody>
     </table>
   </div>
-
   <div class="row">
     <div class="col-12">
-      <span class="fw-semibold">Note:</span>
-      <span>It was a pleasure working with you and your team. We hope you will keep us in mind for future
-        freelance projects. Thank You!</span>
+      <div class="mt-5">
+        <b>@lang('heading.total')</b>
+        <span class="m-3">{{ $invoice->total }} {{ $invoice->currency }}</span>
+      </div>
+    </div>
+  </div>
+<hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="mt-3">
+        <div>
+          <b>اسم المستلم:</b>
+          <span class="m-3">{{ $address->name }}</span>
+        </div>
+
+        <div>
+          <b>رقم الهاتف:</b>
+          <span class="m-3">{{ $address->phone }}</span>
+        </div>
+
+        <div>
+          <b>وصف العنوان:</b>
+          <span class="m-3">{{ $address->desc }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
