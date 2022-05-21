@@ -24,6 +24,9 @@ return new class extends Migration
         $table->foreignId('order_id');
         $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
+        $table->foreignId('user_id');
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         $table->softDeletes();
         $table->timestamps();
       });
