@@ -536,6 +536,48 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
+.t-dropdown{
+  position: relative;
+}
+
+.t-dropdown-item{
+  position: absolute;
+  bottom: -2.25rem;
+  left: 50%;
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.t-dropdown-item button{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.t-dropdown-item button:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(247 249 254 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .badge{
   display: inline-block;
   border-radius: 0.25rem;
@@ -653,48 +695,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .btn-danger:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
-.t-dropdown{
-  position: relative;
-}
-
-.t-dropdown-item{
-  position: absolute;
-  bottom: -2.25rem;
-  left: 50%;
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  white-space: nowrap;
-  border-radius: 0.25rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.t-dropdown-item button{
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-.t-dropdown-item button:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(88 143 244 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(247 249 254 / var(--tw-text-opacity));
-  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 }
 
 .form-group{
@@ -1428,9 +1428,16 @@ textarea.form-control{
   max-height: 100vh;
   flex: 1 1 0%;
   overflow-x: hidden;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-bottom: 3.5rem;
+}
+
+@media (min-width: 1024px){
+  .dashboard-content{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
 }
 
 .dashboard-content main{
@@ -1465,10 +1472,10 @@ body{
 .nav{
   margin-left: -2.5rem;
   margin-right: -2.5rem;
+  padding-left: 2.5rem;
   padding-right: 2.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 5rem;
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1575,14 +1582,6 @@ body{
 
 .sidebar .icon svg, .sidebar .icon path{
   fill: #F7F9FE;
-}
-
-.livewire-security{
-  max-width: 42rem;
-}
-
-.livewire-security h2{
-  margin-bottom: 1rem;
 }
 
 .page-chat section{
@@ -1957,6 +1956,14 @@ body{
   overflow: hidden;
 }
 
+.livewire-security{
+  max-width: 42rem;
+}
+
+.livewire-security h2{
+  margin-bottom: 1rem;
+}
+
 :root {
   --animate-duration: 1s;
   --animate-delay: 1s;
@@ -2261,17 +2268,24 @@ ion-icon{
 }
 
 .page-admin-report .t-chart{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 768px){
+  .page-admin-report .t-chart{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px){
+  .page-admin-report .t-chart{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .page-admin-report .t-chart-item{
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 42rem;
-  flex: 1 1 0%;
   border-radius: 0.25rem;
   border-width: 1px;
   border-style: dashed;
@@ -2281,7 +2295,14 @@ ion-icon{
 }
 
 .page-admin-report .t-chart-item canvas{
+  max-height: 400px;
   width: 100%;
+}
+
+@media (min-width: 1024px){
+  .page-admin-report .t-chart-item:nth-of-type(4){
+    grid-column: span 3 / span 3;
+  }
 }
 
 .page-admin-report .t-chart-title{
