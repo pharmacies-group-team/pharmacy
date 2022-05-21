@@ -13,9 +13,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif"
         href="{{ route('admin.users.index') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/users.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='user' />
 
         <span>إدارة المستخدمين</span>
       </a>
@@ -24,9 +22,7 @@
     {{-- pharmacies --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='capsules' />
 
         <span>الصيدليات</span>
       </a>
@@ -35,9 +31,7 @@
     {{-- clients --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/users.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='users' />
 
         <span>العملاء</span>
       </a>
@@ -46,10 +40,9 @@
     {{-- invoice profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.financial.operations') active @endif"
-         href="{{ route('admin.financial.operations') }}">
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
-        </div>
+        href="{{ route('admin.financial.operations') }}">
+
+        <x-font-icon icon='sack-dollar' />
 
         <span>@lang('heading.invoice-profile')</span>
       </a>
@@ -71,9 +64,7 @@
     {{-- ads --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.ads.index') active @endif" href="{{ route('admin.ads.index') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/ads.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='bullhorn' />
 
         <span>إدارة الإعلانات</span>
       </a>
@@ -82,9 +73,7 @@
     {{-- Site Management --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.site') active @endif" href="{{ route('admin.site') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/website.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='browser' />
 
         <span>أدارة بيانات الموقع</span>
       </a>
@@ -94,9 +83,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.payments.index') active @endif"
         href="{{ route('admin.payments.index') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/paypal.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='credit-card' />
 
         <span>إدارة طرق الدفع</span>
       </a>
@@ -106,9 +93,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.cities.index') active @endif"
         href="{{ route('admin.cities.index') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/city.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='city' />
 
         <span>إدارة المدن</span>
       </a>
@@ -117,10 +102,8 @@
     {{-- City Method --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.directorates.index') active @endif"
-         href="{{ route('admin.directorates.index') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/city.svg') }}'></ion-icon>
-        </div>
+        href="{{ route('admin.directorates.index') }}">
+        <x-font-icon icon='signs-post' />
 
         <span>إدارة المديريات</span>
       </a>
@@ -130,10 +113,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.neighborhoods.index') active @endif"
         href="{{ route('admin.neighborhoods.index') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/places.svg') }}'></ion-icon>
-        </div>
-
+        <x-font-icon icon='house-building' />
         <span>إدارة المناطق</span>
       </a>
     </li>
@@ -142,10 +122,8 @@
     {{-- account settings --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.account-settings') active @endif"
-         href="{{ route('admin.account-settings') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
-        </div>
+        href="{{ route('admin.account-settings') }}">
+        <x-font-icon icon='id-card' />
 
         <span>إعدادات الحساب</span>
       </a>
