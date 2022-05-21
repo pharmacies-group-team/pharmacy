@@ -9,6 +9,9 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
+use Illuminate\Support\Facades\DB;
+
 
 // shared Controllers
 use App\Http\Controllers\ChatController;
@@ -38,6 +41,12 @@ Route::get('generate-invoice-pdf/{id}', [PDFController::class, 'generateInvoiceP
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+Route::get('/chat', function () {
+  $users = DB::select("select DISTINCT u.id, u.name, u.email from users as u inner JOIN messages as m ON u.id IN(m.from,m.to)
+  where u.id<>" . Auth::id() . " and( m.from= " . Auth::id() . " or m.to=" . Auth::id() . ") group by u.id, u.name, u.email;");
+  return $users;
+});
 
 Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
@@ -129,6 +138,14 @@ Route::prefix('/pharmacy')
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
+
+    // chat
+    Route::controller(pharmacy\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 
@@ -214,6 +231,12 @@ Route::prefix('/client')
       Route::get('/', 'index')->name('index');
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
+      Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
+
+      Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
+      Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
+      Route::post('/togglePerodicOrder/{id}',  [client\PerodicOrderController::class, 'togglePerodicOrder'])->name('togglePerodicOrder');
       Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
 
       // chat
@@ -240,7 +263,16 @@ Route::prefix('/client')
       Route::get('/cancel', 'cancel')->name('cancel');
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
+
+    // chat
+    Route::controller(client\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
+
 
 
 Auth::routes(['verify' => true]);

@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
       // only enable this for testing char.js
       // DevTestSeeder::class
+      PerodicOrderSeeder::class
+
     ]);
   }
 }

@@ -6,6 +6,7 @@ use App\Enum\OrderEnum;
 use App\Events\NewOrderNotification;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\PerodicOrder;
 use App\Models\OrderDetails;
 use App\Models\Transaction;
 use App\Models\User;
@@ -29,8 +30,13 @@ class OrderController extends Controller
   //********* git all order for client *********//
   public function getAll()
   {
-    $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->get();
+    // $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->with(['PerodicOrder'])->get();
+    $orders = Auth::user()->userOrders()->with(['PerodicOrders'])->orderBy('created_at', 'DESC')->get();
+    // $perodic_orders = Auth::user()->userOrders()->join('perodic_orders', 'orders.id', '=', 'perodic_orders.order_id')->get();
+    // $orders = Auth::user()->userOrders()->orderBy('created_at', 'DESC')->get();
 
+
+    // return response($orders);
     return view('client.orders', compact('orders'));
   }
 
