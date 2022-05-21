@@ -8,30 +8,6 @@
 
   {{-- sidebar links --}}
   <ul class="list">
-    {{-- index --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.index') active @endif" href="{{ route('client.index') }}">
-
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/dashboard.svg') }}'></ion-icon>
-        </div>
-
-        <span>لوحة التحكم</span>
-      </a>
-    </li>
-
-    {{-- profile --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
-        href="{{ route('client.account-settings') }}">
-
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
-        </div>
-
-        <span>بروفايل </span>
-      </a>
-    </li>
 
     {{-- orders --}}
     <li>
@@ -47,14 +23,15 @@
       </a>
     </li>
 
-    {{-- addresses --}}
+    {{-- invoice profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.financial.operations') active @endif"
+         href="{{ route('client.financial.operations') }}">
         <div class="icon">
-          <ion-icon src='{{ asset('images/icons/delivery.svg') }}'></ion-icon>
+          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
         </div>
 
-        <span>إدارة عناوين التوصيل </span>
+        <span>@lang('heading.invoice-profile')</span>
       </a>
     </li>
 
@@ -69,16 +46,27 @@
       </a>
     </li>
 
-
-    {{-- invoice profile --}}
+    {{-- addresses --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'client.financial.operations') active @endif"
-        href="{{ route('client.financial.operations') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
         <div class="icon">
-          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
+          <ion-icon src='{{ asset('images/icons/delivery.svg') }}'></ion-icon>
         </div>
 
-        <span>@lang('heading.invoice-profile')</span>
+        <span>إدارة عناوين التوصيل </span>
+      </a>
+    </li>
+
+    {{-- profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
+         href="{{ route('client.account-settings') }}">
+
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
+        </div>
+
+        <span>إعدادات الحساب </span>
       </a>
     </li>
 

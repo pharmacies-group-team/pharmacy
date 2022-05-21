@@ -84,7 +84,7 @@
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
                             {{ route('pharmacy.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
-                            {{ route('client.index') }} @endif">
+                            {{ route('client.orders.index') }} @endif">
                     <i class="bi bi-speedometer text-primary-light m-2"></i> لوحة التحكم
                   </a>
                 </li>

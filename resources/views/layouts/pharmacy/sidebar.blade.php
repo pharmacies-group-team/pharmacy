@@ -33,6 +33,30 @@
       </a>
     </li>
 
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
+         href="{{ route('pharmacy.financial.operations') }}">
+
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
+
+    {{-- chat --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
+        </div>
+
+        <span>@lang('heading.chat') </span>
+      </a>
+    </li>
+
     {{-- profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
@@ -58,28 +82,5 @@
       </a>
     </li>
 
-    {{-- chat --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
-        </div>
-
-        <span>@lang('heading.chat') </span>
-      </a>
-    </li>
-
-    {{-- invoice profile --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
-        href="{{ route('pharmacy.financial.operations') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
-        </div>
-
-        <span>@lang('heading.invoice-profile')</span>
-      </a>
-    </li>
   </ul>
 </nav>
