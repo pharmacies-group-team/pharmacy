@@ -1509,7 +1509,6 @@ body{
   max-width: 15rem;
   white-space: nowrap;
   font-family: Cairo, sans-serif;
-  max-height: 100vh;
   min-height: 100vh;
   --tw-bg-opacity: 1;
   background-color: rgb(56 105 186 / var(--tw-bg-opacity));
@@ -1536,6 +1535,8 @@ body{
   border-radius: 0.25rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .sidebar .list-item-link.active{
@@ -1544,6 +1545,11 @@ body{
   background-color: rgb(221 233 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.sidebar .list-item-link.active .t-font-icon{
+  --tw-text-opacity: 1;
+  color: rgb(88 143 244 / var(--tw-text-opacity));
 }
 
 .sidebar .list-item-link.active .icon svg, .sidebar .list-item-link.active .icon svg path{
@@ -1563,15 +1569,16 @@ body{
   background-color: rgb(221 233 255 / var(--tw-bg-opacity));
 }
 
-.sidebar .list-item-icon{
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-  width: 1.25rem;
+.sidebar .t-font-icon{
+  margin-left: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(247 249 254 / var(--tw-text-opacity));
 }
 
 .sidebar .icon{
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  margin-left: 1rem;
   width: 1.5rem;
 }
 
@@ -2120,6 +2127,12 @@ ion-icon{
 }
 
 .icon{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.t-font-icon{
   display: flex;
   align-items: center;
   cursor: pointer;
