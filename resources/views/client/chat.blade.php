@@ -2,9 +2,9 @@
 @section('content')
   <x-alert type="status" />
 
-  <main class="page-chat container">
+  <main class="page-chat">
 
-    <div class="section-header t-cart">
+    <div class="section-header t-card">
       <h1 class="text-large">@lang('heading.chat')</h1>
     </div>
 
@@ -39,39 +39,7 @@
   <x-chat.scripts />
 
   <script>
-    var receiver_id = '';
-    var my_id = "{{ Auth::id() }}";
-
-    // get users
-    axios.get('{{ route('chat.getUsers') }}').then((res) => {
-      console.log(res.data)
-    })
-
     // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    // pusher
-    //   .subscribe('notify-channel')
-    //   .bind('App\\Events\\Notify', (data) => {
-
-    //     console.log(data);
-    //     // if (my_id == data.from) {
-    //     //   $('#' + data.to).click();
-    //     // } else if (my_id == data.to) {
-    //     //   if (receiver_id == data.from) {
-    //     //     // if receiver is selected, reload the selected user ...
-    //     //     $('#' + data.from).click();
-    //     //   } else {
-    //     //     // if receiver is not seleted, add notification for that user
-    //     //     var pending = parseInt($('#' + data.from).find('.pending').html());
-
-    //     //     if (pending) {
-    //     //       $('#' + data.from).find('.pending').html(pending + 1);
-    //     //     } else {
-    //     //       $('#' + data.from).append('<span class="pending">1</span>');
-    //     //     }
-    //     //   }
-    //     // }
-    //   });
+    // Pusher.logToConsole = true;
   </script>
 @endsection

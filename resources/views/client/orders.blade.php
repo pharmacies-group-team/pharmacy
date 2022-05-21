@@ -8,7 +8,7 @@ use App\Enum\PharmacyEnum;
 
   <x-alert type="status" />
 
-  <main class="container">
+  <main>
     <livewire:client.orders />
   </main>
 @stop

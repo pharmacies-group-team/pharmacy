@@ -2,7 +2,7 @@
 @section('content')
   <x-alert type="message" />
 
-  <main class="pharmacy-profile page-quotation-details">
+  <main class="page-quotation-details">
 
     <livewire:client.details-quotation :quotationID="$quotationID" />
 
