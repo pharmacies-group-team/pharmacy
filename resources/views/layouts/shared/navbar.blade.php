@@ -8,9 +8,13 @@ use App\Enum\PharmacyEnum;
 
 $user = User::find(Auth::id());
 
-if (Auth::user()->hasRole(RoleEnum::PHARMACY)) $type = 'pharmacy';
-elseif (Auth::user()->hasRole(RoleEnum::CLIENT)) $type = 'client';
-elseif (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN)) $type = 'admin';
+if (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
+    $type = 'pharmacy';
+} elseif (Auth::user()->hasRole(RoleEnum::CLIENT)) {
+    $type = 'client';
+} elseif (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN)) {
+    $type = 'admin';
+}
 
 @endphp
 
@@ -27,7 +31,7 @@ elseif (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN)) $type = 'admin';
 
       {{-- wallet --}}
       <div class="wallet">
-        <a href="{{ route($type.'.financial.operations') }}" class="wallet-box">
+        <a href="{{ route($type . '.financial.operations') }}" class="wallet-box">
           <span>YER {{ Auth::user()->balance }}</span>
           <x-icon icon='wallet' />
         </a>
