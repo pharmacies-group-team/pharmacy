@@ -74,6 +74,14 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet, Confirmab
   }
 
   /**
+   * Get user perodic orders
+   */
+  public function userPerodicOrders(): HasMany
+  {
+    return $this->hasMany(PerodicOrder::class);
+  }
+
+  /**
    * Get Pharmacy Orders
    */
   public function pharmacyOrders(): HasMany
