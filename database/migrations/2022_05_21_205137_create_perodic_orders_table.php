@@ -16,7 +16,7 @@ return new class extends Migration
       Schema::create('perodic_orders', function (Blueprint $table) {
         $table->id();
 
-        $table->date('next_order_date');
+        $table->date('next_order_date')->nullable();
         $table->date('start_date');
         $table->string('perodic_date_type');
         $table->boolean('is_active');
