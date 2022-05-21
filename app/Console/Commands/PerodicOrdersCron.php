@@ -8,6 +8,7 @@ use App\Models\PerodicOrder;
 use App\Services\NotificationService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class PerodicOrdersCron extends Command
 {
@@ -46,14 +47,13 @@ class PerodicOrdersCron extends Command
     foreach ($perodic_orders as $perodic_order) {
 
       if ($perodic_order->is_active and $perodic_order->next_order_date == Carbon::now()->format('Y-m-d')) {
-        $previousOrder = Order::select()->where('id', $perodic_order['order_id'])->get();
+        $previousOrder = Order::select()->where('id', $perodic_order['order_id'])->first();
         $order = Order::create(
           [
-            'user_id'     => $previousOrder[0]['user_id'],
-            'image'       => $previousOrder[0]['image'],
-            'pharmacy_id' => $previousOrder[0]['pharmacy_id'],
-
-            'order'       => $previousOrder[0]['order'],
+            'user_id'     => $previousOrder->user_id,
+            'image'       => $previousOrder->image,
+            'pharmacy_id' => $previousOrder->pharmacy_id,
+            'order'       => $previousOrder->order,
           ]
         );
 
@@ -69,6 +69,6 @@ class PerodicOrdersCron extends Command
         }
       }
     }
-    \Log::info("Cron is working fine!");
+    Log::info("Cron is working fine!");
   }
 }
