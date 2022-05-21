@@ -76,7 +76,7 @@
         <div class="t-user">
           <h4 class="t-name">${data.sender.name}</h4>
 
-          <span class="t-date">3M</span>
+<!--          <span class="t-date">3M</span>-->
         </div>
 
         <p class="t-desc">${data.message}</p>

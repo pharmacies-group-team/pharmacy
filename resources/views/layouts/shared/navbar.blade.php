@@ -45,8 +45,8 @@ if (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
             <x-icon icon="notification" />
 
             <span class="js-notify-count t-notification-counter"
-              data-count="{{ auth()->user()->unreadNotifications()->count() }}">
-              {{ auth()->user()->unreadNotifications()->count() }}
+                  data-count="{{ auth()->user()->unreadNotifications()->count() }}">
+                {{ auth()->user()->unreadNotifications()->count() }}
             </span>
           </a>
         </div>
@@ -59,27 +59,7 @@ if (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
           </div>
 
           <ul class="t-notification-content js-dropdown-menu">
-
-            @if (isset(Auth::user()->unreadNotifications))
-              @foreach (Auth::user()->unreadNotifications as $notification)
-                @if ($notification->type == 'App\Events\NewOrderNotification')
-                  @if (Auth::user()->hasRole(RoleEnum::CLIENT))
-                    {{-- pharmacy notification --}}
-                    <x-notification :notification="$notification" />
-                  @endif
-
-                  {{-- client notification --}}
-                  @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
-                    <x-notification :notification="$notification" />
-                  @endif
-
-                  {{-- admin notification --}}
-                  @if ($notification->type == 'App\Events\AdminNotification')
-                    <x-notification :notification="$notification" />
-                  @endif
-                @endif
-              @endforeach
-            @endif
+            <livewire:notification />
           </ul>
 
           <div class="t-notification-footer">
