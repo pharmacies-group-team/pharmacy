@@ -18,7 +18,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/orders', // TODO
+      'link'     => SettingEnum::DOMAIN.'pharmacy/quotation/'. $order->id,
       'message'  => 'أرسل لك طلب جديد، يمكنك الإطلاع عليه.',
     ];
 
