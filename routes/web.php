@@ -240,6 +240,7 @@ Route::prefix('/client')
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
       Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
 
       Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
       Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
