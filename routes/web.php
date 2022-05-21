@@ -167,8 +167,8 @@ Route::prefix('/admin')
     /*------------------------------ cities ------------------------------*/
     Route::resource('/cities', admin\CityController::class);
 
-    /*------------------------------ payments ------------------------------*/
-//    Route::resource('/payments', admin\PaymentController::class);
+    /*------------------------------ directorates ------------------------------*/
+    Route::resource('/directorates', admin\DirectorateController::class);
 
     /*------------------------------ payments ------------------------------*/
 //    Route::resource('/payments', admin\PaymentController::class);

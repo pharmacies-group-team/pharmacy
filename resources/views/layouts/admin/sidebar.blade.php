@@ -104,6 +104,18 @@
 
     {{-- City Method --}}
     <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.directorates.index') active @endif"
+         href="{{ route('admin.directorates.index') }}">
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/city.svg') }}'></ion-icon>
+        </div>
+
+        <span>إدارة المديريات</span>
+      </a>
+    </li>
+
+    {{-- City Method --}}
+    <li>
       <a class="list-item-link @if (Route::currentRouteName() === '') active @endif"
         href="{{ route('admin.payments.index') }}">
         <div class='icon'>
