@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
       PharmacySeeder::class,
       AdSeeder::class,
       OrderSeeder::class,
+      PerodicOrderSeeder::class,
 
       // only enable this for testing char.js
       // DevTestSeeder::class
