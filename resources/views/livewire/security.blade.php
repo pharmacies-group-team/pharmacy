@@ -31,8 +31,8 @@
       <div class="form-group">
         <label class="text-base">@lang('form.confirm-new-password') </label>
 
-        <input placeholder="@lang('form.confirm-new-password') " wire:model.debounce.500md="confirmPassword"
-          type="password" class="form-control" autocomplete="new-password">
+        <input placeholder="@lang('form.confirm-new-password') " wire:model.debounce.500md="confirmPassword" type="password"
+          class="form-control" autocomplete="new-password">
 
         @error('confirmPassword')
           <span class="error">{{ $message }}</span>

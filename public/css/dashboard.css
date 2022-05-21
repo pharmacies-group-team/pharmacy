@@ -2389,18 +2389,11 @@ ion-icon{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.pharmacy-profile{
-  margin-left: 2.25rem;
-  margin-right: 2.25rem;
-  margin-top: 4rem;
-  border-radius: 0.5rem;
-  padding: 2.5rem;
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+.page-pharmacy-profile .t-pharmacy-content{
+  margin-top: 2rem;
 }
 
-.pharmacy-profile .pharmacy-info{
+.page-pharmacy-profile .pharmacy-info{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2408,29 +2401,29 @@ ion-icon{
 }
 
 @media (min-width: 1024px){
-  .pharmacy-profile .pharmacy-info{
+  .page-pharmacy-profile .pharmacy-info{
     flex-direction: row;
     justify-content: space-between;
   }
 }
 
-.pharmacy-profile .profile-form{
+.page-pharmacy-profile .profile-form{
   order: 1;
   flex: 1 1 0%;
 }
 
-.pharmacy-profile .profile-form .address-selects{
+.page-pharmacy-profile .profile-form .address-selects{
   display: flex;
   justify-content: space-between;
   gap: 1.25rem;
 }
 
-.pharmacy-profile .profile-form .address-selects select{
+.page-pharmacy-profile .profile-form .address-selects select{
   margin-bottom: 1rem;
   flex: 1 1 0%;
 }
 
-.pharmacy-profile .upload-image{
+.page-pharmacy-profile .upload-image{
   margin-left: auto;
   margin-right: auto;
   max-width: 12rem;
@@ -2439,21 +2432,21 @@ ion-icon{
 }
 
 @media (min-width: 1024px){
-  .pharmacy-profile .upload-image{
+  .page-pharmacy-profile .upload-image{
     order: 2;
     margin-left: 1rem;
     margin-right: 1rem;
   }
 }
 
-.pharmacy-profile .upload-image .avatar{
+.page-pharmacy-profile .upload-image .avatar{
   border-radius: 0.25rem;
   border-width: 8px;
   --tw-border-opacity: 1;
   border-color: rgb(221 233 255 / var(--tw-border-opacity));
 }
 
-.pharmacy-profile .upload-image .update-btn{
+.page-pharmacy-profile .upload-image .update-btn{
   --tw-translate-y: -1.5rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   border-radius: 0.5rem;
@@ -2462,36 +2455,36 @@ ion-icon{
   padding: 0.5rem;
 }
 
-.pharmacy-profile .upload-image .update-btn svg{
+.page-pharmacy-profile .upload-image .update-btn svg{
   height: 1.5rem;
   width: 1.5rem;
   fill: #4E7DCB;
 }
 
-.pharmacy-profile .contact-us-header{
+.page-pharmacy-profile .contact-us-header{
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.pharmacy-profile .contact-us .item{
+.page-pharmacy-profile .contact-us .item{
   margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.pharmacy-profile .contact-us .item .item__column{
+.page-pharmacy-profile .contact-us .item .item__column{
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.pharmacy-profile .social{
+.page-pharmacy-profile .social{
   max-width: 36rem;
 }
 
-.pharmacy-profile .social .item{
+.page-pharmacy-profile .social .item{
   position: relative;
   margin-top: 1rem;
   display: flex;
@@ -2499,7 +2492,7 @@ ion-icon{
   gap: 1rem;
 }
 
-.pharmacy-profile .social .item .icon{
+.page-pharmacy-profile .social .item .icon{
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -2507,13 +2500,13 @@ ion-icon{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.pharmacy-profile .social .item input{
+.page-pharmacy-profile .social .item input{
   width: 100%;
   padding-right: 3rem;
   direction: ltr;
 }
 
-.pharmacy-profile .social .btn, .pharmacy-profile .social .btn-rounded{
+.page-pharmacy-profile .social .btn, .page-pharmacy-profile .social .btn-rounded{
   margin-top: 1.5rem;
 }
 

@@ -7,21 +7,27 @@
 
   {{-- @include('includes.alerts') --}}
 
-  <main class="pharmacy-profile">
-    <div class="pharmacy-info">
+  <main class="page-pharmacy-profile">
+    <header class="t-header t-card">
+      <h2 class="text-base">
+        @lang('heading.profile')
+      </h2>
+    </header>
 
-      {{-- form --}}
-      <livewire:account />
+    <div class="t-card t-pharmacy-content">
+      <div class="pharmacy-info">
+        {{-- form --}}
+        <livewire:account />
 
-      {{-- avatar --}}
-      <x-image :image="asset(UserEnum::USER_AVATAR_PATH . $user->avatar)" :uploadTo="route('setting.update.avatar')" name="avatar" />
+        {{-- avatar --}}
+        <x-image :image="asset(UserEnum::USER_AVATAR_PATH . $user->avatar)" :uploadTo="route('setting.update.avatar')" name="avatar" />
+      </div>
+
+      <hr class="divided">
+
+      {{-- security --}}
+      <livewire:security />
     </div>
-
-    <hr class="divided">
-
-    {{-- security --}}
-    <livewire:security />
-
   </main>
 
 @stop
