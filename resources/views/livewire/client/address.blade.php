@@ -2,9 +2,9 @@
 
   <x-alert type="message" />
 
-  <div class="container" style="margin-top: 50px ">
+  <div>
 
-    <section class="section-header">
+    <section class="section-header t-card">
       <h2 class="text-large">عناوين التوصيل</h2>
 
       <button class="btn" wire:click.prevent="create()" @click="addModal = true;">اضافه عنوان جديد</button>
