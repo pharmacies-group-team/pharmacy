@@ -13,11 +13,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.orders.index') active @endif"
         href="{{ route('client.orders.index') }}">
-
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/orders.svg') }}'></ion-icon>
-        </div>
-
+        <x-font-icon icon='store' />
 
         <span>إدارة الطلبات</span>
       </a>
@@ -41,10 +37,8 @@
     {{-- invoice profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.financial.operations') active @endif"
-         href="{{ route('client.financial.operations') }}">
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/money.svg') }}'></ion-icon>
-        </div>
+        href="{{ route('client.financial.operations') }}">
+        <x-font-icon icon='sack-dollar' />
 
         <span>@lang('heading.invoice-profile')</span>
       </a>
@@ -53,9 +47,7 @@
     {{-- chat --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.chat') active @endif" href="{{ route('client.chat') }}">
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='comments' />
 
         <span>@lang('heading.chat') </span>
       </a>
@@ -64,9 +56,7 @@
     {{-- addresses --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.address') active @endif" href="{{ route('client.address') }}">
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/delivery.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='map-location-dot' />
 
         <span>إدارة عناوين التوصيل </span>
       </a>
@@ -75,11 +65,8 @@
     {{-- profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.account-settings') active @endif"
-         href="{{ route('client.account-settings') }}">
-
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
-        </div>
+        href="{{ route('client.account-settings') }}">
+        <x-font-icon icon='id-card' />
 
         <span>إعدادات الحساب </span>
       </a>
