@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
   let getMinutes = (time) => new Date(time).getMinutes();
   let getHours = (time) => new Date(time).getHours();
 
+  const scrollToBottom = (node) => node.scrollTop = node.scrollHeight;
+
   let messageTimeFormat = (time) => {
     return `${Math.ceil(getHours(time)/2)}:${getMinutes(time) < 10 ? '0': ''}${getMinutes(time)}`;
   }
@@ -33,7 +35,7 @@ use Illuminate\Support\Facades\Auth;
 {{-- get user messages --}}
 <script>
   const getUserMessages = (userID) => {
-    console.log(userID);
+    // console.log(userID);
     axios
       .get(`/chat/messages/${userID}`)
       .then(res => {
@@ -48,17 +50,25 @@ use Illuminate\Support\Facades\Auth;
         let messages = usersMessages.map(message => renderUserMessages(message))
 
         let element = el('.t-chat-messages-list').innerHTML = messages.join(' ');
+
+        // scroll to bottom
+        scrollToBottom(el('.t-chat-messages-list'));
       })
   }
 </script>
 
 {{-- user-item --}}
 <script>
+  let toUserID = '';
+
   const usersClickEvent = () => {
     els('.js-user-item')
       .forEach(userElement => {
         userElement
           .addEventListener('click', (event) => {
+            toUserID = userElement.getAttribute('data-user-id')
+
+            // user messages
             getUserMessages(userElement.getAttribute('data-user-id'))
 
             // add active class
@@ -66,7 +76,7 @@ use Illuminate\Support\Facades\Auth;
             userElement.classList.add('is-active')
           })
 
-        console.log('{{ Auth::id() }}')
+        // console.log('{{ Auth::id() }}')
       })
   }
 </script>
@@ -88,7 +98,7 @@ use Illuminate\Support\Facades\Auth;
     let days = hours * 24;
 
 
-    console.log(dateDiff(minutes), dateDiff(minutes) > 9 ? '' : '*', 'hi there');
+    // console.log(dateDiff(minutes), dateDiff(minutes) > 9 ? '' : '*', 'hi there');
     // day
     if (dateDiff(days) > 0) return `${dateDiff(days)}d`;
 
@@ -141,13 +151,13 @@ use Illuminate\Support\Facades\Auth;
 
   // get users
   axios.get('{{ route('chat.getUsers') }}').then((res) => {
-
-    let users = res.data.map(user => renderUser(user));
+    let users = res.data
+      .filter(user => user.id !== Number('{{ Auth::id() }}'))
+      .map(user => renderUser(user));
 
     el('.js-users').innerHTML = users.join('');
 
     usersClickEvent();
-
 
     // render first user message
     el('.js-user-item').click()
@@ -167,17 +177,37 @@ use Illuminate\Support\Facades\Auth;
         to,
         message
       })
-      .then(res => el('.t-chat-messages-list').innerHTML += renderUserMessages(res.data))
+      .then(res => {
+        // el('.t-chat-messages-list').innerHTML += renderUserMessages(res.data);
+        resetInput();
+        // scroll to bottom
+        scrollToBottom(el('.t-chat-messages-list'));
+      })
   }
 
+  const resetInput = () => el('.js-chat-input').value = '';
 
   el('.js-chat-form')
     .addEventListener('submit', event => {
       event.preventDefault();
 
       sendMessage({
-        to: 3,
+        to: toUserID,
         message: el('.js-chat-input').value
-      })
+      });
+    });
+</script>
+
+{{-- pusher --}}
+<script>
+  pusher
+    .subscribe('notify-channel')
+    .bind('App\\Events\\Notify', (data) => {
+      console.log(data, 'pppppppppppppppppppppppppppppppppppp')
+
+      el('.t-chat-messages-list').innerHTML += renderUserMessages(data.users)
+
+      // scroll to bottom
+      scrollToBottom(el('.t-chat-messages-list'));
     });
 </script>

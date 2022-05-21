@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Pusher\Pusher;
 
 class ChatController extends Controller
 {
@@ -81,6 +82,22 @@ class ChatController extends Controller
       ->with('fromUser')
       ->latest()
       ->first();
+
+    // notification
+    $options = array();
+    $pusher = new Pusher(
+      env('PUSHER_APP_KEY'),
+      env('PUSHER_APP_SECRET'),
+      env('PUSHER_APP_ID'),
+      [
+        'cluster' => env('PUSHER_APP_CLUSTER'),
+        'encrypted' => true
+      ]
+    );
+
+    $data = ['from' => $from, 'to' => $to, 'users' => $message];
+    $notify = 'notify-channel';
+    $pusher->trigger($notify, 'App\\Events\\Notify', $data);
 
     return response($message);
   }
