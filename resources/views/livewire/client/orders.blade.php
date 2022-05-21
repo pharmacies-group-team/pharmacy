@@ -36,6 +36,9 @@
         {{-- status --}}
         <th>حالة الطلب</th>
 
+        {{-- perodic order --}}
+        <th>أضافة طلب دوري</th>
+
         {{-- actions --}}
         <th></th>
       </tr>
@@ -100,6 +103,23 @@
                   أُلغي الطلب
                 </div>
               @endif
+            </td>
+
+            {{-- create perodic order --}}
+            <td>
+
+              @if ($order['PerodicOrders'] && $order->id == $order['PerodicOrders']['order_id'])
+                <div class="badge bg-light text-dark">
+                  <div>
+                    @lang('action.has-perodic-order')
+                  </div>
+
+                </div>
+              @else
+                <x-perodic-orders :order="$order">
+                </x-perodic-orders>
+              @endif
+
             </td>
 
             {{-- action --}}
