@@ -2,9 +2,9 @@
 @section('content')
   <x-alert type="status" />
 
-  <main class="page-chat container">
+  <main class="page-chat">
 
-    <div class="section-header t-cart">
+    <div class="section-header t-card">
       <h1 class="text-large">@lang('heading.chat')</h1>
     </div>
 
