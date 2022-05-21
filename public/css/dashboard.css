@@ -525,6 +525,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  z-index: 1000;
   display: inline-block;
 }
 
@@ -1686,7 +1687,6 @@ body{
 
 .page-chat .t-chat-messages-list{
   max-height: 24rem;
-  min-height: 10rem;
   overflow-x: hidden;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -1699,6 +1699,10 @@ body{
 .page-chat .t-chat-messages-list::-webkit-scrollbar{
   width: 0px;
   opacity: 0;
+}
+
+.page-chat .t-chat-messages .t-chat-messages-list{
+  min-height: 28rem;
 }
 
 .page-chat .t-chat-messages .t-time{
@@ -1787,8 +1791,6 @@ body{
   border-style: none;
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .page-chat .t-chat-messages-form input{
