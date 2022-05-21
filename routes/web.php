@@ -164,6 +164,15 @@ Route::prefix('/admin')
     /*------------------------------ payments ------------------------------*/
     Route::resource('/payments', admin\PaymentController::class);
 
+    /*------------------------------ cities ------------------------------*/
+    Route::resource('/cities', admin\CityController::class);
+
+    /*------------------------------ directorates ------------------------------*/
+    Route::resource('/directorates', admin\DirectorateController::class);
+
+    /*------------------------------ Neighborhood ------------------------------*/
+    Route::resource('/neighborhoods', admin\NeighborhoodController::class);
+
     /*------------------------------ website content ------------------------------*/
     Route::prefix('site')->controller(admin\SiteController::class)
       ->group(function () {
