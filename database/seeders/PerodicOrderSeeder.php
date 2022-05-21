@@ -17,9 +17,9 @@ class PerodicOrderSeeder extends Seeder
   {
     //
     PerodicOrder::insert([
-      ['order_id' => 1, 'is_active' => 1, 'start_date' => Carbon::create('2022', '05', '21'), 'perodic_date_type' => 'weekly'],
-      ['order_id' => 2, 'is_active' => 1, 'start_date' => Carbon::create('2022', '05', '22'), 'perodic_date_type' => 'monthly'],
-      ['order_id' => 3, 'is_active' => 0, 'start_date' => Carbon::create('2022', '06', '21'), 'perodic_date_type' => 'weekly']
+      ['order_id' => 1, 'is_active' => 1, 'start_date' => Carbon::create('2022', '05', '21'), 'perodic_date_type' => 'weekly', 'next_order_date' => Carbon::create('2022', '05', '28'), 'user_id' => 3],
+      ['order_id' => 2, 'is_active' => 1, 'start_date' => Carbon::create('2022', '05', '22'), 'perodic_date_type' => 'monthly', 'next_order_date' => Carbon::create('2022', '06', '28'), 'user_id' => 3],
+      ['order_id' => 3, 'is_active' => 0, 'start_date' => Carbon::create('2022', '06', '1'), 'perodic_date_type' => 'weekly', 'next_order_date' => Carbon::create('2022', '06', '8'), 'user_id' => 3]
     ]);
   }
 }
