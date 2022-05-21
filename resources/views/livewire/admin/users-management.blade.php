@@ -5,13 +5,26 @@
     {{-- title --}}
     <section class="section-header">
       <h2 class="text-large">المستخدمين</h2>
-      <button class="btn" @click="addModal = true">اضافه مستخدم</button>
+
+      <div>
+        <select wire:model="role" class="form-control">
+          <option value=""> عرض الكل</option>
+          <option value="{{ \App\Enum\RoleEnum::SUPER_ADMIN }}">مدير النظام</option><hr>
+          <option value="{{ \App\Enum\RoleEnum::PHARMACY }}">الصيدليات</option>
+          <option value="{{ \App\Enum\RoleEnum::CLIENT }}">العملاء</option>
+        </select>
+        <button class="btn" @click="addModal = true">اضافه مستخدم</button>
+      </div>
+
     </section>
 
     <div class="table-wrapper">
       <table class="table">
         <thead>
-        <tr>
+        <tr style="text-align: right ">
+          {{-- name --}}
+          <th> # </th>
+
           {{-- name --}}
           <th> الاسم</th>
 
@@ -36,19 +49,24 @@
         @if ($users)
           @foreach ($users as $user)
             <tr>
-              <td><a href="{{ route('admin.users.profile', $user->id) }}">{{ $user->name }}</a> </td>
+              <td>{{ $user->id }}</td>
+              <td style="text-align: right "><a href="{{ route('admin.users.profile', $user->id) }}">{{ $user->name }}</a> </td>
 
-              <td>{{ $user->email }}</td>
-              <td>{{ $user->phone }}</td>
-              <td> <span class="badge bg-primary">
-                    @if($user->hasRole(\App\Enum\RoleEnum::PHARMACY)) صيدلي
-                  @elseif($user->hasRole(\App\Enum\RoleEnum::CLIENT)) عميل
-                  @elseif($user->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN)) مدير النظام
-                  @endif
-                  </span></td>
+              <td style="text-align: right ">{{ $user->email }}</td>
+              <td style="text-align: right ">{{ $user->phone }}</td>
+              <td style="text-align: right ">
+                @if($user->hasRole(\App\Enum\RoleEnum::PHARMACY))
+                    <span class="badge badge-info">صيدلي</span>
+                @elseif($user->hasRole(\App\Enum\RoleEnum::CLIENT))
+                    <span class="badge badge-primary">عميل</span>
+                @elseif($user->hasRole(\App\Enum\RoleEnum::SUPER_ADMIN))
+                    <span class="badge badge-success"> مدير النظام</span>
+                @endif
+
+              </td>
 
               {{-- status --}}
-              <td>
+              <td style="text-align: right ">
                 @if ($user->is_active)
                   <div class="badge badge-info">
                     مفعل
@@ -61,7 +79,7 @@
               </td>
 
               {{-- action --}}
-              <td>
+              <td style="text-align: right ">
                 <form method="post" action='{{ route('admin.clients.toggle', ['id' => $user->id]) }}'>
                   @csrf
                   <button type="submit" class="btn {{ $user->is_active ? 'btn-danger' : 'btn-primary' }} m-1">
@@ -88,7 +106,7 @@
   {{-- modals --}}
   <div>
     {{-- add ads modal --}}
-    <x-modal title="اضافة اعلان" open="addModal">
+    <x-modal title="اضافة اعلان" open="addModal" wire:ignore.self>
       <form enctype="multipart/form-data">
         {{-- name --}}
         <div class="form-group">
@@ -143,23 +161,12 @@
           <label>الصلاحيات</label>
 
           <select wire:model="roles" class="form-control @error('roles') is-invalid @enderror">
-            <option value="{{ \App\Enum\RoleEnum::SUPER_ADMIN }}">مدير النظام</option>
-            <option value="{{ \App\Enum\RoleEnum::ADMIN }}">مدير</option>
+            <option selected value="{{ \App\Enum\RoleEnum::SUPER_ADMIN }}">مدير النظام</option>
             <option value="{{ \App\Enum\RoleEnum::PHARMACY }}">صيدلي</option>
-            <option selected value="{{ \App\Enum\RoleEnum::CLIENT }}">عميل</option>
+            <option value="{{ \App\Enum\RoleEnum::CLIENT }}">عميل</option>
           </select>
 
           @error('roles')
-          <span class="invalid-feedback">{{ $message }}</span>
-          @enderror
-        </div>
-
-        {{-- avatar --}}
-        <div class="form-group">
-          <label>صورة المستخدم</label>
-          <input wire:model="avatar" class="form-control @error('avatar') is-invalid @enderror" type="file">
-
-          @error('avatar')
           <span class="invalid-feedback">{{ $message }}</span>
           @enderror
         </div>
