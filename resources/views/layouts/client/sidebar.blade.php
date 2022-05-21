@@ -19,6 +19,19 @@
       </a>
     </li>
 
+    {{-- perodic orders --}}
+    {{-- TODO change icon --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'client.showTasks') active @endif"
+         href="{{ route('client.showTasks') }}">
+
+        <div class="icon">
+          <ion-icon src='{{ asset('images/icons/orders.svg') }}'></ion-icon>
+        </div>
+        <span> الطلبات الدورية</span>
+      </a>
+    </li>
+
     {{-- invoice profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'client.financial.operations') active @endif"
