@@ -1,73 +1,171 @@
 @extends('layouts.admin.master')
 @section('content')
+  <main class="page-admin-report">
+    <div class="t-chart">
 
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card widget-flat">
-          <div class="card-body">
-            <div class="float-end">
-              <i class="mdi mdi-account-multiple widget-icon"></i>
-            </div>
-            <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Customers</h5>
-            <h3 class="mt-3 mb-3">36,254</h3>
-            <p class="text-muted mb-0">
-              <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
-              <span class="text-nowrap">Since last month</span>
-            </p>
-          </div> <!-- end card-body-->
-        </div> <!-- end card-->
-      </div> <!-- end col-->
+      {{-- orders --}}
+      <div class="t-chart-item t-card">
+        <h3 class="t-chart-title">@lang('heading.orders')</h3>
+        <canvas id="chart-orders" width="300" height="300"></canvas>
+      </div>
 
-      <div class="col-sm-6">
-        <div class="card widget-flat">
-          <div class="card-body">
-            <div class="float-end">
-              <i class="mdi mdi-cart-plus widget-icon"></i>
-            </div>
-            <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Orders</h5>
-            <h3 class="mt-3 mb-3">5,543</h3>
-            <p class="text-muted mb-0">
-              <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
-              <span class="text-nowrap">Since last month</span>
-            </p>
-          </div> <!-- end card-body-->
-        </div> <!-- end card-->
-      </div> <!-- end col-->
-    </div> <!-- end row -->
+      {{-- pharmacies --}}
+      <div class="t-chart-item t-card">
+        <h3 class="t-chart-title">@lang('heading.pharmacies')</h3>
+        <canvas id="chart-pharmacies" width="300" height="300"></canvas>
+      </div>
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card widget-flat">
-          <div class="card-body">
-            <div class="float-end">
-              <i class="mdi mdi-currency-usd widget-icon"></i>
-            </div>
-            <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Revenue</h5>
-            <h3 class="mt-3 mb-3">$6,254</h3>
-            <p class="text-muted mb-0">
-              <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
-              <span class="text-nowrap">Since last month</span>
-            </p>
-          </div> <!-- end card-body-->
-        </div> <!-- end card-->
-      </div> <!-- end col-->
+      {{-- clients --}}
+      <div class="t-chart-item t-card">
+        <h3 class="t-chart-title">@lang('heading.clients')</h3>
+        <canvas id="chart-clients" width="300" height="300"></canvas>
+      </div>
 
-      <div class="col-sm-6">
-        <div class="card widget-flat">
-          <div class="card-body">
-            <div class="float-end">
-              <i class="mdi mdi-pulse widget-icon"></i>
-            </div>
-            <h5 class="text-muted fw-normal mt-0" title="Growth">Growth</h5>
-            <h3 class="mt-3 mb-3">+ 30.56%</h3>
-            <p class="text-muted mb-0">
-              <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 4.87%</span>
-              <span class="text-nowrap">Since last month</span>
-            </p>
-          </div> <!-- end card-body-->
-        </div> <!-- end card-->
-      </div> <!-- end col-->
-    </div> <!-- end row -->
-  </div>
-@stop
+      {{-- profits --}}
+      <div class="t-chart-item t-card">
+        <h3 class="t-chart-title">@lang('heading.profits')</h3>
+        <canvas id="chart-profits" width="300" height="300"></canvas>
+      </div>
+    </div>
+
+  </main>
+@endsection
+
+
+@section('script')
+  <script>
+    const toLabels = (items) => items.map(item => Object.keys(item)).flat()
+    const toData = (items) => items.map(item => Object.values(item)).flat()
+  </script>
+
+
+  {{-- chart settings --}}
+  <script>
+    const CHART_LABELS = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    const CHART_COLORS = [
+      'rgb(88 ,143 ,244)',
+      '#f44336 ',
+      ' #e91e63',
+      '#9c27b0 ',
+      ' #673ab7',
+      '#3f51b5 ',
+      '#2196f3 ',
+      '#4caf50 ',
+      '#cddc39',
+      '#ffc107',
+      '#ff9800',
+      '#ff5722',
+      '#607d8b',
+    ];
+  </script>
+
+  {{-- chart factory --}}
+  <script>
+    const chartFactor = ({
+      element,
+      type = 'line',
+      labels,
+      label,
+      data
+    }) => {
+      return new Chart(element, {
+        type,
+        // type: 'polarArea',
+        data: {
+          labels,
+          datasets: [{
+            label,
+            data,
+            // backgroundColor: 'rgb(88 ,143 ,244)',
+            backgroundColor: CHART_COLORS,
+            borderWidth: 1,
+            borderColor: CHART_COLORS,
+          }]
+        },
+        options: {
+          animation: false,
+          responsive: true,
+          plugins: {
+            // legend: {
+            //   display: false
+            // }
+          },
+          scales: {
+            y: {
+              // type: 'linear',
+              min: 0,
+            }
+          }
+        }
+      });
+    }
+  </script>
+
+  <script>
+    // orders
+    axios.get('/api/report/orders').then(res => {
+      console.log(res.data)
+
+      chartFactor({
+        label: '@lang('heading.orders')',
+        element: el('#chart-orders').getContext('2d'),
+        labels: toLabels(res.data),
+        data: toData(res.data)
+      });
+    })
+
+    // pharmacies
+    // axios.get('/api/report/pharmacies').then(res => {
+    axios.get('/api/report/orders').then(res => {
+      console.log(res.data)
+
+      chartFactor({
+        label: '@lang('heading.pharmacies')',
+        element: el('#chart-pharmacies').getContext('2d'),
+        labels: toLabels(res.data),
+        data: toData(res.data)
+      });
+    })
+
+    // clients
+    // axios.get('/api/report/clients').then(res => {
+    axios.get('/api/report/orders').then(res => {
+      console.log(res.data)
+
+      chartFactor({
+        label: '@lang('heading.clients')',
+        element: el('#chart-clients').getContext('2d'),
+        labels: toLabels(res.data),
+        data: toData(res.data)
+      });
+    })
+
+    // profits
+    // axios.get('/api/report/profits').then(res => {
+    axios.get('/api/report/orders').then(res => {
+      console.log(res.data)
+
+      chartFactor({
+        label: '@lang('heading.clients')',
+        // type: 'radar',
+        element: el('#chart-profits').getContext('2d'),
+        labels: toLabels(res.data),
+        data: toData(res.data)
+      });
+    })
+  </script>
+@endsection

@@ -6,6 +6,13 @@ return [
   "protection-and-privacy" => "الحماية والخصوصية",
 
   "order-details" => "تفاصيل الطلب",
+  "orders" => "orders",
+
+  "pharmacies" => "pharmacies",
+
+  "clients" => "clients",
+
+  "profits" => "profits",
 
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",

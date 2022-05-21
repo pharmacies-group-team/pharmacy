@@ -33,28 +33,16 @@
       </a>
     </li>
 
-    {{-- profile --}}
+    {{-- invoice profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
+         href="{{ route('pharmacy.financial.operations') }}">
 
         <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
+          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
         </div>
 
-        <span>بروفايل الصيدلية</span>
-      </a>
-    </li>
-
-    {{-- account settings --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
-        href="{{ route('pharmacy.account-settings') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
-        </div>
-
-        <span>أعدادات الحساب</span>
+        <span>@lang('heading.invoice-profile')</span>
       </a>
     </li>
 
@@ -69,17 +57,30 @@
       </a>
     </li>
 
-    {{-- invoice profile --}}
+    {{-- profile --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
-        href="{{ route('pharmacy.financial.operations') }}">
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
 
         <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
+          <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
         </div>
 
-        <span>@lang('heading.invoice-profile')</span>
+        <span>الملف الشخصي </span>
       </a>
     </li>
+
+    {{-- account settings --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
+        href="{{ route('pharmacy.account-settings') }}">
+
+        <div class='icon'>
+          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
+        </div>
+
+        <span>إعدادات الحساب</span>
+      </a>
+    </li>
+
   </ul>
 </nav>

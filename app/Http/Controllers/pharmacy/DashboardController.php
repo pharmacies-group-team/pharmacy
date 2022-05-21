@@ -46,3 +46,4 @@ class DashboardController extends Controller
         return view('pharmacy.chat');
     }
 }
+

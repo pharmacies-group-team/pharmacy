@@ -17,12 +17,15 @@ class DatabaseSeeder extends Seeder
     // \App\Models\User::factory(10)->create();
     $this->call([
       PermissionSeeder::class,
-      CitySeeder::class,
       UserSeeder::class,
+      CitySeeder::class,
       WebInfoSeeder::class,
       PharmacySeeder::class,
       AdSeeder::class,
       OrderSeeder::class,
+
+      // only enable this for testing char.js
+      // DevTestSeeder::class
       PerodicOrderSeeder::class
 
     ]);
