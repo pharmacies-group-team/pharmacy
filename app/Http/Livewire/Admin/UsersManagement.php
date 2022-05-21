@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Enum\RoleEnum;
+use App\Http\Controllers\MailController;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -92,8 +93,16 @@ class UsersManagement extends Component
     //********* active users *********//
     public function toggle($id)
     {
-      User::find($id)->update(['is_active' => !User::find($id)->is_active]);
+      $user = User::find($id);
+
+      $user->update(['is_active' => !User::find($id)->is_active]);
+
+      if ($user->is_active == 0)
+        (new MailController)->sendDeactivateMail($user->email);
+      else
+        (new MailController)->sendactivateMail($user->email);
 
       session()->flash('status', 'تمت العملية بنجاح.');
+
     }
 }
