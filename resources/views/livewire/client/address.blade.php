@@ -12,24 +12,25 @@
 
     <table class="table">
       <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">الاسم</th>
-        <th scope="col">رقم الهاتف</th>
-        <th scope="col">نوع العنوان</th>
-        <th scope="col"></th>
-      </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">الاسم</th>
+          <th scope="col">رقم الهاتف</th>
+          <th scope="col">نوع العنوان</th>
+          <th scope="col"></th>
+        </tr>
       </thead>
       <tbody>
-        @if(isset($addresses))
-          @foreach($addresses as $address)
+        @if (isset($addresses))
+          @foreach ($addresses as $address)
             <tr>
-              <th scope="row">{{ $address->id }}</th>
+              <td scope="row">{{ $address->id }}</th>
               <td>{{ $address->name }}</td>
               <td>{{ $address->phone }}</td>
               <td>{{ $address->type_address }}</td>
               <td class="table-action">
-                <button wire:click.prevent="update({{$address->id}})" @click=" id = {{ $address->id }}; address = {{ $address }}; editModal = true">
+                <button wire:click.prevent="update({{ $address->id }})"
+                  @click=" id = {{ $address->id }}; address = {{ $address }}; editModal = true">
                   <x-icon icon='edit' />
                 </button>
 
@@ -54,20 +55,18 @@
       {{-- Name --}}
       <div class="form-group">
         <label for="ad-name-label">الاسم</label>
-        <input wire:model="name" id="ad-name-label"  type="text"
-               class="form-control " placeholder="الاسم " />
+        <input wire:model="name" id="ad-name-label" type="text" class="form-control" placeholder="الاسم " />
         @error('name')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
       {{-- phone --}}
       <div class="form-group">
         <label for="ad-name-label">رقم الهاتف </label>
-        <input  wire:model="phone" id="ad-name-label"  type="text"
-                class="form-control " placeholder="رقم الهاتف " />
+        <input wire:model="phone" id="ad-name-label" type="text" class="form-control" placeholder="رقم الهاتف " />
         @error('phone')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
@@ -75,8 +74,7 @@
       <div class="form-group">
         <label>نوع العنوان</label>
 
-        <select wire:model="type_address"
-                class="form-control ">
+        <select wire:model="type_address" class="form-control">
           <option>نوع العنوان</option>
           <option value="{{ \App\Enum\UserEnum::TYPE_ADDRESS_HOME }}">
             منزل
@@ -87,15 +85,16 @@
         </select>
 
         @error('type_address')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
-      {{--    desc    --}}
+      {{-- desc --}}
       <div class="form-group">
-        <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع" style="margin-top: 10px "></textarea>
+        <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع"
+          style="margin-top: 10px "></textarea>
         @error('desc')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
@@ -125,20 +124,18 @@
       {{-- Name --}}
       <div class="form-group">
         <label for="ad-name-label">الاسم</label>
-        <input wire:model="name" id="ad-name-label"  type="text"
-               class="form-control " placeholder="الاسم " />
+        <input wire:model="name" id="ad-name-label" type="text" class="form-control" placeholder="الاسم " />
         @error('name')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
       {{-- phone --}}
       <div class="form-group">
         <label for="ad-name-label">رقم الهاتف </label>
-        <input  wire:model="phone" id="ad-name-label"  type="text"
-                class="form-control " placeholder="رقم الهاتف " />
+        <input wire:model="phone" id="ad-name-label" type="text" class="form-control" placeholder="رقم الهاتف " />
         @error('phone')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
@@ -146,8 +143,7 @@
       <div class="form-group">
         <label>نوع العنوان</label>
 
-        <select wire:model="type_address"
-                class="form-control ">
+        <select wire:model="type_address" class="form-control">
           <option>نوع العنوان</option>
           <option value="{{ \App\Enum\UserEnum::TYPE_ADDRESS_HOME }}">
             منزل
@@ -158,15 +154,16 @@
         </select>
 
         @error('type_address')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
-      {{--    desc    --}}
+      {{-- desc --}}
       <div class="form-group">
-        <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع" style="margin-top: 10px "></textarea>
+        <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع"
+          style="margin-top: 10px "></textarea>
         @error('desc')
-        <span class="error">{{ $message }}</span>
+          <span class="error">{{ $message }}</span>
         @enderror
       </div>
 
