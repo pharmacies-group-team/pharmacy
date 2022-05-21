@@ -11,16 +11,14 @@
         <span>رصيدك الحالي:</span>
         <span>{{ Auth::user()->balance }}</span>
       </div>
-
-
     </section>
 
     {{-- content --}}
-    <div class="t-content" style="background: white">
+    <div class="t-content">
       {{-- log data --}}
       <div class="t-log-data">
         <header>
-          <x-icon icon="home" />
+          <x-font-icon icon='sack-dollar' />
 
           <h3 class="t-heading">@lang('heading.invoice-profile')</h3>
         </header>
