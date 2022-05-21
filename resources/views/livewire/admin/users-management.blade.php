@@ -80,9 +80,8 @@
 
               {{-- action --}}
               <td style="text-align: right ">
-                <form method="post" action='{{ route('admin.clients.toggle', ['id' => $user->id]) }}'>
-                  @csrf
-                  <button type="submit" class="btn {{ $user->is_active ? 'btn-danger' : 'btn-primary' }} m-1">
+                <form>
+                  <button wire:click.prevent="toggle({{ $user->id }})" class="btn {{ $user->is_active ? 'btn-danger' : 'btn-primary' }} m-1">
 
                     @if ($user->is_active)
                       تعطيل
