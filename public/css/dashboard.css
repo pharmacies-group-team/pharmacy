@@ -1855,6 +1855,29 @@ body{
   margin-top: 2rem;
 }
 
+.page-invoice-profile .t-wallet-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.page-invoice-profile .t-wallet{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(221 233 255 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 249 254 / var(--tw-bg-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .page-invoice-profile .t-bg{
   min-height: 20rem;
   border-radius: 0.5rem;
