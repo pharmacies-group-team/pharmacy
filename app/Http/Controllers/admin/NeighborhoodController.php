@@ -6,11 +6,10 @@ use App\Models\Directorate;
 use App\Models\Neighborhood;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class NeighborhoodController extends Controller
 {
-
+    //********* get all Neighborhoods *********//
     public function index()
     {
       $neighborhoods = Neighborhood::all();
@@ -18,6 +17,7 @@ class NeighborhoodController extends Controller
       return view('admin.neighborhoods', compact('neighborhoods', 'directorates'));
     }
 
+    //********* create new Neighborhood *********//
     public function store(Request $request)
     {
       $request->validate(
@@ -34,6 +34,7 @@ class NeighborhoodController extends Controller
       return redirect()->back()->with('status', 'تمت الإضافة بنجاح');
     }
 
+    //********* update Neighborhood by id *********//
     public function update(Request $request, $id)
     {
       $request->validate(
@@ -51,6 +52,7 @@ class NeighborhoodController extends Controller
       return redirect()->back()->with('status', 'تمت التعديل بنجاح');
     }
 
+    //********* delete Neighborhood by id *********//
     public function destroy($id)
     {
       return redirect()->back()->with('status', Neighborhood::find($id)->delete() ? "تم الحذف بنجاح" : 'يبدو أن هناك مشكلة');
