@@ -21,28 +21,6 @@
       </a>
     </li>
 
-    {{-- pharmacies --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
-        </div>
-
-        <span>الصيدليات</span>
-      </a>
-    </li>
-
-    {{-- clients --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/users.svg') }}'></ion-icon>
-        </div>
-
-        <span>العملاء</span>
-      </a>
-    </li>
-
     {{-- invoice profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.financial.operations') active @endif"

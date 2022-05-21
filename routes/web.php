@@ -190,27 +190,10 @@ Route::prefix('/admin')
         Route::put('/social', 'updateSocial')->name('updateSocial');
       });
 
-    /*------------------------------ clients ------------------------------*/
-    Route::controller(admin\ClientController::class)->group(function () {
-      Route::get('/clients', 'index')
-        ->name('clients');
-
-      Route::post('/clients/toggle/{id}',  'clientToggle')
-        ->name('clients.toggle');
-    });
-
     /*------------------------------ orders ------------------------------*/
     // Route::get('/orders', [admin\OrderController::class, 'index'])
     //   ->name('admin.orders'); // TODO
 
-    // pharmacies
-    Route::controller(admin\PharmacyController::class)->group(function () {
-      Route::get('/pharmacies',  'index')
-        ->name('pharmacies');
-
-      Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
-        ->name('pharmacies.toggle');
-    });
   });
 
 
