@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Pharmacy;
+namespace App\Http\Livewire\Client;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -15,20 +15,20 @@ class Orders extends Component
 
     public function render()
     {
-        return view('livewire.pharmacy.orders',
-        ['orders' => $this->filter()]);
+        return view('livewire.client.orders',
+          ['orders' => $this->filter()]);
     }
 
     //********* filter search orders *********//
     public function filter()
     {
-      ##### Search By order status #####
-    if($this->status != '')
-        return Auth::user()->pharmacyOrders()->where('status','like', $this->status)
+      ##### Search By Name Pharmacy #####
+      if($this->status != '')
+        return Auth::user()->userOrders()->where('status','like', $this->status)
           ->orderBy('created_at', 'DESC')->paginate(5);
 
-    else
-      return Auth::user()->pharmacyOrders()->orderBy('created_at', 'DESC')->paginate(5);
+      else
+        return Auth::user()->userOrders()->orderBy('created_at', 'DESC')->paginate(5);
     }
 
     //********* Resetting Pagination After Filtering Data *********//
@@ -38,10 +38,10 @@ class Orders extends Component
     }
 
     public function gotoPage($url)
-    {
-      $this->currentPage = explode('page=', $url)[1];
-      Paginator::currentPageResolver(function(){
-        return $this->currentPage;
-      });
-    }
+  {
+    $this->currentPage = explode('page=', $url)[1];
+    Paginator::currentPageResolver(function(){
+      return $this->currentPage;
+    });
+  }
 }

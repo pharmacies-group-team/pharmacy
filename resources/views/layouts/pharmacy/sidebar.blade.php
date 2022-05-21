@@ -11,12 +11,9 @@
     {{-- index --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.index') active @endif" href="{{ route('pharmacy.index') }}">
+        <x-font-icon icon='chart-pie' />
 
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/dashboard.svg') }}'></ion-icon>
-        </div>
-
-        <span>لوحة التحكم</span>
+        <span>الاحصائيات</span>
       </a>
     </li>
 
@@ -25,47 +22,9 @@
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.orders.index') active @endif"
         href="{{ route('pharmacy.orders.index') }}">
 
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/orders.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='store' />
 
         <span>إدارة الطلبات</span>
-      </a>
-    </li>
-
-    {{-- profile --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/pharmacy.svg') }}'></ion-icon>
-        </div>
-
-        <span>بروفايل الصيدلية</span>
-      </a>
-    </li>
-
-    {{-- account settings --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
-        href="{{ route('pharmacy.account-settings') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/profile.svg') }}'></ion-icon>
-        </div>
-
-        <span>أعدادات الحساب</span>
-      </a>
-    </li>
-
-    {{-- chat --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
-        <div class="icon">
-          <ion-icon src='{{ asset('images/icons/messages.svg') }}'></ion-icon>
-        </div>
-
-        <span>@lang('heading.chat') </span>
       </a>
     </li>
 
@@ -73,13 +32,39 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
         href="{{ route('pharmacy.financial.operations') }}">
-
-        <div class='icon'>
-          <ion-icon src='{{ asset('images/icons/invoice.svg') }}'></ion-icon>
-        </div>
+        <x-font-icon icon='sack-dollar' />
 
         <span>@lang('heading.invoice-profile')</span>
       </a>
     </li>
+
+    {{-- chat --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
+        <x-font-icon icon='comments' />
+
+        <span>@lang('heading.chat') </span>
+      </a>
+    </li>
+
+    {{-- profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
+        <x-font-icon icon='capsules' />
+
+        <span>الملف الشخصي </span>
+      </a>
+    </li>
+
+    {{-- account settings --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
+        href="{{ route('pharmacy.account-settings') }}">
+        <x-font-icon icon='id-card' />
+
+        <span>إعدادات الحساب</span>
+      </a>
+    </li>
+
   </ul>
 </nav>

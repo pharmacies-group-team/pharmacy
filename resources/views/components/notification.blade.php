@@ -35,7 +35,7 @@ if (isset($notification)) {
           <div class="t-user">
             <h4 class="t-name">{{ $name }}</h4>
 
-            <span class="t-date">3M</span>
+            <span class="t-date">{{$notification->created_at->diffForHumans()}}</span>
           </div>
 
           <p class="t-desc" style="font-size: 14px; color: #588FF4">

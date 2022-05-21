@@ -46,10 +46,11 @@
           @if (isset($quotationDetails))
             @foreach ($quotationDetails as $details)
               <tr>
-                
+
+                <td> {{ $details->product_name }} </td>
+
                 <td>
                   <div>
-                    {{ $details->product_unit }}
                     @if ($details->product_unit === \App\Enum\QuotationEnum::TYPE_BOTTLE)
                       عبوه
                     @elseif($details->product_unit === \App\Enum\QuotationEnum::TYPE_CARTONS)
