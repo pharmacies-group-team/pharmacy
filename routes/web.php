@@ -170,8 +170,8 @@ Route::prefix('/admin')
     /*------------------------------ directorates ------------------------------*/
     Route::resource('/directorates', admin\DirectorateController::class);
 
-    /*------------------------------ payments ------------------------------*/
-//    Route::resource('/payments', admin\PaymentController::class);
+    /*------------------------------ Neighborhood ------------------------------*/
+    Route::resource('/neighborhoods', admin\NeighborhoodController::class);
 
     /*------------------------------ website content ------------------------------*/
     Route::prefix('site')->controller(admin\SiteController::class)

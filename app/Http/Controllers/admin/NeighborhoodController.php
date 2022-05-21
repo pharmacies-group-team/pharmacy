@@ -1,59 +1,58 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\Models\Directorate;
 use App\Models\Neighborhood;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class NeighborhoodController extends Controller
 {
 
     public function index()
     {
-      $neighborhoods = Neighborhood::get();
-      return response($neighborhoods);
-      // return view('neighborhoods', compact('neighborhoods'));
+      $neighborhoods = Neighborhood::all();
+      $directorates  = Directorate::all();
+      return view('admin.neighborhoods', compact('neighborhoods', 'directorates'));
     }
 
     public function store(Request $request)
     {
-      $validator = Validator::make($request->all(), [
-        'name' => 'required|min:2|max:30|string',
-        'directorate_id' => 'required'
+      $request->validate(
+      [
+        'name'           => 'required|min:2|max:30|string',
+        'directorate_id' => 'required',
       ]);
+
       Neighborhood::create([
-        'name' => $request->input('name'),
+        'name'           => $request->input('name'),
         'directorate_id' => $request->input('directorate_id'),
       ]);
 
-      return response(['added successfully', $validator->errors()]);
-    //  return redirect()->back()->with('status', 'added successfully');
-    }
-
-    public function show($id)
-    {
-      $neighborhoods = Neighborhood::where('id', $id)->get();
-      return response($neighborhoods);
+      return redirect()->back()->with('status', 'تمت الإضافة بنجاح');
     }
 
     public function update(Request $request, $id)
     {
-      $validator = Validator::make($request->all(), [
-        'name' => 'required|min:2|max:30|string',
+      $request->validate(
+      [
+        'name'           => 'required|min:2|max:30|string',
         'directorate_id' => 'required',
       ]);
-      Neighborhood::where('id', $id)
-        ->update([
-          'name' => $request->input('name'),
-          'directorate_id' => $request->input('directorate_id')
-        ]);
-      //  return redirect()->back()->with('status', 'edit successfully');
-      return response(['edit successfully', $validator->errors()]);
+
+      Neighborhood::find($id)->update(
+      [
+        'name'           => $request->input('name'),
+        'directorate_id' => $request->input('directorate_id')
+      ]);
+
+      return redirect()->back()->with('status', 'تمت التعديل بنجاح');
     }
 
     public function destroy($id)
     {
-      return Neighborhood::where('id', $id)->delete() ? "deleted" : 'not deleted';
-      //return redirect()->back()->with('status', Ad::where('id', $id)->delete() ? "deleted" : 'not deleted');
+      return redirect()->back()->with('status', Neighborhood::find($id)->delete() ? "تم الحذف بنجاح" : 'يبدو أن هناك مشكلة');
     }
 }
