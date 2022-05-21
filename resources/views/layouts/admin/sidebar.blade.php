@@ -11,6 +11,15 @@
 
     {{-- users --}}
     <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.index') active @endif" href="{{ route('admin.index') }}">
+        <x-font-icon icon='file-chart-pie' />
+
+        <span>الاحصائيات</span>
+      </a>
+    </li>
+
+    {{-- users --}}
+    <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif"
         href="{{ route('admin.users.index') }}">
         <x-font-icon icon='user' />
