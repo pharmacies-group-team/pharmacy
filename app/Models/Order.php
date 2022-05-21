@@ -48,6 +48,14 @@ class Order extends Model
     }
 
     /**
+     * Get orders perodic orders
+     */
+    public function PerodicOrders(): HasOne
+    {
+      return $this->hasOne(PerodicOrder::class);
+    }
+
+    /**
      * validation
      */
     public static function roles()
