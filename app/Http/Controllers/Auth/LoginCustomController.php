@@ -21,12 +21,12 @@ class LoginCustomController extends Controller
 
       if (Auth::user()->is_active === 1) {
         if (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN))
-          return redirect()->route('admin.users.index');
+          return redirect()->route('admin.index');
 
         elseif (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
           if (Auth::user()->email_verified_at == null)
             return view('auth.verify');
-          return redirect()->route('pharmacy.profile');
+          return redirect()->route('pharmacy.index');
         } else {
           if (Auth::user()->email_verified_at == null)
             return view('auth.verify');

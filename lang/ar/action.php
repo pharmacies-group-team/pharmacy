@@ -9,6 +9,8 @@ return [
   "order-details" => "تفاصيل الطلب ",
   "add" => "إضافة",
   "show-invoice" => "عرض الفاتورة",
-  "cancel-order" => "إلغاء الطلب"
+  "cancel-order" => "إلغاء الطلب",
+  "has-perodic-order" => "طلب دوري",
+  "add_perodic_order" => "اضافة طلب دوري"
   // "" => ""
 ];

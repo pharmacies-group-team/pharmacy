@@ -26,6 +26,12 @@ php artisan make:controller client/ChatController
 php artisan make:controller web/NameController
 ```
 
+### run cron job locally
+
+```bash
+php artisan schedule:work
+```
+
 ## for custom css class you should use `t-` prefix
 
 ```css

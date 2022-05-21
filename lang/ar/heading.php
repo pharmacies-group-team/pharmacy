@@ -39,6 +39,7 @@ return [
   "contact-us" => "تواصل معنا",
 
   "chat" => "الرسائل",
+  "perodic_order" => " طلب دوري"
 
   // "" => "",
 

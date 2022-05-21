@@ -111,6 +111,8 @@ Route::prefix('/pharmacy')
       Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
       Route::get('/chat', 'showChat')->name('chat');
+
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
     });
 
     Route::controller(pharmacy\OrderController::class)
@@ -218,7 +220,14 @@ Route::prefix('/client')
 
       // chat
       Route::get('/chat', 'showChat')->name('chat');
+
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
     });
+
+    Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
+    Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
+//    Route::get('/setCronJob',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
+    Route::post('/togglePerodicOrder/{id}',  [client\PerodicOrderController::class, 'togglePerodicOrder'])->name('togglePerodicOrder');
 
     // order
     Route::controller(client\OrderController::class)

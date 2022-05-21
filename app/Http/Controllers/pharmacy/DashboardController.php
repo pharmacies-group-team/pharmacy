@@ -40,10 +40,19 @@ class DashboardController extends Controller
       return FinancialOperationsServices::getInvoice($invoiceID, 'pharmacy');
     }
 
-    // chat page 
+    // chat page
     public function showChat()
     {
         return view('pharmacy.chat');
+    }
+
+    // dactive user
+    public function deactivate()
+    {
+      $id = Auth::id();
+      $User = user::where('id', $id)->update(['is_active' => !user::find($id)->is_active]);
+      Auth::logout();
+      return view('message.user-not-active');
     }
 }
 

@@ -27,7 +27,19 @@
 
       {{-- security --}}
       <livewire:security />
+
+
+      <form class="t-disable-account" method="post" action='{{ route('client.deactivate', ['id' => $user->id]) }}'>
+        @csrf
+        <button type="submit" class="btn {{ $user->is_active ? 'btn-danger' : 'btn-primary' }} m-1">
+
+          @if ($user->is_active)
+            تعطيل الحساب
+          @endif
+        </button>
+      </form>
     </div>
+
   </main>
 
 @stop

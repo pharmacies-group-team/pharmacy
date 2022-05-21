@@ -24,6 +24,19 @@
     {{-- security --}}
     <livewire:security />
 
+    <hr class="divided">
+
+
+    <form method="post" action='{{ route('pharmacy.deactivate', ['id' => $user->id]) }}'>
+      @csrf
+      <button type="submit" class="btn {{ $user->is_active ? 'btn-danger' : 'btn-primary' }} m-1">
+
+        @if ($user->is_active)
+          تعطيل الحساب
+        @endif
+      </button>
+    </form>
+
   </main>
 
 @stop

@@ -17,9 +17,8 @@
     <div dir="auto" class="mt-4">
       <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
         @csrf
-
-        <button type="submit" class="btn btn-big btn-primary w-100 mt-5" data-bs-dismiss="modal">إعاده إرسال رسالة التاكيد
-        </button>
+        @method('POST')
+        <button type="submit" class="btn btn-big btn-primary w-100 mt-5" data-bs-dismiss="modal">إعاده إرسال رسالة التاكيد</button>
       </form>
     </div>
   </div>
