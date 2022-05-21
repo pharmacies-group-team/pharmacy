@@ -99,7 +99,7 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 */
 
 Route::prefix('/pharmacy')
-  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified', 'active_account'])
   ->name('pharmacy.')->group(function () {
 
     Route::controller(pharmacy\DashboardController::class)->group(function () {
@@ -223,7 +223,7 @@ Route::prefix('/admin')
 
 Route::prefix('/client')
   ->name('client.')
-  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified', 'active_account'])
   ->group(function () {
 
     // dashboard
