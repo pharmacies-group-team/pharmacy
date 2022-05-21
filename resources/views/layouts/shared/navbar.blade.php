@@ -19,7 +19,7 @@ if (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
 @endphp
 
 
-<header>
+<header class="t-nav-wrapper">
   <nav class="nav">
     {{-- menu icon --}}
     <button class="menu-icon" @click="isSidebarOpen = !isSidebarOpen">

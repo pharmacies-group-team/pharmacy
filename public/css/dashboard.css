@@ -1466,6 +1466,12 @@ body{
   background-color: rgb(247 249 254 / var(--tw-bg-opacity));
 }
 
+.t-nav-wrapper{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+}
+
 .nav{
   margin-left: -2.5rem;
   margin-right: -2.5rem;
