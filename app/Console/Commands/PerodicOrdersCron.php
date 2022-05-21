@@ -62,7 +62,7 @@ class PerodicOrdersCron extends Command
         );
 
         // send and save notification in DB
-        NotificationService::newOrder($previousOrder[0]['pharmacy_id']);
+        NotificationService::newOrder($order);
 
         if ($perodic_order->perodic_date_type === PerodicOrderEnum::WEEKLY) {
           $nextDate = Carbon::parse($perodic_order['next_order_date'])->copy()->addWeek()->format('Y-m-d');
