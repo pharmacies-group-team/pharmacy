@@ -22,7 +22,7 @@ class Orders extends Component
     //********* filter search orders *********//
     public function filter()
     {
-      ##### Search By Name Pharmacy #####
+      ##### Search By order status #####
     if($this->status != '')
         return Auth::user()->pharmacyOrders()->where('status','like', $this->status)
           ->orderBy('created_at', 'DESC')->paginate(5);
