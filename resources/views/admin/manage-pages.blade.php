@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 @section('content')
 
-  <main class="manage-website container">
+  <main class="manage-website t-card">
     <x-alert type="status" />
 
     {{-- about us --}}
@@ -54,8 +54,6 @@
       </form>
     </div>
 
-
-
     {{-- contact us --}}
     <div class="section">
       <div class="section-header">
@@ -95,7 +93,6 @@
         </button>
       </form>
     </div>
-
 
 
     {{-- social media management --}}
