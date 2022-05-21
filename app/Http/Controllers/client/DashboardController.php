@@ -34,9 +34,17 @@ class DashboardController extends Controller
       return FinancialOperationsServices::getFinancialOperations('client');
     }
 
-    // chat page 
+    // chat page
     public function showChat()
     {
         return view('client.chat');
+    }
+
+    public function deactivate()
+    {
+      $id = Auth::id();
+      $User = user::where('id', $id)->update(['is_active' => !user::find($id)->is_active]);
+      Auth::logout();
+      return view('message.user-not-active');
     }
 }
