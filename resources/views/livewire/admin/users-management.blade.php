@@ -1,7 +1,7 @@
 <div x-data="{ addModal: false }">
   <x-alert type="status" />
 
-  <div class="container">
+  <div>
     {{-- title --}}
     <section class="section-header t-card">
       <h2 class="text-large">المستخدمين</h2>
