@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Enum\RoleEnum;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -86,5 +87,13 @@ class UsersManagement extends Component
       $this->reset();
 
       session()->flash('status', 'تم إنشاء مستخدم جديد.');
+    }
+
+    //********* active users *********//
+    public function toggle($id)
+    {
+      User::find($id)->update(['is_active' => !User::find($id)->is_active]);
+
+      session()->flash('status', 'تمت العملية بنجاح.');
     }
 }

@@ -99,7 +99,7 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 */
 
 Route::prefix('/pharmacy')
-  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified', 'active_account'])
   ->name('pharmacy.')->group(function () {
 
     Route::controller(pharmacy\DashboardController::class)->group(function () {
@@ -190,27 +190,10 @@ Route::prefix('/admin')
         Route::put('/social', 'updateSocial')->name('updateSocial');
       });
 
-    /*------------------------------ clients ------------------------------*/
-    Route::controller(admin\ClientController::class)->group(function () {
-      Route::get('/clients', 'index')
-        ->name('clients');
-
-      Route::post('/clients/toggle/{id}',  'clientToggle')
-        ->name('clients.toggle');
-    });
-
     /*------------------------------ orders ------------------------------*/
     // Route::get('/orders', [admin\OrderController::class, 'index'])
     //   ->name('admin.orders'); // TODO
 
-    // pharmacies
-    Route::controller(admin\PharmacyController::class)->group(function () {
-      Route::get('/pharmacies',  'index')
-        ->name('pharmacies');
-
-      Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
-        ->name('pharmacies.toggle');
-    });
   });
 
 
@@ -223,7 +206,7 @@ Route::prefix('/admin')
 
 Route::prefix('/client')
   ->name('client.')
-  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified', 'active_account'])
   ->group(function () {
 
     // dashboard

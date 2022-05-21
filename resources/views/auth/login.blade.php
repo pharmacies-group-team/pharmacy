@@ -1,6 +1,7 @@
 @extends('layouts.web.master')
 
 @section('content')
+  <x-alert type="status" />
   <section class="mt-5">
     <div class="container-lg p-lg-0 px-5">
       <div class="card card-blur w-75 m-auto"

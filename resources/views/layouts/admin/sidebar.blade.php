@@ -19,24 +19,6 @@
       </a>
     </li>
 
-    {{-- pharmacies --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
-        <x-font-icon icon='capsules' />
-
-        <span>الصيدليات</span>
-      </a>
-    </li>
-
-    {{-- clients --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
-        <x-font-icon icon='users' />
-
-        <span>العملاء</span>
-      </a>
-    </li>
-
     {{-- invoice profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.financial.operations') active @endif"
