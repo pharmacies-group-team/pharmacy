@@ -1521,11 +1521,29 @@ body{
   color: rgb(247 249 254 / var(--tw-text-opacity));
 }
 
-.sidebar-brand{
+.sidebar-logo{
   margin-top: 1.75rem;
   display: inline-block;
   width: 100%;
   text-align: center;
+}
+
+.sidebar-logo .t-title{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(247 249 254 / var(--tw-text-opacity));
+}
+
+.sidebar-logo .t-subtitle{
+  position: relative;
+  top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(197 217 254 / var(--tw-text-opacity));
 }
 
 .sidebar .list{
