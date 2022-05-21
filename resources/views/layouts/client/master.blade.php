@@ -11,11 +11,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>صيدلية اون لاين</title>
 
-  @livewireStyles()
-  <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
-  <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+  @include('layouts.shared.styles')
 
-  @livewireStyles()
 </head>
 
 <body>
