@@ -1,8 +1,8 @@
 {{-- TODO --}}
-<div x-data="{ addModal: false, payModal: false, deleteModal: false, cancelModal: false }">
+<div x-data="{ addModal: false, payModal: false, cancelModal: false }">
   <x-alert type="message" />
 
-  <div class="section-header">
+  <div class="section-header t-card">
     <h2 class="text-large">عرض السعر</h2>
 
     <p>
@@ -10,7 +10,6 @@
       {{ $quotation->created_at->format('Y-m-d') }}
     </p>
   </div>
-
 
 
   {{-- table --}}
@@ -65,11 +64,13 @@
               <td> {{ $details->price * $details->quantity }} {{ $details->currency }}</td>
 
               {{-- action --}}
-              @if($active === 0)
-                <td>
-                  <button @click="id = {{ $details->id }};details = {{ $details }}; deleteModal = true" >
+              @if ($active === 0)
+                <td x-data="{ deleteModal: false }">
+                  <button @click="deleteModal = true">
                     <x-icon icon='remove' />
                   </button>
+
+                  <x-client.delete-quotation-item :id="$details->id" :name="$details->product_name" />
                 </td>
               @endif
             </tr>
@@ -85,8 +86,9 @@
       </tbody>
     </table>
   </div>
-  @if($active === 0)
-    <div class="t-address">
+
+  @if ($active === 0)
+    <div class="t-address t-card">
       <h3> حدد العنوان</h3>
       <div>
         <select wire:model="addressID" class="form-control" style="width: 240px;">
@@ -97,12 +99,13 @@
         </select>
       </div>
 
-      <button class="form-control" @click="addModal = true" >
+      <button class="form-control" @click="addModal = true">
         +
         إضافة عنوان جديد
       </button>
     </div>
-    <div style="display: flex; gap: 10px; justify-content: end">
+
+    <div class="t-card" style="display: flex; gap: 10px; justify-content: end">
       <button @click="payModal = true" class="btn">دفع الفاتورة</button>
       <button @click="cancelModal = true" class="btn btn-danger">@lang('action.cancel-order')</button>
     </div>
@@ -114,20 +117,18 @@
         {{-- Name --}}
         <div class="form-group">
           <label for="ad-name-label">الاسم</label>
-          <input wire:model="name" id="ad-name-label"  type="text"
-                 class="form-control " placeholder="الاسم " />
+          <input wire:model="name" id="ad-name-label" type="text" class="form-control" placeholder="الاسم " />
           @error('name')
-          <span class="error">{{ $message }}</span>
+            <span class="error">{{ $message }}</span>
           @enderror
         </div>
 
         {{-- phone --}}
         <div class="form-group">
           <label for="ad-name-label">رقم الهاتف </label>
-          <input  wire:model="phone" id="ad-name-label"  type="text"
-                 class="form-control " placeholder="رقم الهاتف " />
+          <input wire:model="phone" id="ad-name-label" type="text" class="form-control" placeholder="رقم الهاتف " />
           @error('phone')
-          <span class="error">{{ $message }}</span>
+            <span class="error">{{ $message }}</span>
           @enderror
         </div>
 
@@ -135,8 +136,7 @@
         <div class="form-group">
           <label>نوع العنوان</label>
 
-          <select wire:model="type_address"
-                  class="form-control ">
+          <select wire:model="type_address" class="form-control">
             <option>نوع العنوان</option>
             <option value="{{ \App\Enum\UserEnum::TYPE_ADDRESS_HOME }}">
               منزل
@@ -147,15 +147,16 @@
           </select>
 
           @error('type_address')
-          <span class="error">{{ $message }}</span>
+            <span class="error">{{ $message }}</span>
           @enderror
         </div>
 
-        {{--    desc    --}}
+        {{-- desc --}}
         <div class="form-group">
-          <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع" style="margin-top: 10px "></textarea>
+          <textarea wire:model="desc" rows="3" class="form-control" placeholder="وصف الموقع"
+            style="margin-top: 10px "></textarea>
           @error('desc')
-          <span class="error">{{ $message }}</span>
+            <span class="error">{{ $message }}</span>
           @enderror
         </div>
 
@@ -173,21 +174,6 @@
         </h1>
         <x-slot:footer>
           <button class="btn" @click="payModal = false" wire:click="pay">متابعة الدفع</button>
-        </x-slot:footer>
-      </form>
-    </x-modal>
-
-    {{-- delete product modal --}}
-    <x-modal title="حذف منتج" open="deleteModal">
-      <form style="display: flex; justify-content: center; align-items: center; height: 112px">
-        <h1 style="font-size: 20px">
-          هل انت متاكد من حذف المنتج ؟
-        </h1>
-        <div x-text="details.product_name"></div>
-
-        <x-slot:footer>
-          <button class="btn btn-danger" wire:click="delete(id)" @click="deleteModal = false">حذف
-          </button>
         </x-slot:footer>
       </form>
     </x-modal>
