@@ -7,8 +7,8 @@
 
 
   <main class="page-ads" x-data="{ id: null, ad: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
-    <div class="container">
-      <section class="section-header">
+    <div>
+      <section class="section-header t-card">
         <h2 class="text-large">نشر الأعلان</h2>
 
         <button class="btn" @click="addModal = true">اضافه اعلان</button>

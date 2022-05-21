@@ -36,14 +36,14 @@ use App\Enum\PharmacyEnum;
           {{-- status --}}
           <th>حالة الطلب</th>
 
-        {{-- perodic order --}}
-        <th>أضافة طلب دوري</th>
+          {{-- perodic order --}}
+          <th>أضافة طلب دوري</th>
 
-        {{-- actions --}}
-        <th></th>
-      </tr>
           {{-- actions --}}
           <th></th>
+        </tr>
+        {{-- actions --}}
+        <th></th>
         </tr>
       </thead>
 
@@ -167,7 +167,7 @@ use App\Enum\PharmacyEnum;
       </tbody>
     </table>
   </div>
-  <div style="display: flex; justify-content: center; margin-top: 50px ">
+  <div class="t-card" style="display: flex; justify-content: center; ">
     {{ $orders->links('livewire.livewire-pagination') }}
   </div>
 </div>

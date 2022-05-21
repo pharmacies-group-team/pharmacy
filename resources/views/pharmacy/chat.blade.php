@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Auth;
 @section('content')
   <x-alert type="status" />
 
-  <main class="page-chat container">
+  <main class="page-chat">
 
-    <div class="section-header">
-      <h1 class="text-large">@lang('heading.chat')</h1>
-    </div>
+    <header class="section-header t-card">
+      <h2 class="text-large">@lang('heading.chat')</h2>
+    </header>
 
     <section>
       {{-- chat sidebar --}}

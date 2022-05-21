@@ -2,37 +2,29 @@
 @section('content')
   <x-alert type="status" />
 
-  {{-- TODO STYLE PAGE (NAIF) 😅 --}}
-  <main class="page-invoice-profile container">
 
-    <div style="display: flex; align-items: center; justify-content:end ">
-      <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #ecf2ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
+  <main class="page-invoice-profile">
+    <section class="t-wallet-wrapper t-card">
+      <div class="t-wallet">
         <x-icon icon='wallet' />
         <span>رصيدك الحالي:</span>
         <span>{{ Auth::user()->balance }}</span>
       </div>
-
-    </div>
+    </section>
 
     {{-- content --}}
     <div class="t-content" style="background: white">
       {{-- log data --}}
       <div class="t-log-data">
         <header>
-          <x-icon icon="home" />
+          <x-font-icon icon='sack-dollar' />
+
           <h3 class="t-heading">@lang('heading.invoice-profile')</h3>
         </header>
 
         <div class="t-list">
-          @if(isset($transactions))
-            @foreach($transactions as $transaction)
+          @if (isset($transactions))
+            @foreach ($transactions as $transaction)
               {{-- item --}}
               <div class="t-item">
                 {{-- header --}}
@@ -60,7 +52,8 @@
 
                 </div>
                 <div style="display:flex; justify-content: end">
-                  <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                  <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض
+                    الفاتورة</a>
                 </div>
               </div>
               <hr class="divided">

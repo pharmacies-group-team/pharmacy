@@ -10,12 +10,6 @@
         <canvas id="chart-orders" width="300" height="300"></canvas>
       </div>
 
-      {{-- pharmacies --}}
-      <div class="t-chart-item t-card">
-        <h3 class="t-chart-title">@lang('heading.pharmacies')</h3>
-        <canvas id="chart-pharmacies" width="300" height="300"></canvas>
-      </div>
-
       {{-- clients --}}
       <div class="t-chart-item t-card">
         <h3 class="t-chart-title">@lang('heading.clients')</h3>
@@ -124,19 +118,6 @@
       chartFactor({
         label: '@lang('heading.orders')',
         element: el('#chart-orders').getContext('2d'),
-        labels: toLabels(res.data),
-        data: toData(res.data)
-      });
-    })
-
-    // pharmacies
-    // axios.get('/api/report/pharmacies').then(res => {
-    axios.get('/api/report/orders').then(res => {
-      console.log(res.data)
-
-      chartFactor({
-        label: '@lang('heading.pharmacies')',
-        element: el('#chart-pharmacies').getContext('2d'),
         labels: toLabels(res.data),
         data: toData(res.data)
       });
