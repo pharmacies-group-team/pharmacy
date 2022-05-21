@@ -42,6 +42,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
         <x-font-icon icon='comments' />
+
         <span>@lang('heading.chat') </span>
       </a>
     </li>
