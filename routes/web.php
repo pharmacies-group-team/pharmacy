@@ -120,6 +120,7 @@ Route::prefix('/pharmacy')
       Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
       Route::get('/chat', 'showChat')->name('chat');
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
     });
 
     Route::controller(pharmacy\OrderController::class)
