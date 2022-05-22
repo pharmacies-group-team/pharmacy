@@ -9,9 +9,9 @@ $count = 0;
 
 @section('content')
 
-  <main x-data="{ addOrderModal: false, pharmacy: {} }">
+  <main x-data="{ addOrderModal: false, pharmacy: {} }" class="mt-lg-5 pt-lg-5">
     <!-- Start Services Section -->
-    <section>
+    <section class="mt-lg-4">
       <div class="container-xl">
         <div class="row">
           <div class="col-lg-10 col-md-12 m-auto">
@@ -49,7 +49,7 @@ $count = 0;
     <!-- End Services Section -->
 
     <!-- Start Pharmacies Section -->
-    <section>
+    <section class="mt-lg-5 pt-lg-5 ">
       <header class="d-flex flex-column justify-content-center align-items-center mt-5 mb-2 pt-5">
         <h1 class="text-primary-darker fw-bold fs-1">الصيدليات</h1>
       </header>
@@ -94,7 +94,7 @@ $count = 0;
     <!-- End Pharmacies Section -->
 
     {{-- start ads section --}}
-    <section class="mt-5">
+    <section class="mt-lg-5 pt-lg-5">
       <div class="container-lg owl-2-style mt-2">
         <div class="owl-carousel owl-ads">
           @if (isset($ads))
@@ -114,9 +114,9 @@ $count = 0;
     {{-- end ads section --}}
 
     <!-- Start Register Pharmacy -->
-    <section class="mt-5 py-5" style="background-image: url({{ asset('images/map.svg') }})">
+    <section class="mt-lg-5 pt-lg-5" style="background-image: url({{ asset('images/map.svg') }}); height: 460px;">
       <div class="container">
-        <div class="row">
+        <div class="row m-auto">
           <div class="col-xl-6 col-lg-7 col-md-8 col-12 m-lg-0 m-md-auto">
             <div class="card p-md-5 card-blur p-3">
               <h1 class="text-primary-base fw-bold">هل أنت صاحب صيدلية؟</h1>
