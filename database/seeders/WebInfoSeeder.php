@@ -62,10 +62,10 @@ class WebInfoSeeder extends Seeder
 
     SocialMedia::create(
       [
-        'facebook'  => '',
-        'whatsapp'  => '',
-        'twitter'   => '',
-        'instagram' => '',
+        'facebook'  => 'https://facebook.com',
+        'whatsapp'  => 'https://whatsapp.com',
+        'twitter'   => 'https://twitter.com',
+        'instagram' => 'https://instagram.com',
         'user_id'   => 1
       ]
     );
