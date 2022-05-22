@@ -80,15 +80,17 @@
                 <div class="t-item-header">
                   {{-- title --}}
                   <h4 style="display:flex; align-items: center;">
-                    <a href="{{ $transaction->meta['invoice_id'] }}" style="margin: 4px ">رقم العملية: {{ $transaction->uuid }}</a>
-                    @if ($transaction->confirmed === 0)
-                      <span class="badge badge-danger">غير مؤكدة</span>
-                    @else
-                      <span class="badge badge-success">مؤكدة</span>
-                    @endif
+                    <a href="{{ $transaction->meta['invoice_id'] }}" style="color: #588FF4">
+                      <span style="color: #3869BA">رقم العملية:</span> {{ $transaction->uuid }}
+                      @if ($transaction->confirmed == 0)
+                        <span class="badge badge-danger">غير مؤكدة</span>
+                      @elseif($transaction->confirmed == 1)
+                        <span class="badge badge-success">مؤكدة</span>
+                      @endif
+                    </a>
                   </h4>
                   {{-- date --}}
-                  <span class="t-date">
+                  <span class="t-date" style="z-index: 2">
                     <span>تاريخ</span> {{ $transaction->created_at->format('Y-m-d') }}
                     <span> بتوقيت </span>{{ $transaction->created_at->format('h:m:s A') }}
                   </span>
@@ -96,19 +98,20 @@
 
                 {{-- desc --}}
                 <div class="t-desc">
-                  <p>
+                  <p style="color: #456687">
                     <span>{{ $transaction->meta['state_1'] }}</span>
-                    <span>( {{ $transaction->meta['depositor'] }} )</span>
+                    <span style="color: #588FF4">( {{ $transaction->meta['depositor'] }} )</span>
                     <span>{{ $transaction->meta['state_2'] }}</span>
-                    <span>( {{ $transaction->meta['recipient'] }} )</span>
+                    <span style="color: #588FF4">( {{ $transaction->meta['recipient'] }} )</span>
                   </p>
+
                   <div style="margin-top: 16px">
-                    <span> <b>المبلغ: </b> {{ $transaction->amount }}</span>
+                    <span style="color: #3869BA"> المبلغ: {{ $transaction->amount }}</span>
                   </div>
 
                 </div>
                 <div style="display:flex; justify-content: end">
-                  <a href="{{ route('pharmacy.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                  <a href="{{ route('pharmacy.invoice', $transaction->meta['order_id']) }}" class="btn">عرض الفاتورة</a>
                 </div>
               </div>
               <hr class="divided">
