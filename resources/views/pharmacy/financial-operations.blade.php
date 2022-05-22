@@ -3,58 +3,30 @@
   <x-alert type="status" />
 
   {{-- TODO STYLE PAGE (NAIF) 😅 --}}
-  <main class="page-invoice-profile container">
+  <main class="page-invoice-profile">
 
-    <div style="display: flex; align-items: center; gap: 12px ">
-
-      <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #ecf2ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
+    <div class="t-wallet-wrapper t-card" style="justify-content: flex-start; gap: .5rem">
+      <div class="t-wallet">
         <x-icon icon='wallet' />
         <span style="color: rgb(78 125 203)">رصيدك الحالي:</span>
         <span style="color: #3869BA">{{ $amount_not_confirmed }}</span>
       </div>
 
-      <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #ecf2ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
+      <div class="t-wallet">
         <x-icon icon='wallet' />
         <span style="color: rgb(78 125 203)">الرصيد القابل للسحب:</span>
         <span style="color: #3869BA">{{ $amount_confirmed }}</span>
       </div>
 
-      <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #ecf2ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
-{{--        <x-icon icon='wallet' />--}}
+      <div class="t-wallet">
+
+        {{-- <x-icon icon='wallet' /> --}}
         <span style="color: rgb(78 125 203)"> الفواتير المؤكدة:</span>
         <span style="color: #3869BA">{{ $invoice_confirmed }}</span>
       </div>
 
-      <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #ecf2ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
-{{--        <x-icon icon='wallet' />--}}
+      <div class="t-wallet">
+        {{-- <x-icon icon='wallet' /> --}}
         <span style="color: rgb(78 125 203)"> الفواتير الغير مؤكدة:</span>
         <span style="color: #3869BA">{{ $invoice_not_confirmed }}</span>
       </div>
@@ -67,13 +39,14 @@
       {{-- log data --}}
       <div class="t-log-data">
         <header>
-          <x-icon icon="home" />
+          <x-font-icon icon='sack-dollar' />
+
           <h3 class="t-heading">@lang('heading.invoice-profile')</h3>
         </header>
 
         <div class="t-list">
-          @if(isset($transactions))
-            @foreach($transactions as $transaction)
+          @if (isset($transactions))
+            @foreach ($transactions as $transaction)
               {{-- item --}}
               <div class="t-item">
                 {{-- header --}}
@@ -111,10 +84,10 @@
 
                 </div>
                 <div style="display:flex; justify-content: end">
-                  <a href="{{ route('pharmacy.invoice', $transaction->meta['order_id']) }}" class="btn">عرض الفاتورة</a>
+                  <a href="{{ route('pharmacy.invoice', $transaction->meta['order_id']) }}" class="btn">عرض
+                    الفاتورة</a>
                 </div>
               </div>
-              <hr class="divided">
             @endforeach
           @endif
         </div>

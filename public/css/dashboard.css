@@ -2007,12 +2007,16 @@ body{
 .page-invoice-profile .t-content .t-item-header h4::before{
   position: absolute;
   top: 0px;
-  right: -0.75rem;
-  height: 1.5rem;
-  width: 1.5rem;
+  right: -0.5rem;
+  height: 1rem;
+  width: 1rem;
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(8px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: rgb(239 68 68 / 0.1);
   content: "";
 }
 
@@ -2182,15 +2186,12 @@ ion-icon{
   line-height: 1.75rem;
 }
 
-.icon{
+.t-font-icon, .icon{
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
-.t-font-icon{
-  display: flex;
-  align-items: center;
+a .t-font-icon, a .icon{
   cursor: pointer;
 }
 
