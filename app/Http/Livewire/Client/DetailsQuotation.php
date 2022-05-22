@@ -40,7 +40,7 @@ class DetailsQuotation extends Component
   public function delete($id)
   {
     $quotationDetails = QuotationDetails::find($id);
-    $this->quotation->update(['total' => abs($quotationDetails->total - $this->quotation->total)]);
+    $this->quotation->update(['total' => abs(($quotationDetails->price * $quotationDetails->quantity) - $this->quotation->total)]);
     $quotationDetails->delete();
     session()->flash('message', 'تم حذف المنتح من عرض المنتج.');
   }
