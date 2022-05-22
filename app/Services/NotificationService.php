@@ -103,7 +103,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'client/invoice/'.$order->invoice->id, // TODO
+      'link'     => SettingEnum::DOMAIN.'pharmacy/invoice/'.$order->invoice->id, // TODO
       'message'  => 'لقد تم إيصال الطلب من قبل '.$sender->name,
     ];
 
