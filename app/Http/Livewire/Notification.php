@@ -16,11 +16,9 @@ class Notification extends Component
 
     public function readable($id)
     {
-      $notification = \App\Models\Notification::find($id);
-      if (!$notification) {
-        return;
-      }
-      $notification->read_at = Carbon::now();
-      $notification->save();
+      $notification = auth()->user()->notifications->find($id);
+      $notification->markAsRead();
+
+      return redirect($notification->data['link']);
     }
 }

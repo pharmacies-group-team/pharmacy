@@ -12,7 +12,7 @@ if (isset($notification)) {
 @endphp
 
 @if (isset($notification))
-  <li class='t-item'>
+  <li class='t-item' style="cursor: pointer">
     <a wire:click.prevent="readable('{{ $notification->id }}')">
       <header class="t-item-header">
         {{-- avatar --}}
