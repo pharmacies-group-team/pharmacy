@@ -8,11 +8,11 @@ return [
   "order-details" => "تفاصيل الطلب",
   "orders" => "orders",
 
-  "pharmacies" => "pharmacies",
+  "pharmacies" => "الصيدليات",
 
-  "clients" => "clients",
+  "clients" => "العملاء",
 
-  "profits" => "profits",
+  "profits" => "المبيعات",
 
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",
