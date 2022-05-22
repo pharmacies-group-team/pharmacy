@@ -8,14 +8,12 @@
   <meta name="author" content="Tokyo">
   <meta name="keywords" content="pharmacy online">
   <meta name="description" content="pharmacy online">
-
-  @include('layouts.web.style')
-
-  <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-
   <title>@yield('title')</title>
 
-  @livewireStyles()
+  @include('layouts.web.style')
+  @include('layouts.shared.styles')
+
+
 
 </head>
 
