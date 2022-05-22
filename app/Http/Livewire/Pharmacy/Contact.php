@@ -10,7 +10,7 @@ class Contact extends Component
 {
     public Pharmacy $pharmacy;
     public $contacts;
-    public $phone;
+    public $phone, $contact;
 
     public function render()
     {
@@ -35,5 +35,18 @@ class Contact extends Component
 
         $this->phone = '';
         session()->flash('message', 'تم الإضافة بنجاح.');
+    }
+
+    public function update($id)
+    {
+      PharmacyContact::find($id)->update(['phone' => $this->contact]);
+//      $this->reset();
+      session()->flash('message', 'تم التعديل بنجاح.');
+    }
+
+    public function delete($id)
+    {
+      PharmacyContact::find($id)->delete();
+      session()->flash('message', 'تم الحذف بنجاح.');
     }
 }

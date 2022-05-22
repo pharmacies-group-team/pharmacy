@@ -4,9 +4,9 @@ use App\Enum\UserEnum;
 
 if (isset($notification)) {
     $message = $notification->data['message'];
-    $link    = $notification->data['link'];
-    $name    = $notification->data['sender']['name'];
-    $isRead  = $notification['read_at'] != null;
+    $link = $notification->data['link'];
+    $name = $notification->data['sender']['name'];
+    $isRead = $notification['read_at'] != null;
 }
 
 @endphp
@@ -35,7 +35,7 @@ if (isset($notification)) {
           <div class="t-user">
             <h4 class="t-name">{{ $name }}</h4>
 
-            <span class="t-date">{{$notification->created_at->diffForHumans()}}</span>
+            <span class="t-date">{{ $notification->created_at->diffForHumans() }}</span>
           </div>
 
           <p class="t-desc" style="font-size: 14px; color: #588FF4">
@@ -47,7 +47,6 @@ if (isset($notification)) {
   </li>
 @else
   <div class="t-param-error">
-
     <strong>x-notification</strong>
     <span>notification</span>
   </div>

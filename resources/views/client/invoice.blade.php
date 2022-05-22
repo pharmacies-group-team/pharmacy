@@ -4,16 +4,17 @@
 
   <x-alert type="status" />
 
-  <main class="page-invoice" x-data="{ confirmationModal: false }" style="width: 95%; margin: auto; padding-top: 40px">
+  <main class="page-invoice" x-data="{ confirmationModal: false }">
 
     <div>
       {{-- header --}}
-      <header class="t-header">
+      <header class="t-header t-card">
         <div class="section-header">
           <h2 class="t-title" style="color: #3869BA">@lang('heading.invoice-buying')</h2>
+
           <div style="display: flex; gap: 12px">
             @if ($order->status === OrderEnum::DELIVERED_ORDER)
-              <h4 style="color: #3869BA; border: 1px solid #588FF4; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب
+              <h4 style="color: #3869BA; border-radius: 6px; padding: 8px">تم تأكيد وصول الطلب
               </h4>
             @elseif($order->status === OrderEnum::PAID_ORDER)
               <button class="btn" @click="confirmationModal = true">تأكيد وصول الطلب</button>
