@@ -16,12 +16,6 @@ use App\Enum\RoleEnum;
         <div class="t-card">
           <x-notification :notification="$notification" />
         </div>
-        <div class="t-card">
-          <x-notification :notification="$notification" />
-        </div>
-        <div class="t-card">
-          <x-notification :notification="$notification" />
-        </div>
       @endforeach
     </ul>
   </main>
