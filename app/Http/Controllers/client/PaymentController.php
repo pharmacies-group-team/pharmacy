@@ -15,6 +15,7 @@ use App\Services\FinancialOperationsServices;
 use App\Services\NotificationService;
 use App\Services\PaymentServices;
 use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 class PaymentController extends Controller
 {
@@ -31,13 +32,18 @@ class PaymentController extends Controller
 
       if ($order->status == OrderEnum::UNPAID_ORDER)
       {
-        $invoice->update(['is_active' => 1]);
-        $order->update(['status' => OrderEnum::PAID_ORDER]);
+        try {
+          $invoice->update(['is_active' => 1]);
+          $order->update(['status' => OrderEnum::PAID_ORDER]);
 
-        PaymentServices::processWallet($invoice->total, $invoice);
+          PaymentServices::processWallet($invoice->total, $invoice);
 
-        // send and save notification in DB
-        NotificationService::userPay($invoice->order);
+          // send and save notification in DB
+          NotificationService::userPay($invoice->order);
+        }
+        catch (Throwable $e) {
+          report($e);
+        }
       }
 
       return $this->getInvoice($order_id);
