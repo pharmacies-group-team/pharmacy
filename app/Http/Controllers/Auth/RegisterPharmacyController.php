@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\Directorate;
-use App\Models\Neighborhood;
 use App\Models\Pharmacy;
 use App\Models\PharmacyContact;
 use App\Models\User;
 use App\Services\NotificationAdminService;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class RegisterPharmacyController extends Controller
 {
@@ -32,9 +29,9 @@ class RegisterPharmacyController extends Controller
         'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password'        => ['required', 'string', 'min:8', 'confirmed'],
         'namePharma'      => ['required', 'string', 'min:8', 'max:255'],
-        'phone'           => ['required', 'numeric']
-      ]
-    );
+        'phone'           => 'required|regex:/^([0-9]*)$/|not_regex:/[a-z]/|min:8|max:9|starts_with:77,73,71,70,0',
+      ]);
+
     event(new Registered($user = User::create(
       [
         'name'      => $request['name'],
@@ -48,18 +45,21 @@ class RegisterPharmacyController extends Controller
       [
         'name'      => $request->input('namePharma'),
         'user_id'   => $user->id,
-      ]
-    );
+      ]);
 
     PharmacyContact::create(
       [
         'phone'       => $request->input('phone'),
         'pharmacy_id' => $pharmacy->id
-      ]
-    );
+      ]);
 
-    // send and save notification in DB
-    NotificationAdminService::newPharmacy($user);
+    try {
+      // send and save notification in DB
+      NotificationAdminService::newPharmacy($user);
+    }
+    catch (Throwable $e) {
+      report($e);
+    }
 
     return view('auth.verify');
   }
