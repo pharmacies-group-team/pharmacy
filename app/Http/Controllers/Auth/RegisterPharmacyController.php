@@ -32,7 +32,8 @@ class RegisterPharmacyController extends Controller
         'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password'        => ['required', 'string', 'min:8', 'confirmed'],
         'namePharma'      => ['required', 'string', 'min:8', 'max:255'],
-        'phone'           => ['required', 'numeric']
+        'phone'           => ['required', 'numeric'],
+        'Commercial_record'  => ['required|image|mimes:png,jpg']
       ]
     );
     event(new Registered($user = User::create(
@@ -47,6 +48,7 @@ class RegisterPharmacyController extends Controller
     $pharmacy = Pharmacy::create(
       [
         'name'      => $request->input('namePharma'),
+        'Commercial_record'      => $request->input('recordPharma'),
         'user_id'   => $user->id,
       ]
     );
