@@ -20,16 +20,33 @@ class ChatController extends Controller
 
     $usersMessageToList = DB::table('messages')
       ->where('from', $from)
-      ->select('to')->groupBy('to')->get();
+      ->orWhere('to', $from)
+      ->select('to', 'from')->groupBy('to', 'from')->get();
+
 
 
     $users = [];
 
+    // to key
     foreach ($usersMessageToList as $key) {
       $user = User::find($key->to);
 
       // last message
       $user['last_message'] = Message::where('to', $user->id)->latest()->first();
+
+      // unread message
+      $user['unread_message'] = Message::where(['is_read' => 0, 'to' => $user->id])
+        ->count();
+
+      $users[] = $user;
+    }
+
+    // from key
+    foreach ($usersMessageToList as $key) {
+      $user = User::find($key->from);
+
+      // last message
+      $user['last_message'] = Message::where('from', $user->id)->latest()->first();
 
       // unread message
       $user['unread_message'] = Message::where(['is_read' => 0, 'to' => $user->id])

@@ -3,7 +3,7 @@
   <x-alert type="status" />
 
   <main class="page-chat">
-
+    {{ Auth::id() }}
     <div class="section-header t-card">
       <h1 class="text-large">@lang('heading.chat')</h1>
     </div>

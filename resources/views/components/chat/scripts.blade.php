@@ -155,9 +155,12 @@ use Illuminate\Support\Facades\Auth;
 
   // get users
   const getUsersList = () => axios.get('{{ route('chat.getUsers') }}').then((res) => {
-    let users = res.data
+    let users = [...new Map(res.data.map(item => [item['id'], item])).values()]
       .filter(user => user.id !== Number('{{ Auth::id() }}'))
       .map(user => renderUser(user));
+
+
+
 
     el('.js-users').innerHTML = users.join('');
 
