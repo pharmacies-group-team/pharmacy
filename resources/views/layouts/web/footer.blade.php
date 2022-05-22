@@ -1,3 +1,12 @@
+@php
+use App\Models\SocialMedia;
+
+if (!isset($social)) {
+    $social = SocialMedia::first();
+}
+@endphp
+
+
 <footer class="t-footer">
   <div class="t-social">
     <a href="{{ $social->facebook }}">
