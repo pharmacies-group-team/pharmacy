@@ -24,11 +24,7 @@ if (Auth::user()->hasRole(RoleEnum::SUPER_ADMIN)) {
   @if (isset($notifications))
     <main>
       <ul class="t-notification-content" style="max-height: 30rem">
-        @foreach ($notifications as $notification)
-          <div class="t-card">
-            <x-notification :notification="$notification" />
-          </div>
-        @endforeach
+        <livewire:notification />
       </ul>
     </main>
   @endif
