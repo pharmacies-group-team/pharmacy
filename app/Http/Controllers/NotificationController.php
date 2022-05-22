@@ -10,9 +10,12 @@ class NotificationController extends Controller
 {
   public function getAll()
   {
-    $notifications = auth()->user()->notifications;
-
-    return view('shared.notifications', compact('notifications'));
+    try {
+      $notifications = auth()->user()->notifications;
+      return view('shared.notifications', compact('notifications'));
+    } catch (\Throwable $th) {
+      return redirect()->back();
+    }
   }
 
   public function read(Request $request)
