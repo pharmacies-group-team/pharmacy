@@ -6,7 +6,7 @@ return [
   "protection-and-privacy" => "الحماية والخصوصية",
 
   "order-details" => "تفاصيل الطلب",
-  "orders" => "orders",
+  "orders" => "الطلبات",
 
   "pharmacies" => "الصيدليات",
 
