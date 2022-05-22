@@ -45,8 +45,8 @@ if (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
             <x-icon icon="notification" />
 
             <span class="js-notify-count t-notification-counter"
-                  data-count="{{ auth()->user()->unreadNotifications()->count() }}">
-                {{ auth()->user()->unreadNotifications()->count() }}
+              data-count="{{ auth()->user()->unreadNotifications()->count() }}">
+              {{ auth()->user()->unreadNotifications()->count() }}
             </span>
           </a>
         </div>

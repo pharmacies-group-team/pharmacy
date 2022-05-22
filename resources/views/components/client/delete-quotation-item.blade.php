@@ -1,6 +1,6 @@
 {{-- delete product modal --}}
 <x-modal title="حذف منتج" open="deleteModal">
-  <form style=" height: 112px">
+  <form style=" height: 8rem">
 
     <h1 style="" class="text-danger">
       هل انت متاكد من حذف المنتج ؟

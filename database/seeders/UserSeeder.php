@@ -80,29 +80,5 @@ class UserSeeder extends Seeder
       ]
     );
 
-    //  create new Pharmacy 1
-    $pharmacy_1 = Pharmacy::create(
-      [
-        'name'            => 'صيدلية الحياة',
-        'logo'            => 'pharmacy.png', // fixed value
-        'about'           => ' هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة',
-        'email'           => 'alheah@gmail.com',
-        'user_id'         => User::inRandomOrder()->role(RoleEnum::PHARMACY)->first()->id,
-        'neighborhood_id' => 1
-      ]);
-    PharmacyContact::create(
-      [
-        'phone'       => '773773773',
-        'pharmacy_id' => $pharmacy_1->id
-      ] );
-    PharmacySocial::create(
-      [
-        'whatsapp'    => 'https://github.com/pharmacies-group-team/pharmacy',
-        'website'     => 'https://github.com/pharmacies-group-team/pharmacy',
-        'facebook'    => 'https://github.com/pharmacies-group-team/pharmacy',
-        'twitter'     => 'https://github.com/pharmacies-group-team/pharmacy',
-        'pharmacy_id' => $pharmacy_1->id
-      ]);
-
   }
 }
