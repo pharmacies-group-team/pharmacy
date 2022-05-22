@@ -42,9 +42,6 @@ use App\Enum\PharmacyEnum;
           {{-- actions --}}
           <th></th>
         </tr>
-        {{-- actions --}}
-        <th></th>
-        </tr>
       </thead>
 
       <tbody>
@@ -57,7 +54,7 @@ use App\Enum\PharmacyEnum;
               {{-- pharmacy name --}}
 
               {{-- TODO Naif move to css --}}
-              <td style="display: flex; justify-content: start">
+              <td>
                 <div class="user-table" d='{{ $order->image }}'>
 
                   <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->pharmacy->logo) }}"
@@ -123,7 +120,6 @@ use App\Enum\PharmacyEnum;
                   <x-perodic-orders :order="$order">
                   </x-perodic-orders>
                 @endif
-
               </td>
 
               {{-- action --}}
