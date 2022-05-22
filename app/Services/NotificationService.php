@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enum\SettingEnum;
 use App\Events\NewOrderNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
@@ -18,7 +17,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/quotation/'. $order->id,
+      'link'     => '/pharmacy/quotation/'. $order->id,
       'message'  => 'أرسل لك طلب جديد، يمكنك الإطلاع عليه.',
     ];
 
@@ -35,7 +34,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/quotation/'. $order->id,
+      'link'     => '/pharmacy/quotation/'. $order->id,
       'message'  => 'قام بإلغاء الطلب.',
     ];
 
@@ -52,7 +51,7 @@ class NotificationService
       $data     = [
         'sender'   => $sender,
         'receiver' => $receiver->id,
-        'link'     => SettingEnum::DOMAIN.'client/orders', // TODO
+        'link'     => '/client/orders',
         'message'  => 'عذراً لا يتوفر لدينا طلبك..',
       ];
 
@@ -69,7 +68,7 @@ class NotificationService
     $data  = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'client/quotation/details/'.$order->quotation->id,
+      'link'     => '/client/quotation/details/'.$order->quotation->id,
       'message'  => 'تم إرسال عرض سعر يُمكنك الإطلاع عليها'
     ];
 
@@ -86,7 +85,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/invoice/'.$order->id,
+      'link'     => '/pharmacy/invoice/'.$order->id,
       'message'  => 'قام بدفع الفاتورة المُرسله إلية، يمكنك ايصال طلبه.',
     ];
 
@@ -103,7 +102,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/invoice/'.$order->invoice->id, // TODO
+      'link'     => '/pharmacy/invoice/'.$order->invoice->id, // TODO
       'message'  => 'لقد تم إيصال الطلب من قبل '.$sender->name,
     ];
 
@@ -120,7 +119,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/financial-operations',
+      'link'     => '/pharmacy/financial-operations',
       'message'  => 'تم الايداع الى حسابك من قبل '.$sender->name,
     ];
 
@@ -137,7 +136,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'client/financial-operations',
+      'link'     => '/client/financial-operations',
       'message'  => 'تم السحب من حسابك الى حساب '.$sender->name,
     ];
 
