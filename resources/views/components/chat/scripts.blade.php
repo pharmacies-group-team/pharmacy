@@ -2,6 +2,13 @@
 use Illuminate\Support\Facades\Auth;
 @endphp
 
+<script>
+  // when user click send to client focus on input
+  if (location.search.slice('userToID='.length + 1) !== '') {
+    el('.js-chat-input').focus();
+  }
+</script>
+
 {{-- render user messages --}}
 <script>
   let getMinutes = (time) => new Date(time).getMinutes();
@@ -158,8 +165,6 @@ use Illuminate\Support\Facades\Auth;
     let users = [...new Map(res.data.map(item => [item['id'], item])).values()]
       .filter(user => user.id !== Number('{{ Auth::id() }}'))
       .map(user => renderUser(user));
-
-
 
 
     el('.js-users').innerHTML = users.join('');
