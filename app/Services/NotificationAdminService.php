@@ -54,7 +54,7 @@ class NotificationAdminService
       $data     = [
         'sender'   => $sender,
         'receiver' => $admin->id,
-        'link'     => SettingEnum::DOMAIN.'admin/invoice/'.$order->invoice->id,
+        'link'     => SettingEnum::DOMAIN.'admin/financial-operations',
         'message'  => 'لقد تم دفع الفاتورة من قبل '.$sender->name . ' إلى صيدلية ' . $pharmacy->name
       ];
 
