@@ -49,13 +49,13 @@ class CreateQuotation extends Component
 
       foreach ($this->product_name as $key => $value) {
         QuotationDetails::create(
-          [
-            'product_name'  => $this->product_name[$key],
-            'product_unit'  => $this->product_unit[$key],
-            'quantity'      => (int) $this->quantity[$key],
-            'price'         => $this->price[$key],
-            'quotation_id'  => $quotation->id
-          ]);
+        [
+          'product_name'  => $this->product_name[$key],
+          'product_unit'  => $this->product_unit[$key],
+          'quantity'      => (int) $this->quantity[$key],
+          'price'         => $this->price[$key],
+          'quotation_id'  => $quotation->id
+        ]);
 
         $total +=  $this->price[$key] * $this->quantity[$key];
       }
@@ -74,6 +74,7 @@ class CreateQuotation extends Component
       }
 
       session()->flash('message', 'لقد تم إرسال عرض السعر');
+
       $this->reset();
       return redirect()->route('pharmacy.quotation.details', $quotation->id);
 
@@ -83,8 +84,7 @@ class CreateQuotation extends Component
   //********* add new form product *********//
   public function add($i)
   {
-    $i = $i + 1;
-    $this->i = $i;
+    $this->i += 1;
     array_push($this->inputs, $i);
   }
 

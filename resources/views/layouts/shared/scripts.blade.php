@@ -65,7 +65,7 @@
     <header class="t-item-header">
       <div class="${data.read_at === null ? 'is-not-read' : ''} t-avatar">
         <img
-          src="/uploads/user/${data.sender.avatar}"
+          src="${data.sender.avatar ? '/uploads/user/'+data.sender.avatar : '/uploads/pharmacy/'+data.sender.logo}"
           alt="user avatar"
           class="t-avatar"
           width="40px"
@@ -76,7 +76,7 @@
         <div class="t-user">
           <h4 class="t-name">${data.sender.name}</h4>
 
-          <span class="t-date">3M</span>
+<!--          <span class="t-date">3M</span>-->
         </div>
 
         <p class="t-desc">${data.message}</p>

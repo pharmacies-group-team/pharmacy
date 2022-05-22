@@ -4,16 +4,16 @@ use App\Enum\UserEnum;
 
 if (isset($notification)) {
     $message = $notification->data['message'];
-    $link = $notification->data['link'];
-    $name = $notification->data['sender']['name'];
-    $isRead = $notification['read_at'] != null;
+    $link    = $notification->data['link'];
+    $name    = $notification->data['sender']['name'];
+    $isRead  = $notification['read_at'] != null;
 }
 
 @endphp
 
 @if (isset($notification))
   <li class='t-item'>
-    <a href="{{ url($link) }}">
+    <a wire:click.prevent="readable('{{ $notification->id }}')">
       <header class="t-item-header">
         {{-- avatar --}}
         <div @class(['is-not-read' => !$isRead, 't-avatar'])>

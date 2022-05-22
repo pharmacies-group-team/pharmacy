@@ -8,8 +8,8 @@
     <section class="t-wallet-wrapper t-card">
       <div class="t-wallet">
         <x-icon icon='wallet' />
-        <span>رصيدك الحالي:</span>
-        <span>{{ Auth::user()->balance }}</span>
+        <span style="color: rgb(78 125 203)">رصيدك الحالي:</span>
+        <span style="color: #3869BA">{{ Auth::user()->balance }}</span>
       </div>
     </section>
 
@@ -32,7 +32,9 @@
                 <div class="t-item-header">
                   {{-- title --}}
                   <h4 style="display:flex; align-items: center;">
-                    <a href="{{ $transaction->meta['invoice_id'] }}">رقم العملية: {{ $transaction->uuid }}</a>
+                    <a href="{{ $transaction->meta['invoice_id'] }}" style="color: #588FF4">
+                      <span style="color: #3869BA">رقم العملية:</span> {{ $transaction->uuid }}
+                    </a>
                   </h4>
                   {{-- date --}}
                   <span class="t-date">
@@ -43,17 +45,20 @@
 
                 {{-- desc --}}
                 <div class="t-desc">
-                  <p>
+                  <p style="color: #456687">
                     <span>{{ $transaction->meta['state_1'] }}</span>
-                    <span>( {{ $transaction->meta['depositor'] }} )</span>
+                    <span style="color: #588FF4">( {{ $transaction->meta['depositor'] }} )</span>
                     <span>{{ $transaction->meta['state_2'] }}</span>
-                    <span>( {{ $transaction->meta['recipient'] }} )</span>
+                    <span style="color: #588FF4">( {{ $transaction->meta['recipient'] }} )</span>
                   </p>
-                  <span> المبلغ: {{ $transaction->amount }}</span>
+
+                  <div style="margin-top: 16px">
+                    <span style="color: #3869BA"> المبلغ: {{ $transaction->amount }}</span>
+                  </div>
 
                 </div>
                 <div style="display:flex; justify-content: end">
-                  <a href="{{ route('client.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض
+                  <a href="{{ route('client.invoice', $transaction->meta['order_id']) }}" class="btn">عرض
                     الفاتورة</a>
                 </div>
               </div>
