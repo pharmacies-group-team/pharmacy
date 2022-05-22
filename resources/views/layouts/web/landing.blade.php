@@ -7,7 +7,7 @@
           <p class="text-primary-dark mt-4">{{ $aboutUs->sub_title }}</p>
           <div class="d-md-flex align-items-center gap-3 mt-5 d-none">
             <a href="#" class="btn btn-primary__linear">أطلب دوائك</a>
-            <a href="#" class="btn btn-primary__linear">إنظم إلينا كصيدلية</a>
+            <a href="#" class="btn btn-primary__linear">إنضم إلينا كصيدلية</a>
           </div>
         </article>
       </div>
