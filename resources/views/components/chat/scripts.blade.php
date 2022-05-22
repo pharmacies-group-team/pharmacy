@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Auth;
 
 {{-- user-item --}}
 <script>
-  let toUserID = '';
+  let toUserID = location.search.slice('userToID='.length + 1);
 
   const usersClickEvent = () => {
     els('.js-user-item')
@@ -107,6 +107,10 @@ use Illuminate\Support\Facades\Auth;
 
     // minutes
     else if (dateDiff(minutes) > 0) return `${dateDiff(minutes)}m`;
+
+    else {
+      return new Date(time).getMinutes();
+    }
   }
 
   const renderUser = (user) => {
@@ -150,7 +154,7 @@ use Illuminate\Support\Facades\Auth;
   }
 
   // get users
-  axios.get('{{ route('chat.getUsers') }}').then((res) => {
+  const getUsersList = () => axios.get('{{ route('chat.getUsers') }}').then((res) => {
     let users = res.data
       .filter(user => user.id !== Number('{{ Auth::id() }}'))
       .map(user => renderUser(user));
@@ -163,6 +167,8 @@ use Illuminate\Support\Facades\Auth;
     el('.js-user-item').click()
     el('.js-user-item').classList.add('is-active')
   })
+
+  getUsersList();
 </script>
 
 {{-- chat form --}}
@@ -195,6 +201,14 @@ use Illuminate\Support\Facades\Auth;
         to: toUserID,
         message: el('.js-chat-input').value
       });
+
+      // add user to chat list
+      if (location.search.search('userToID') !== -1) {
+        // getUserMessages(toUserID);
+        getUsersList()
+
+        // location.search = ''
+      }
     });
 </script>
 
@@ -203,7 +217,7 @@ use Illuminate\Support\Facades\Auth;
   pusher
     .subscribe('notify-channel')
     .bind('App\\Events\\Notify', (data) => {
-      console.log(data, 'pppppppppppppppppppppppppppppppppppp')
+      // console.log(data, 'pppppppppppppppppppppppppppppppppppp')
 
       el('.t-chat-messages-list').innerHTML += renderUserMessages(data.users)
 
