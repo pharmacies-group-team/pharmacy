@@ -2,14 +2,14 @@
 
 return [
   // http errors
-  "page-not-found" => "Page not found",
-  "go-to-home" => "Go to home",
+  "page-not-found" => "الصفحة غير موجودة",
+  "go-to-home" => "الذهاب الى الرئيسية",
 
-  "unauthorized" => "Unauthorized",
+  "unauthorized" => "غير مصرح لك بالوصول",
 
-  "forbidden" => "forbidden",
+  "forbidden" => "لا تملك صلاحية الوصول",
 
-  "server-error" => "Server Error"
+  "server-error" => "خطأ في الخادم"
 
 
   // "" => ""
