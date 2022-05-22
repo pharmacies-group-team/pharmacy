@@ -114,9 +114,8 @@
                             @lang('action.create-quote')
                           </a>
                         @endif
-
-                        <a href="{{ route('pharmacy.chat') }}" class="btn">
-                          <x-icon icon="message" />
+                        <a href="/pharmacy/chat?userToID={{ $order->user->id }}" class="btn">
+                          <x-icon icon="message" /> message
                           @lang('action.send-message')
                         </a>
 
@@ -132,7 +131,8 @@
                         class="badge">@lang('action.create-quote')</a>
                     </div>
                     <div>
-                      <a href="{{ route('pharmacy.chat') }}" class="badge">@lang('action.send-message')</a>
+                      <a href="/pharmacy/chat?userToID={{ $order->user->id }}"
+                        class="badge">@lang('action.send-message')</a>
                     </div>
                     <div>
                       <a href="{{ route('pharmacy.orders.refusal', $order->id) }}"
@@ -148,7 +148,7 @@
                           </a>
                         @endif
 
-                        <a href="{{ route('pharmacy.chat') }}" class="btn">
+                        <a href="/pharmacy/chat?userToID={{ $order->user->id }}" class="btn">
                           <x-icon icon="message" />
                           @lang('action.send-message')
                         </a>
@@ -174,7 +174,7 @@
                           </a>
                         @endif
 
-                        <a href="{{ route('pharmacy.chat') }}" class="btn">
+                        <a href="/pharmacy/chat?userToID={{ $order->user->id }}" class="btn">
                           <x-icon icon="message" />
                           @lang('action.send-message')
                         </a>
