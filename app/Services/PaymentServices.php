@@ -33,7 +33,7 @@ class PaymentServices
         $invoice->update(['is_active' => 1]);
         $quotation->order->update(['status' => OrderEnum::PAID_ORDER]);
 
-        return redirect()->route('client.success', $quotation->order->id)
+        return redirect()->route('client.invoice', $quotation->order->id)
           ->with('message', 'تمت عملية الدفع بنجاح، طلبك قيد التجهيز..');
       }
       catch (ConnectionException $e) {
