@@ -117,7 +117,8 @@
     .subscribe('new-order-notification')
     .bind(`Illuminate\\Notifications\\Events\\BroadcastNotificationCreated`, (data) => {
       if ({{ Auth::id() }} === data.receiver) {
-        el('.js-dropdown-menu').innerHTML += renderNotificationItem(data);
+        el('.js-dropdown-menu')
+          .insertAdjacentHTML('afterbegin', renderNotificationItem(data));
 
         // console.log(data);
         addOneToNotifyCount();
