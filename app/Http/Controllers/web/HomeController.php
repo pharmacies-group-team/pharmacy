@@ -31,28 +31,36 @@ class HomeController extends Controller
 
   public function showPharmacies()
   {
-    return view('web.pharmacies');
+    $social     = SocialMedia::first();
+    return view('web.pharmacies', compact('social'));
   }
 
   public function showPharmacy($id)
   {
+    $social     = SocialMedia::first();
     $pharmacy = Pharmacy::find($id);
 
-    return view('web.profile', compact('pharmacy'));
+    return view('web.profile', compact('pharmacy', 'social'));
   }
 
   public function showPrivacy()
   {
-    return view('web.privacy');
+    $social     = SocialMedia::first();
+
+    return view('web.privacy', compact('social'));
   }
 
   public function showContactUs()
   {
-    return view('web.contact-us');
+    $social     = SocialMedia::first();
+
+    return view('web.contact-us', compact('social'));
   }
 
   public function showAboutUs()
   {
-    return view('web.about-us');
+    $social     = SocialMedia::first();
+
+    return view('web.about-us', compact('social'));
   }
 }
