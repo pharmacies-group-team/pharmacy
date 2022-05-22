@@ -72,7 +72,7 @@
 
               <select name="ad_position" value="{{ old('ad_position') }}"
                 class="form-control @error('ad_position') is-invalid @enderror">
-                <option value="home">Home</option>
+                <option value="home">بيت</option>
               </select>
 
               @error('ad_position')
