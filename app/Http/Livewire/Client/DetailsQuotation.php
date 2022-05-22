@@ -3,12 +3,8 @@
 namespace App\Http\Livewire\Client;
 
 use App\Enum\OrderEnum;
-use App\Models\Invoice;
-use App\Models\Quotation;
-use App\Models\QuotationDetails;
-use App\Services\OrderServices;
-use App\Services\PaymentServices;
-use App\Models\{Address};
+use App\Models\{Invoice, Quotation, QuotationDetails, Address};
+use App\Services\{OrderServices, PaymentServices};
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -24,10 +20,9 @@ class DetailsQuotation extends Component
   {
     $this->quotationDetails = QuotationDetails::where('quotation_id', $this->quotationID)->get();
     $this->quotation        = Quotation::find($this->quotationID);
-
     $this->addresses        = Auth::user()->addresses()->get();
 
-    $invoice      = Invoice::where('order_id', $this->quotation->order->id)->select('is_active')->first();
+    $invoice       = Invoice::where('order_id', $this->quotation->order->id)->select('is_active')->first();
     $this->active = $invoice == '' ? 0 : $invoice->is_active;
 
     return view('livewire.client.details-quotation');
@@ -75,15 +70,15 @@ class DetailsQuotation extends Component
   {
     Address::create(
       [
-        'name'         => $this->name,
-        'phone'        => $this->phone,
-        'desc'         => $this->desc,
+        'name' => $this->name,
+        'phone' => $this->phone,
+        'desc' => $this->desc,
         'type_address' => $this->type_address,
-        'user_id'      => Auth::id()
+        'user_id' => Auth::id()
       ]
     );
 
-    $this->reset();
+    $this->resetFiled();
     session()->flash('message', 'تم إضافة عنوان جديد.');
   }
 
@@ -91,5 +86,14 @@ class DetailsQuotation extends Component
   public function cancelOrder()
   {
     OrderServices::cancelOrder($this->quotation->order->id);
+  }
+
+  //********* reset filed inputs *********//
+  public function resetFiled()
+  {
+    $this->name         = '';
+    $this->phone        = '';
+    $this->desc         = '';
+    $this->type_address = '';
   }
 }
