@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Enum\RoleEnum;
-use App\Enum\SettingEnum;
 use App\Events\AdminNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
@@ -19,7 +18,7 @@ class NotificationAdminService
       $data     = [
         'sender'   => $sender,
         'receiver' => $admin->id,
-        'link'     => SettingEnum::DOMAIN.'admin/users/profile/'.$user->id,
+        'link'     => '/admin/users/profile/'.$user->id,
         'message'  => 'يوجد عضوية تسجيل كصيدلي جديده يمكنك تفعيل حسابه.',
       ];
 
@@ -37,7 +36,7 @@ class NotificationAdminService
       $data     = [
         'sender'   => $sender,
         'receiver' => $admin->id,
-        'link'     => SettingEnum::DOMAIN.'admin/invoice/'.$order->invoice->id,
+        'link'     => '/admin/invoice/'.$order->invoice->id,
         'message'  => 'لقد تم إيصال الطلب من قبل '.$pharmacy->name,
       ];
 
@@ -54,7 +53,7 @@ class NotificationAdminService
       $data     = [
         'sender'   => $sender,
         'receiver' => $admin->id,
-        'link'     => SettingEnum::DOMAIN.'admin/financial-operations',
+        'link'     => '/admin/financial-operations',
         'message'  => 'لقد تم دفع الفاتورة من قبل '.$sender->name . ' إلى صيدلية ' . $pharmacy->name
       ];
 
