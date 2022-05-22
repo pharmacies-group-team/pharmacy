@@ -1,54 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tokyo">
+  <meta name="keywords" content="pharmacy online">
+  <meta name="description" content="pharmacy online">
+  <title>صيدلية أون لاين</title>
 
-  <title>@yield('title')</title>
+  @include('layouts.web.style')
+  @include('layouts.shared.styles')
 
-  <!-- Styles -->
-  <style>
-    html,
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      font-weight: 100;
-      height: 100vh;
-      margin: 0;
-    }
 
-    .full-height {
-      height: 100vh;
-    }
 
-    .flex-center {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-    }
-
-    .position-ref {
-      position: relative;
-    }
-
-    .content {
-      text-align: center;
-    }
-
-    .title {
-      font-size: 36px;
-      padding: 20px;
-    }
-
-  </style>
 </head>
 
-<body>
-  <div class="flex-center position-ref full-height">
+<body style="background: #F7F9FE">
+
+  <div class="flex-center mt-5">
     <div class="content">
       @yield('message')
     </div>
   </div>
+
+  {{-- scripts --}}
+  @include('layouts.web.script')
+
+
 </body>
 
 </html>
