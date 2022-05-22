@@ -37,8 +37,8 @@ class NotificationAdminService
       $data     = [
         'sender'   => $sender,
         'receiver' => $admin->id,
-        'link'     => SettingEnum::DOMAIN.'client/invoice/'.$order->invoice->id,
-        'message'  => 'لقد تم إيصال طلبي من قبل '.$pharmacy->name,
+        'link'     => SettingEnum::DOMAIN.'admin/invoice/'.$order->invoice->id,
+        'message'  => 'لقد تم إيصال الطلب من قبل '.$pharmacy->name,
       ];
 
       // send and save notification in DB
