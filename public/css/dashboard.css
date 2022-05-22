@@ -1988,7 +1988,7 @@ body{
 
 .page-invoice-profile .t-content .t-item{
   position: relative;
-  padding-right: 4rem;
+  padding-right: 2rem;
 }
 
 .page-invoice-profile .t-content .t-item-header{
@@ -2006,7 +2006,7 @@ body{
 
 .page-invoice-profile .t-content .t-item-header h4::before{
   position: absolute;
-  top: 0px;
+  top: 0.5rem;
   right: -0.5rem;
   height: 1rem;
   width: 1rem;
