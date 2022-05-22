@@ -1,9 +1,10 @@
+
 @extends('layouts.pharmacy/master')
+
 
 @php use App\Enum\OrderEnum; @endphp
 
 @section('content')
-
 
   <x-alert type="status" />
 
@@ -135,3 +136,4 @@
   </main>
 
 @stop
+

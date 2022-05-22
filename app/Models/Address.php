@@ -54,4 +54,9 @@ class Address extends Model
           'desc.required'         => 'يجب إدخال الوصف.',
         ];
     }
+
+    public function  order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

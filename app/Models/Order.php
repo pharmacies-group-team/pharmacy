@@ -40,13 +40,20 @@ class Order extends Model
     }
 
     /**
-     * Get Client
+     * Get User
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+
+    /**
+     * Get Address
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     /**
      * validation
      */

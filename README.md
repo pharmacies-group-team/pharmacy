@@ -170,6 +170,50 @@ php artisan make:component icon --view
  'required|min:5|max:255|url'
 
 # email
+'required|min:5|max:100|string'
+or
+ 'title' => 'required|unique:posts|max:255'
+ or 
+   'title' => 'required|exists:blogs,created_at'
+   
+#phone
+  'phone' => 'required|digits:10'
+  or 
+ 'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
+or 
+'phone' => 'required | numeric | digits:10 | starts_with: 6,7,8,9'
+
+or 
+// Adds phone number functionality to Laravel based on the PHP port of Google's libphonenumber API by giggsey
+// https://github.com/Propaganistas/Laravel-Phone
+
+////////////////////
+# link
+'required|min:5|max:100|string'
+//
+'required|url'
+or with regex
+ $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+
+    $request->validate([
+        'url' => 'required|regex:'.$regex,
+
+# email
+'email' => 'required|email'  
+
+ex 
+   protected function validator(array $data)
+    {
+    return Validator::make($data, [
+        'name' => 'required|Regex:/^[\D]+$/i|max:100',
+        'last_name' => 'required|Regex:/^[\D]+$/i|max:100',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|min:6|confirmed',
+    ]);
+   }
+
+for more follow this link https://laravel.com/docs/9.x/verification
+
 
 # image
 'required|image|mimes:png,jpg'
@@ -177,4 +221,83 @@ php artisan make:component icon --view
 # date
 'required|date'
 
+```
+//example
+// VIEW
+
+<form class="form-horizontal" method="post">
+                @foreach($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}</p>
+                @endforeach
+                @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                {!! csrf_field() !!}
+                <fieldset>
+                    <div class="form-group">
+                  
+                            <input type="file" class="form-control" name="picture" id="picture">
+
+                    </div>
+
+                    <div class="form-group">
+              
+                            <button class="btn btn-default" type="reset">Cancel</button>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                       
+                    </div>
+                </fieldset>
+            </form>
+CONTROLLER
+public function update($user, Request $request) {
+$rules = array(
+            'picture' => 'required | mimes:jpeg,jpg,png | max:1000',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+ $user = User::where('id', Auth::user()->id)->firstOrFail();
+ $user->save();
+
+return Redirect::back();
+
+/////////////////
+# date
+'required|date'
+
+// //
+
+
+// Note :
+// The field under validation must match the given format. You should use either date or date_format when validating a field, not both.This validation rule supports all formats supported by PHP's DateTime class.
+
+// The dates will be passed into the PHP strtotime function.
+
+// date
+// date_equals
+// date_format 
+// after:date
+// after_or_equal:date
+// before:date
+// before_or_equal:date
+// //ex 
+// 'start_date' => 'required|date|after:tomorrow'
+
+//    'start_at'      => 'required|date|date_format:Y-m-d|after:yesterday',
+//     'end_at'        => 'required|date|date_format:Y-m-d|after:xxxx',
+//     or
+//      'start_at'      => 'required|date|date_format:Y-m-d|before:end_at',
+//     'end_at'        => 'required|date|date_format:Y-m-d|after:start_at',
+//     or 
+//      'start_at'      => 'required|date|date_format:Y-m-d|after:tomorrow',
+//     'end_at'        => 'required|date|date_format:Y-m-d|befor_or_eqle:start_at',
 ```

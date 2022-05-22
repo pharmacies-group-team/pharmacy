@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\pharmacy;
 
+
 use App\Enum\OrderEnum;
 use App\Events\NewOrderNotification;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,20 @@ use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
+   // show orders
+
+  public function index()
+  {
+
+  $pharmacy_id = Auth::user()->id;
+  $orders=Order::select('user_id','pharmacy_id','status','created_at')->where('pharmacy_id', $pharmacy_id)->with(['user:id,name,avatar'])->get();
+
+   return view('pharmacy.dashboard.orders', compact('orders'));
+  // return response( $request);
+
+
+   }
+
     public function getAll()
     {
         $orders = Auth::user()->pharmacyOrders()->orderBy('created_at', 'DESC')->get();
