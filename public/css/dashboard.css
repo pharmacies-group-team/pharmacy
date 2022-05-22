@@ -506,32 +506,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
-.wallet{
-  margin-left: 1.25rem;
-}
-
-.wallet-box{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.375rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(185 209 254 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-.wallet-box span{
-  --tw-text-opacity: 1;
-  color: rgb(78 125 203 / var(--tw-text-opacity));
-}
-
 .alert-box{
   position: fixed;
   bottom: 2rem;
@@ -618,7 +592,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(153 27 27 / var(--tw-text-opacity));
 }
 
-.btn, .btn-rounded{
+.btn, .btn-rounded, button.t-btn{
   white-space: nowrap;
   border-radius: 0.25rem;
   padding-left: 1.25rem;
@@ -635,14 +609,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-delay: 100ms;
 }
 
-.btn:hover, .btn-rounded:hover{
+.btn:hover, .btn-rounded:hover, button.t-btn:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(78 125 203 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(221 233 255 / var(--tw-text-opacity));
 }
 
-.btn, .btn-rounded{
+.btn, .btn-rounded, button.t-btn{
   --tw-bg-opacity: 1;
   background-color: rgb(78 125 203 / var(--tw-bg-opacity));
 }
@@ -722,6 +696,32 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.t-footer{
+  --tw-bg-opacity: 1;
+  background-color: rgb(56 105 186 / var(--tw-bg-opacity));
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.t-footer .t-social{
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.t-footer .t-social img{
+  width: 1.5rem;
+}
+
+.t-footer .t-links{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .form-group{
@@ -1408,6 +1408,32 @@ textarea.form-control{
 .table tbody .btn, .table tbody .btn-rounded{
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.wallet{
+  margin-left: 1.25rem;
+}
+
+.wallet-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(185 209 254 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 233 255 / var(--tw-bg-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.wallet-box span{
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
 }
 
 .dashboard{
@@ -2760,6 +2786,115 @@ a .t-font-icon, a .icon{
   border-color: rgb(115 164 255 / var(--tw-border-opacity));
 }
 
+.page-contact-us{
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  background-color: rgb(247 249 254 / 0.8);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 1024px){
+  .page-contact-us{
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+}
+
+.page-contact-us{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 1024px){
+  .page-contact-us{
+    justify-content: space-between;
+  }
+}
+
+.page-contact-us{
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+@media (min-width: 768px){
+  .page-contact-us{
+    display: flex;
+  }
+}
+
+.page-contact-us .t-content{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.page-contact-us .t-title{
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.page-contact-us .t-item{
+  flex: 1 1 0%;
+}
+
+.page-contact-us .t-form-wrapper{
+  position: relative;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding: 2rem;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 640px){
+  .page-contact-us .t-form-wrapper{
+    padding: 3rem;
+  }
+}
+
+.page-contact-us form label{
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(78 125 203 / var(--tw-text-opacity));
+}
+
+.page-contact-us form > div{
+  margin-bottom: 1rem;
+}
+
+.page-contact-us .t-bg-icons span{
+  position: absolute;
+  z-index: -1;
+}
+
+.page-contact-us .t-bg-icons span:nth-of-type(1){
+  top: -2.5rem;
+  right: -2.25rem;
+}
+
+.page-contact-us .t-bg-icons span:nth-of-type(2){
+  right: -2.5rem;
+  top: 90px;
+}
+
+.page-contact-us .t-bg-icons span:nth-of-type(3){
+  left: -1.75rem;
+  bottom: -1.75rem;
+}
+
 .page-pharmacy-profile .t-bg{
   height: 20rem;
   --tw-bg-opacity: 1;
@@ -2987,30 +3122,4 @@ a .t-font-icon, a .icon{
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
-}
-
-.t-footer{
-  --tw-bg-opacity: 1;
-  background-color: rgb(56 105 186 / var(--tw-bg-opacity));
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.t-footer .t-social{
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.t-footer .t-social img{
-  width: 1.5rem;
-}
-
-.t-footer .t-links{
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
 }
