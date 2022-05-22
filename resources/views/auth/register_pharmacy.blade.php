@@ -28,7 +28,7 @@
             <fieldset class="form-group border p-3">
               {{-- <legend class="w-auto px-2">User Information</legend> --}}
               <div class="mt-3">
-                <label>
+                <label class="text-primary-base">
                   اسم المستخدم
                 </label>
 
@@ -48,7 +48,7 @@
 
 
               <div class="mt-3">
-                <label>
+                <label class="text-primary-base">
                   البريد الإلكتروني
                 </label>
 
@@ -66,7 +66,7 @@
               </div>
 
               <div class="mt-3">
-                <label>
+                <label class="text-primary-base">
                   كلمة السر
                 </label>
 
@@ -84,7 +84,7 @@
               </div>
 
               <div class="mt-3">
-                <label>
+                <label class="text-primary-base">
                   تأكيد كلمة السر
                 </label>
                 <div class="input-group position-relative">
@@ -102,7 +102,7 @@
             <!-- Pharmacy Info  -->
             <fieldset class="form-group border p-3">
               <div class="mt-3">
-                <label>
+                <label class="text-primary-base">
                   اسم الصيدلية
                 </label>
                 <div class="input-group position-relative">
@@ -119,7 +119,7 @@
               </div>
 
               <div class="mt-3">
-                <label>
+                <label class="text-primary-base">
                   رقم الهاتف
                 </label>
                 <div class="input-group position-relative">
