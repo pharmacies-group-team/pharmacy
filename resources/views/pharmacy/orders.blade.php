@@ -1,5 +1,6 @@
 
-@extends('layouts/pharmacy/master')
+@extends('layouts.pharmacy/master')
+
 
 @php use App\Enum\OrderEnum; @endphp
 
@@ -92,6 +93,10 @@
                     @elseif($order->status === OrderEnum::REFUSAL_ORDER)
                       <div class="badge badge-danger">
                         تم رفض الطلب
+                      </div>
+                    @elseif($order->status === OrderEnum::CANCELED_ORDER)
+                      <div class="badge badge-danger">
+                        {{ OrderEnum::CANCELED_ORDER }}
                       </div>
                     @endif
                   </td>

@@ -1,4 +1,4 @@
-@extends('layouts/client/master')
+@extends('layouts.client/master')
 @section('content')
 
   <div class="container px-5">

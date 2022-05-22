@@ -4,7 +4,7 @@
 return [
   "profile" => "بروفايل",
   "protection-and-privacy" => "الحماية والخصوصية",
-  "order-details" => "تفاصيل الطلب",
+  "order-details" => "التفاصيل",
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",
   "invoice_id" => "رقم فاتورة",
@@ -28,6 +28,8 @@ return [
   "about-us" => "عن صيدلية أونلاين",
   "privacy" => "سياسة الخصوصية",
   "contact-us" => "تواصل معنا",
+
+  "chat" => "الرسائل",
 
   // "" => "",
 

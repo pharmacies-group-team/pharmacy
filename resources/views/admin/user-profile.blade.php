@@ -1,4 +1,4 @@
-@extends('layouts.client/master')
+@extends('layouts.admin.master')
 @section('content')
   <x-alert type="status" />
 
@@ -15,7 +15,7 @@
       </div>
 
       {{-- user info --}}
-      <div class="t-user">
+      <div class="t-user-desc">
         {{-- user name --}}
         <h3 class="t-user-name">
           <x-icon icon='home' />
@@ -23,21 +23,11 @@
           <span> {{ $user->name }} </span>
         </h3>
 
-        <div class="t-user-desc">
-          {{-- item address --}}
-          <div class="t-item">
-            <x-icon icon='location' />
+        {{-- item date --}}
+        <div class="t-item">
+          <x-icon icon='home' />
 
-            {{-- TODO user address :) --}}
-            <span>{{ $user->addresses[0]->name }}</span>
-          </div>
-
-          {{-- item date --}}
-          <div class="t-item">
-            <x-icon icon='home' />
-
-            <span>{{ $user->created_at }}</span>
-          </div>
+          <span>{{ $user->created_at }}</span>
         </div>
       </div>
     </header>
@@ -91,7 +81,6 @@
             </p>
           </div>
         </div>
-
 
 
       </div>

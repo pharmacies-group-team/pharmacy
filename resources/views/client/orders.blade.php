@@ -1,4 +1,4 @@
-@extends('layouts/client/master')
+@extends('layouts.client/master')
 @php
 use App\Enum\OrderEnum;
 use App\Enum\PharmacyEnum;
@@ -45,11 +45,14 @@ use App\Enum\PharmacyEnum;
                 <td>{{ $order->id }} </td>
 
                 {{-- pharmacy name --}}
-                <td>
-                  <div class="user-table">
 
-                    <img src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $order->pharmacy->logo) }}
-                       " alt="profile avatar">
+                {{-- TODO Naif move to css --}}
+                <td style="display: flex; justify-content: start">
+                  <div class="user-table" d='{{ $order->image }}'>
+
+                    {{-- TODO PharmacyEnum::PHARMACY_LOGO_PATH replace with pharmacy logo --}}
+                    <img src="{{ asset('uploads/user/' . $order->pharmacy->avatar) }}" alt="profile avatar" width="30"
+                      style="max-width: 30px; width: 100%" height="30">
 
                     <a href="{{ route('show.pharmacy.profile', $order->pharmacy->id) }}" style="color: #3869BA">
                       {{ $order->pharmacy->name }}
@@ -89,6 +92,10 @@ use App\Enum\PharmacyEnum;
                     <div class="badge badge-danger">
                       تم رفض الطلب
                     </div>
+                  @elseif($order->status === OrderEnum::CANCELED_ORDER)
+                    <div class="badge badge-danger">
+                      {{ OrderEnum::CANCELED_ORDER }}
+                    </div>
                   @endif
                 </td>
 
@@ -97,10 +104,15 @@ use App\Enum\PharmacyEnum;
                   <x-order-details :order="$order">
                     @slot('footer')
                       <x-client.order-details-footer :order="$order" />
-                      @if ($order->status === \App\Enum\OrderEnum::PAID_ORDER)
+                      @if ($order->status === OrderEnum::PAID_ORDER)
                         <a href="{{ route('client.invoice', $order->invoice->id) }}" class="btn">
                           <x-icon icon="order" />
                           @lang('action.show-invoice')
+                        </a>
+                      @elseif($order->status === OrderEnum::NEW_ORDER || $order->status === OrderEnum::UNPAID_ORDER)
+                        <a href="{{ route('client.orders.cancel', $order->id) }}" class="btn">
+                          <x-icon icon="order" />
+                          @lang('action.cancel-order')
                         </a>
                       @endif
                     @endslot

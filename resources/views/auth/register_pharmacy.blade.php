@@ -79,6 +79,16 @@
 
 {{--                </select>--}}
 {{--              </div>--}}
+
+{{-- Commercial_record --}}
+   <input name="recordPharma" value="{{ old('recordPharma') }}" type="text" class="form-control @error('recordPharma') is-invalid @enderror rounded-2 pr" placeholder=" صورة السجل التجاري للصيدلية" aria-describedby="addon-wrapping" style="padding-right: 40px">
+              </div>
+              @error('recordPharma') <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span> @enderror
+
+              <div class="col-12 my-3 input-group flex-nowrap position-relative">
+                <div class="position-absolute top-50 end-0 translate-middle-y me-4" style="z-index: 999;">
+{{--                  <i class="bi bi-telephone text-black-50"></i>--}}
+                </div>
             </fieldset>
             <button class="btn btn-primary d-block w-100" type="submit">إنشاء حساب</button>
             <p class="fs-sm pt-3 mb-0 text-primary-darker">هل لديك حساب ؟ <a href="{{ route('register') }}" class="fw-medium text-primary-base" data-view="#modal-signup-view">تسجيل الدخول</a></p>

@@ -23,10 +23,10 @@ use App\Http\Controllers\pharmacy;
 Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
 
 Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
-    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
-      ->name('update.avatar');
-  });
+  //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+  Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
+    ->name('update.avatar');
+});
 
 
 /*
@@ -105,6 +105,14 @@ Route::prefix('/pharmacy')
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
+
+    // chat 
+    Route::controller(pharmacy\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 
@@ -120,7 +128,11 @@ Route::prefix('/admin')
   ->group(function () {
 
     /*------------------------------ Users ------------------------------*/
-    Route::get('/users', [admin\UserController::class, 'getAllUsers'])->name('users');
+    Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
+      Route::get('/', 'getAllUsers')->name('index');
+      Route::get('/profile/{id}', 'userProfile')->name('profile');
+      Route::get('/list', 'getUsers')->name('list');
+    });
 
     Route::get('/', [admin\AdminController::class, 'index'])->name('index');
     Route::get('/account-settings', [admin\AdminController::class, 'showAccountSettings'])->name('account-settings');
@@ -199,7 +211,8 @@ Route::prefix('/client')
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
-        Route::post('/confirmation','confirmation')->name('confirmation');
+        Route::post('/confirmation', 'confirmation')->name('confirmation');
+        Route::get('/cancel/{id}', 'cancelOrder')->name('cancel');
       });
 
     // quotation
@@ -211,6 +224,14 @@ Route::prefix('/client')
       Route::get('/cancel', 'cancel')->name('cancel');
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
+
+    // chat 
+    Route::controller(client\ChatController::class)
+      ->prefix('chat')
+      ->name('chat.')
+      ->group(function () {
+        Route::get('/', 'showChat')->name('index');
+      });
   });
 
 

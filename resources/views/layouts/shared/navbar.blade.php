@@ -1,11 +1,14 @@
 @php
-use App\Enum\UserEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 use App\Enum\RoleEnum;
+use App\Enum\UserEnum;
+use App\Enum\PharmacyEnum;
 
 $user = User::find(Auth::id());
 @endphp
+
 
 <header>
   <nav class="nav">
@@ -16,6 +19,15 @@ $user = User::find(Auth::id());
 
     {{-- nav end --}}
     <div class="nav-end">
+
+      {{-- wallet --}}
+      <div class="wallet">
+        <div class="wallet-box">
+          <span>YER {{ \Illuminate\Support\Facades\Auth::user()->balance }}</span>
+          <x-icon icon='wallet' />
+        </div>
+      </div>
+
       {{-- notification --}}
       <div class="t-notification" x-data="{ open: false }" @click="open = true" @click.away="open = false">
         {{-- icon --}}
@@ -23,7 +35,7 @@ $user = User::find(Auth::id());
           <a style="position: relative" data-toggle="dropdown">
             <x-icon icon="notification" />
 
-            <span class="notif-count t-notification-counter"
+            <span class="js-notify-count t-notification-counter"
               data-count="{{ auth()->user()->unreadNotifications()->count() }}">
               {{ auth()->user()->unreadNotifications()->count() }}
             </span>
@@ -31,32 +43,40 @@ $user = User::find(Auth::id());
         </div>
 
         {{-- content --}}
-        <ul class="t-notification-content js-dropdown-menu" :class="open ? 'is-open' : ''" style="width: 300px">
-          {{-- notification item --}}
-          <li class="t-item">
-            <a>
-              <p class="t-desc">الإشعارات</p>
-            </a>
-          </li>
-          @if (isset(Auth::user()->unreadNotifications))
-            @foreach (Auth::user()->unreadNotifications as $notification)
-              @if ($notification->type == 'App\Events\NewOrderNotification')
-                @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
-                  <x-pharmacy.notification :notification="$notification" />
-                @elseif(Auth::user()->hasRole(RoleEnum::CLIENT))
-                  <x-client.notification :notification="$notification" />
-                @elseif($notification->type == 'App\Events\AdminNotification')
-                  <x-admin.notification :notification="$notification" />
+        {{-- notification item --}}
+        <div class="t-notification-content-wrapper" :class="open ? 'is-open' : ''">
+          <div class="t-notification-header">
+            <h5 class="t-title">الإشعارات</h5>
+          </div>
+
+          <ul class="t-notification-content js-dropdown-menu">
+
+            @if (isset(Auth::user()->unreadNotifications))
+              @foreach (Auth::user()->unreadNotifications as $notification)
+                @if ($notification->type == 'App\Events\NewOrderNotification')
+                  @if (Auth::user()->hasRole(RoleEnum::CLIENT))
+                    {{-- pharmacy notification --}}
+                    <x-notification :notification="$notification" />
+                  @endif
+
+                  {{-- client notification --}}
+                  @if (Auth::user()->hasRole(RoleEnum::PHARMACY))
+                    <x-notification :notification="$notification" />
+                  @endif
+
+                  {{-- admin notification --}}
+                  @if ($notification->type == 'App\Events\AdminNotification')
+                    <x-notification :notification="$notification" />
+                  @endif
                 @endif
-              @endif
-            @endforeach
-          @endif
-          <li class="t-item">
-            <a>
-              <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
-            </a>
-          </li>
-        </ul>
+              @endforeach
+            @endif
+          </ul>
+
+          <div class="t-notification-footer">
+            <a href="{{ route('notification') }}" class="t-desc">عرض جميع الإشعارات</a>
+          </div>
+        </div>
       </div>
 
       {{-- user avatar --}}
@@ -72,6 +92,7 @@ $user = User::find(Auth::id());
           </form>
         </div>
       @endif
+
     </div>
   </nav>
 </header>
