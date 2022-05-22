@@ -25,7 +25,10 @@ class DetailsQuotation extends Component
     $invoice       = Invoice::where('order_id', $this->quotation->order->id)->select('is_active')->first();
     $this->active = $invoice == '' ? 0 : $invoice->is_active;
 
-    return view('livewire.client.details-quotation');
+    if ($this->quotation->order->status === OrderEnum::UNPAID_ORDER)
+      return view('livewire.client.details-quotation');
+    else
+      return view('client.orders');
   }
 
   public function updated($propertyName)
