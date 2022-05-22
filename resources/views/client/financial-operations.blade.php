@@ -8,8 +8,8 @@
     <section class="t-wallet-wrapper t-card">
       <div class="t-wallet">
         <x-icon icon='wallet' />
-        <span>رصيدك الحالي:</span>
-        <span>{{ Auth::user()->balance }}</span>
+        <span style="color: rgb(78 125 203)">رصيدك الحالي:</span>
+        <span style="color: #3869BA">{{ Auth::user()->balance }}</span>
       </div>
     </section>
 
