@@ -2988,3 +2988,29 @@ a .t-font-icon, a .icon{
   --tw-text-opacity: 1;
   color: rgb(56 105 186 / var(--tw-text-opacity));
 }
+
+.t-footer{
+  --tw-bg-opacity: 1;
+  background-color: rgb(56 105 186 / var(--tw-bg-opacity));
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.t-footer .t-social{
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.t-footer .t-social img{
+  width: 1.5rem;
+}
+
+.t-footer .t-links{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
