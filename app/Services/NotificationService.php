@@ -35,7 +35,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => SettingEnum::DOMAIN.'pharmacy/orders',
+      'link'     => SettingEnum::DOMAIN.'pharmacy/quotation/'. $order->id,
       'message'  => 'قام بإلغاء الطلب.',
     ];
 
