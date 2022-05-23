@@ -98,7 +98,7 @@
                   border: 1px solid #d5e4ff;
                   border-radius: 6px;">
           {{--        <x-icon icon='wallet' />--}}
-          <span> تصدير PDF</span>
+          <span></span>
         </div>
 
 
