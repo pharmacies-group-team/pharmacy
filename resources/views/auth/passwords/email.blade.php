@@ -1,7 +1,7 @@
 @extends('layouts.web.master')
 
 @section('content')
-  <section class="mt-5">
+  <section class="mt-5 vh-100">
     <div class="container-lg p-lg-0 px-5">
       <div class="card card-blur w-75 m-auto"
         style="background-image: url({{ asset('images/login.svg') }}); background-repeat: no-repeat;background-position:  right; height: 350px;">

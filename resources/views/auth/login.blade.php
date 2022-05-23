@@ -2,9 +2,9 @@
 
 @section('content')
   <x-alert type="status" />
-  <section class="mt-5">
-    <div class="container-lg p-lg-0 px-5">
-      <div class="card card-blur w-75 m-auto"
+  <section class="mt-5 vh-100">
+    <div class="container-lg p-lg-0 px-5 pt-5">
+      <div class="card card-blur w-75 m-auto pt-5"
         style="background-image: url({{ asset('images/login.svg') }});background-size: contain; background-repeat: no-repeat;background-position: bottom right;">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
