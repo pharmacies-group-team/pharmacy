@@ -77,7 +77,7 @@ if (Auth::user()->hasRole(RoleEnum::PHARMACY)) {
           <form class="t-dropdown-item" x-show="dropdown" action="{{ route('logout') }}" method="POST">
             @csrf
 
-            <button type="submit">Log out</button>
+            <button type="submit">تسجل الخروج</button>
           </form>
         </div>
       @endif
