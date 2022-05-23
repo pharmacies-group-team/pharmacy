@@ -1,8 +1,8 @@
 @php use App\Enum\{RoleEnum, UserEnum} @endphp
 
 <nav class="top-header">
-  <div class="navbar navbar-expand-lg container">
-    <div class="row w-100">
+  <div class="container">
+    <div class="row w-100 navbar navbar-expand-lg">
 
       {{-- Logo --}}
       <div class="col-3">
@@ -13,7 +13,7 @@
       </div>
 
       {{-- Button collapse --}}
-      <div class="d-lg-none">
+      <div class="d-lg-none d-inline-block" style="width: 80px">
         <button class="navbar-toggler btn btn-sm navbar-burger text-primary-dark" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
           aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
       </div>
 
       {{-- Nav collapse --}}
-      <div class="col-5">
+      <div class="d-none d-lg-block col-5">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item">
@@ -52,7 +52,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-4">
+      <div class="d-none d-lg-block col-4">
         @if (Route::has('login'))
           @auth
             <div class="dropdown d-lg-inline-flex d-none w-100">
