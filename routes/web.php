@@ -2,32 +2,36 @@
 
 use App\Enum\RoleEnum;
 
-use App\Http\Controllers\Auth\ChangePasswordController;
-use App\Http\Controllers\clint\PayController;
+use App\Http\Controllers\Auth\LoginCustomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\web;
-use App\Http\Controllers\admin;
-use App\Http\Controllers\client;
-use App\Http\Controllers\pharmacy;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Auth\RegisterPharmacyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use Barryvdh\Debugbar\Facades\Debugbar;
+// shared Controllers
+use App\Http\Controllers\ChatController;
 
-// disable Debug
-// Debugbar::disable();
+// standard Controllers
+use App\Http\Controllers\web;
+use App\Http\Controllers\admin;
+use App\Http\Controllers\client;
+use App\Http\Controllers\pharmacy;
+
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| General Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
+
+Route::post('/login/custom', [LoginCustomController::class, 'login'])->name('login.custom');
+
+Route::middleware(['auth', 'verified'])->name('setting.')->group(function () {
+  Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])->name('update.avatar');
+});
+
+Route::get('generate-invoice-pdf/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice-pdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,21 +43,11 @@ Route::controller(web\HomeController::class)->group(function () {
   Route::get('/', 'index')->name('home');
   Route::get('/pharmacies', 'showPharmacies')->name('show.pharmacies');
   Route::get('/pharmacies/profile/{id}', 'showPharmacy')->name('show.pharmacy.profile');
+  Route::get('/privacy', 'showPrivacy')->name('privacy');
+  Route::get('/contact-us', 'showContactUs')->name('contact-us');
+  Route::get('/about-us', 'showAboutUs')->name('about-us');
 });
 
-/*
-|--------------------------------------------------------------------------
-| General Routes
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'verified'])
-  ->name('setting.')
-  ->group(function () {
-    //  Route::post('/change/password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
-
-    Route::post('/update/avatar', [SettingController::class, 'updateAvatar'])
-      ->name('update.avatar');
-  });
 
 /*
 |--------------------------------------------------------------------------
@@ -68,13 +62,35 @@ Route::controller(NotificationController::class)->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| Notifications Routes
+|--------------------------------------------------------------------------
+*/
+
+// chat
+Route::controller(ChatController::class)
+  ->prefix('chat')
+  // TODO enable auth
+  // ->middleware(['auth'])
+  ->name('chat.')
+  ->group(function () {
+
+    Route::get('/users',  'getUsers')->name('getUsers');
+    Route::get('/messages/{id}', 'getUserMessages')->name('userMessages');
+
+    Route::post('/messages/send',  'sendMessage')->name('sendMessage');
+  });
+
+/*
+|--------------------------------------------------------------------------
 | Register Pharmacy Routes
 |--------------------------------------------------------------------------
 */
+
 Route::controller(RegisterPharmacyController::class)->group(function () {
   Route::get('/register/pharmacy', 'index')->name('register.pharmacy');
   Route::post('/register/pharmacy', 'store')->name('register.pharmacy.store');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -83,19 +99,20 @@ Route::controller(RegisterPharmacyController::class)->group(function () {
 */
 
 Route::prefix('/pharmacy')
-  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::PHARMACY, 'verified', 'active_account'])
   ->name('pharmacy.')->group(function () {
-    // Route::resource('/', pharmacy\PharmacyController::class);
-    // Route::view('/', 'pharmacy.dashboard.setting')->name('dashboard');
 
     Route::controller(pharmacy\DashboardController::class)->group(function () {
       // profile
       Route::get('/', 'index')->name('index');
       Route::get('/profile', 'profile')->name('profile');
-      Route::get('/messages', 'messages')->name('messages');
       Route::get('/account-settings', 'accountSettings')
         ->name('account-settings');
-      Route::get('/invoice-profile', 'getInvoiceProfile')->name('invoice-profile');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
+      Route::get('/chat', 'showChat')->name('chat');
+
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
     });
 
     Route::controller(pharmacy\OrderController::class)
@@ -108,13 +125,15 @@ Route::prefix('/pharmacy')
       ->prefix('/quotation')->name('quotation.')->group(function () {
 
         Route::get('/', 'getAll')->name('index');
-        Route::get('/{id}', 'createQuotation')->name('create');
         Route::get('/details/{id}', 'getQuotationDetails')->name('details');
+        Route::get('/{id}', 'createQuotation')->name('create');
       });
 
     Route::post('/update/logo', [pharmacy\ProfileController::class, 'updateLogo'])
       ->name('update.logo');
   });
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -126,8 +145,20 @@ Route::prefix('/admin')
   ->middleware(['auth', 'role:' . RoleEnum::SUPER_ADMIN])
   ->group(function () {
 
-    Route::get('/', [admin\AdminController::class, 'index'])->name('index');
+    Route::controller(admin\DashboardController::class)->group(function () {
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+    });
 
+    /*------------------------------ Users ------------------------------*/
+    Route::controller(admin\UserController::class)->name('users.')->prefix('/users')->group(function () {
+      Route::get('/', 'getAllUsers')->name('index');
+      Route::get('/profile/{id}', 'userProfile')->name('profile');
+      Route::get('/list', 'getUsers')->name('list');
+    });
+
+    Route::get('/', [admin\AdminController::class, 'index'])->name('index');
+    Route::get('/account-settings', [admin\AdminController::class, 'showAccountSettings'])->name('account-settings');
 
     /*------------------------------ ads ------------------------------*/
     Route::resource('/ads', admin\AdController::class);
@@ -135,10 +166,20 @@ Route::prefix('/admin')
     /*------------------------------ payments ------------------------------*/
     Route::resource('/payments', admin\PaymentController::class);
 
+    /*------------------------------ cities ------------------------------*/
+    Route::resource('/cities', admin\CityController::class);
+
+    /*------------------------------ directorates ------------------------------*/
+    Route::resource('/directorates', admin\DirectorateController::class);
+
+    /*------------------------------ Neighborhood ------------------------------*/
+    Route::resource('/neighborhoods', admin\NeighborhoodController::class);
+
     /*------------------------------ website content ------------------------------*/
     Route::prefix('site')->controller(admin\SiteController::class)
       ->group(function () {
         Route::get('/', 'index')->name('site');
+
         Route::put('/about-us', 'updateAboutUs')
           ->name('updateAboutUs');
 
@@ -151,31 +192,13 @@ Route::prefix('/admin')
         Route::put('/social', 'updateSocial')->name('updateSocial');
       });
 
-    /*------------------------------ clients ------------------------------*/
-    Route::controller(admin\ClientController::class)->group(function () {
-      Route::get('/clients', 'index')
-        ->name('clients');
-
-      Route::post('/clients/toggle/{id}',  'clientToggle')
-        ->name('clients.toggle');
-    });
-
     /*------------------------------ orders ------------------------------*/
     // Route::get('/orders', [admin\OrderController::class, 'index'])
     //   ->name('admin.orders'); // TODO
 
-    // pharmacies
-    Route::controller(admin\PharmacyController::class)->group(function () {
-      Route::get('/pharmacies',  'index')
-        ->name('pharmacies');
-
-      Route::post('/pharmacies/toggle/{id}',  'pharmacyToggle')
-        ->name('pharmacies.toggle');
-    });
-
-    Route::view('/account-settings', 'admin.account-settings')
-      ->name('account-settings');
   });
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -185,17 +208,26 @@ Route::prefix('/admin')
 
 Route::prefix('/client')
   ->name('client.')
-  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified'])
+  ->middleware(['auth', 'role:' . RoleEnum::CLIENT, 'verified', 'active_account'])
   ->group(function () {
 
     // dashboard
     Route::controller(client\DashboardController::class)->group(function () {
       Route::get('/', 'index')->name('index');
-      //      Route::get('/profile', 'getProfile')->name('profile'); // X
       Route::get('/account-settings', 'accountSettings')->name('account-settings');
       Route::get('/address', 'address')->name('address');
-      Route::get('/invoice-profile', 'invoiceProfile')->name('invoice-profile');
+      Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
+
+      // chat
+      Route::get('/chat', 'showChat')->name('chat');
+
+      Route::post('/deactivate', 'deactivate')->name('deactivate');
     });
+
+    Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
+    Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
+//    Route::get('/setCronJob',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
+    Route::post('/togglePerodicOrder/{id}',  [client\PerodicOrderController::class, 'togglePerodicOrder'])->name('togglePerodicOrder');
 
     // order
     Route::controller(client\OrderController::class)
@@ -204,17 +236,25 @@ Route::prefix('/client')
         Route::get('/', 'getAll')->name('index');
         Route::post('/', 'storeOrder')->name('store');
         Route::get('/{id}', 'showOrder')->name('show');
+        Route::post('/confirmation', 'confirmation')->name('confirmation');
+        Route::get('/cancel/{id}', 'cancelOrder')->name('cancel');
       });
 
     // quotation
     Route::get('/quotation/details/{id}', [client\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
 
     // payment
-    Route::controller(client\PayController::class)->group(function () {
-      Route::post('/pay',  'payment')->name('payment');
-      Route::get('/success',  'success')->name('success');
+    Route::controller(client\PaymentController::class)->group(function () {
+      Route::get('/success/{data}',  'success')->name('success');
       Route::get('/cancel', 'cancel')->name('cancel');
+      Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
     });
   });
 
+
 Auth::routes(['verify' => true]);
+
+// only for document dev components
+Route::get('/dev', function () {
+  return view('web.dev-docs.index');
+});

@@ -1,4 +1,4 @@
-@extends('layouts/pharmacy/master')
+@extends('layouts.pharmacy.master')
 
 @php use App\Enum\PharmacyEnum;  @endphp
 
@@ -7,35 +7,38 @@
 
   <x-alert type="status" />
 
-  <main class="pharmacy-profile">
-    <div class="pharmacy-info">
+  <main class="page-pharmacy-profile">
+    <header class="t-header t-card">
+      <h2 class="text-base">
+        @lang('heading.profile')
+      </h2>
+    </header>
 
-      {{-- form --}}
-      <livewire:pharmacy.information :pharmacy="$pharmacy" />
+    <div class="t-card t-mt-8">
+      <div class="pharmacy-info">
 
-      {{-- avatar --}}
-      @if (isset($pharmacy))
-        <x-image :image="asset(
-            isset($pharmacy->logo)
-                ? PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo
-                : PharmacyEnum::PHARMACY_LOGO_DEFAULT,
-        )" :uploadTo="route('pharmacy.update.logo')" name="logo" />
-      @endif
+        {{-- form --}}
+        <livewire:pharmacy.information :pharmacy="$pharmacy" />
 
+        {{-- avatar --}}
+        @if (isset($pharmacy))
+          <x-image :image="asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo)" :uploadTo="route('pharmacy.update.logo')" name="logo" />
+        @endif
+
+      </div>
+
+
+      <hr class="divided" />
+
+      {{-- contact us --}}
+      <livewire:pharmacy.contact :pharmacy="$pharmacy" />
+
+
+      <hr class="divided">
+
+      {{-- social media --}}
+      <livewire:pharmacy.social :pharmacy="$pharmacy" />
     </div>
-
-
-    <hr class="divided" />
-
-    {{-- contact us --}}
-    <livewire:pharmacy.contact :pharmacy="$pharmacy" />
-
-
-    <hr class="divided">
-
-    {{-- social media --}}
-    <livewire:pharmacy.social :pharmacy="$pharmacy" />
-
   </main>
 
 @stop

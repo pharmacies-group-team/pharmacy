@@ -1,11 +1,11 @@
-@extends('layouts/admin/master')
+@extends('layouts.admin.master')
 @section('content')
 
   <x-alert type="status" />
 
   <main class="ads" x-data="{ id: null, payment: {{ json_encode(old()) }} ?? {}, addModal: false, editModal: false, deleteModal: false }">
-    <div class="container">
-      <section class="section-header">
+    <div>
+      <section class="section-header t-card">
         <h2 class="text-large">إدارة طرق الدفع</h2>
         <button class="btn" @click="addModal = true; payment = {{ json_encode(old()) }} ?? {}">اضافه طريقة
           دفع</button>
@@ -164,9 +164,9 @@
           </p>
 
           <div>
-{{--            <img :src="'{{ \App\Enum\PaymentEnum::IMAGE_PATH }}'--}}
-{{--            payment.image" width="200" height="150"--}}
-{{--              alt="payment image" style="display: block; margin: 1rem auto;">--}}
+            {{-- <img :src="'{{ \App\Enum\PaymentEnum::IMAGE_PATH }}' --}}
+            {{-- payment.image" width="200" height="150" --}}
+            {{-- alt="payment image" style="display: block; margin: 1rem auto;"> --}}
             <div x-text="payment.name"></div>
           </div>
 

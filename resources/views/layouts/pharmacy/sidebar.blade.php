@@ -2,30 +2,16 @@
   @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
   {{-- link to home page --}}
-  <a class="sidebar-brand" href="{{ route('home') }}">
-    <span>صيدلية اون لاين</span>
-  </a>
+  <x-logo />
 
   {{-- sidebar links --}}
   <ul class="list">
     {{-- index --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.index') active @endif" href="{{ route('pharmacy.index') }}">
+        <x-font-icon icon='chart-pie' />
 
-        <x-icon icon="home" />
-
-        <span>لوحة التحكم</span>
-      </a>
-    </li>
-
-    {{-- message --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.messages') active @endif"
-        href="{{ route('pharmacy.messages') }}">
-
-        <x-icon icon="message" />
-
-        <span>الرسائل </span>
+        <span>الاحصائيات</span>
       </a>
     </li>
 
@@ -34,19 +20,37 @@
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.orders.index') active @endif"
         href="{{ route('pharmacy.orders.index') }}">
 
-        <x-icon icon="order" />
+        <x-font-icon icon='store' />
 
         <span>إدارة الطلبات</span>
+      </a>
+    </li>
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.financial.operations') active @endif"
+        href="{{ route('pharmacy.financial.operations') }}">
+        <x-font-icon icon='sack-dollar' />
+
+        <span>@lang('heading.invoice-profile')</span>
+      </a>
+    </li>
+
+    {{-- chat --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.chat') active @endif" href="{{ route('pharmacy.chat') }}">
+        <x-font-icon icon='comments' />
+
+        <span>@lang('heading.chat') </span>
       </a>
     </li>
 
     {{-- profile --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.profile') active @endif" href="{{ route('pharmacy.profile') }}">
+        <x-font-icon icon='capsules' />
 
-        <x-icon icon="profile" />
-
-        <span>بروفايل الصيدلية</span>
+        <span>الملف الشخصي </span>
       </a>
     </li>
 
@@ -54,22 +58,11 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.account-settings') active @endif"
         href="{{ route('pharmacy.account-settings') }}">
+        <x-font-icon icon='id-card' />
 
-        <x-icon icon="setting" />
-
-        <span>أعدادات الحساب</span>
+        <span>إعدادات الحساب</span>
       </a>
     </li>
 
-    {{-- invoice profile --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'pharmacy.invoice-profile') active @endif"
-        href="{{ route('pharmacy.invoice-profile') }}">
-        {{-- TODO --}}
-        <x-icon icon="order" />
-
-        <span>@lang('heading.invoice-profile')</span>
-      </a>
-    </li>
   </ul>
 </nav>

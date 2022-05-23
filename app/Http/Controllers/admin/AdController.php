@@ -27,8 +27,8 @@ class AdController extends Controller
       'title'       => 'required|min:5|max:100|string',
       'image'       => 'required|image|mimes:png,jpg',
       'link'        => 'required|min:5|max:255|url',
-      'ad_position' => 'required|min:5|max:100|string',
-      'start_at'    => 'required|date|before:end_at',
+      'ad_position' => 'required',
+      'start_at'    => 'required|date|before:end_at|after_or_equal:today',
       'end_at'      => 'required|date|after:start_at',
     ]);
 

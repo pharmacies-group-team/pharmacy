@@ -1,33 +1,21 @@
 @php use App\Enum\{RoleEnum, UserEnum} @endphp
 
-<nav class="navbar navbar-light navbar-expand-lg top-header">
-  <div class="container-md">
-    <div class="row w-100">
+<nav class="top-header">
+  <div class="container">
+    <div class="row w-100 navbar navbar-expand-lg">
 
       {{-- Logo --}}
       <div class="col-3">
         <a class="navbar-brand h4 text-decoration-none m-0" href="{{ route('home') }}">
-          {{-- <img src="{{ asset('images/logo.svg') }}"> --}}
           <h1 class="text-primary-darker fs-3 fw-bold">PHARMACY <span
               class="fs-6 fw-normal text-primary-base">online</span></h1>
         </a>
       </div>
 
-      {{-- Button collapse --}}
-      <div class="d-lg-none">
-        <button class="navbar-toggler btn btn-sm navbar-burger text-primary-dark" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <svg class="d-block text-primary-dark" width="16" height="16" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <title>Mobile menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-          </svg>
-        </button>
-      </div>
+
 
       {{-- Nav collapse --}}
-      <div class="col-5">
+      <div class="d-lg-block col-5">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item">
@@ -41,19 +29,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-primary-darker" href="#">
+              <a class="nav-link text-primary-darker" href="{{ route('about-us') }}">
                 عنَا
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-primary-darker" href="#">
+              <a class="nav-link text-primary-darker" href="{{ route('contact-us') }}">
                 تواصل معنا
               </a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col-4">
+      <div class="d-none d-lg-block col-4">
         @if (Route::has('login'))
           @auth
             <div class="dropdown d-lg-inline-flex d-none w-100">
@@ -61,10 +49,9 @@
               <div
                 class="nav-link dropdown-toggle text-primary-darker w-100 d-flex align-items-center justify-content-end cursor-pointer gap-2"
                 id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
-                <img
-                  src="@if (Auth::user()->avatar) {{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }} @else {{ asset(UserEnum::USER_AVATAR_DEFAULT) }} @endif"
-                  width="30" height="20" class="img-fluid rounded-circle border-1 border-secondary border shadow-sm"
-                  alt="user avatar">
+
+                <img src="{{ asset(UserEnum::USER_AVATAR_PATH . Auth::user()->avatar) }}" width="30" height="20"
+                  class="img-fluid rounded-circle border-1 border-secondary border shadow-sm" alt="user avatar">
 
                 <span class="me-2" style="cursor: pointer">{{ Auth::user()->name }}</span>
               </div>
@@ -86,7 +73,7 @@
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::PHARMACY))
                             {{ route('pharmacy.index') }}
                          @elseif(Auth::user()->hasRole(\App\Enum\RoleEnum::CLIENT))
-                            {{ route('client.index') }} @endif">
+                            {{ route('client.orders.index') }} @endif">
                     <i class="bi bi-speedometer text-primary-light m-2"></i> لوحة التحكم
                   </a>
                 </li>
@@ -112,6 +99,18 @@
             </div>
           @endauth
         @endif
+      </div>
+      {{-- Button collapse --}}
+      <div class="d-lg-none d-inline-block" style="width: 80px">
+        <button class="navbar-toggler btn btn-sm navbar-burger text-primary-dark" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <svg class="d-block text-primary-dark" width="16" height="16" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <title>Mobile menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>

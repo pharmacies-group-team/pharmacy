@@ -1,5 +1,37 @@
 # Project and code roles
 
+## controller
+
+### pharmacy
+
+```bash
+php artisan make:controller pharmacy/NameController
+```
+
+### admin
+
+```bash
+php artisan make:controller admin/NameController
+```
+
+### client
+
+```bash
+php artisan make:controller client/ChatController
+```
+
+### web
+
+```bash
+php artisan make:controller web/NameController
+```
+
+### run cron job locally
+
+```bash
+php artisan schedule:work
+```
+
 ## for custom css class you should use `t-` prefix
 
 ```css

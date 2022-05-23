@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>صيدلية اون لاين</title>
 
-  <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
-
-  @livewireStyles()
+  @include('layouts.shared.styles')
 
 </head>
 
@@ -27,10 +27,9 @@
   </div>
 
   @livewireScripts()
-  {{-- load alpinejs before any html element #fix modal light show/hide issues --}}
-  @yield('alpine-script')
-  <script src="{{ asset('js/alpine.min.js') }}"></script>
+  @include('layouts.shared.scripts')
 
+  @yield('script')
 </body>
 
 </html>

@@ -1,3 +1,11 @@
+# super command
+
+```bash
+php artisan config:cache
+php artisan config:clear
+php artisan optimize
+```
+
 ## commands
 
 ```bash
@@ -14,19 +22,21 @@ php artisan serve
 
 ## todo
 
-- [x] client invoice
-- [x] notification
-- [x] pharmacy/client invoice profile
+- pharmacy add order 'add total price'
+- web pharmacy profile
 
-- [] pharmacy add order 'add total price'
-- [] **_ alert bg color_**
-- [] web pharmacy profile
+- contact
+- about us
+- footer
+- 404 page
+- 403 page
+- auth
+- report with pdf
 
-- [] contact
-- [] about us
-- [] footer
-- [] 404 page
-- [] 403 page
-- [] auth
-- [] report with pdf
-- [] order details image make it zoom
+## done
+
+- **_ alert bg color_**
+- client invoice
+- notification
+- order details modal image zoom on click
+- pharmacy/client invoice profile

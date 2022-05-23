@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pharmacies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo')->nullable();
+            $table->string('logo')->default('default.png');
             $table->text('about')->nullable();
             $table->string('email')->nullable();
 

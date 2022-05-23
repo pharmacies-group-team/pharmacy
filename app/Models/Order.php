@@ -18,7 +18,7 @@ class Order extends Model
     /**
      * Get Order Invoice
      */
-    public function Invoice(): HasOne
+    public function invoice(): HasOne
     {
         return $this->hasOne(Invoice::class);
     }
@@ -44,7 +44,15 @@ class Order extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get orders perodic orders
+     */
+    public function PerodicOrders(): HasOne
+    {
+      return $this->hasOne(PerodicOrder::class);
     }
 
     /**

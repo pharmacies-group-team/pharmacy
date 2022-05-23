@@ -1,6 +1,6 @@
 @if (isset($order))
   <div x-data="{ orderModal: false }">
-    <button @click="orderModal = true" class="badge badge-info">
+    <button @click="orderModal = true" class="badge">
       @lang('action.order-details')
     </button>
 
@@ -10,9 +10,8 @@
         <div class="t-order-details-user">
           {{-- avatar --}}
           <div>
-            <img
-              src="{{ asset($order->user->avatar ? \App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar : \App\Enum\UserEnum::USER_AVATAR_DEFAULT) }}"
-              alt="user avatar" class="t-order-image">
+            <img src="{{ asset(\App\Enum\UserEnum::USER_AVATAR_PATH . $order->user->avatar) }}" alt="user avatar"
+              class="t-order-image">
           </div>
 
           <div>

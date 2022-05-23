@@ -4,8 +4,8 @@
     "dev": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
-    "build": "pnpm production",
-    "production": " mix --production"
+    "build": "npm production",
+    "production": "mix --production"
   },
   "devDependencies": {
     "@popperjs/core": "^2.10.2",
@@ -16,10 +16,14 @@
     "postcss": "^8.1.14",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.32.11",
-    "sass-loader": "^11.0.1"
-  },
-  "dependencies": {
+    "sass-loader": "^11.0.1",
+    "cypress": "^9.6.1",
+    "webpack": "^5.0.0",
     "browser-sync": "^2.27.9",
     "browser-sync-webpack-plugin": "^2.3.0"
+  },
+  "dependencies": {
+    "laravel-echo": "^1.11.7",
+    "pusher-js": "^7.1.0-beta"
   }
 }

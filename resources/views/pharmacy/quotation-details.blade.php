@@ -29,7 +29,7 @@
             <th> اسم المنتج</th>
 
             {{-- type --}}
-            <th>نوع المنتج</th>
+            <th>الوحده</th>
 
             {{-- quantity --}}
             <th>الكمية</th>
@@ -46,6 +46,7 @@
           @if (isset($quotationDetails))
             @foreach ($quotationDetails as $details)
               <tr>
+
                 <td> {{ $details->product_name }} </td>
 
                 <td>
@@ -66,7 +67,7 @@
                 <td> {{ $details->price }} {{ $details->currency }} </td>
 
                 {{-- total --}}
-                <td> {{ $details->total }} </td>
+                <td> {{$details->price * $details->quantity }} {{ $details->currency }}</td>
 
               </tr>
             @endforeach
@@ -76,7 +77,7 @@
             <td>
               الأجمالي
             </td>
-            <td colspan="5"> {{ $quotation->total }} </td>
+            <td colspan="5"> {{ $quotation->total }} {{ $details->currency }}</td>
           </tr>
         </tbody>
       </table>

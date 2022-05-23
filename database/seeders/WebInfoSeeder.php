@@ -37,39 +37,35 @@ class WebInfoSeeder extends Seeder
       ]
     );
 
-    Service::create(
+    Service::insert(
       [
-        'name'    => 'الدفع الإلكترونى',
-        'desc'    => 'إمكانية الدفع من خلال البطاقة الإئتمانية بكل سرية وأمان.',
-        'icon'    => 'service.svg',
-        'user_id' => 1
-      ]
-    );
-
-    Service::create(
-      [
-        'name'    => 'تكرار الروشته',
-        'desc'    => 'إمكانية التوصيل الشهري للأدوية بعيدا عن مشاكل نقص الأدوية.',
-        'icon'    => 'service.svg',
-        'user_id' => 1
-      ]
-    );
-
-    Service::create(
-      [
-        'name'    => 'توصيل الأدوية',
-        'desc'    => 'توصيل الأدوية من أقرب صيدلية بسهولة ويسر دقة.',
-        'icon'    => 'service.svg',
-        'user_id' => 1
+        [
+          'name'    => 'الدفع الإلكترونى',
+          'desc'    => 'إمكانية الدفع من خلال البطاقة الإئتمانية بكل سرية وأمان.',
+          'icon'    => 'default.jpg',
+          'user_id' => 1
+        ],
+        [
+          'name'    => 'تكرار الروشته',
+          'desc'    => 'إمكانية التوصيل الشهري للأدوية بعيدا عن مشاكل نقص الأدوية.',
+          'icon'    => 'default.jpg',
+          'user_id' => 1
+        ],
+        [
+          'name'    => 'توصيل الأدوية',
+          'desc'    => 'توصيل الأدوية من أقرب صيدلية بسهولة ويسر دقة.',
+          'icon'    => 'default.jpg',
+          'user_id' => 1
+        ]
       ]
     );
 
     SocialMedia::create(
       [
-        'facebook'  => '',
-        'whatsapp'  => '',
-        'twitter'   => '',
-        'instagram' => '',
+        'facebook'  => 'https://facebook.com',
+        'whatsapp'  => 'https://whatsapp.com',
+        'twitter'   => 'https://twitter.com',
+        'instagram' => 'https://instagram.com',
         'user_id'   => 1
       ]
     );

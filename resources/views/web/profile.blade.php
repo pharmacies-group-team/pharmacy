@@ -6,16 +6,14 @@
 
 @section('content')
 
-  <main x-data="{ addOrderModal: false, pharmacy: {} }">
+  <main class="pb-5" x-data="{ addOrderModal: false, pharmacy: {} }">
     <section class="profile__bg"
-      style="background-image: url(@if (isset($pharmacy->logo)) {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}) @else {{ asset(\App\Enum\PharmacyEnum::PHARMACY_LOGO_DEFAULT) }}) @endif">
+      style="background-image: url({{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }})">
       <div class="container-fluid d-flex justify-content-start align-items-end position-relative" style="height: inherit;">
         <div class="profile__avatar d-flex justify-content-end align-items-start gap-4">
           <figure class="position-relative">
-            <img class="rounded-3"
-              src="@if (isset($pharmacy->logo)) {{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}
-                    @else{{ asset(PharmacyEnum::PHARMACY_LOGO_DEFAULT) }} @endif"
-              alt="">
+
+            <img class="rounded-3" src="{{ asset(PharmacyEnum::PHARMACY_LOGO_PATH . $pharmacy->logo) }}" alt="">
 
             @if (Auth::id() === $pharmacy->user->id)
               <a data-bs-toggle="modal" data-bs-target="#editImg"
@@ -50,8 +48,8 @@
         <div class="row">
           <div class="col-lg-7 col-md-6 col-12">
             <div class="p-5">
-              <h1 class="text-primary-dark fw-bold fs-2">عن صيدلية <span
-                  class="text-primary-base">{{ $pharmacy->name }}</span></h1>
+              <h1 class="text-primary-dark fw-bold fs-2">عن <span class="text-primary-base">{{ $pharmacy->name }}</span>
+              </h1>
               <p class="fs-6 text-primary-darker mt-3">
                 @if (isset($pharmacy->about))
                   {{ $pharmacy->about }}
@@ -185,8 +183,10 @@
 
         {{-- description --}}
         <p class="description">
-          موقع صيدلية أونلاين يساعدك في طلب كافة احتياجاتك من الصيدلية، ولكن صيدلية أونلاين غير مسئولة عن بيع أو صرف أو
-          توزيع أي أدوية، وتتحمل الصيدليات وحدها مسئولية بيع الأدوية وصرفها وتوزيعها ،لمزيد من التفاصيل يرجى مراجعة شروط
+          موقع صيدلية أونلاين يساعدك في طلب كافة احتياجاتك من الصيدلية، ولكن صيدلية أونلاين غير مسئولة عن بيع أو
+          صرف أو
+          توزيع أي أدوية، وتتحمل الصيدليات وحدها مسئولية بيع الأدوية وصرفها وتوزيعها ،لمزيد من التفاصيل يرجى
+          مراجعة شروط
           الإستخدام.
         </p>
       </div>

@@ -2,47 +2,44 @@
   @resize.window="isSidebarOpen = window.innerWidth >= 786 ? true : false">
 
   {{-- link to home page --}}
-  <a class="sidebar-brand" href="{{ route('home') }}">
-    <span>صيدلية اون لاين</span>
-  </a>
+  <x-logo />
 
   {{-- sidebar links --}}
   <ul class="list">
-    {{-- pharmacies --}}
-    <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.pharmacies') active @endif" href="{{ route('admin.pharmacies') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
 
-        <span>الصيدليات</span>
+    {{-- users --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.index') active @endif" href="{{ route('admin.index') }}">
+        <x-font-icon icon='chart-pie' />
+
+        <span>الاحصائيات</span>
       </a>
     </li>
 
-    {{-- clients --}}
+    {{-- users --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === 'admin.clients') active @endif" href="{{ route('admin.clients') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.users.index') active @endif"
+        href="{{ route('admin.users.index') }}">
+        <x-font-icon icon='user' />
 
-        <span>الزبائن</span>
+        <span>إدارة المستخدمين</span>
+      </a>
+    </li>
+
+    {{-- invoice profile --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.financial.operations') active @endif"
+        href="{{ route('admin.financial.operations') }}">
+
+        <x-font-icon icon='sack-dollar' />
+
+        <span>@lang('heading.invoice-profile')</span>
       </a>
     </li>
 
     {{-- orders --}}
     {{-- <li>
-      <div class="list-item-icon">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="feather feather-bell align-middle">
@@ -56,30 +53,16 @@
     {{-- ads --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.ads.index') active @endif" href="{{ route('admin.ads.index') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
+        <x-font-icon icon='bullhorn' />
 
         <span>إدارة الإعلانات</span>
       </a>
     </li>
 
-    {{-- Site Managment --}}
+    {{-- Site Management --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.site') active @endif" href="{{ route('admin.site') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
+        <x-font-icon icon='browser' />
 
         <span>أدارة بيانات الموقع</span>
       </a>
@@ -89,14 +72,7 @@
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.payments.index') active @endif"
         href="{{ route('admin.payments.index') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
+        <x-font-icon icon='credit-card' />
 
         <span>إدارة طرق الدفع</span>
       </a>
@@ -104,16 +80,9 @@
 
     {{-- City Method --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === '') active @endif"
-        href="{{ route('admin.payments.index') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.cities.index') active @endif"
+        href="{{ route('admin.cities.index') }}">
+        <x-font-icon icon='city' />
 
         <span>إدارة المدن</span>
       </a>
@@ -121,30 +90,33 @@
 
     {{-- City Method --}}
     <li>
-      <a class="list-item-link @if (Route::currentRouteName() === '') active @endif"
-        href="{{ route('admin.payments.index') }}">
-        <div class="list-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-bell align-middle">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </div>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.directorates.index') active @endif"
+        href="{{ route('admin.directorates.index') }}">
+        <x-font-icon icon='signs-post' />
 
+        <span>إدارة المديريات</span>
+      </a>
+    </li>
+
+    {{-- City Method --}}
+    <li>
+      <a class="list-item-link @if (Route::currentRouteName() === 'admin.neighborhoods.index') active @endif"
+        href="{{ route('admin.neighborhoods.index') }}">
+        <x-font-icon icon='house-building' />
         <span>إدارة المناطق</span>
       </a>
     </li>
+
 
     {{-- account settings --}}
     <li>
       <a class="list-item-link @if (Route::currentRouteName() === 'admin.account-settings') active @endif"
         href="{{ route('admin.account-settings') }}">
+        <x-font-icon icon='id-card' />
 
-        <x-icon icon="setting" />
-
-        <span>أعدادات الحساب</span>
+        <span>إعدادات الحساب</span>
       </a>
     </li>
+
   </ul>
 </nav>
