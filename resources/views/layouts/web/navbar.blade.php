@@ -1,7 +1,7 @@
 @php use App\Enum\{RoleEnum, UserEnum} @endphp
 
-<nav class="navbar navbar-light navbar-expand-lg top-header">
-  <div class="container-md">
+<nav class="top-header">
+  <div class="navbar navbar-expand-lg container">
     <div class="row w-100">
 
       {{-- Logo --}}
