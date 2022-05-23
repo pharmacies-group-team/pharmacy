@@ -1,5 +1,12 @@
 # Project and code roles
 
+## super command
+
+```bash
+php artisan optimize
+php artisan optimize:clear
+```
+
 ## controller
 
 ### pharmacy
