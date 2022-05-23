@@ -13,6 +13,22 @@
   @include('layouts.web.style')
   @include('layouts.shared.styles')
 
+  <style>
+    .page-link-c {
+      border: none;
+    }
+
+    .page-link-c.active {
+      padding: 0;
+    }
+
+    .pagination-c {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding: 0
+    }
+
+  </style>
 
 
 </head>
