@@ -19,7 +19,7 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-      Order::factory()->count(10)->create();
+//      Order::factory()->count(10)->create();
 
       // Create New Order (order 1 )
       $order_1 = Order::create([
@@ -47,7 +47,7 @@ class OrderSeeder extends Seeder
       ]);
       // Create New Order (order 4 )
       $order_4 = Order::create([
-        'order'           => 'هات كريم نيفيا كبير و قي شمس disaar ',
+        'order'           => ' كريم نيفيا كبير و واقي شمس disaar ',
         'image'           => 'default.jpg', // fixed value
         'status'          => OrderEnum::UNPAID_ORDER, // fixed value
         'user_id'         => 3, // fixed value
@@ -55,7 +55,7 @@ class OrderSeeder extends Seeder
       ]);
       // Create New Order (order 5 )
       $order_5 = Order::create([
-        'order'           => 'لو سمحة باكتة سبرين',
+        'order'           => 'واحد باكت سبرين',
         'image'           => 'default.jpg', // fixed value
         'status'          => OrderEnum::UNPAID_ORDER, // fixed value
         'user_id'         => 3, // fixed value
@@ -79,7 +79,7 @@ class OrderSeeder extends Seeder
       ]);
       // Create New Order (order 8 )
       $order_8 = Order::create([
-        'order'           => 'من فضلك أفضل دواء متوفر عندك لحموضه وحد نيفيا صغير',
+        'order'           => 'من فضلك أفضل دواء متوفر عندك للحموضه و واحد نيفيا صغير',
         'image'           => 'default.jpg', // fixed value
         'status'          => OrderEnum::UNPAID_ORDER, // fixed value
         'user_id'         => 3, // fixed value
