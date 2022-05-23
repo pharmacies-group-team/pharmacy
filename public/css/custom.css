@@ -13,15 +13,18 @@
   color: #4e7dcb !important;
   background: #ffffff;
   /*pointer-events: none;*/
+  padding: 0.375rem 0.75rem;
   position: relative;
+  display: block;
+  border: 1px solid #dee2e6;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .page-link-c.active {
   color: #dde9ff !important;
   background: #4e7dcb;
 }
 .pagination-c {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   display: flex;
   padding-left: 0;
   list-style: none;
