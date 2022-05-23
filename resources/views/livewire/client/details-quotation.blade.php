@@ -1,4 +1,6 @@
 {{-- TODO --}}
+@php use App\Enum\QuotationEnum @endphp
+
 <div x-data="{ addModal: false, payModal: false, cancelModal: false }">
   <x-alert type="message" />
 
@@ -42,14 +44,13 @@
           @foreach ($quotationDetails as $details)
             <tr>
               <td> {{ $details->product_name }} </td>
-
               <td>
                 <div>
-                  @if ($details->product_unit === \App\Enum\QuotationEnum::TYPE_BOTTLE)
+                  @if ($details->product_unit = QuotationEnum::TYPE_BOTTLE)
                     عبوه
-                  @elseif($details->product_unit === \App\Enum\QuotationEnum::TYPE_CARTONS)
+                  @elseif($details->product_unit = QuotationEnum::TYPE_CARTONS)
                     كرتون
-                  @elseif($details->product_unit === \App\Enum\QuotationEnum::TYPE_RIBBON)
+                  @elseif($details->product_unit = QuotationEnum::TYPE_RIBBON)
                     شريط
                   @endif
                 </div>
