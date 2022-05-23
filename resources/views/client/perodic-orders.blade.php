@@ -1,4 +1,4 @@
-@extends('layouts/client/master')
+@extends('layouts.client.master')
 @php
 use App\Enum\PerodicOrderEnum;
 @endphp
