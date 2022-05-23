@@ -12,21 +12,10 @@
         </a>
       </div>
 
-      {{-- Button collapse --}}
-      <div class="d-lg-none d-inline-block" style="width: 80px">
-        <button class="navbar-toggler btn btn-sm navbar-burger text-primary-dark" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <svg class="d-block text-primary-dark" width="16" height="16" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <title>Mobile menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-          </svg>
-        </button>
-      </div>
+
 
       {{-- Nav collapse --}}
-      <div class="d-none d-lg-block col-5">
+      <div class="d-lg-block col-5">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item">
@@ -110,6 +99,18 @@
             </div>
           @endauth
         @endif
+      </div>
+      {{-- Button collapse --}}
+      <div class="d-lg-none d-inline-block" style="width: 80px">
+        <button class="navbar-toggler btn btn-sm navbar-burger text-primary-dark" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <svg class="d-block text-primary-dark" width="16" height="16" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <title>Mobile menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
