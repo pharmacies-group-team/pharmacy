@@ -40,8 +40,7 @@ class CreateQuotation extends Component
     }
 
     ##### check and save data #####
-    elseif ($this->product_name != null)
-    {
+    elseif ($this->product_name != null) {
       $this->validate(QuotationDetails::roles(), QuotationDetails::messages());
       $quotation = Quotation::updateOrCreate(['order_id' => $this->order->id]);
 
@@ -49,13 +48,14 @@ class CreateQuotation extends Component
 
       foreach ($this->product_name as $key => $value) {
         QuotationDetails::create(
-        [
-          'product_name'  => $this->product_name[$key],
-          'product_unit'  => $this->product_unit[$key],
-          'quantity'      => (int) $this->quantity[$key],
-          'price'         => $this->price[$key],
-          'quotation_id'  => $quotation->id
-        ]);
+          [
+            'product_name'  => $this->product_name[$key],
+            'product_unit'  => $this->product_unit[$key],
+            'quantity'      => (int) $this->quantity[$key],
+            'price'         => $this->price[$key],
+            'quotation_id'  => $quotation->id
+          ]
+        );
 
         $total +=  $this->price[$key] * $this->quantity[$key];
       }
@@ -68,8 +68,7 @@ class CreateQuotation extends Component
       try {
         ##### send and save notification in DB #####
         NotificationService::newQuotation($this->order);
-      }
-      catch (Throwable $e) {
+      } catch (Throwable $e) {
         report($e);
       }
 
@@ -77,7 +76,6 @@ class CreateQuotation extends Component
 
       $this->reset();
       return redirect()->route('pharmacy.quotation.details', $quotation->id);
-
     }
   }
 

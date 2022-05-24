@@ -15,12 +15,6 @@
         <h3 class="t-chart-title">@lang('heading.clients')</h3>
         <canvas id="chart-clients" width="300" height="300"></canvas>
       </div>
-
-      {{-- profits --}}
-      <div class="t-chart-item t-card">
-        <h3 class="t-chart-title">@lang('heading.profits')</h3>
-        <canvas id="chart-profits" width="300" height="300"></canvas>
-      </div>
     </div>
 
   </main>

@@ -28,7 +28,7 @@
         <label class="text-base">الوحده </label>
 
         <select wire:model="product_unit.0" class="form-control">
-          <option selected disabled>حدد الوحده</option>
+          <option selected>حدد الوحده</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
           <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
@@ -86,7 +86,7 @@
 
           {{-- <input type="text" wire:model="product_unit.{{ $value }}" class="form-control"> --}}
           <select wire:model="product_unit.{{ $value }}" class="form-control">
-            <option selected disabled>حدد الوحده</option>
+            <option selected>حدد الوحده</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_BOTTLE }}">عبوه</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_CARTONS }}">كرتون</option>
             <option value="{{ \App\Enum\QuotationEnum::TYPE_RIBBON }}">شريط</option>
