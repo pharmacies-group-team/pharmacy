@@ -102,7 +102,7 @@ class NotificationService
     $data     = [
       'sender'   => $sender,
       'receiver' => $receiver->id,
-      'link'     => '/pharmacy/invoice/'.$order->invoice->id, // TODO
+      'link'     => '/pharmacy/invoice/'.$order->id, // TODO
       'message'  => 'لقد تم إيصال الطلب من قبل '.$sender->name,
     ];
 
