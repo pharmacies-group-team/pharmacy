@@ -12,7 +12,7 @@ return [
 
   "clients" => "العملاء",
 
-  "profits" => "المبيعات",
+  "profits" => "الارباح",
 
   "invoice-buying" => "فاتورة شراء",
   "invoice-sale" => "فاتورة بيع",
