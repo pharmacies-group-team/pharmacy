@@ -147,6 +147,8 @@ Route::prefix('/admin')
 
     Route::controller(admin\DashboardController::class)->group(function () {
       Route::get('/invoice/{id}', 'getInvoice')->name('invoice');
+      Route::get('/quotation/details/{id}', [admin\QuotationController::class, 'getQuotationDetails'])->name('quotation.details');
+
       Route::get('/financial-operations', 'getFinancialOperations')->name('financial.operations');
     });
 
@@ -193,9 +195,9 @@ Route::prefix('/admin')
       });
 
     /*------------------------------ orders ------------------------------*/
-    // Route::get('/orders', [admin\OrderController::class, 'index'])
-    //   ->name('admin.orders'); // TODO
 
+    Route::get('/orders', [admin\OrderController::class, 'getAll'])
+      ->name('orders');
   });
 
 
@@ -226,7 +228,7 @@ Route::prefix('/client')
 
     Route::get('/periodic-orders',  [client\PerodicOrderController::class, 'showTasks'])->name('showTasks');
     Route::post('/addPerodicOrder',  [client\PerodicOrderController::class, 'addTask'])->name('addPerodicOrder');
-//    Route::get('/setCronJob',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
+    //    Route::get('/setCronJob',  [client\PerodicOrderController::class, 'setCronJob'])->name('setCronJob');
     Route::post('/togglePerodicOrder/{id}',  [client\PerodicOrderController::class, 'togglePerodicOrder'])->name('togglePerodicOrder');
 
     // order

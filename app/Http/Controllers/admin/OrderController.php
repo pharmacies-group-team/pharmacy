@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-  public function index()
-  {
-    $orders = Order::select()->with('orderDetails', 'client', 'pharmacy')->get();
 
-    return response($orders);
+
+
+  public function getAll()
+  {
+    return view('admin.orders');
   }
 }

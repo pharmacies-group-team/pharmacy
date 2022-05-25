@@ -22,8 +22,12 @@
                     {{-- order id --}}
                     <th> رقم الطلب</th>
 
-                    {{-- pharmacy name --}}
+                    {{-- client name --}}
                     <th>اسم العميل</th>
+
+                    {{-- pharmacy name --}}
+                    <th>اسم الصيدلية</th>
+
 
                     {{-- date --}}
                     <th>التاريخ</th>
@@ -40,6 +44,7 @@
             </thead>
 
             <tbody>
+                {{-- {{ dd($orders) }} --}}
                 @if (isset($orders))
                     @foreach ($orders as $order)
                         <tr>
@@ -59,6 +64,13 @@
                                     <span class="text-base">
                                         {{ $order->user->name }}
                                     </span>
+                                </div>
+                            </td>
+
+                            {{-- client name --}}
+                            <td>
+                                <div style="display: flex; justify-content: center;gap: 12px;align-items: center;">
+                                    {{ $order->pharmacy->name }}
                                 </div>
                             </td>
 
@@ -108,18 +120,13 @@
                                     @if ($order->status === OrderEnum::NEW_ORDER)
                                         <x-order-details :order="$order">
                                             @slot('footer')
-                                                @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                                                {{-- @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                                                     <a href="{{ route('pharmacy.quotation.create', $order->id) }}"
                                                         class="btn">
                                                         <x-icon icon="order" />
                                                         @lang('action.create-quote')
                                                     </a>
-                                                @endif
-                                                <a href="/pharmacy/chat?userToID={{ $order->user->id }}"
-                                                    class="btn">
-                                                    <x-icon icon="message" /> message
-                                                    @lang('action.send-message')
-                                                </a>
+                                                @endif --}}
 
                                                 @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                                                     <a href="{{ route('pharmacy.orders.refusal', $order->id) }}"
@@ -129,83 +136,72 @@
                                                 @endif
                                             @endslot
                                         </x-order-details>
-                                        <div>
+                                        {{-- <div>
                                             <a href="{{ route('pharmacy.quotation.create', $order->id) }}"
                                                 class="badge">@lang('action.create-quote')</a>
-                                        </div>
-                                        <div>
-                                            <a href="/pharmacy/chat?userToID={{ $order->user->id }}"
-                                                class="badge">@lang('action.send-message')</a>
-                                        </div>
-                                        <div>
+                                        </div> --}}
+
+                                        {{-- <div>
                                             <a href="{{ route('pharmacy.orders.refusal', $order->id) }}"
                                                 class="badge">@lang('action.not-found')</a>
-                                        </div>
+                                        </div> --}}
                                     @elseif($order->status === OrderEnum::UNPAID_ORDER)
                                         <x-order-details :order="$order">
                                             @slot('footer')
-                                                @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                                                {{-- @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                                                     <a href="{{ route('pharmacy.quotation.create', $order->id) }}"
                                                         class="btn">
                                                         <x-icon icon="order" />
                                                         @lang('action.create-quote')
                                                     </a>
-                                                @endif
+                                                @endif --}}
 
-                                                <a href="/pharmacy/chat?userToID={{ $order->user->id }}"
-                                                    class="btn">
-                                                    <x-icon icon="message" />
-                                                    @lang('action.send-message')
-                                                </a>
 
-                                                @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+
+                                                {{-- @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                                                     <a href="{{ route('pharmacy.orders.refusal', $order->id) }}"
                                                         class="btn btn-danger">
                                                         @lang('action.not-found')
                                                     </a>
-                                                @endif
+                                                @endif --}}
                                             @endslot
                                         </x-order-details>
                                         <div>
-                                            <a href="{{ route('pharmacy.quotation.details', $order->quotation->id) }}"
+                                            <a href="{{ route('admin.quotation.details', $order->quotation->id) }}"
                                                 class="badge">عرض السعر</a>
                                         </div>
                                     @elseif($order->status === OrderEnum::CANCELED_ORDER || $order->status === OrderEnum::REFUSAL_ORDER)
                                         <x-order-details :order="$order">
                                             @slot('footer')
-                                                @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+                                                {{-- @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                                                     <a href="{{ route('pharmacy.quotation.create', $order->id) }}"
                                                         class="btn">
                                                         <x-icon icon="order" />
                                                         @lang('action.create-quote')
                                                     </a>
-                                                @endif
+                                                @endif --}}
 
-                                                <a href="/pharmacy/chat?userToID={{ $order->user->id }}"
-                                                    class="btn">
-                                                    <x-icon icon="message" />
-                                                    @lang('action.send-message')
-                                                </a>
 
-                                                @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
+
+                                                {{-- @if ($order->status === \App\Enum\OrderEnum::NEW_ORDER)
                                                     <a href="{{ route('pharmacy.orders.refusal', $order->id) }}"
                                                         class="btn btn-danger">
                                                         @lang('action.not-found')
                                                     </a>
-                                                @endif
+                                                @endif --}}
                                             @endslot
                                         </x-order-details>
                                     @else
                                         <div>
-                                            <a href="{{ route('pharmacy.invoice', $order->invoice->id) }}"
+                                            <a href="{{ route('admin.invoice', $order->id) }}"
                                                 class="badge">عرض
                                                 الفاتورة</a>
                                         </div>
-                                        <div>
+                                        {{-- <div>
                                             <a href="{{ route('pharmacy.quotation.create', $order->id) }}"
                                                 class="badge">عرض
                                                 تفاصيل الطلب</a>
-                                        </div>
+                                        </div> --}}
                                     @endif
 
                                 </x-table-dropdown>
