@@ -188,7 +188,7 @@
                     </x-order-details>
                   @else
                     <div>
-                      <a href="{{ route('pharmacy.invoice', $order->invoice->id) }}" class="badge">عرض
+                      <a href="{{ route('pharmacy.invoice', $order->id) }}" class="badge">عرض
                         الفاتورة</a>
                     </div>
                     <div>

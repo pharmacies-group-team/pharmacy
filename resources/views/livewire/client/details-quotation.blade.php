@@ -90,7 +90,7 @@
 
   @if ($active === 0)
     <div class="t-address t-card">
-      <h3> حدد العنوان</h3>
+      <h3>حدد المستلم</h3>
       <div>
         <select wire:model="addressID" class="form-control" style="width: 240px;">
           <option>...</option>

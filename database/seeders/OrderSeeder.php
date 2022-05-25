@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enum\OrderEnum;
 use App\Enum\QuotationEnum;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
@@ -25,7 +26,7 @@ class OrderSeeder extends Seeder
       $order_1 = Order::create([
         'order'           => 'اشتي 2 شرائط قياس سكر و 2 جونسون زيت وكرتون بندول إكسترا و واحد واقي شمس من نوع sunScreen',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::REFUSAL_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
@@ -33,15 +34,23 @@ class OrderSeeder extends Seeder
       $order_2 = Order::create([
         'order'           => 'اشتي نيفيا حجم متوسط وشتي معجون اسنان oral-B',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::DELIVERED_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
+
+      $invoice = Invoice::create([
+        'total' => 23000,
+        'invoice_id' => '',
+        'order_id' => $order_2->id,
+        'address_id' => 1
+      ]);
+
       // Create New Order (order 3 )
       $order_3 = Order::create([
         'order'           => 'اريد شريط نيكسيوم وشريط اسبرين',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::CANCELED_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
@@ -49,7 +58,7 @@ class OrderSeeder extends Seeder
       $order_4 = Order::create([
         'order'           => ' كريم نيفيا كبير و واقي شمس disaar ',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::REFUSAL_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
@@ -65,7 +74,7 @@ class OrderSeeder extends Seeder
       $order_6 = Order::create([
         'order'           => 'اشتي 2 واقي شمس من نوع sunScreen',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::NEW_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
@@ -73,7 +82,7 @@ class OrderSeeder extends Seeder
       $order_7 = Order::create([
         'order'           => 'اشتي 3 شريط ديس سكر وزيت جيسون',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::CANCELED_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
@@ -81,7 +90,7 @@ class OrderSeeder extends Seeder
       $order_8 = Order::create([
         'order'           => 'من فضلك أفضل دواء متوفر عندك للحموضه و واحد نيفيا صغير',
         'image'           => 'default.jpg', // fixed value
-        'status'          => OrderEnum::UNPAID_ORDER, // fixed value
+        'status'          => OrderEnum::NEW_ORDER, // fixed value
         'user_id'         => 3, // fixed value
         'pharmacy_id'     => 2 // fixed value
       ]);
