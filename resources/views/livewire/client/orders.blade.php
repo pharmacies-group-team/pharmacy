@@ -149,7 +149,7 @@ use App\Enum\PharmacyEnum;
                     </div>
                   @elseif($order->status === OrderEnum::PAID_ORDER || $order->status === OrderEnum::DELIVERY_ORDER || $order->status === OrderEnum::DELIVERED_ORDER)
                     <div>
-                      <a href="{{ route('client.invoice', $order->invoice->id) }}" class="badge">عرض
+                      <a href="{{ route('client.invoice', $order->id) }}" class="badge">عرض
                         الفاتورة</a>
                     </div>
                   @endif

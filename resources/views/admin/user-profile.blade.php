@@ -6,7 +6,7 @@
   <main class="page-invoice-profile container" style="padding-top: 0">
 
     {{-- bg --}}
-    <div class="t-bg" style="min-height: 14rem;"></div>
+    <div class="t-bg" style="min-height: 12rem; background: #3869BA"></div>
 
     {{-- user --}}
     <header class="t-header">
@@ -19,17 +19,31 @@
       <div class="t-user-desc">
         {{-- user name --}}
         <h3 class="t-user-name">
-          <x-icon icon='home' />
+{{--          <x-icon icon='home' />--}}
 
           <span> {{ $user->name }} </span>
         </h3>
 
         {{-- item date --}}
         <div class="t-item">
-          <x-icon icon='home' />
+{{--          <x-icon icon='home' />--}}
 
           <span>{{ $user->created_at }}</span>
         </div>
+        @if($user->hasRole(\App\Enum\RoleEnum::PHARMACY))
+          <div style="display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 6px;
+                  background: #3869ba;
+                  color: #d5e4ff;
+                  padding: 4px 18px;
+                  border: 1px solid #d5e4ff;
+                  border-radius: 6px;">
+            {{--        <x-icon icon='wallet' />--}}
+            <a href="{{ route('show.pharmacy.profile', $user->pharmacy->id) }}">بروفايل الصيدلية</a>
+          </div>
+        @endif
       </div>
     </header>
 
@@ -88,18 +102,7 @@
           <span style="color: #3869BA">{{ $invoice_not_confirmed }}</span>
         </div>
 
-        <div style="display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 6px;
-                  background: #3869ba;
-                  color: #d5e4ff;
-                  padding: 4px 18px;
-                  border: 1px solid #d5e4ff;
-                  border-radius: 6px;">
-          {{--        <x-icon icon='wallet' />--}}
-          <span></span>
-        </div>
+
 
 
 
@@ -161,7 +164,7 @@
 
                 </div>
                 <div style="display:flex; justify-content: end">
-                  <a href="{{ route('admin.invoice', $transaction->meta['invoice_id']) }}" class="btn">عرض الفاتورة</a>
+                  <a href="{{ route('admin.invoice', $transaction->meta['order_id']) }}" class="btn">عرض الفاتورة</a>
                 </div>
               </div>
               <hr class="divided">

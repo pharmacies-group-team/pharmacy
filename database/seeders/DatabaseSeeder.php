@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
       AdSeeder::class,
       OrderSeeder::class,
       PerodicOrderSeeder::class,
+      PaymentSeeder::class,
+      MessageSeeder::class
 
       // only enable this for testing char.js
       // DevTestSeeder::class
